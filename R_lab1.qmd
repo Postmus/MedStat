@@ -206,7 +206,7 @@ In a clinical trial in which a total of 100 patients are allocated to two treatm
 
 ## Normal Distribution
 
-suppose that we want to calculate the probability that a randomly selected individual has a weight less than or equal to 80 kg, assuming that the distribution of weight in the population follows a normal distribution with mean 72 kg and standard deviation 10 kg.
+Suppose that we want to calculate the probability that a randomly selected individual has a weight less than or equal to 80 kg, assuming that the distribution of weight in the population follows a normal distribution with mean 72 kg and standard deviation 10 kg.
 
 To calculate this probability, we first need to **standardize** the value using the formula:
 
@@ -251,7 +251,7 @@ d)	divided by their standard deviation
 Two fair dice are rolled, the results are X1 and X2.
 
 (a)	What is the probability Prob(X1=X2)?
-(b)	What is the expected value EX1, and the standard deviation sd(X1)?
+(b)	What is the expected value E(X1), and the standard deviation SD(X1)?
 (c)	Give the expected value and the variance of X1+X2 and of X1-X2.
 :::
 
@@ -270,8 +270,4 @@ GBGBGB
 BBBGGG
 
 GBBBBB
-:::
-
-::: {.callout-important icon=false title="Question 12"}
-A TV-quiz host hides a prize behind one of three doors. You, the finalist-participant, win the prize if you correctly guess which door hides the prize. According to the rules of the show, you make a preliminary choice of the door without actually opening it. The host then opens one of the other doors - always one without the prize. You can now either open the door of your original choice or switch to the other unopened door. What would you do, and why? Did you make any additional assumptions?
 :::
