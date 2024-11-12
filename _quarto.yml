@@ -1,0 +1,27 @@
+project:
+  type: website
+  output-dir: "docs"
+  resources:
+    - "/datasets"
+    
+website:
+  title: "Advanced Statistics"
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Labs week 1"
+        menu:
+          - text: "R"
+            href: R_lab1.qmd
+          - text: "SPSS"
+            href: SPSS_lab1.qmd
+      
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+
