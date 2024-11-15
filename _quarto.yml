@@ -16,7 +16,10 @@ website:
             href: R_lab1.qmd
           - text: "SPSS"
             href: SPSS_lab1.qmd
-      
+      - text: "Answers"
+        menu:
+          - text: "Week 1"
+            href: lab1_answers.qmd 
 format:
   html:
     theme: cosmo
