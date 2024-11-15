@@ -74,7 +74,7 @@ Create a bar chart for the variable `ht` to visualize the frequency of mothers w
 
 # Part 2 - Probability calculations for random variables
 
-In this section, we will focus on two commonly used probability distributions: the binomial disribution and the normal distributions. We will explore how to work with these distributions in SPSS using practical examples.
+In this section, we will focus on two commonly used probability distributions: the binomial distribution and the normal distribution. We will explore how to work with these distributions in SPSS using practical examples.
 
 ## Binomial Distribution
 
