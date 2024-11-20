@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Advanced Statistics - Advanced medical Statistics – Lab 1</title>
+<title>Advanced Statistics - Advanced medical Statistics – Lab 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -60,8 +94,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -144,27 +176,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1---descriptive-statistics" id="toc-part-1---descriptive-statistics" class="nav-link active" data-scroll-target="#part-1---descriptive-statistics">Part 1 - Descriptive statistics</a>
-  <ul class="collapse">
-  <li><a href="#descriptive-analysis-of-continuous-variables" id="toc-descriptive-analysis-of-continuous-variables" class="nav-link" data-scroll-target="#descriptive-analysis-of-continuous-variables">Descriptive analysis of continuous variables</a></li>
-  <li><a href="#descriptive-analysis-of-categorical-variables" id="toc-descriptive-analysis-of-categorical-variables" class="nav-link" data-scroll-target="#descriptive-analysis-of-categorical-variables">Descriptive analysis of categorical variables</a></li>
-  </ul></li>
-  <li><a href="#part-2---probability-calculations-for-random-variables" id="toc-part-2---probability-calculations-for-random-variables" class="nav-link" data-scroll-target="#part-2---probability-calculations-for-random-variables">Part 2 - Probability calculations for random variables</a>
-  <ul class="collapse">
-  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution">Binomial Distribution</a></li>
-  <li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link" data-scroll-target="#normal-distribution">Normal Distribution</a></li>
-  </ul></li>
-  <li><a href="#part-3---some-conceptual-questions" id="toc-part-3---some-conceptual-questions" class="nav-link" data-scroll-target="#part-3---some-conceptual-questions">Part 3 - Some conceptual questions</a></li>
+  <li><a href="#point-estimates-and-95-confidence-intervals-for-population-means" id="toc-point-estimates-and-95-confidence-intervals-for-population-means" class="nav-link active" data-scroll-target="#point-estimates-and-95-confidence-intervals-for-population-means">Point Estimates and 95% Confidence Intervals for Population Means</a></li>
+  <li><a href="#one-sample-t-test" id="toc-one-sample-t-test" class="nav-link" data-scroll-target="#one-sample-t-test">One-Sample t-Test</a></li>
+  <li><a href="#point-estimates-and-95-confidence-intervals-for-population-proportions" id="toc-point-estimates-and-95-confidence-intervals-for-population-proportions" class="nav-link" data-scroll-target="#point-estimates-and-95-confidence-intervals-for-population-proportions">Point Estimates and 95% Confidence Intervals for Population Proportions</a></li>
+  <li><a href="#binomial-test" id="toc-binomial-test" class="nav-link" data-scroll-target="#binomial-test">Binomial Test</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="SPSS_lab1.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Advanced medical Statistics – Lab 1</h1>
-<p class="subtitle lead">SPSS version</p>
+<h1 class="title">Advanced medical Statistics – Lab 2</h1>
+<p class="subtitle lead">R version</p>
 </div>
 
 
@@ -179,11 +204,16 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Welcome to lab 1 in the advanced medical statistics course. In this lab, we will explore descriptive statistics and probability calculations for random variables. We will use an example dataset to practice summarizing continuous and categorical variables, and introduce some basic concepts of probability distributions.</p>
-<section id="part-1---descriptive-statistics" class="level1">
-<h1>Part 1 - Descriptive statistics</h1>
-<p>For this part of the lab, we will use the dataset <code>lowbwt.sav</code>, which you can download from Brightspace. This dataset contains information collected at Baystate Medical Center Springfield, MA, during 1986 and is from Appendix 1 of Hosmer and Lemeshow (1989). The data include information about factors related to low birth weight, an important concern due to its association with high infant mortality rates and birth defects.</p>
-<p>The dataset includes the following variables:</p>
+<p>Welcome to lab 2 in the advanced medical statistics course. For today’s exercises, we will continue exploring the <code>lowbwt.sav</code> dataset, which you can download from Brightspace.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>lowbwt <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"lowbwt.sav"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As a reminder, the dataset includes the following variables (see the previous lab for more details):</p>
 <table class="table">
 <colgroup>
 <col style="width: 50%">
@@ -242,15 +272,19 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p>The variables <code>bwt</code> (birth weight in grams) and <code>low</code> (low birth weight) are the outcome variables, while all other variables are considered independent variables. The outcome variables will be analyzed in more detail in subsequent labs. In this lab, we will focus on describing the study population in terms of the independent variables to obtain a set of summary statistics that could be used to populate a baseline characteristics table.</p>
-<section id="descriptive-analysis-of-continuous-variables" class="level2">
-<h2 class="anchored" data-anchor-id="descriptive-analysis-of-continuous-variables">Descriptive analysis of continuous variables</h2>
-<p>Let’s start by calculating the summary statistics for the continuous variable <code>age</code>.</p>
-<ol type="1">
-<li><p><strong>Mean</strong> and <strong>Standard Deviation</strong>: Use the “Analyze &gt; Descriptive Statistics &gt; Descriptives…” menu in SPSS to calculate the mean age of the mothers. Select <code>age</code> as the variable, and ensure that the mean and standard deviation are checked in the “Options” dialog.</p></li>
-<li><p><strong>Median and Interquartile Range (IQR)</strong>: To calculate the median and IQR for <code>age</code>, use the “Analyze &gt; Descriptive Statistics &gt; Frequencies…” menu. Select <code>age</code> as the variable and click on “Statistics…” to choose the median and quartiles.</p></li>
-</ol>
-<p>To decide which summary measures (mean and standard deviation, or median and IQR) are appropriate to report, we need to understand the shape of the distribution of the <code>age</code> variable. Create a histogram by using “Graphs &gt; Legacy Dialogs &gt; Histogram…” and selecting <code>age</code> as the variable.</p>
+<section id="point-estimates-and-95-confidence-intervals-for-population-means" class="level2">
+<h2 class="anchored" data-anchor-id="point-estimates-and-95-confidence-intervals-for-population-means">Point Estimates and 95% Confidence Intervals for Population Means</h2>
+<p>We will start by analyzing the variable ‘birth weight in grams’ (bwt), which is the main outcome of this study.</p>
+<p>To calculate the mean, standard deviation, and standard error of the mean, you can use the following R code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mean_bwt <span class="ot">&lt;-</span> <span class="fu">mean</span>(lowbwt<span class="sc">$</span>bwt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sd_bwt <span class="ot">&lt;-</span> <span class="fu">sd</span>(lowbwt<span class="sc">$</span>bwt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>se_bwt <span class="ot">&lt;-</span> sd_bwt <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(lowbwt<span class="sc">$</span>bwt)))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>mean_bwt</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>sd_bwt</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>se_bwt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 1">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -261,7 +295,7 @@ Question 1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on the shape of the histogram, determine which summary statistics are more appropriate to report.</p>
+<p>Based on these summary statistics, what is the estimated mean birth weight for the population?</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 2">
@@ -274,17 +308,20 @@ Question 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Calculate the mean, standard deviation, median, and IQR for the variable <code>lwt</code>. Additionally, create a histogram to determine the shape of its distribution and decide which summary measures are most appropriate to report.</p>
+<p>Manually calculate the corresponding 95% confidence interval.</p>
 </div>
 </div>
-</section>
-<section id="descriptive-analysis-of-categorical-variables" class="level2">
-<h2 class="anchored" data-anchor-id="descriptive-analysis-of-categorical-variables">Descriptive analysis of categorical variables</h2>
-<p>Let’s move on to analyzing the categorical variables. We will start by calculating the frequency and percentage of mothers who smoked during pregnancy (<code>smoke</code>):</p>
-<ol type="1">
-<li><p><strong>Frequency Table</strong>: Use the “Analyze &gt; Descriptive Statistics &gt; Frequencies…” menu to calculate the frequency of each category for <code>smoke</code>.</p></li>
-<li><p><strong>Percentage Calculation</strong>: SPSS will automatically calculate the percentages for each category in the frequency table output.</p></li>
-</ol>
+<p>You can also use R to calculate this 95% confidence interval using the <code>qt()</code> function to determine the appropriate t-value:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(lowbwt<span class="sc">$</span>bwt))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>t_value <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>lower_ci <span class="ot">&lt;-</span> mean_bwt <span class="sc">-</span> t_value <span class="sc">*</span> se_bwt</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>upper_ci <span class="ot">&lt;-</span> mean_bwt <span class="sc">+</span> t_value <span class="sc">*</span> se_bwt</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(lower_ci, upper_ci)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Explanation</strong>:</p>
+<p>The <code>qt()</code> function in R is used to obtain the critical value from the t-distribution. In this case, we use <code>qt(0.975, df = n - 1)</code> to get the t-value for a 95% confidence interval, where <code>0.975</code> corresponds to the upper tail probability for a two-sided confidence level of 95%, and <code>df = n - 1</code> represents the degrees of freedom (sample size minus one).</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 3">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -295,10 +332,17 @@ Question 3
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Calculate the frequencies and percentages for the variable <code>ht</code> (history of hypertension).</p>
+<p>How does the 95% confidence interval given by R compare to the 95% confidence interval that you manually computed?</p>
 </div>
 </div>
-<p>In addition to calculating frequencies and percentages, it can also be helpful to visualize categorical data. One common way to do this is by creating a bar chart. To create a bar chart for the <code>smoke</code> variable, use “Graphs &gt; Legacy Dialogs &gt; Bar…” and select “Simple” and “Summaries for Groups of Cases.” Then select <code>smoke</code> as the Category Axis.</p>
+</section>
+<section id="one-sample-t-test" class="level2">
+<h2 class="anchored" data-anchor-id="one-sample-t-test">One-Sample t-Test</h2>
+<p>To determine whether the population mean birth weight differs significantly from a hypothesized value of 3000 grams, we use the <code>t.test()</code> function to conduct a one-sample t-test:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>t_test_result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(lowbwt<span class="sc">$</span>bwt, <span class="at">mu =</span> <span class="dv">3000</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>t_test_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 4">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -309,25 +353,9 @@ Question 4
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Create a bar chart for the variable <code>ht</code> to visualize the frequency of mothers with a history of hypertension.</p>
+<p>You see that the test has 188 degrees of freedom. Why?</p>
 </div>
 </div>
-</section>
-</section>
-<section id="part-2---probability-calculations-for-random-variables" class="level1">
-<h1>Part 2 - Probability calculations for random variables</h1>
-<p>In this section, we will focus on two commonly used probability distributions: the binomial distribution and the normal distribution. We will explore how to work with these distributions in SPSS using practical examples.</p>
-<section id="binomial-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="binomial-distribution">Binomial Distribution</h2>
-<p>A binomial distribution represents the number of successes in a fixed number of independent trials, each with the same probability of success. For example, if we have 10 patients and we want to know the probability that exactly 3 of them respond to a given treatment, where the response rate is known to be 40%, we can use SPSS to calculate this probability.</p>
-<p>To perform this calculation in SPSS, go to “Transform &gt; Compute Variable…” and create a new variable called <code>p_response_3</code>. Use the function <code>PDF.BINOM(x, n, p)</code> to calculate the cumulative probability:</p>
-<ul>
-<li><strong><code>x</code></strong>: The number of successes we are interested in (in this example, <code>3</code> patients responding).</li>
-<li><strong><code>n</code></strong>: The number of trials (in this example, <code>10</code> patients).</li>
-<li><strong><code>p</code></strong>: The probability of success in each trial (in this example, <code>0.4</code> or 40% response rate).</li>
-</ul>
-<p>Cumulative probabilities, such as the probability that 3 or fewer patients out of 10 respond to the treatment, can similarly be calculated by creating a new variable with the <code>CDF.BINOM(x, n, p)</code> function.</p>
-<p><strong>Note</strong>: Unlike other statistical software, SPSS requires that calculations performed using the “Transform &gt; Compute Variable…” tool always have a target variable specified. This means you cannot perform calculations without creating an output variable in your dataset, which can make one-time calculations cumbersome. This is a limitation of SPSS, especially when you just want to explore different scenarios without cluttering your dataset with temporary variables.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 5">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -338,8 +366,14 @@ Question 5
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The probability of being blood group B is 0.08. What is the probability that if 500 ml of blood is taken from each of 100 unrelated blood donors fewer than 1,500 ml of group B blood will be obtained?</p>
+<p>Based on the results of the test, does the population mean significantly differ from 3000?</p>
 </div>
+</div>
+<p>One of the assumptions underlying the one-sample t-test is that the data are normally distributed. We can check this assumption by creating a histogram:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lowbwt, <span class="fu">aes</span>(<span class="at">x =</span> bwt)) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Birth Weights"</span>, <span class="at">x =</span> <span class="st">"Birth Weight (grams)"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 6">
 <div class="callout-header d-flex align-content-center">
@@ -351,24 +385,19 @@ Question 6
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In a clinical trial in which a total of 100 patients are allocated to two treatments A and B by simple randomization (tossing a coin for each new patient). What is the probability that the difference between the numbers of patients in the two treatment groups exceeds 20? (Hint: the number of individuals in one treatment group (for example A) follows a Binomial distribution).</p>
+<p>Looking at the histogram, would you say that the data are normally distributed?</p>
 </div>
 </div>
 </section>
-<section id="normal-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="normal-distribution">Normal Distribution</h2>
-<p>Suppose that we want to calculate the probability that a randomly selected individual has a weight less than or equal to 80 kg, assuming that the distribution of weight in the population follows a normal distribution with mean 72 kg and standard deviation 10 kg.</p>
-<p>To calculate this probability, we first need to <strong>standardize</strong> the value using the formula:</p>
-<p><span class="math display">\[
-Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
-\]</span></p>
-<p>where:</p>
-<ul>
-<li><strong><code>x</code></strong> is the value we want to standardize (in this case, 80 kg).</li>
-<li><strong><code>μ</code></strong> is the mean of the distribution (in this case, 72 kg).</li>
-<li><strong><code>σ</code></strong> is the standard deviation of the distribution (in this case, 10 kg).</li>
-</ul>
-<p>Using SPSS, we can then use the “Transform &gt; Compute Variable…” menu and the <code>CDF.NORMAL(z, mean, sd)</code> function to find the corresponding cumulative probability from the standard normal distribution by setting <code>z = 0.8</code>, <code>mean = 0</code> and <code>sd = 1</code>.</p>
+<section id="point-estimates-and-95-confidence-intervals-for-population-proportions" class="level2">
+<h2 class="anchored" data-anchor-id="point-estimates-and-95-confidence-intervals-for-population-proportions">Point Estimates and 95% Confidence Intervals for Population Proportions</h2>
+<p>Next, we will explore the variable ‘low birth weight’ (low), which is a dichotomous variable that takes a value 1 if the baby had a low birth weight (defined as a birth weight &lt; 2500g) and a value of 0 otherwise.</p>
+<p>We start by using the <code>table()</code> function to calculate the frequency of each category of the ‘low’ variable:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the frequency of each category of the 'low' variable</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>freq_table <span class="ot">&lt;-</span> <span class="fu">table</span>(lowbwt<span class="sc">$</span>low)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>freq_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 7">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -379,13 +408,9 @@ Question 7
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Over a 25 year period the mean height of adult males increased from 175.8 cm to 179.1 cm, but the standard deviation stayed at 5.84 cm. The minimum height requirement for men to join the police force is 172 cm. What proportion of men would be too short to become policemen at the beginning and end of the 25 year period, assuming that the height of adult males has a Normal distribution?</p>
+<p>Based on these frequencies, what is the estimated proportion of low birth weight babies in the population?</p>
 </div>
 </div>
-</section>
-</section>
-<section id="part-3---some-conceptual-questions" class="level1">
-<h1>Part 3 - Some conceptual questions</h1>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 8">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -396,15 +421,27 @@ Question 8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Imagine we have some observations on blood pressure and calculate the mean, standard deviation, median and IQR. How do these measures change if all observations are</p>
-<ol type="a">
-<li>increased by 10</li>
-<li>decreased by their mean</li>
-<li>multiplied by 10</li>
-<li>divided by their standard deviation</li>
-</ol>
+<p>Calculate the corresponding 95% confidence interval based on the Normal approximation.</p>
 </div>
 </div>
+</section>
+<section id="binomial-test" class="level2">
+<h2 class="anchored" data-anchor-id="binomial-test">Binomial Test</h2>
+<p>Subsequently, we perform an exact binomial test to assess whether the proportion of low birth weight babies in the population differs significantly from a hypothesized value of 30%:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>binom_test_result <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(lowbwt<span class="sc">$</span>low <span class="sc">==</span> <span class="dv">1</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">length</span>(<span class="fu">na.omit</span>(lowbwt<span class="sc">$</span>low)),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">p =</span> <span class="fl">0.30</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>binom_test_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Explanation</strong>:</p>
+<ul>
+<li><code>binom.test()</code> is the function used to perform the binomial test.</li>
+<li><code>sum(lowbwt$low == 1, na.rm = TRUE)</code> calculates the number of babies in the dataset with low birth weight (where <code>low</code> is 1). The <code>na.rm = TRUE</code> argument tells R to ignore missing values.</li>
+<li><code>length(na.omit(lowbwt$lbw))</code> gives the total number of non-missing observations in the <code>low</code> variable.</li>
+<li><code>p = 0.30</code> specifies the hypothesized population proportion (30%).</li>
+</ul>
+<p>The output displays, among other statistics, the two-sided p-value and an exact 95% confidence interval calculated using the Clopper and Pearson procedure.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 9">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -415,12 +452,7 @@ Question 9
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Two fair dice are rolled, the results are X1 and X2.</p>
-<ol type="a">
-<li>What is the probability Prob(X1=X2)?</li>
-<li>What is the expected value E(X1), and the standard deviation SD(X1)?</li>
-<li>Give the expected value and the variance of X1+X2 and of X1-X2.</li>
-</ol>
+<p>Does the proportion of low birth weight babies differ significantly from 30%?</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 10">
@@ -433,11 +465,7 @@ Question 10
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>There are two hospitals in town. On average 45 deliveries take place each day in the larger hospital, and 15 in the smaller. The probability of a baby being a boy is about 0.52, and the probability of twins is about 0.012. On any day, which hospital is more likely</p>
-<ol type="a">
-<li>to have a set of twins delivered</li>
-<li>to have more than 60 % of babies being boys?</li>
-</ol>
+<p>The Dutch government intends to start a campaign against drinking alcoholic beverages if over 50 % of the adolescents drink alcoholic beverages regularly (at least once a week). A random sample of 200 adolescents is taken and 128 admit that they drink alcohol regularly (we assume all 200 speak the truth). Test the null hypothesis that 50% of the Dutch adolescents drink alcohol, using a significance level of 5%.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 11">
@@ -450,10 +478,24 @@ Question 11
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The probability of a baby being a boy is 0.52. For six women delivering consecutively in the same labour ward on one day, which of the following exact sequences of boys and girls is most likely and which least likely?</p>
-<p>GBGBGB</p>
-<p>BBBGGG</p>
-<p>GBBBBB</p>
+<p>Rather than using an exact binomial test, we can also use the normal approximation of the binomial distribution to obtain an approximate p-value for the above hypothesis test. Manually calculate this approximate p-value and compare it to the p-value obtained from the binomial test. Is the use of the normal approximation appropriate in this case?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Differences in Two-Sided P-Value Calculation Between SPSS and R">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Differences in Two-Sided P-Value Calculation Between SPSS and R
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When conducting statistical tests, it is important to understand that different software packages can calculate two-sided p-values in slightly different ways, which may lead to variations in results. A key difference exists between how SPSS and base R handle this calculation:</p>
+<ul>
+<li><p>SPSS often calculates two-sided p-values by doubling the one-sided p-value. Specifically, SPSS determines the probability of the observed outcome in one direction (greater or less than a given value) and then multiplies this value by 2. This approach assumes that the distribution of the test statistic is symmetric under the null hypothesis. While this method is straightforward, it can be misleading if the distribution is skewed or the sample size is small, as it may not fully account for the asymmetry in the data.</p></li>
+<li><p>Base R (e.g., the <code>binom.test()</code> function) uses a more exact method for calculating two-sided p-values. R’s approach sums the probabilities of observing outcomes that are as extreme as, or more extreme than, the observed value in both directions (both tails of the distribution). This method does not assume symmetry and provides a more accurate p-value, particularly for small samples or skewed distributions.</p></li>
+</ul>
 </div>
 </div>
 
