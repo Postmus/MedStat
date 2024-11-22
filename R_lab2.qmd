@@ -62,10 +62,10 @@ Based on these summary statistics, what is the estimated mean birth weight for t
 :::
 
 ::: {.callout-important icon=false title="Question 2"}
-Manually calculate the corresponding 95% confidence interval.
+Calculate the corresponding 95% confidence interval based on the normal approximation.
 :::
 
-You can also use R to calculate this 95% confidence interval using the `qt()` function to determine the appropriate t-value:
+You can also use R to calculate the 95% confidence interval by using the `qt()` function to determine the appropriate t-value. This approach uses  the t-distribution, which provides a more accurate confidence interval when the population standard deviation is unknown and the sample size is small.
 
 ```{r}
 n <- sum(!is.na(lowbwt$bwt))
@@ -81,7 +81,7 @@ c(lower_ci, upper_ci)
 The `qt()` function in R is used to obtain the critical value from the t-distribution. In this case, we use `qt(0.975, df = n - 1)` to get the t-value for a 95% confidence interval, where `0.975` corresponds to the upper tail probability for a two-sided confidence level of 95%, and `df = n - 1` represents the degrees of freedom (sample size minus one).
 
 ::: {.callout-important icon=false title="Question 3"}
-How does the 95% confidence interval given by R compare to the 95% confidence interval that you manually computed?
+How does the 95% confidence interval based on the t-distribution compare to the 95% confidence interval based on the normal approximation that you manually computed?
 :::
 
 ## One-Sample t-Test

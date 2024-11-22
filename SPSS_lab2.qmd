@@ -35,13 +35,13 @@ Based on these summary statistics, what is the estimated mean birth weight for t
 :::
 
 ::: {.callout-important icon=false title="Question 2"}
-Manually calculate the corresponding 95% confidence interval.
+Calculate the corresponding 95% confidence interval based on the normal approximation.
 :::
 
-You can also have SPSS calculate this 95% confidence interval. To do this, go to `Analyze => Descriptive Statistics => Explore`. Click on 'Statistics.' Here you can specify which confidence interval you want to calculate. By default, it is set to 95%, so there is no need to change anything. Click 'Cancel,' and then select 'Statistics' under 'Display.' The output will then contain only the desired descriptive statistics. Press 'OK' to generate this output.
+You can also use SPSS to calculate the 95% confidence interval. To do this, go to `Analyze => Descriptive Statistics => Explore`. Click on 'Statistics,' where you can specify the confidence interval you want to calculate. The default is set to 95%, so no changes are needed. SPSS uses the t-distribution to calculate this confidence interval, which provides a more accurate estimate when the population standard deviation is unknown and the sample size is small. Afterward, select 'Statistics' under 'Display' to ensure the output contains only the desired descriptive statistics. Press 'OK' to generate the output."
 
 ::: {.callout-important icon=false title="Question 3"}
-How does the 95% confidence interval given by SPSS compare to the 95% confidence interval that you manually computed?
+How does the 95% confidence interval based on the t-distribution compare to the 95% confidence interval based on the normal approximation that you manually computed?
 :::
 
 ## One-Sample t-Test

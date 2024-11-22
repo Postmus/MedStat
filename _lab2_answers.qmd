@@ -1,0 +1,210 @@
+---
+title: "Advanced medical Statistics – Answers lab 2"
+format: 
+  html:
+    toc: true       
+    toc-depth: 3    
+    toc-location: right   # Optional: Can be left, right, or floating    
+  pdf:
+    toc: false      
+editor_options:
+  chunk_output_type: console
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+# configure global options for R code chunks:
+# warning = F to suppress the display of warning messages generated during the execution of code chunks
+# message = F to suppress the display of messages produced during the execution of code chunks
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, eval=TRUE, echo = FALSE)
+```
+
+Welcome to lab 2 in the advanced medical statistics course. For today’s exercises, we will continue exploring the `lowbwt.sav` dataset, which you can download from Brightspace. 
+
+```{r}
+#| include: false
+
+library(haven)
+library(dplyr)
+library(ggplot2)
+
+# Load the dataset
+lowbwt <- read_sav("datasets/lowbwt.sav")
+```
+
+## Point Estimates and 95% Confidence Intervals for Population Means
+
+We will start by analyzing the variable 'birth weight in grams' (bwt), which is the main outcome of this study.
+
+The mean, standard deviation, and standard error of the mean of the variable 'birth weight in grams' (bwt) are as follows:
+
+```{r}
+mean_bwt <- mean(lowbwt$bwt, na.rm = TRUE)
+sd_bwt <- sd(lowbwt$bwt, na.rm = TRUE)
+se_bwt <- sd_bwt / sqrt(sum(!is.na(lowbwt$bwt)))
+```
+
+- Mean: `r round(mean_bwt, 1)`
+- Standard deviation: `r round(sd_bwt, 1)`
+- Standard error (SE): `r round(se_bwt, 2)`
+
+::: {.callout-important icon=false title="Question 1"}
+Based on these summary statistics, what is the estimated mean birth weight for the population?
+:::
+
+::: {.callout-tip icon=false title="Answer question 1"}
+The estimated mean birth weight for the population is 2944.7 grams.
+:::
+
+::: {.callout-important icon=false title="Question 2"}
+Manually calculate the corresponding 95% confidence interval based on the normal approximation.
+:::
+
+::: {.callout-tip icon=false title="Answer question 2"}
+Using the normal approximation, the 95% confidence interval for the population mean birth weight can be calculated as mean ± 1.96 * SE, where the standard error (SE) is equal to 53.03. Therefore, the 95% confidence interval is (`r round(mean_bwt - 1.96*se_bwt, 1)`, `r round(mean_bwt + 1.96*se_bwt, 1)`).
+:::
+
+```{r}
+#| include: false
+
+n <- sum(!is.na(lowbwt$bwt))
+t_value <- qt(0.975, df = n - 1)
+lower_ci <- mean_bwt - t_value * se_bwt
+upper_ci <- mean_bwt + t_value * se_bwt
+
+c(lower_ci, upper_ci)
+```
+
+You can also use SPSS/R to calculate this 95% confidence interval by using the t-distribution. This gives the following result:
+(`r round(lower_ci, 1)`, `r round(upper_ci, 1)`)
+
+::: {.callout-important icon=false title="Question 3"}
+How does the 95% confidence interval based on the t-distribution compare to the 95% confidence interval based on the normal approximation that you manually computed?
+:::
+
+::: {.callout-tip icon=false title="Answer question 3"}
+The 95% confidence interval that uses the t-distribution is sightly wider compared to the 95% confidence interval that was manually computed using the normal approximation. However, given that the sample size is relatively large (n = 189), the difference is minimal. Larger differences would be expected with smaller sample sizes.
+:::
+
+## One-Sample t-Test
+
+```{r}
+t_test_result <- t.test(lowbwt$bwt, mu = 3000)
+t_test_result
+```
+
+::: {.callout-important icon=false title="Question 4"}
+You see that the test has 188 degrees of freedom. Why?
+:::
+
+::: {.callout-tip icon=false title="Answer question 5"}
+The degrees of freedom (df) for the one-sample t-test is equal to (sample size - 1), so df = 189 - 1 = 188 in this case.
+:::
+
+::: {.callout-important icon=false title="Question 5"}
+Based on the results of the test, does the population mean significantly differ from 3000?
+:::
+
+::: {.callout-tip icon=false title="Answer question 5"}
+The value of t-statistic is -1.04, and the corresponding p-value is 0.298. Since the p-value is greater than the significance level of 0.05, we fail to reject the null hypothesis. Therefore, the current sample does not provide sufficient evidence to conclude that the population mean significantly differs from 3000.
+:::
+
+```{r}
+ggplot(lowbwt, aes(x = bwt)) +
+  geom_histogram(fill = "blue", color = "black", bins = 20) +
+  labs(title = "Histogram of Birth Weights", x = "Birth Weight (grams)", y = "Frequency")
+```
+
+::: {.callout-important icon=false title="Question 6"}
+Looking at the histogram, would you say that the data are normally distributed?
+:::
+
+::: {.callout-tip icon=false title="Answer question 6"}
+Based on the histogram, the data appears to be reasonably normally distributed.
+:::
+
+## Point Estimates and 95% Confidence Intervals for Population Proportions
+
+Next, we will explore the variable 'low birth weight' (low), which is a dichotomous variable that takes a value 1 if the baby had a low birth weight (defined as a birth weight < 2500g) and a value of 0 otherwise.
+
+The frequency table for this variable is as follows:
+
+```{r}
+# Calculate the frequency of each category of the 'low' variable
+freq_table <- table(lowbwt$low)
+pander::pander(freq_table)
+```
+
+::: {.callout-important icon=false title="Question 7"}
+Based on these frequencies, what is the estimated proportion of low birth weight babies in the population?
+:::
+
+::: {.callout-tip icon=false title="Answer question 7"}
+The estimated proportion of low birth weight babies in the population is 59 / (130 + 59) = 0.31.
+:::
+
+::: {.callout-important icon=false title="Question 8"}
+Calculate the corresponding 95% confidence interval based on the Normal approximation.
+:::
+
+::: {.callout-tip icon=false title="Answer question 8"}
+Using the sample proportion p, the standard error (SE) can be calculated as $\sqrt(p * (1 - p) / n)$, where n is the total number of observations. The 95% confidence interval can then be calculated as p ± 1.96 * SE. In this case, the SE is equal to `r round(sqrt(0.31 * 0.69 / (130 + 59)), 2)`. Therefore, the 95% confidence interval is (`r round(0.31 - 1.96 * sqrt(0.31 * 0.69 / (130 + 59)), 2)`, `r round(0.31 + 1.96 * sqrt(0.31 * 0.69 / (130 + 59)), 2)`).
+:::
+
+## Binomial Test
+
+Subsequently, we perform an exact binomial test to assess whether the proportion of low birth weight babies in the population differs significantly from a hypothesized value of 30%:
+
+### R results
+
+```{r}
+binom_test_result <- binom.test(sum(lowbwt$low == 1, na.rm = TRUE),
+                                length(na.omit(lowbwt$low)),
+                                p = 0.30)
+binom_test_result
+```
+
+### SPSS results
+
+![Screenshot of the SPSS output table](images/SPSS_lab2_q9.PNG)
+
+Because the binomial distribution with n=189 and p=0.3 is reasonably symmetric, the two-sided p-value provided by SPSS is close to the one provided by R. In the answers below, we will use the R results.
+
+::: {.callout-important icon=false title="Question 9"}
+Does the proportion of low birth weight babies differ significantly from 30%?
+:::
+
+::: {.callout-tip icon=false title="Answer question 9"}
+The observed number of successes is 59, and the total number of trials is 189. Assuming a null hypothesis proportion of 30%, the expected number of successes is 0.3 * 189 = 56.7. The observed number of successes is relatively close to the expected number of successes under the null hypothesis, resulting in a p-value of the binomial test of 0.75. Since this p-value is greater than the significance level of 0.05, we fail to reject the null hypothesis. Therefore, the current sample does not provide sufficient evidence to conclude that the proportion of low birth weight babies differs significantly from 30%.
+:::
+
+::: {.callout-important icon=false title="Question 10"}
+The Dutch government intends to start a campaign against drinking alcoholic beverages if over 50% of the adolescents drink alcoholic beverages regularly (at least once a week). A random sample of 200 adolescents is taken and 128 admit that they drink alcohol regularly (we assume all 200 speak the truth). Test the null hypothesis that 50% of the Dutch adolescents drink alcohol, using a significance level of 5%.
+:::
+
+::: {.callout-tip icon=false title="Answer question 10"}
+The observed number of successes is 128, and the total number of trials is 200. Assuming a null hypothesis proportion of 50%, the expected number of successes is 0.5 * 200 = 100. The observed number of successes is considerably higher than the expected number of successes under the null hypothesis, resulting in a p-value of the binomial test that is <0.001: 
+
+```{r}
+#| echo: true
+
+binom_test_result <- binom.test(128, 200, p = 0.50)
+binom_test_result
+```
+  
+Therefore, we reject the null hypothesis and conclude that the proportion of Dutch adolescents who drink alcohol regularly is significantly higher than 50%.
+:::
+
+::: {.callout-important icon=false title="Question 11"}
+Rather than using an exact binomial test, we can also use the normal approximation of the binomial distribution to obtain an approximate p-value for the above hypothesis test. Manually calculate this approximate p-value and compare it to the p-value obtained from the binomial test. Is the use of the normal approximation appropriate in this case?
+::: 
+
+::: {.callout-tip icon=false title="Answer question 11"}
+To manually calculate an approximate p-value using the normal approximation, we first calculate the sample proportion $p$ as the number of successes divided by the total number of trials (i.e., $p$ = 128 / 200 = 0.64). We then calculate the standard error (SE) as $\sqrt(\pi * (1 - \pi) / n)$, where $n$ is the total number of observations and $\pi$ is the null hypothesis proportion. This gives a SE of `r round(sqrt(0.5 * 0.5 / 200), 3)`.
+
+Under the null hypothesis, the sample proportion is approximately Normally distributed with mean $\pi$ = 0.5 and SE = `r round(sqrt(0.5 * 0.5 / 200), 3)`. To calculate the probability of observing a sample proportion at least as extreme as the one observed in the data, we can calculate the z-score as $(p - \pi) / SE$. In this case, the z-score is `r round((0.64 - 0.5) / sqrt(0.5 * 0.5 / 200), 2)`, resulting in a p-value <0.001, which is consistent with the p-value obtained from the binomial test.
+
+The use of the normal approximation is very reasonable in this case because $n * \pi = 200 * 0.5 =100$ is considerably larger than 5, which is the minimum requirement for the normal approximation to be valid.
+:::
