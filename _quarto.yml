@@ -26,6 +26,8 @@ website:
         menu:
           - text: "Week 1"
             href: lab1_answers.qmd 
+          - text: "Week 2"
+            href: lab2_answers.qmd 
 format:
   html:
     theme: cosmo

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Advanced medical Statistics – Lab 2</title>
+<title>Advanced medical Statistics – Answers lab 2 – Advanced Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,30 +57,182 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="_R_lab2_files/libs/clipboard/clipboard.min.js"></script>
-<script src="_R_lab2_files/libs/quarto-html/quarto.js"></script>
-<script src="_R_lab2_files/libs/quarto-html/popper.min.js"></script>
-<script src="_R_lab2_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="_R_lab2_files/libs/quarto-html/anchor.min.js"></script>
-<link href="_R_lab2_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="_R_lab2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="_R_lab2_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="_R_lab2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="_R_lab2_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="fullcontent">
+<body class="nav-fixed">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Advanced Statistics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs-week-1" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Labs week 1</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-labs-week-1">    
+        <li>
+    <a class="dropdown-item" href="./R_lab1.html">
+ <span class="dropdown-text">R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./SPSS_lab1.html">
+ <span class="dropdown-text">SPSS</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs-week-2" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Labs week 2</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-labs-week-2">    
+        <li>
+    <a class="dropdown-item" href="./R_lab2.html">
+ <span class="dropdown-text">R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./SPSS_lab2.html">
+ <span class="dropdown-text">SPSS</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-answers" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Answers</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-answers">    
+        <li>
+    <a class="dropdown-item" href="./lab1_answers.html">
+ <span class="dropdown-text">Week 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./lab2_answers.html">
+ <span class="dropdown-text">Week 2</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#point-estimates-and-95-confidence-intervals-for-population-means" id="toc-point-estimates-and-95-confidence-intervals-for-population-means" class="nav-link active" data-scroll-target="#point-estimates-and-95-confidence-intervals-for-population-means">Point Estimates and 95% Confidence Intervals for Population Means</a></li>
+  <li><a href="#one-sample-t-test" id="toc-one-sample-t-test" class="nav-link" data-scroll-target="#one-sample-t-test">One-Sample t-Test</a></li>
+  <li><a href="#point-estimates-and-95-confidence-intervals-for-population-proportions" id="toc-point-estimates-and-95-confidence-intervals-for-population-proportions" class="nav-link" data-scroll-target="#point-estimates-and-95-confidence-intervals-for-population-proportions">Point Estimates and 95% Confidence Intervals for Population Proportions</a></li>
+  <li><a href="#binomial-test" id="toc-binomial-test" class="nav-link" data-scroll-target="#binomial-test">Binomial Test</a>
+  <ul class="collapse">
+  <li><a href="#r-results" id="toc-r-results" class="nav-link" data-scroll-target="#r-results">R results</a></li>
+  <li><a href="#spss-results" id="toc-spss-results" class="nav-link" data-scroll-target="#spss-results">SPSS results</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab2_answers.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Advanced medical Statistics – Lab 2</h1>
-<p class="subtitle lead">R version</p>
+<h1 class="title">Advanced medical Statistics – Answers lab 2</h1>
 </div>
 
 
@@ -98,86 +250,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Welcome to lab 2 in the advanced medical statistics course. For today’s exercises, we will continue exploring the <code>lowbwt.sav</code> dataset, which you can download from Brightspace.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>lowbwt <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"lowbwt.sav"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>As a reminder, the dataset includes the following variables (see the previous lab for more details):</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Variable</th>
-<th>Abbreviation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Identification Code</td>
-<td>ID</td>
-</tr>
-<tr class="even">
-<td>Low Birth Weight (0 = Birth Weight ≥ 2500g, 1 = Birth Weight &lt; 2500g)</td>
-<td>low</td>
-</tr>
-<tr class="odd">
-<td>Age of the Mother in Years</td>
-<td>age</td>
-</tr>
-<tr class="even">
-<td>Weight in Pounds at the Last Menstrual Period</td>
-<td>lwt</td>
-</tr>
-<tr class="odd">
-<td>Socio-Economic Status (1 = Low, 2 = Middle, 3 = High)</td>
-<td>ses</td>
-</tr>
-<tr class="even">
-<td>Smoking Status During Pregnancy (1 = Yes, 0 = No)</td>
-<td>smoke</td>
-</tr>
-<tr class="odd">
-<td>History of Premature Labor (0 = None, 1 = One, etc.)</td>
-<td>ptl</td>
-</tr>
-<tr class="even">
-<td>History of Hypertension (1 = Yes, 0 = No)</td>
-<td>ht</td>
-</tr>
-<tr class="odd">
-<td>Presence of Uterine Irritability (1 = Yes, 0 = No)</td>
-<td>urirr</td>
-</tr>
-<tr class="even">
-<td>Number of Physician Visits During the First Trimester (0 = None, 1 = One, 2 = Two, etc.)</td>
-<td>pvft</td>
-</tr>
-<tr class="odd">
-<td>Birth Weight in Grams</td>
-<td>bwt</td>
-</tr>
-</tbody>
-</table>
 <section id="point-estimates-and-95-confidence-intervals-for-population-means" class="level2">
 <h2 class="anchored" data-anchor-id="point-estimates-and-95-confidence-intervals-for-population-means">Point Estimates and 95% Confidence Intervals for Population Means</h2>
 <p>We will start by analyzing the variable ‘birth weight in grams’ (bwt), which is the main outcome of this study.</p>
-<p>To calculate the mean, standard deviation, and standard error of the mean, you can use the following R code:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mean_bwt <span class="ot">&lt;-</span> <span class="fu">mean</span>(lowbwt<span class="sc">$</span>bwt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sd_bwt <span class="ot">&lt;-</span> <span class="fu">sd</span>(lowbwt<span class="sc">$</span>bwt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>se_bwt <span class="ot">&lt;-</span> sd_bwt <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(lowbwt<span class="sc">$</span>bwt)))</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>mean_bwt</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>sd_bwt</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>se_bwt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>The mean, standard deviation, and standard error of the mean of the variable ‘birth weight in grams’ (bwt) are as follows:</p>
+<ul>
+<li>Mean: 2944.7</li>
+<li>Standard deviation: 729</li>
+<li>Standard error (SE): 53.03</li>
+</ul>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 1">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -191,6 +272,19 @@ Question 1
 <p>Based on these summary statistics, what is the estimated mean birth weight for the population?</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 1">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The estimated mean birth weight for the population is 2944.7 grams.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 2">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -201,20 +295,23 @@ Question 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Manually calculate the corresponding 95% confidence interval.</p>
+<p>Manually calculate the corresponding 95% confidence interval based on the normal approximation.</p>
 </div>
 </div>
-<p>You can also use R to calculate this 95% confidence interval using the <code>qt()</code> function to determine the appropriate t-value:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(lowbwt<span class="sc">$</span>bwt))</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>t_value <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>lower_ci <span class="ot">&lt;-</span> mean_bwt <span class="sc">-</span> t_value <span class="sc">*</span> se_bwt</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>upper_ci <span class="ot">&lt;-</span> mean_bwt <span class="sc">+</span> t_value <span class="sc">*</span> se_bwt</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(lower_ci, upper_ci)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 2">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
 </div>
-<p><strong>Explanation</strong>:</p>
-<p>The <code>qt()</code> function in R is used to obtain the critical value from the t-distribution. In this case, we use <code>qt(0.975, df = n - 1)</code> to get the t-value for a 95% confidence interval, where <code>0.975</code> corresponds to the upper tail probability for a two-sided confidence level of 95%, and <code>df = n - 1</code> represents the degrees of freedom (sample size minus one).</p>
+<div class="callout-title-container flex-fill">
+Answer question 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using the normal approximation, the 95% confidence interval for the population mean birth weight can be calculated as mean ± 1.96 * SE, where the standard error (SE) is equal to 53.03. Therefore, the 95% confidence interval is (2840.7, 3048.6).</p>
+</div>
+</div>
+<p>You can also use SPSS/R to calculate this 95% confidence interval by using the t-distribution. This gives the following result: (2840, 3049.3)</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 3">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -225,16 +322,39 @@ Question 3
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>How does the 95% confidence interval given by R compare to the 95% confidence interval that you manually computed?</p>
+<p>How does the 95% confidence interval based on the t-distribution compare to the 95% confidence interval based on the normal approximation that you manually computed?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 3">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The 95% confidence interval that uses the t-distribution is sightly wider compared to the 95% confidence interval that was manually computed using the normal approximation. However, given that the sample size is relatively large (n = 189), the difference is minimal. Larger differences would be expected with smaller sample sizes.</p>
 </div>
 </div>
 </section>
 <section id="one-sample-t-test" class="level2">
 <h2 class="anchored" data-anchor-id="one-sample-t-test">One-Sample t-Test</h2>
-<p>To determine whether the population mean birth weight differs significantly from a hypothesized value of 3000 grams, we use the <code>t.test()</code> function to conduct a one-sample t-test:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>t_test_result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(lowbwt<span class="sc">$</span>bwt, <span class="at">mu =</span> <span class="dv">3000</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>t_test_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  lowbwt$bwt
+t = -1.0437, df = 188, p-value = 0.298
+alternative hypothesis: true mean is not equal to 3000
+95 percent confidence interval:
+ 2840.049 3049.264
+sample estimates:
+mean of x 
+ 2944.656 </code></pre>
+</div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 4">
 <div class="callout-header d-flex align-content-center">
@@ -247,6 +367,19 @@ Question 4
 </div>
 <div class="callout-body-container callout-body">
 <p>You see that the test has 188 degrees of freedom. Why?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 5">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The degrees of freedom (df) for the one-sample t-test is equal to (sample size - 1), so df = 189 - 1 = 188 in this case.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 5">
@@ -262,11 +395,27 @@ Question 5
 <p>Based on the results of the test, does the population mean significantly differ from 3000?</p>
 </div>
 </div>
-<p>One of the assumptions underlying the one-sample t-test is that the data are normally distributed. We can check this assumption by creating a histogram:</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 5">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The value of t-statistic is -1.04, and the corresponding p-value is 0.298. Since the p-value is greater than the significance level of 0.05, we fail to reject the null hypothesis. Therefore, the current sample does not provide sufficient evidence to conclude that the population mean significantly differs from 3000.</p>
+</div>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lowbwt, <span class="fu">aes</span>(<span class="at">x =</span> bwt)) <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Birth Weights"</span>, <span class="at">x =</span> <span class="st">"Birth Weight (grams)"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab2_answers_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 6">
 <div class="callout-header d-flex align-content-center">
@@ -281,15 +430,45 @@ Question 6
 <p>Looking at the histogram, would you say that the data are normally distributed?</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 6">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 6
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Based on the histogram, the data appears to be reasonably normally distributed.</p>
+</div>
+</div>
 </section>
 <section id="point-estimates-and-95-confidence-intervals-for-population-proportions" class="level2">
 <h2 class="anchored" data-anchor-id="point-estimates-and-95-confidence-intervals-for-population-proportions">Point Estimates and 95% Confidence Intervals for Population Proportions</h2>
 <p>Next, we will explore the variable ‘low birth weight’ (low), which is a dichotomous variable that takes a value 1 if the baby had a low birth weight (defined as a birth weight &lt; 2500g) and a value of 0 otherwise.</p>
-<p>We start by using the <code>table()</code> function to calculate the frequency of each category of the ‘low’ variable:</p>
+<p>The frequency table for this variable is as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the frequency of each category of the 'low' variable</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>freq_table <span class="ot">&lt;-</span> <span class="fu">table</span>(lowbwt<span class="sc">$</span>low)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>freq_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">59</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 7">
 <div class="callout-header d-flex align-content-center">
@@ -302,6 +481,19 @@ Question 7
 </div>
 <div class="callout-body-container callout-body">
 <p>Based on these frequencies, what is the estimated proportion of low birth weight babies in the population?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 7">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 7
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The estimated proportion of low birth weight babies in the population is 59 / (130 + 59) = 0.31.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 8">
@@ -317,24 +509,50 @@ Question 8
 <p>Calculate the corresponding 95% confidence interval based on the Normal approximation.</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 8">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 8
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using the sample proportion p, the standard error (SE) can be calculated as <span class="math inline">\(\sqrt(p * (1 - p) / n)\)</span>, where n is the total number of observations. The 95% confidence interval can then be calculated as p ± 1.96 * SE. In this case, the SE is equal to 0.03. Therefore, the 95% confidence interval is (0.24, 0.38).</p>
+</div>
+</div>
 </section>
 <section id="binomial-test" class="level2">
 <h2 class="anchored" data-anchor-id="binomial-test">Binomial Test</h2>
 <p>Subsequently, we perform an exact binomial test to assess whether the proportion of low birth weight babies in the population differs significantly from a hypothesized value of 30%:</p>
+<section id="r-results" class="level3">
+<h3 class="anchored" data-anchor-id="r-results">R results</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>binom_test_result <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="fu">sum</span>(lowbwt<span class="sc">$</span>low <span class="sc">==</span> <span class="dv">1</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">length</span>(<span class="fu">na.omit</span>(lowbwt<span class="sc">$</span>low)),</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">p =</span> <span class="fl">0.30</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>binom_test_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Exact binomial test
+
+data:  sum(lowbwt$low == 1, na.rm = TRUE) and length(na.omit(lowbwt$low))
+number of successes = 59, number of trials = 189, p-value = 0.7509
+alternative hypothesis: true probability of success is not equal to 0.3
+95 percent confidence interval:
+ 0.2468886 0.3834546
+sample estimates:
+probability of success 
+             0.3121693 </code></pre>
 </div>
-<p><strong>Explanation</strong>:</p>
-<ul>
-<li><code>binom.test()</code> is the function used to perform the binomial test.</li>
-<li><code>sum(lowbwt$low == 1, na.rm = TRUE)</code> calculates the number of babies in the dataset with low birth weight (where <code>low</code> is 1). The <code>na.rm = TRUE</code> argument tells R to ignore missing values.</li>
-<li><code>length(na.omit(lowbwt$lbw))</code> gives the total number of non-missing observations in the <code>low</code> variable.</li>
-<li><code>p = 0.30</code> specifies the hypothesized population proportion (30%).</li>
-</ul>
-<p>The output displays, among other statistics, the two-sided p-value and an exact 95% confidence interval calculated using the Clopper and Pearson procedure.</p>
+</div>
+</section>
+<section id="spss-results" class="level3">
+<h3 class="anchored" data-anchor-id="spss-results">SPSS results</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/SPSS_lab2_q9.PNG" class="img-fluid figure-img"></p>
+<figcaption>Screenshot of the SPSS output table</figcaption>
+</figure>
+</div>
+<p>Because the binomial distribution with n=189 and p=0.3 is reasonably symmetric, the two-sided p-value provided by SPSS is close to the one provided by R. In the answers below, we will use the R results.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 9">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -348,6 +566,19 @@ Question 9
 <p>Does the proportion of low birth weight babies differ significantly from 30%?</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 9">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 9
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The observed number of successes is 59, and the total number of trials is 189. Assuming a null hypothesis proportion of 30%, the expected number of successes is 0.3 * 189 = 56.7. The observed number of successes is relatively close to the expected number of successes under the null hypothesis, resulting in a p-value of the binomial test of 0.75. Since this p-value is greater than the significance level of 0.05, we fail to reject the null hypothesis. Therefore, the current sample does not provide sufficient evidence to conclude that the proportion of low birth weight babies differs significantly from 30%.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 10">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -358,7 +589,38 @@ Question 10
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The Dutch government intends to start a campaign against drinking alcoholic beverages if over 50 % of the adolescents drink alcoholic beverages regularly (at least once a week). A random sample of 200 adolescents is taken and 128 admit that they drink alcohol regularly (we assume all 200 speak the truth). Test the null hypothesis that 50% of the Dutch adolescents drink alcohol, using a significance level of 5%.</p>
+<p>The Dutch government intends to start a campaign against drinking alcoholic beverages if over 50% of the adolescents drink alcoholic beverages regularly (at least once a week). A random sample of 200 adolescents is taken and 128 admit that they drink alcohol regularly (we assume all 200 speak the truth). Test the null hypothesis that 50% of the Dutch adolescents drink alcohol, using a significance level of 5%.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 10">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 10
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The observed number of successes is 128, and the total number of trials is 200. Assuming a null hypothesis proportion of 50%, the expected number of successes is 0.5 * 200 = 100. The observed number of successes is considerably higher than the expected number of successes under the null hypothesis, resulting in a p-value of the binomial test that is &lt;0.001:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>binom_test_result <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="dv">128</span>, <span class="dv">200</span>, <span class="at">p =</span> <span class="fl">0.50</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>binom_test_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Exact binomial test
+
+data:  128 and 200
+number of successes = 128, number of trials = 200, p-value = 9.13e-05
+alternative hypothesis: true probability of success is not equal to 0.5
+95 percent confidence interval:
+ 0.5692861 0.7064953
+sample estimates:
+probability of success 
+                  0.64 </code></pre>
+</div>
+</div>
+<p>Therefore, we reject the null hypothesis and conclude that the proportion of Dutch adolescents who drink alcohol regularly is significantly higher than 50%.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 11">
@@ -374,27 +636,27 @@ Question 11
 <p>Rather than using an exact binomial test, we can also use the normal approximation of the binomial distribution to obtain an approximate p-value for the above hypothesis test. Manually calculate this approximate p-value and compare it to the p-value obtained from the binomial test. Is the use of the normal approximation appropriate in this case?</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Differences in Two-Sided P-Value Calculation Between SPSS and R">
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 11">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Differences in Two-Sided P-Value Calculation Between SPSS and R
+Answer question 11
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>When conducting statistical tests, it is important to understand that different software packages can calculate two-sided p-values in slightly different ways, which may lead to variations in results. A key difference exists between how SPSS and base R handle this calculation:</p>
-<ul>
-<li><p>SPSS often calculates two-sided p-values by doubling the one-sided p-value. Specifically, SPSS determines the probability of the observed outcome in one direction (greater or less than a given value) and then multiplies this value by 2. This approach assumes that the distribution of the test statistic is symmetric under the null hypothesis. While this method is straightforward, it can be misleading if the distribution is skewed or the sample size is small, as it may not fully account for the asymmetry in the data.</p></li>
-<li><p>Base R (e.g., the <code>binom.test()</code> function) uses a more exact method for calculating two-sided p-values. R’s approach sums the probabilities of observing outcomes that are as extreme as, or more extreme than, the observed value in both directions (both tails of the distribution). This method does not assume symmetry and provides a more accurate p-value, particularly for small samples or skewed distributions.</p></li>
-</ul>
+<p>To manually calculate an approximate p-value using the normal approximation, we first calculate the sample proportion <span class="math inline">\(p\)</span> as the number of successes divided by the total number of trials (i.e., <span class="math inline">\(p\)</span> = 128 / 200 = 0.64). We then calculate the standard error (SE) as <span class="math inline">\(\sqrt(\pi * (1 - \pi) / n)\)</span>, where <span class="math inline">\(n\)</span> is the total number of observations and <span class="math inline">\(\pi\)</span> is the null hypothesis proportion. This gives a SE of 0.035.</p>
+<p>Under the null hypothesis, the sample proportion is approximately Normally distributed with mean <span class="math inline">\(\pi\)</span> = 0.5 and SE = 0.035. To calculate the probability of observing a sample proportion at least as extreme as the one observed in the data, we can calculate the z-score as <span class="math inline">\((p - \pi) / SE\)</span>. In this case, the z-score is 3.96, resulting in a p-value &lt;0.001, which is consistent with the p-value obtained from the binomial test.</p>
+<p>The use of the normal approximation is very reasonable in this case because <span class="math inline">\(n * \pi = 200 * 0.5 =100\)</span> is considerably larger than 5, which is the minimum requirement for the normal approximation to be valid.</p>
 </div>
 </div>
+
+
+</section>
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
