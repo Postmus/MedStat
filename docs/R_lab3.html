@@ -308,13 +308,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Smoking Status"</span>, <span class="at">y =</span> <span class="st">"Birth Weight (grams)"</span>, <span class="at">title =</span> <span class="st">"Birth Weight by Smoking Status"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question">
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 1">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question
+Question 1
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -338,13 +338,13 @@ Question
 <li>The second argument <code>data = lowbwt</code> specifies the dataset.</li>
 <li>The argument <code>var.equal = TRUE</code> indicates that we are assuming equal variances in the two groups, meaning that the classical independent samples t-test is performed. If you suspect unequal variances, Welch’s t-test can be conducted by setting <code>var.equal = FALSE</code>.</li>
 </ul>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question">
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 2">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question
+Question 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -362,13 +362,13 @@ Question
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>smoke) <span class="sc">+</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Birth Weight (grams)"</span>, <span class="at">title =</span> <span class="st">"Histograms of Birth Weight by Smoking Status"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question">
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 3">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question
+Question 3
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -381,13 +381,13 @@ Question
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>levene_test <span class="ot">&lt;-</span> <span class="fu">leveneTest</span>(bwt <span class="sc">~</span> smoke, <span class="at">data =</span> lowbwt)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>levene_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question">
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 4">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question
+Question 4
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -416,16 +416,16 @@ Exercise
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on these summary statistics, calculate the pooled standard deviation, standard error of the mean difference, and the 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not.</p>
+<p>Based on these summary statistics, calculate the pooled standard deviation and the standard error of the mean difference. Then compute the 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not. You may simplify the calculation by using the 97.5th percentile from the standard normal distribution (1.96) rather than the corresponding percentile from the t-distribution.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question">
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 5">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question
+Question 5
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -441,13 +441,13 @@ Question
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>wilcoxon_test <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(bwt <span class="sc">~</span> smoke, <span class="at">data =</span> lowbwt)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>wilcoxon_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question">
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 6">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question
+Question 6
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -467,13 +467,13 @@ Question
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Ethnicity"</span>, <span class="at">y =</span> <span class="st">"Birth Weight (grams)"</span>, <span class="at">title =</span> <span class="st">"Birth Weight by Ethnicity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question">
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 7">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question
+Question 7
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -491,13 +491,13 @@ Question
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print summary of ANOVA</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question">
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 8">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question
+Question 8
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -519,13 +519,13 @@ Question
 <li>The second argument specifies the grouping variable, which is the column of the lowbwt dataset that contains the ethnicity values</li>
 <li>The <code>p.adjust.method = "bonferroni"</code> argument specifies that the p-values should be adjusted using the Bonferroni correction</li>
 </ul>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question">
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 9">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question
+Question 9
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -545,13 +545,13 @@ Question
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>kruskal_test <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(bwt <span class="sc">~</span> ethnicity, <span class="at">data =</span> lowbwt)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>kruskal_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question">
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 10">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question
+Question 10
 </div>
 </div>
 <div class="callout-body-container callout-body">
