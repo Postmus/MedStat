@@ -82,7 +82,7 @@ ggplot(lowbwt, aes(x = smoke, y = bwt)) +
   labs(x = "Smoking Status", y = "Birth Weight (grams)", title = "Birth Weight by Smoking Status")
 ```
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 1"}
 Based on the boxplot, do you expect the smoking status to have an effect on birth weight?
 :::
 
@@ -104,7 +104,7 @@ print(independent_t_test)
 - The second argument `data = lowbwt` specifies the dataset.
 - The argument `var.equal = TRUE` indicates that we are assuming equal variances in the two groups, meaning that the classical independent samples t-test is performed. If you suspect unequal variances, Welch's t-test can be conducted by setting `var.equal = FALSE`.
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 2"}
 Based on the results of the independent samples t-test, is there a statistically significant difference in birth weight between mothers who smoked and those who did not?
 :::
 
@@ -120,7 +120,7 @@ ggplot(lowbwt, aes(x = bwt)) +
   labs(x = "Birth Weight (grams)", title = "Histograms of Birth Weight by Smoking Status")
 ```
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 3"}
 Do the histograms indicate that the birth weight data are approximately normally distributed for both groups?
 :::
 
@@ -132,7 +132,7 @@ levene_test <- leveneTest(bwt ~ smoke, data = lowbwt)
 levene_test
 ```
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 4"}
 Based on the Levene test, does the assumption of equal variances hold?
 :::
 
@@ -151,10 +151,10 @@ summary_stats
 ```
 
 ::: {.callout-important icon=false title="Exercise"}
-Based on these summary statistics, calculate the pooled standard deviation, standard error of the mean difference, and the 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not.
+Based on these summary statistics, calculate the pooled standard deviation and the standard error of the mean difference. Then compute the 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not. You may simplify the calculation by using the 97.5th percentile from the standard normal distribution (1.96) rather than the corresponding percentile from the t-distribution.
 :::
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 5"}
 Does your manually calculated 95% confidence interval for the mean difference in birth weight between the two groups agree with the one provided in the output of the `t.test()` function?
 :::
 
@@ -168,7 +168,7 @@ wilcoxon_test <- wilcox.test(bwt ~ smoke, data = lowbwt)
 wilcoxon_test
 ```
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 6"}
 What are the null and alternative hypotheses for the Mann-Whitney U test, and what does the p-value indicate about the difference in birth weight between mothers who smoked and those who did not?
 :::
 
@@ -185,7 +185,7 @@ ggplot(lowbwt, aes(x = ethnicity, y = bwt)) +
   labs(x = "Ethnicity", y = "Birth Weight (grams)", title = "Birth Weight by Ethnicity")
 ```
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 7"}
 What does the boxplot suggest about the distribution of birth weights across different ethnic groups?
 :::
 
@@ -201,7 +201,7 @@ anova_result <- aov(bwt ~ ethnicity, data = lowbwt)
 summary(anova_result)
 ```
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 8"}
 What conclusions can be drawn from the results of the one-way ANOVA?
 :::
 
@@ -221,7 +221,7 @@ posthoc
 - The second argument specifies the grouping variable, which is the column of the lowbwt dataset that contains the ethnicity values
 - The `p.adjust.method = "bonferroni"` argument specifies that the p-values should be adjusted using the Bonferroni correction
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 9"}
 What conclusions can be drawn from the post-hoc comparisons?
 :::
 
@@ -239,7 +239,7 @@ kruskal_test <- kruskal.test(bwt ~ ethnicity, data = lowbwt)
 kruskal_test
 ```
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 10"}
 Are the results of the Kruskal-Wallis test consistent with the one-way ANOVA results? 
 :::
 

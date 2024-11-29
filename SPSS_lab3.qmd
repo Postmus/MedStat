@@ -37,7 +37,7 @@ To get a sense of the data and the extent of a possible effect of smoking, we st
 3. **Select Variables**: Drag `bwt` to the y-axis and `smoke` to the x-axis to create a boxplot comparing the birth weights for mothers who smoked and those who did not.
 4. **Run the Graph**: Click `OK` to generate the boxplot.
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 1"}
 Based on the boxplot, do you expect the smoking status to have an effect on birth weight?
 :::
 
@@ -56,11 +56,11 @@ SPSS will generate several tables. Here we focus on the table **Independent Samp
 
 - **t-test for Equality of Means**: Provides the t-test results, including the t-value, degrees of freedom, and p-value. It also includes the **Mean Difference** and **95% Confidence Interval of the Difference**. It is important to choose the appropriate row ("Equal variances assumed" or "Equal variances not assumed") based on the result of Levene's test.
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 2"}
 Based on the Levene test, does the assumption of equal variances hold?
 :::
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 3"}
 Is there a significant difference in birth weights between mothers who smoked and those who did not?
 :::
 
@@ -74,7 +74,7 @@ To assess whether the assumption of normality holds for the outcome variable in 
 4. **Split by Group**: In the `Chart Builder`, click on the `Groups/Points ID` tab. Check the `Rows panel variable` checkbox to add a panel field to the chart preview. Then, drag the `smoke` variable into this field to split the histograms by group.
 5. **Run the Graph**: Click `OK` to generate the histograms.
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 4"}
 Do the histograms indicate that the birth weight data are approximately normally distributed for both groups?
 :::
 
@@ -100,10 +100,10 @@ To calculate the summary statistics required for the manual calculation, follow 
    - Click `OK` to run the analysis. The output will provide group-wise means, standard deviations, and sample sizes, which can be used for manual calculations.
 
 ::: {.callout-important icon=false title="Exercise"}
-Based on these summary statistics, calculate the pooled standard deviation, standard error of the mean difference, and the 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not.
+Based on these summary statistics, calculate the pooled standard deviation and the standard error of the mean difference. Then compute the 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not. You may simplify the calculation by using the 97.5th percentile from the standard normal distribution (1.96) rather than the corresponding percentile from the t-distribution.
 :::
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 5"}
 Does your manually calculated 95% confidence interval for the mean difference in birth weight between the two groups agree with the one provided in the output of the independent samples t-test procedure?
 :::
 
@@ -125,7 +125,7 @@ In case the assumption of normality is violated, we can use the Mann-Whitney U t
 4. **Run the Test**:
    - Click `OK` to run the analysis. The output will include the test statistic and associated p-value.
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 6"}
 What are the null and alternative hypotheses for the Mann-Whitney U test, and what does the p-value indicate about the difference in birth weight between mothers who smoked and those who did not?
 :::
 
@@ -146,7 +146,7 @@ To get a sense of the differences in birth weights across the different ethnic g
 3. **Run the Graph**:
    - Click `OK` to generate the boxplot.
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 7"}
 What does the boxplot suggest about the distribution of birth weights across different ethnic groups?
 :::
 
@@ -166,7 +166,7 @@ SPSS will generate the following key output:
 
 - **ANOVA Table**: Contains the F-statistic and the associated p-value. These values indicate whether there is a statistically significant difference in mean birth weights across ethnic groups.
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 8"}
 What conclusions can be drawn from the results of the one-way ANOVA?
 :::
 
@@ -182,7 +182,7 @@ If the one-way ANOVA indicates a statistically significant difference, we will p
 
 The post-hoc output will include pairwise comparisons of the means between all groups, with adjusted p-values.
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 9"}
 Which groups differ significantly, and what do the results suggest about the differences in birth weights across ethnic groups?
 :::
 
@@ -208,7 +208,7 @@ If the assumptions of the one-way ANOVA are not satisfied, we can use the Kruska
 4. **Run the Test**:
    - Click `OK` to run the analysis. The output will include the test statistic and associated p-value.
 
-::: {.callout-important icon=false title="Question"}
+::: {.callout-important icon=false title="Question 10"}
 Are the results of the Kruskal-Wallis test consistent with the one-way ANOVA results?
 :::
 
