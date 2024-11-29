@@ -150,6 +150,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="./lab2_answers.html">
  <span class="dropdown-text">Week 2</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./lab3_answers.html">
+ <span class="dropdown-text">Week 3</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -163,8 +167,34 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#part-1-independent-samples-t-test-and-mann-whitney-u-test" id="toc-part-1-independent-samples-t-test-and-mann-whitney-u-test" class="nav-link active" data-scroll-target="#part-1-independent-samples-t-test-and-mann-whitney-u-test">Part 1: Independent Samples t-test and Mann-Whitney U Test</a>
+  <ul class="collapse">
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory data analysis</a></li>
+  <li><a href="#independent-samples-t-test" id="toc-independent-samples-t-test" class="nav-link" data-scroll-target="#independent-samples-t-test">Independent samples t-test</a></li>
+  <li><a href="#checking-of-assumptions" id="toc-checking-of-assumptions" class="nav-link" data-scroll-target="#checking-of-assumptions">Checking of assumptions</a></li>
+  <li><a href="#confidence-interval-for-the-mean-difference" id="toc-confidence-interval-for-the-mean-difference" class="nav-link" data-scroll-target="#confidence-interval-for-the-mean-difference">95% Confidence Interval for the mean difference</a></li>
+  <li><a href="#mann-whitney-u-test" id="toc-mann-whitney-u-test" class="nav-link" data-scroll-target="#mann-whitney-u-test">Mann-Whitney U Test</a></li>
+  </ul></li>
+  <li><a href="#part-2-one-way-anova-and-kruskal-wallis-test" id="toc-part-2-one-way-anova-and-kruskal-wallis-test" class="nav-link" data-scroll-target="#part-2-one-way-anova-and-kruskal-wallis-test">Part 2: One-Way ANOVA and Kruskal-Wallis Test</a>
+  <ul class="collapse">
+  <li><a href="#exploratory-data-analysis-1" id="toc-exploratory-data-analysis-1" class="nav-link" data-scroll-target="#exploratory-data-analysis-1">Exploratory data analysis</a></li>
+  <li><a href="#one-way-anova" id="toc-one-way-anova" class="nav-link" data-scroll-target="#one-way-anova">One-way ANOVA</a></li>
+  <li><a href="#post-hoc-tests" id="toc-post-hoc-tests" class="nav-link" data-scroll-target="#post-hoc-tests">Post-hoc tests</a></li>
+  <li><a href="#checking-of-assumptions-1" id="toc-checking-of-assumptions-1" class="nav-link" data-scroll-target="#checking-of-assumptions-1">Checking of assumptions</a></li>
+  <li><a href="#kruskal-wallis-test" id="toc-kruskal-wallis-test" class="nav-link" data-scroll-target="#kruskal-wallis-test">Kruskal-Wallis Test</a></li>
+  </ul></li>
+  <li><a href="#part-3-unguided-exercises" id="toc-part-3-unguided-exercises" class="nav-link" data-scroll-target="#part-3-unguided-exercises">Part 3: Unguided exercises</a>
+  <ul class="collapse">
+  <li><a href="#effect-of-hypertension-on-birth-weight" id="toc-effect-of-hypertension-on-birth-weight" class="nav-link" data-scroll-target="#effect-of-hypertension-on-birth-weight">Effect of hypertension on birth weight</a></li>
+  <li><a href="#comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients" id="toc-comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients" class="nav-link" data-scroll-target="#comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients">Comparing red cell folate levels across ventilation strategies in cardiac bypass patients</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="SPSS_lab3.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -249,7 +279,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<div>
+<p><br></p>
 <section id="part-1-independent-samples-t-test-and-mann-whitney-u-test" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-independent-samples-t-test-and-mann-whitney-u-test">Part 1: Independent Samples t-test and Mann-Whitney U Test</h2>
 <p>In this part of the lab, we will examine the effect of smoking during pregnancy on birth weight.</p>
@@ -343,7 +373,6 @@ Question 4
 </section>
 <section id="confidence-interval-for-the-mean-difference" class="level3">
 <h3 class="anchored" data-anchor-id="confidence-interval-for-the-mean-difference">95% Confidence Interval for the mean difference</h3>
-<p>In addition to performing hypothesis tests, it is often informative to estimate the effect size and its uncertainty. One way to do this is by calculating a confidence interval for the mean difference in birth weight between the two groups. The 95% confidence interval is included in the output provided by the independent samples t-test procedure, so in principle we could extract it from there. As an exercise, we are also going to calculate it manually based on the formulas provided in the lecture/course syllabus.</p>
 <p>In addition to performing hypothesis tests, it is often informative to estimate the effect size and its uncertainty. One way to do this is by calculating a confidence interval for the mean difference in birth weight between the two groups. The 95% confidence interval is included in the output provided by the independent samples t-test procedure, so in principle, we could extract it from there. As an exercise, we are also going to calculate it manually based on the formulas provided in the lecture/course syllabus.</p>
 <p>To calculate the summary statistics required for the manual calculation, follow these steps:</p>
 <ol type="1">
@@ -626,7 +655,6 @@ Question 10
 </section>
 </section>
 </section>
-</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

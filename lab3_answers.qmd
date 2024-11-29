@@ -5,8 +5,8 @@ format:
     toc: true       
     toc-depth: 3    
     toc-location: right   # Optional: Can be left, right, or floating    
-#  pdf:
-#    toc: false      
+  pdf:
+    toc: false      
 editor_options:
   chunk_output_type: console
 ---
@@ -395,3 +395,10 @@ kruskal.test(rcfl ~ group, data = df)
 ```
 
 The Kruskal-Wallis test gives P-value = 0.123, indicating that there are no significant differences between the three groups.
+
+#### Caveat 
+
+In this example, the sample size is very limited, making it difficult — if not impossible — to verify whether the assumptions underlying the one-way ANOVA are met. The Kruskal-Wallis test is a good alternative in such cases.
+
+
+

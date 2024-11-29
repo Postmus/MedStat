@@ -1,9 +1,13 @@
 ---
 title: "Advanced Medical Statistics – Lab 3"
 subtitle: R version
-format:
+format: 
   html:
-    code-overflow: wrap
+    toc: true       
+    toc-depth: 3    
+    toc-location: right   # Optional: Can be left, right, or floating    
+  pdf:
+    toc: false  
 ---
 
 
@@ -65,7 +69,7 @@ As a reminder, the dataset includes the following variables (see the previous la
 | Number of Physician Visits During the First Trimester (0 = None, 1 = One, 2 = Two, etc.) | pvft |
 | Birth Weight in Grams | bwt |
 
-<div>
+<br>
 
 ## Part 1: Independent Samples t-test and Mann-Whitney U Test
 

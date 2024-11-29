@@ -1,7 +1,13 @@
 ---
 title: "Advanced Medical Statistics – Lab 3"
 subtitle: SPSS version
-format: html
+format: 
+  html:
+    toc: true       
+    toc-depth: 3    
+    toc-location: right   # Optional: Can be left, right, or floating    
+  pdf:
+    toc: false  
 ---
 
 Welcome to lab 3 in the advanced medical statistics course. For today’s exercises, we will continue exploring the `lowbwt.sav` dataset, which you can download from Brightspace. 
@@ -22,7 +28,7 @@ As a reminder, the dataset includes the following variables (see the previous la
 | Number of Physician Visits During the First Trimester (0 = None, 1 = One, 2 = Two, etc.) | pvft |
 | Birth Weight in Grams | bwt |
 
-<div>
+<br>
 
 ## Part 1: Independent Samples t-test and Mann-Whitney U Test
 
@@ -79,8 +85,6 @@ Do the histograms indicate that the birth weight data are approximately normally
 :::
 
 ### 95% Confidence Interval for the mean difference
-
-In addition to performing hypothesis tests, it is often informative to estimate the effect size and its uncertainty. One way to do this is by calculating a confidence interval for the mean difference in birth weight between the two groups. The 95% confidence interval is included in the  output provided by the independent samples t-test procedure, so in principle we could extract it from there. As an exercise, we are also going to calculate it manually based on the formulas provided in the lecture/course syllabus.
 
 In addition to performing hypothesis tests, it is often informative to estimate the effect size and its uncertainty. One way to do this is by calculating a confidence interval for the mean difference in birth weight between the two groups. The 95% confidence interval is included in the output provided by the independent samples t-test procedure, so in principle, we could extract it from there. As an exercise, we are also going to calculate it manually based on the formulas provided in the lecture/course syllabus.
 

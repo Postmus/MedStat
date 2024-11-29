@@ -1,7 +1,13 @@
 ---
 title: "Advanced medical Statistics – Lab 2"
 subtitle: R version
-format: html
+format: 
+  html:
+    toc: true       
+    toc-depth: 3    
+    toc-location: right   # Optional: Can be left, right, or floating    
+  pdf:
+    toc: false  
 ---
 
 ```{r}
