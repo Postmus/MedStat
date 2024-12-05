@@ -1,0 +1,761 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Advanced Medical Statistics -- Lab 4},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Advanced Medical Statistics -- Lab 4}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{R version}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+Welcome to lab 4 in the advanced medical statistics course. In this lab,
+we will focus on the analysis of categorical data and the comparison of
+proportions between groups. We will also perform several statistical
+tests for the analysis of paired data.
+
+\section{Part 1: Inference for categorical
+data}\label{part-1-inference-for-categorical-data}
+
+\subsection{Smoking and post-surgical
+complications}\label{smoking-and-post-surgical-complications}
+
+A study was conducted to investigate whether smoking is associated with
+an increased risk of post-surgical complications. The relationship
+between smoking status (smoker or non-smoker) and the occurrence of
+complications following surgery was examined. The outcome of interest
+was whether or not a complication occurred (yes or no), with smoking
+status serving as the explanatory variable to compare complication rates
+between the two groups.
+
+The data from the study are summarized in the following 2x2 contingency
+table:
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+& Complication & No Complication & Total \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Smokers & 8 & 12 & 20 \\
+Non-smokers & 10 & 50 & 60 \\
+Total & 18 & 62 & 80 \\
+\end{longtable}
+
+\subsubsection{Confidence intervals and hypothesis testing for the
+difference in proportions using the normal
+approximation}\label{confidence-intervals-and-hypothesis-testing-for-the-difference-in-proportions-using-the-normal-approximation}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, left=2mm, bottomtitle=1mm, breakable, colframe=quarto-callout-important-color-frame, toprule=.15mm, titlerule=0mm, title={Question 1}, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, opacityback=0, leftrule=.75mm, toptitle=1mm, colback=white]
+
+Using the data provided in the table, calculate an approximate 95\%
+confidence interval for the difference in proportions of post-surgical
+complications between smokers and non-smokers.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, left=2mm, bottomtitle=1mm, breakable, colframe=quarto-callout-important-color-frame, toprule=.15mm, titlerule=0mm, title={Question 2}, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, opacityback=0, leftrule=.75mm, toptitle=1mm, colback=white]
+
+Based on the 95\% confidence interval, can we conclude that there is a
+statistically significant difference in the proportion of post-surgical
+complications between smokers and non-smokers?
+
+\end{tcolorbox}
+
+We can also use the normal approximation to test the hypothesis that the
+proportion of complications is the same for smokers and non-smokers.
+This test is known as the two-sample Z test for equality of proportions.
+
+As explained in the syllabus, the two-sample Z test uses the pooled
+population proportion \(\hat{p}\), which is calculated as the total
+number of events divided by the total sample size. This pooled
+proportion is used under the null hypothesis, which assumes that the two
+groups share the same underlying proportion. The standard error of the
+difference in proportions is then calculated as
+\(\sqrt{\hat{p}(1-\hat{p})(1/n_1 + 1/n_2)}\), where \(n_1\) and \(n_2\)
+are the sample sizes in the two groups.
+
+In contrast, the 95\% confidence interval for the difference in
+proportions does not rely on the pooled proportion. Instead, it
+calculates the standard error separately for each group using the
+observed proportions, resulting in an unpooled standard error:
+\(\sqrt{\frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}}\), where
+\(p_1\) and \(p_2\) are the sample proportions for each group. This
+approach provides an interval that better reflects the variability in
+the observed data, independent of the null hypothesis assumption.
+
+To conduct the two-sample Z test, we start by creating a contingency
+table:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create a contingency table}
+\NormalTok{complications }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{50}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(complications) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Complication"}\NormalTok{, }\StringTok{"No Complication"}\NormalTok{)}
+\FunctionTok{rownames}\NormalTok{(complications) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Smokers"}\NormalTok{, }\StringTok{"Non{-}smokers"}\NormalTok{)}
+\NormalTok{complications }\OtherTok{\textless{}{-}} \FunctionTok{as.table}\NormalTok{(complications)}
+\NormalTok{complications}
+\end{Highlighting}
+\end{Shaded}
+
+Next, we supply this table to the \texttt{prop.test()} function to
+calculate the test statistic and p-value:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{prop.test}\NormalTok{(complications)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, left=2mm, bottomtitle=1mm, breakable, colframe=quarto-callout-important-color-frame, toprule=.15mm, titlerule=0mm, title={Question 3}, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, opacityback=0, leftrule=.75mm, toptitle=1mm, colback=white]
+
+Based on the results of the test, can we conclude that there is a
+statistically significant difference in the proportion of post-surgical
+complications between smokers and non-smokers?
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, left=2mm, bottomtitle=1mm, breakable, colframe=quarto-callout-important-color-frame, toprule=.15mm, titlerule=0mm, title={Question 4}, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, opacityback=0, leftrule=.75mm, toptitle=1mm, colback=white]
+
+In addition to the p-value, output of the \texttt{prop.test()} function
+also provides an approximate 95\% confidence interval for the difference
+in proportions. How does this confidence interval compare to the one you
+calculated manually?
+
+\end{tcolorbox}
+
+\subsubsection{Checking of assumptions}\label{checking-of-assumptions}
+
+For the use of the normal approximation to be valid, the expected number
+of events and non-events in each group should be at least 5.
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, left=2mm, bottomtitle=1mm, breakable, colframe=quarto-callout-important-color-frame, toprule=.15mm, titlerule=0mm, title={Exercise}, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, opacityback=0, leftrule=.75mm, toptitle=1mm, colback=white]
+
+Check this assumption by calculating the expected counts for each cell
+in the contingency table.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, left=2mm, bottomtitle=1mm, breakable, colframe=quarto-callout-important-color-frame, toprule=.15mm, titlerule=0mm, title={Question 5}, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, opacityback=0, leftrule=.75mm, toptitle=1mm, colback=white]
+
+Is it reasonable to use the normal approximation in this case?
+
+\end{tcolorbox}
+
+\subsubsection{Fisher's exact test}\label{fishers-exact-test}
+
+When the expected cell counts are small, the normal approximation may
+not be appropriate. In such cases, Fisher's exact test is recommended
+for testing the association between two categorical variables.
+
+In R, we can perform Fisher's exact test using the
+\texttt{fisher.test()} function. The test is based on the hypergeometric
+distribution and provides an exact p-value for the association between
+the two variables:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fisher.test}\NormalTok{(complications)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, left=2mm, bottomtitle=1mm, breakable, colframe=quarto-callout-important-color-frame, toprule=.15mm, titlerule=0mm, title={Question 6}, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, opacityback=0, leftrule=.75mm, toptitle=1mm, colback=white]
+
+Based on the results of Fisher's exact test, can we conclude that there
+is a statistically significant difference in the proportion of
+post-surgical complications between smokers and non-smokers?
+
+\end{tcolorbox}
+
+\subsection{Vaccine side effects across age
+groups}\label{vaccine-side-effects-across-age-groups}
+
+A study was conducted to investigate whether the occurrence of vaccine
+side effects differs across age groups. Researchers categorized side
+effects into three types: none, mild, and severe. The study participants
+were divided into three age groups: 18--39, 40--59, and 60+, and data
+was collected on the type of side effect experienced by individuals in
+each group.
+
+The research objective was to determine whether the distribution of side
+effects is consistent across these age groups.
+
+The data is summarized in the following contingency table:
+
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Age Group & None & Mild & Severe & Total \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+18--39 & 50 & 30 & 10 & 90 \\
+40--59 & 40 & 40 & 20 & 100 \\
+60+ & 30 & 50 & 40 & 120 \\
+Total & 120 & 120 & 70 & 310 \\
+\end{longtable}
+
+\subsubsection{Chi-square test of
+homogeneity}\label{chi-square-test-of-homogeneity}
+
+To conduct a chi-square test of homogeneity, we start by creating a
+contingency table:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create a contingency table}
+\NormalTok{side\_effects }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{40}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(side\_effects) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"None"}\NormalTok{, }\StringTok{"Mild"}\NormalTok{, }\StringTok{"Severe"}\NormalTok{)}
+\FunctionTok{rownames}\NormalTok{(side\_effects) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"18–39"}\NormalTok{, }\StringTok{"40–59"}\NormalTok{, }\StringTok{"60+"}\NormalTok{)}
+\NormalTok{side\_effects }\OtherTok{\textless{}{-}} \FunctionTok{as.table}\NormalTok{(side\_effects)}
+\NormalTok{side\_effects}
+\end{Highlighting}
+\end{Shaded}
+
+Next, we supply this table to the \texttt{chisq.test()} function to
+calculate the test statistic and p-value:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chisq\_test\_overall }\OtherTok{\textless{}{-}} \FunctionTok{chisq.test}\NormalTok{(side\_effects)}
+\FunctionTok{print}\NormalTok{(chisq\_test\_overall)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, left=2mm, bottomtitle=1mm, breakable, colframe=quarto-callout-important-color-frame, toprule=.15mm, titlerule=0mm, title={Question 7}, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, opacityback=0, leftrule=.75mm, toptitle=1mm, colback=white]
+
+Based on the results of the chi-square test, can we conclude that the
+distribution of vaccine side effects is consistent across the three age
+groups?
+
+\end{tcolorbox}
+
+\paragraph{Checking of assumptions}\label{checking-of-assumptions-1}
+
+To use the chi-square test, the expected cell counts should be at least
+5 for most cells. To check this assumption, we retrieve the table of
+expected counts from the output of the \texttt{chisq.test()} function,
+which we stored in the \texttt{chisq\_test\_overall} object:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Retrieve the table of expected counts}
+\NormalTok{chisq\_test\_overall}\SpecialCharTok{$}\NormalTok{expected}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, left=2mm, bottomtitle=1mm, breakable, colframe=quarto-callout-important-color-frame, toprule=.15mm, titlerule=0mm, title={Question 8}, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, opacityback=0, leftrule=.75mm, toptitle=1mm, colback=white]
+
+Are the expected cell counts greater than 5 for the different cells in
+the contingency table?
+
+\end{tcolorbox}
+
+\paragraph{Post-hoc pairwise
+comparisons}\label{post-hoc-pairwise-comparisons}
+
+Finally, we are interested in determining which age groups have
+significantly different distributions of side effects. For a
+\(n \times 2\) table, this can be achieved easily using the
+\texttt{pairwise.prop.test()} function, which performs pairwise
+comparisons of proportions between groups with adjustments for multiple
+testing. However, in our case, we are working with a \(3 \times 3\)
+contingency table, where the outcomes have more than two categories
+(None, Mild, Severe). This complexity requires a manual approach to
+perform pairwise comparisons.
+
+We start by comparing the first two age groups (18--39 and 40--59).
+First, we set up the contingency table for these two groups:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{table\_12 }\OtherTok{\textless{}{-}}\NormalTok{ side\_effects[}\FunctionTok{c}\NormalTok{(}\StringTok{"18–39"}\NormalTok{, }\StringTok{"40–59"}\NormalTok{), ]}
+\NormalTok{table\_12}
+\end{Highlighting}
+\end{Shaded}
+
+Next, we perform the chi-square test for this subset of the data and
+adjust the p-value by applying the Bonferroni correction:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Perform chi{-}square test for the subset of data}
+\NormalTok{chisq\_test\_12 }\OtherTok{\textless{}{-}} \FunctionTok{chisq.test}\NormalTok{(table\_12)}
+\FunctionTok{print}\NormalTok{(chisq\_test\_12)}
+
+\CommentTok{\# Adjust the p{-}value for multiple testing}
+\NormalTok{p\_adjusted\_12 }\OtherTok{\textless{}{-}} \DecValTok{3}\SpecialCharTok{*}\NormalTok{chisq\_test\_12}\SpecialCharTok{$}\NormalTok{p.value}
+\NormalTok{p\_adjusted\_12}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, left=2mm, bottomtitle=1mm, breakable, colframe=quarto-callout-important-color-frame, toprule=.15mm, titlerule=0mm, title={Exercise}, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, opacityback=0, leftrule=.75mm, toptitle=1mm, colback=white]
+
+Perform the pairwise comparison between the other two pairs of age
+groups (40--59 and 60+, 18--39 and 60+) using the same approach.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, left=2mm, bottomtitle=1mm, breakable, colframe=quarto-callout-important-color-frame, toprule=.15mm, titlerule=0mm, title={Question 9}, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, opacityback=0, leftrule=.75mm, toptitle=1mm, colback=white]
+
+Based on the results of the pairwise comparisons, which age groups have
+significantly different distributions of side effects?
+
+\end{tcolorbox}
+
+\section{Part 2: Analysis of paired continous
+data}\label{part-2-analysis-of-paired-continous-data}
+
+\subsection{Introduction}\label{introduction}
+
+In this part of the lab, we will analyze paired data on pocket depth
+before and after an intervention. Pocket depth refers to the depth of
+the gum pockets around teeth, measured using a periodontal probe. It is
+an important indicator of periodontal health. Healthy gums typically
+have pocket depths less than 3 mm, while deeper pockets may indicate
+conditions such as gingivitis or periodontitis.
+
+The dataset \texttt{pockets\_paired.sav}, available on Brightspace,
+contains the following columns:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{subjectID}: Unique identifier for each participant
+\item
+  \texttt{pocket\_depth\_before}: Average pocket depth (in mm) measured
+  before the intervention
+\item
+  \texttt{pocket\_depth\_after}: Average pocket depth (in mm) measured
+  after the intervention
+\end{itemize}
+
+The objective is to determine whether the intervention significantly
+reduces pocket depth. We will apply three statistical methods to analyze
+the paired data:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Paired t-test
+\item
+  Sign test
+\item
+  Wilcoxon signed-rank test
+\end{enumerate}
+
+\subsubsection{Paired t-test}\label{paired-t-test}
+
+First, we load the data from the provided SPSS file
+\texttt{pockets\_paired.sav}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(haven)}
+\NormalTok{pockets }\OtherTok{\textless{}{-}} \FunctionTok{read\_sav}\NormalTok{(}\StringTok{"pockets\_paired.sav"}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(pockets)}
+\end{Highlighting}
+\end{Shaded}
+
+Next, we perform a paired t-test to compare the average pocket depth
+before and after the intervention:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Perform paired t{-}test}
+\NormalTok{t\_test }\OtherTok{\textless{}{-}} \FunctionTok{t.test}\NormalTok{(pockets}\SpecialCharTok{$}\NormalTok{pocket\_depth\_before, pockets}\SpecialCharTok{$}\NormalTok{pocket\_depth\_after, }\AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(t\_test)}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{t.test()} function with the argument
+\texttt{paired\ =\ TRUE} conducts a paired t-test; setting
+\texttt{paired\ =\ FALSE} (default) would perform an independent samples
+t-test. The output includes the test statistic, degrees of freedom, and
+the p-value.
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, left=2mm, bottomtitle=1mm, breakable, colframe=quarto-callout-important-color-frame, toprule=.15mm, titlerule=0mm, title={Question 10}, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, opacityback=0, leftrule=.75mm, toptitle=1mm, colback=white]
+
+Based on the results of the paired t-test, can we conclude that the
+intervention significantly reduces pocket depth?
+
+\end{tcolorbox}
+
+\paragraph{Checking of assumptions}\label{checking-of-assumptions-2}
+
+To determine whether it is appropriate to apply the paired t-test to
+these data, we need to verify that the differences in pocket depth
+before and after the intervention are normally distributed. We can
+visually inspect the distribution of differences using a histogram:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate the differences in pocket depth}
+\NormalTok{pockets}\SpecialCharTok{$}\NormalTok{diff }\OtherTok{\textless{}{-}}\NormalTok{ pockets}\SpecialCharTok{$}\NormalTok{pocket\_depth\_after }\SpecialCharTok{{-}}\NormalTok{ pockets}\SpecialCharTok{$}\NormalTok{pocket\_depth\_before}
+
+\CommentTok{\# Create a histogram of the differences}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{ggplot}\NormalTok{(pockets, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ diff)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.05}\NormalTok{, }\AttributeTok{fill =} \StringTok{"skyblue"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Distribution of differences in pocket depth"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Difference in pocket depth (mm)"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Frequency"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, left=2mm, bottomtitle=1mm, breakable, colframe=quarto-callout-important-color-frame, toprule=.15mm, titlerule=0mm, title={Question 11}, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, opacityback=0, leftrule=.75mm, toptitle=1mm, colback=white]
+
+Based on the histogram, do the differences in pocket depth appear to be
+approximately normally distributed?
+
+\end{tcolorbox}
+
+\subsubsection{Sign test}\label{sign-test}
+
+The sign test is a non-parametric test used to compare two related
+samples. It is based on the signs of the differences between the pairs
+of observations. We will apply the sign test to the pocket depth data to
+determine whether the intervention has a significant effect.
+
+First, we calculate the total number of positive and negative signs in
+the differences:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate the number of positive and negative signs}
+\NormalTok{signs\_positive }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(pockets}\SpecialCharTok{$}\NormalTok{diff }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{)}
+\NormalTok{signs\_negative }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(pockets}\SpecialCharTok{$}\NormalTok{diff }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Next, we perform the sign test using the \texttt{binom.test()} function,
+which calculates the exact p-value for the sign test:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Perform the sign test}
+\CommentTok{\# There are 7 positive signs out of 96 pairs with either a positive or negative sign}
+\NormalTok{sign\_test }\OtherTok{\textless{}{-}} \FunctionTok{binom.test}\NormalTok{(signs\_positive, (signs\_positive }\SpecialCharTok{+}\NormalTok{ signs\_negative), }\AttributeTok{p =} \FloatTok{0.5}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(sign\_test)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, left=2mm, bottomtitle=1mm, breakable, colframe=quarto-callout-important-color-frame, toprule=.15mm, titlerule=0mm, title={Question 12}, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, opacityback=0, leftrule=.75mm, toptitle=1mm, colback=white]
+
+Based on the results of the sign test, can we conclude that the
+intervention significantly reduces pocket depth?
+
+\end{tcolorbox}
+
+\subsubsection{Wilcoxon signed-rank
+test}\label{wilcoxon-signed-rank-test}
+
+The Wilcoxon signed-rank test is another non-parametric test used to
+compare two related samples. It is based on the ranks of the absolute
+differences between the pairs of observations. In this case, the sign
+test is more appropriate because the Wilcoxon signed-rank test requires
+the assumption of symmetry in the distribution of differences, whereas
+the previously constructed histogram suggests that the distribution of
+these differences is left-skewed.
+
+To perform the Wilcoxon signed-rank test, we use the
+\texttt{wilcox.test()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Perform the Wilcoxon signed{-}rank test}
+\NormalTok{wilcox\_test }\OtherTok{\textless{}{-}} \FunctionTok{wilcox.test}\NormalTok{(pockets}\SpecialCharTok{$}\NormalTok{pocket\_depth\_before, pockets}\SpecialCharTok{$}\NormalTok{pocket\_depth\_after, }\AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(wilcox\_test)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, left=2mm, bottomtitle=1mm, breakable, colframe=quarto-callout-important-color-frame, toprule=.15mm, titlerule=0mm, title={Question 13}, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, opacityback=0, leftrule=.75mm, toptitle=1mm, colback=white]
+
+Based on the results of the Wilcoxon signed-rank test, can we conclude
+that the intervention significantly reduces pocket depth?
+
+\end{tcolorbox}
+
+\section{Part 3: Analysis of paired dichotomous
+data}\label{part-3-analysis-of-paired-dichotomous-data}
+
+In this part of the lab, we will analyze paired dichotomous data from a
+study investigating the skin response to two substances:
+\textbf{dinitrochlorobenzene (DNCB)}, a contact allergen, and
+\textbf{croton oil}, a skin irritant. The objective is to determine
+whether the proportion of patients with a negative response to DNCB is
+the same as the proportion with a negative response to croton oil.
+
+The data, summarized in the following table, represents the results of
+simultaneous skin reaction tests on 173 patients with skin cancer:
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+& DNCB +ve & DNCB -ve & Total \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Croton oil +ve} & 81 & 23 & 104 \\
+\textbf{Croton oil -ve} & 48 & 21 & 69 \\
+\textbf{Total} & 129 & 44 & 173 \\
+\end{longtable}
+
+Because the data are paired, we will use the McNemar test to compare the
+proportions of positive and negative responses to DNCB and croton oil.
+
+First, we create a 2x2 contingency table from the data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create the table for DNCB and Croton Oil responses}
+\NormalTok{skin\_response\_table }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{81}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{48}\NormalTok{, }\DecValTok{21}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(skin\_response\_table) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"DNCB +ve"}\NormalTok{, }\StringTok{"DNCB {-}ve"}\NormalTok{)}
+\FunctionTok{rownames}\NormalTok{(skin\_response\_table) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Croton Oil +ve"}\NormalTok{, }\StringTok{"Croton Oil {-}ve"}\NormalTok{)}
+\NormalTok{skin\_response\_table }\OtherTok{\textless{}{-}} \FunctionTok{as.table}\NormalTok{(skin\_response\_table)}
+
+\CommentTok{\# Print the table}
+\NormalTok{skin\_response\_table}
+\end{Highlighting}
+\end{Shaded}
+
+Next, we perform the McNemar test using the \texttt{mcnemar.test()}
+function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Perform the McNemar test}
+\NormalTok{mcnemar\_test }\OtherTok{\textless{}{-}} \FunctionTok{mcnemar.test}\NormalTok{(skin\_response\_table)}
+\FunctionTok{print}\NormalTok{(mcnemar\_test)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, left=2mm, bottomtitle=1mm, breakable, colframe=quarto-callout-important-color-frame, toprule=.15mm, titlerule=0mm, title={Question 14}, opacitybacktitle=0.6, arc=.35mm, rightrule=.15mm, opacityback=0, leftrule=.75mm, toptitle=1mm, colback=white]
+
+Based on the results of the McNemar test, can we conclude that there is
+a significant difference in the proportions of patients with a negative
+response to DNCB and croton oil? If so, can you determine which
+substance is associated with a higher proportion of negative responses?
+
+\end{tcolorbox}
+
+
+
+
+\end{document}
