@@ -44,11 +44,12 @@ website:
             href: lab3_answers.qmd
           - text: "Week 4"
             href: lab4_answers.qmd   
+      - text: "Assignments"
+        menu:
+          - text: "Assignment part 1"
+            href: Assignment_1.qmd
 format:
   html:
     theme: cosmo
     css: styles.css
     toc: true
-
-
-

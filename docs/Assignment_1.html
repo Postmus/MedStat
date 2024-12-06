@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Advanced medical Statistics – Lab 2 – Advanced Statistics</title>
+<title>Advanced Medical Statistics – Advanced Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -202,20 +236,29 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#point-estimates-and-95-confidence-intervals-for-population-means" id="toc-point-estimates-and-95-confidence-intervals-for-population-means" class="nav-link active" data-scroll-target="#point-estimates-and-95-confidence-intervals-for-population-means">Point Estimates and 95% Confidence Intervals for Population Means</a></li>
-  <li><a href="#one-sample-t-test" id="toc-one-sample-t-test" class="nav-link" data-scroll-target="#one-sample-t-test">One-Sample t-Test</a></li>
-  <li><a href="#point-estimates-and-95-confidence-intervals-for-population-proportions" id="toc-point-estimates-and-95-confidence-intervals-for-population-proportions" class="nav-link" data-scroll-target="#point-estimates-and-95-confidence-intervals-for-population-proportions">Point Estimates and 95% Confidence Intervals for Population Proportions</a></li>
-  <li><a href="#binomial-test" id="toc-binomial-test" class="nav-link" data-scroll-target="#binomial-test">Binomial Test</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#dataset-description" id="toc-dataset-description" class="nav-link" data-scroll-target="#dataset-description">Dataset description</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#steps-to-complete-the-assignment" id="toc-steps-to-complete-the-assignment" class="nav-link" data-scroll-target="#steps-to-complete-the-assignment">Steps to complete the assignment</a>
+  <ul class="collapse">
+  <li><a href="#step-1-create-an-individualized-dataset" id="toc-step-1-create-an-individualized-dataset" class="nav-link" data-scroll-target="#step-1-create-an-individualized-dataset"><strong>Step 1:</strong> Create an individualized dataset</a></li>
+  <li><a href="#step-2-create-a-baseline-characteristics-table" id="toc-step-2-create-a-baseline-characteristics-table" class="nav-link" data-scroll-target="#step-2-create-a-baseline-characteristics-table"><strong>Step 2:</strong> Create a baseline characteristics table</a></li>
+  <li><a href="#step-3-perform-the-analysis-for-the-first-research-question" id="toc-step-3-perform-the-analysis-for-the-first-research-question" class="nav-link" data-scroll-target="#step-3-perform-the-analysis-for-the-first-research-question"><strong>Step 3:</strong> Perform the analysis for the first research question</a></li>
+  <li><a href="#step-4-perform-the-analysis-for-the-second-research-question" id="toc-step-4-perform-the-analysis-for-the-second-research-question" class="nav-link" data-scroll-target="#step-4-perform-the-analysis-for-the-second-research-question"><strong>Step 4:</strong> Perform the analysis for the second research question</a></li>
+  <li><a href="#step-5-write-a-report" id="toc-step-5-write-a-report" class="nav-link" data-scroll-target="#step-5-write-a-report"><strong>Step 5:</strong> Write a report</a></li>
+  </ul></li>
+  <li><a href="#reporting-examples" id="toc-reporting-examples" class="nav-link" data-scroll-target="#reporting-examples">Reporting examples</a></li>
+  <li><a href="#submission-instructions" id="toc-submission-instructions" class="nav-link" data-scroll-target="#submission-instructions">Submission instructions</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="SPSS_lab2.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Assignment_1.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Advanced medical Statistics – Lab 2</h1>
-<p class="subtitle lead">SPSS version</p>
+<h1 class="title">Advanced Medical Statistics</h1>
+<p class="subtitle lead">Assignment part 1: Cleveland heart disease dataset</p>
 </div>
 
 
@@ -232,278 +275,251 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Welcome to lab 2 in the advanced medical statistics course. For today’s exercises, we will continue exploring the <code>lowbwt.sav</code> dataset, which you can download from Brightspace.</p>
-<p>As a reminder, the dataset includes the following variables (see the previous lab for more details):</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Variable</th>
-<th>Abbreviation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Identification Code</td>
-<td>ID</td>
-</tr>
-<tr class="even">
-<td>Low Birth Weight (0 = Birth Weight ≥ 2500g, 1 = Birth Weight &lt; 2500g)</td>
-<td>low</td>
-</tr>
-<tr class="odd">
-<td>Age of the Mother in Years</td>
-<td>age</td>
-</tr>
-<tr class="even">
-<td>Weight in Pounds at the Last Menstrual Period</td>
-<td>lwt</td>
-</tr>
-<tr class="odd">
-<td>Socio-Economic Status (1 = Low, 2 = Middle, 3 = High)</td>
-<td>ses</td>
-</tr>
-<tr class="even">
-<td>Smoking Status During Pregnancy (1 = Yes, 0 = No)</td>
-<td>smoke</td>
-</tr>
-<tr class="odd">
-<td>History of Premature Labor (0 = None, 1 = One, etc.)</td>
-<td>ptl</td>
-</tr>
-<tr class="even">
-<td>History of Hypertension (1 = Yes, 0 = No)</td>
-<td>ht</td>
-</tr>
-<tr class="odd">
-<td>Presence of Uterine Irritability (1 = Yes, 0 = No)</td>
-<td>urirr</td>
-</tr>
-<tr class="even">
-<td>Number of Physician Visits During the First Trimester (0 = None, 1 = One, 2 = Two, etc.)</td>
-<td>pvft</td>
-</tr>
-<tr class="odd">
-<td>Birth Weight in Grams</td>
-<td>bwt</td>
-</tr>
-</tbody>
-</table>
-<section id="point-estimates-and-95-confidence-intervals-for-population-means" class="level2">
-<h2 class="anchored" data-anchor-id="point-estimates-and-95-confidence-intervals-for-population-means">Point Estimates and 95% Confidence Intervals for Population Means</h2>
-<p>We will start by analyzing the variable ‘birth weight in grams’ (bwt), which is the main outcome of this study.</p>
-<p>Go to <code>Analyze =&gt; Descriptive Statistics =&gt; Frequencies</code>. Select the variable ‘birth weight in grams’ from the list on the left. Then, uncheck ‘Display frequency tables.’ A frequency table shows how many individuals have a particular score, but due to the large number of different scores in this case, it would be quite overwhelming (you can keep it checked if you wish to see it).</p>
-<p>Next, click on the ‘Statistics’ button. Here you can specify which statistics you want for the selected variable(s). Select mean, standard deviation, and S.E. mean. Press ‘Continue’.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 1">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Based on these summary statistics, what is the estimated mean birth weight for the population?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 2">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 2
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Calculate the corresponding 95% confidence interval based on the normal approximation.</p>
-</div>
-</div>
-<p>You can also use SPSS to calculate the 95% confidence interval. To do this, go to <code>Analyze =&gt; Descriptive Statistics =&gt; Explore</code>. Click on ‘Statistics,’ where you can specify the confidence interval you want to calculate. The default is set to 95%, so no changes are needed. SPSS uses the t-distribution to calculate this confidence interval, which provides a more accurate estimate when the population standard deviation is unknown and the sample size is small. Afterward, select ‘Statistics’ under ‘Display’ to ensure the output contains only the desired descriptive statistics. Press ‘OK’ to generate the output.”</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 3">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 3
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>How does the 95% confidence interval based on the t-distribution compare to the 95% confidence interval based on the normal approximation that you manually computed?</p>
-</div>
-</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this assignment, you will work with an individualized dataset derived from the Cleveland heart disease dataset. This dataset contains information on patients with suspected heart disease and includes various demographic, clinical, and diagnostic variables. Your task is to perform a series of analyses to explore the dataset and investigate the relationship between different variables and the presence of heart disease.</p>
 </section>
-<section id="one-sample-t-test" class="level2">
-<h2 class="anchored" data-anchor-id="one-sample-t-test">One-Sample t-Test</h2>
-<p>To determine whether the population mean birth weight differs significantly from a hypothesized value of 3000 grams, we conduct a one-sample t-test. To do this, go to <code>Analyze =&gt; Compare Means =&gt; One-Sample t-Test</code>. Select the variable ‘birth weight in grams’ and place it under ‘Test Variables’. We want to determine if the population mean significantly differs from the threshold value of 3000 grams. Enter ‘3000’ as the test value. Press ‘OK’. Now you will see the result of the t-test in your output.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 4">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 4
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>You see that the test has 188 degrees of freedom. Why?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 5">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 5
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Based on the results of the test, does the population mean significantly differ from 3000?</p>
-</div>
-</div>
-<p>One of the assumptions underlying the one-sample t-test is that the data are normally distributed. We can check this assumption by creating a histogram. To do this. go to <code>Graphs =&gt; Legacy Dialoges =&gt; Histrogram...</code>. Select the variable ‘birth weight in grams’ and place it under ‘Variable’. Check the ‘Diplay normal curve’ checkbox and press ‘OK’.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 6">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 6
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Looking at the histogram, would you say that the data are normally distributed?</p>
-</div>
-</div>
-</section>
-<section id="point-estimates-and-95-confidence-intervals-for-population-proportions" class="level2">
-<h2 class="anchored" data-anchor-id="point-estimates-and-95-confidence-intervals-for-population-proportions">Point Estimates and 95% Confidence Intervals for Population Proportions</h2>
-<p>Next, we will explore the variable ‘low birth weight’ (low), which is a dichotomous variable that takes a value 1 if the baby had a low birth weight (defined as a birth weight &lt; 2500g) and a value of 0 otherwise.</p>
-<p>We start by making a frequency table to calculate the frequency of each category of the ‘low’ variable:</p>
+<section id="dataset-description" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-description">Dataset description</h2>
+<p>The Cleveland heart disease dataset originates from the Cleveland Clinic Foundation and focuses on heart disease diagnosis. It includes data from 303 patients on the following variables:</p>
 <ul>
-<li>Go to <code>Analyze =&gt; Descriptive Statistics =&gt; Frequencies...</code></li>
-<li>Select the variable ‘low’ and move it to ‘Variable(s)’</li>
-<li>Press ‘OK’ to obtain the frequency table</li>
+<li><code>age</code>: Age in years</li>
+<li><code>sex</code>: Sex (1 = female; 2 = male)</li>
+<li><code>cp</code>: Chest pain type (1 = typical angina; 2 = atypical angina; 3 = non-anginal pain; 4 = asymptomatic)</li>
+<li><code>trestbps</code>: Resting blood pressure (mm Hg at hospital admission)</li>
+<li><code>chol</code>: Serum cholesterol in mg/dl</li>
+<li><code>fbs</code>: Fasting blood sugar &gt; 120 mg/dl</li>
+<li><code>restecg</code>: Resting electrocardiographic results (1 = normal; 2 = ST-T wave abnormality; 3 = left ventricular hypertrophy)</li>
+<li><code>thalach</code>: Maximum heart rate achieved</li>
+<li><code>exang</code>: Exercise-induced angina (1 = no; 2 = yes)</li>
+<li><code>oldpeak</code>: ST depression induced by exercise relative to rest</li>
+<li><code>slope</code>: Slope of the peak exercise ST segment (1 = upsloping; 2 = flat; 3 = downsloping)</li>
+<li><code>ca</code>: Number of major vessels (0-3) colored by fluoroscopy</li>
+<li><code>thal</code>: Thallium heart scan results (1 = normal; 2 = fixed defect; 3 = reversible defect)</li>
+<li><code>target</code>: Diagnosis of heart disease (1 = heart disease; 2 = no heart disease)</li>
 </ul>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 7">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 7
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Based on these frequencies, what is the estimated proportion of low birth weight babies in the population?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 8">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 8
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Calculate the corresponding 95% confidence interval based on the Normal approximation.</p>
-</div>
-</div>
 </section>
-<section id="binomial-test" class="level2">
-<h2 class="anchored" data-anchor-id="binomial-test">Binomial Test</h2>
-<p>Subsequently, we perform an exact binomial test to assess whether the proportion of low birth weight babies in the population differs significantly from a hypothesized value of 30%:</p>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<p>In this assignment, you will explore the Cleveland heart disease dataset to answer the following research questions:</p>
 <ul>
-<li>Go to <code>Analyze =&gt; Compare Means =&gt; One-Sample Proportions...</code>.</li>
-<li>Select the variable ‘low’ and move it to the ‘Test Variable List’.</li>
-<li>Under ‘Define Success’, select ‘Value(s)’ and enter the number <code>1</code> to indicate that having a low birth weight baby is the event of interest.</li>
-<li>Click on the ‘Test’ button to open the dialog box, select ‘Exact Binomial’ as the test and enter <code>0.3</code> as the test value. Press the ‘Continue’ button.</li>
-<li>Click ‘OK’ to run the test.</li>
+<li>Does maximum heart rate achieved differ across chest pain types?</li>
+<li>Is the presence of heart disease associated with sex or fasting blood sugar?</li>
 </ul>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 9">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 9
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Does the proportion of low birth weight babies differ significantly from 30%?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 10">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 10
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The Dutch government intends to start a campaign against drinking alcoholic beverages if over 50 % of the adolescents drink alcoholic beverages regularly (at least once a week). A random sample of 200 adolescents is taken and 128 admit that they drink alcohol regularly (we assume all 200 speak the truth). Test the null hypothesis that 50% of the Dutch adolescents drink alcohol, using a significance level of 5%.</p>
-<p>Hint: to perform this test in SPSS, we need to create a new dataset containing the above observations. To achieve this, construct a new data file containing two variables, like this:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Alcohol</th>
-<th>number</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>128</td>
-</tr>
-<tr class="even">
-<td>0</td>
-<td>72</td>
-</tr>
-</tbody>
-</table>
-<p>Then, instruct SPSS to weight the categories (Alcohol) by “number” via Data → Weight cases.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 11">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 11
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Rather than using an exact binomial test, we can also use the normal approximation of the binomial distribution to obtain an approximate p-value for the above hypothesis test. Manually calculate this approximate p-value and compare it to the p-value obtained from the binomial test. Is the use of the normal approximation appropriate in this case?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="Differences in Two-Sided P-Value Calculation Between SPSS and R">
+</section>
+<section id="steps-to-complete-the-assignment" class="level2">
+<h2 class="anchored" data-anchor-id="steps-to-complete-the-assignment">Steps to complete the assignment</h2>
+<section id="step-1-create-an-individualized-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-create-an-individualized-dataset"><strong>Step 1:</strong> Create an individualized dataset</h3>
+<p>Download the Cleveland heart disease dataset from Brightspace. After loading the dataset into R or SPSS, follow the steps below to create an individualized dataset with 200 patients:</p>
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Differences in Two-Sided P-Value Calculation Between SPSS and R
+Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>When conducting statistical tests, it is important to understand that different software packages can calculate two-sided p-values in slightly different ways, which may lead to variations in results. A key difference exists between how SPSS and base R handle this calculation:</p>
+<p>You must use your individualized dataset for all analyses in this assignment. Each dataset is uniquely sampled based on your student or staff number, ensuring that every student works independently with a unique dataset. This approach also ensures that results remain reproducible and can be individually verified by the instructor.</p>
+</div>
+</div>
+<section id="instructions-for-r-users" class="level4">
+<h4 class="anchored" data-anchor-id="instructions-for-r-users">Instructions for R users</h4>
 <ul>
-<li><p>SPSS often calculates two-sided p-values by doubling the one-sided p-value. Specifically, SPSS determines the probability of the observed outcome in one direction (greater or less than a given value) and then multiplies this value by 2. This approach assumes that the distribution of the test statistic is symmetric under the null hypothesis. While this method is straightforward, it can be misleading if the distribution is skewed or the sample size is small, as it may not fully account for the asymmetry in the data.</p></li>
-<li><p>Base R (e.g., the <code>binom.test()</code> function) uses a more exact method for calculating two-sided p-values. R’s approach sums the probabilities of observing outcomes that are as extreme as, or more extreme than, the observed value in both directions (both tails of the distribution). This method does not assume symmetry and provides a more accurate p-value, particularly for small samples or skewed distributions.</p></li>
+<li>Load the dataset into R</li>
+<li>Set a random seed using your student or staff number
+<ul>
+<li>Remove any letters (e.g., <code>S</code> or <code>P</code>) and use the numeric part</li>
+<li>Example: <code>set.seed(123456)</code> for student number <code>S123456</code></li>
+</ul></li>
+<li>Randomly sample 200 patients from the dataset
+<ul>
+<li>Use: <code>heart_data &lt;- heart_data[sample(nrow(heart_data), 200), ]</code></li>
+</ul></li>
+<li>Verify the dataset contains exactly 200 rows
+<ul>
+<li>Example: <code>nrow(heart_data)</code> should return <code>200</code></li>
+</ul></li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the required libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the SPSS file</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>heart_data <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"heart_disease_cleveland.sav"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert all variables to factors where needed</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>heart_data <span class="ot">&lt;-</span> heart_data <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.labelled), as_factor))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the random seed (replace 123456 with your student or staff number without S or P)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123456</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an individualized dataset with 200 patients</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>heart_data <span class="ot">&lt;-</span> heart_data[<span class="fu">sample</span>(<span class="fu">nrow</span>(heart_data), <span class="dv">200</span>), ]</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the dataset contains exactly 200 rows</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(heart_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="instructions-for-spss-users" class="level4">
+<h4 class="anchored" data-anchor-id="instructions-for-spss-users">Instructions for SPSS users</h4>
+<ul>
+<li>Open the dataset in SPSS</li>
+<li>Open the <strong>Syntax Editor</strong> in SPSS (<code>File</code> → <code>New</code> → <code>Syntax</code>)</li>
+<li>Copy and paste the syntax from the box below into the Syntax Editor, replacing <code>123456</code> with your numeric student or staff number without any letters (e.g., <code>S</code> or <code>P</code>)</li>
+<li>Run the syntax to create a custom dataset with 200 patients
+<ul>
+<li>Go to <code>Run</code> → <code>All</code> to run the syntax</li>
+</ul></li>
+<li>Verify the dataset contains exactly 200 cases
+<ul>
+<li>Go to <code>Analyze</code> → <code>Descriptive Statistics</code> → <code>Frequencies</code></li>
+<li>Select the <code>sex</code> variable and click <code>OK</code></li>
+<li>The output should show <code>200</code> cases</li>
+</ul></li>
+<li>Save the dataset as a new file for further analysis</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Set random <span class="fu">seed</span> (replace <span class="dv">123456</span> with your student or staff number without any letters).</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>SET SEED <span class="ot">=</span> <span class="fl">123456.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Initialize sampling counters <span class="cf">for</span> <span class="dv">200</span> samples from <span class="dv">303</span> cases.</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>DO IF <span class="sc">$</span>CASENUM <span class="ot">=</span> <span class="fl">1.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  COMPUTE <span class="co">#s_$_1 = 200.</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  COMPUTE <span class="co">#s_$_2 = 303.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>END IF.</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Perform sampling logic.</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>DO IF <span class="co">#s_$_2 &gt; 0.</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  COMPUTE filter_<span class="sc">$</span> <span class="er">=</span> <span class="fu">RV.UNIFORM</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">*</span> <span class="co">#s_$_2 &lt; #s_$_1.</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  COMPUTE <span class="co">#s_$_1 = #s_$_1 - filter_$.</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  COMPUTE <span class="co">#s_$_2 = #s_$_2 - 1.</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>ELSE.</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  COMPUTE filter_<span class="sc">$</span> <span class="er">=</span> <span class="fl">0.</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>END IF.</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Apply filter to retain sampled cases.</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>VARIABLE LABELS filter_<span class="sc">$</span> <span class="st">'200 from the first 303 cases (SAMPLE)'</span>.</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>FORMATS filter_<span class="sc">$</span> (f1<span class="fl">.0</span>).</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>FILTER BY filter_<span class="sc">$</span>.</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>EXECUTE.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Important note for SPSS users">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important note for SPSS users
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>The syntax above will generate a custom dataset containing 200 patients randomly selected from the original dataset. The selected patients are identified using the filter variable <code>filter_$</code>, which is added as a column in the dataset.</p>
+<p>To reapply the filter when you reopen the dataset, follow these steps:</p>
+<ol type="1">
+<li>Go to <code>Data</code> → <code>Select Cases</code>.</li>
+<li>Choose <code>Use filter variable</code> and select <code>filter_$</code> from the list.</li>
+<li>Click <code>OK</code> to apply the filter.</li>
+</ol>
+<p>Please note that this filtering step must be repeated each time you open the dataset to ensure that only the selected patients are included in your analysis.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="step-2-create-a-baseline-characteristics-table" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-create-a-baseline-characteristics-table"><strong>Step 2:</strong> Create a baseline characteristics table</h3>
+<ul>
+<li>Include all variables in the dataset apart from the outcome variable <code>target</code>
+<ul>
+<li>Summarize demographic variables (e.g., <code>age</code>, <code>sex</code>)</li>
+<li>Summarize clinical variables (e.g., <code>chol</code>, <code>trestbps</code>, <code>thalach</code>, <code>cp</code>)</li>
+</ul></li>
+<li>Decide on suitable summary measures for each variable
+<ul>
+<li>Use appropriate measures for continuous variables (e.g., mean, standard deviation, median, interquartile range)</li>
+<li>Use frequency counts and percentages for categorical variables</li>
+</ul></li>
+<li>Present your table clearly
+<ul>
+<li>Use meaningful labels, headings, and clear formatting</li>
+</ul></li>
+</ul>
+</section>
+<section id="step-3-perform-the-analysis-for-the-first-research-question" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-perform-the-analysis-for-the-first-research-question"><strong>Step 3:</strong> Perform the analysis for the first research question</h3>
+<p><strong>Research Question</strong>: <em>Does maximum heart rate achieved differ across chest pain types?</em></p>
+<ul>
+<li>Visualize the data
+<ul>
+<li>Create a boxplot to compare the distribution of maximum heart rate achieved across the four chest pain types</li>
+</ul></li>
+<li>Calculate the estimated population means and 95% confidence intervals for maximum heart rate achieved for each of the four chest pain types</li>
+<li>Select and perform an appropriate test
+<ul>
+<li>Use one-way ANOVA if normality and equal variances are met</li>
+<li>Use Kruskal-Wallis test if assumptions are violated</li>
+<li>Perform post-hoc comparisons using Bonferroni adjusted p-values if significant differences are found</li>
+</ul></li>
+</ul>
+</section>
+<section id="step-4-perform-the-analysis-for-the-second-research-question" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-perform-the-analysis-for-the-second-research-question"><strong>Step 4:</strong> Perform the analysis for the second research question</h3>
+<p><strong>Research Question</strong>: <em>Is the presence of heart disease associated with sex or fasting blood sugar?</em></p>
+<ul>
+<li>Summarize the data
+<ul>
+<li>Calculate and report the prevalence of heart disease for each group within sex and fasting blood sugar</li>
+<li>Include percentages and 95% confidence intervals for each group</li>
+</ul></li>
+<li>Select and perform an appropriate test
+<ul>
+<li>Use a Chi-Square test of homogeneity or Fisher’s Exact Test, depending on the expected cell counts</li>
+</ul></li>
+</ul>
+</section>
+<section id="step-5-write-a-report" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-write-a-report"><strong>Step 5:</strong> Write a report</h3>
+<p>Your report should be structured in the form of <strong>Methods</strong> and <strong>Results</strong> sections, as typically encountered in scientific papers.</p>
+<ul>
+<li><strong>Methods</strong>
+<ul>
+<li>Outline the steps taken to analyze the data</li>
+<li>Describe statistical tests performed, assumptions checked, and adjustments applied</li>
+</ul></li>
+<li><strong>Results</strong>
+<ul>
+<li>Include the baseline characteristics table</li>
+<li>Present key findings for each research question</li>
+<li>Include visualizations (e.g., boxplots) to support your findings where applicable</li>
+</ul></li>
+<li><strong>Formatting guidelines</strong>
+<ul>
+<li>Properly label all tables and figures</li>
+<li>Limit the report to 2–3 pages, including visuals and tables</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="reporting-examples" class="level2">
+<h2 class="anchored" data-anchor-id="reporting-examples">Reporting examples</h2>
+<p>When presenting your analysis results, ensure clarity and adherence to proper reporting conventions. Use the following examples as a guide:</p>
+<blockquote class="blockquote">
+<p>The mean cholesterol levels (95% CI) for the four chest pain types were as follows: typical angina, 245.3 mg/dL (95% CI: 230.1, 260.5); atypical angina, 220.4 mg/dL (95% CI: 205.7, 235.1); non-anginal pain, 230.2 mg/dL (95% CI: 215.6, 244.8); and asymptomatic chest pain, 200.1 mg/dL (95% CI: 185.4, 214.8). A one-way ANOVA was conducted to compare cholesterol levels across these groups, revealing a significant difference, F(3, 299) = 4.32, p = 0.006. Post-hoc pairwise comparisons using Bonferroni-adjusted p-values indicated that patients with typical angina had significantly higher cholesterol levels compared to those with asymptomatic chest pain (adjusted p = 0.015). No other pairwise differences were statistically significant after adjustment.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>The prevalence of heart disease was higher among patients older than 65 (68.5%, 95% CI: 60.2%, 76.8%) compared to those 65 or younger (47.2%, 95% CI: 35.6%, 58.8%). Fisher’s Exact Test indicated a significant difference between these groups (p = 0.028).</p>
+</blockquote>
+</section>
+<section id="submission-instructions" class="level2">
+<h2 class="anchored" data-anchor-id="submission-instructions">Submission instructions</h2>
+<p>Submit the following files as part of your assignment:</p>
+<ul>
+<li><strong>The report:</strong> Provide your report in Word or PDF format</li>
+<li><strong>The analysis file:</strong> Include your R script or SPSS output file</li>
+</ul>
 
 
 </section>
