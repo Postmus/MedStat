@@ -41,7 +41,9 @@ website:
           - text: "Week 2"
             href: lab2_answers.qmd 
           - text: "Week 3"
-            href: lab3_answers.qmd 
+            href: lab3_answers.qmd
+          - text: "Week 4"
+            href: lab4_answers.qmd   
 format:
   html:
     theme: cosmo

@@ -5,8 +5,10 @@ format:
     toc: true       
     toc-depth: 3    
     toc-location: right
-  #pdf:
-  #  toc: false  
+  pdf:
+    toc: false  
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r}
@@ -44,7 +46,7 @@ Using the data provided in the table, calculate an approximate 95% confidence in
 * Step 5: Determine the 95% confidence interval
   - $Z_{critical} = 1.96$
   - $\text{Lower bound} = \text{Difference} - Z_{critical} \times \text{SE} = 0.233 - 1.96 \times 0.0.120 \approx -0.001$
-  - $\text{Upper bound} = \text{Difference} + Z_{critical} \times \text{SE} = 0.233 + 1.96 \times 0.101 \approx 0.468$
+  - $\text{Upper bound} = \text{Difference} + Z_{critical} \times \text{SE} = 0.233 + 1.96 \times 0.120 \approx 0.468$
 
 * Step 6: Conclusion
   - The 95% confidence interval is approximately $(-0.001, 0.468)$
