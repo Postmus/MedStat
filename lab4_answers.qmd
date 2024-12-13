@@ -102,11 +102,11 @@ Is it reasonable to use the normal approximation in this case?
 The expected counts for each cell in the contingency t able are as follows:
 
 ```{r}
-expected_counts <- prop.table(complications, margin = 1) %*% prop.table(complications, margin = 2) * sum(complications)
-expected_counts
+chisq_test_overall <- chisq.test(complications)
+chisq_test_overall$expected
 ```
 
-The expected counts in all four cells are well above 5, which indicates that the normal approximation is appropriate in this case.
+One of the cells in the contingency table has an expected count just below 5, which indicates that the two sample Z-test may not be fully accurate in this case.
 :::
 
 ### Fisher's exact test
