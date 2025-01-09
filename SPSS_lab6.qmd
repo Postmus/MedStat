@@ -145,7 +145,7 @@ We start by creating a scatterplot to visualize the relationship between `age` a
 What can you infer from the scatterplot about the relationship between `age`, `pocketdepth`, and `alcohol` consumption?
 :::
 
-### 2. Fitting the ANCOVA Model
+### Fitting the ANCOVA Model
 
 In SPSS, there are multiple ways to fit linear regression models. If all your explanatory variables are continuous, you can use **Analyze** → **Regression** → **Linear**. However, if your model includes categorical predictors, it is often more convenient to use **Analyze** → **General Linear Model**, as SPSS will automatically handle the dummy coding for categorical variables in that procedure.
 
