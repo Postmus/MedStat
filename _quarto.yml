@@ -49,7 +49,9 @@ website:
           - text: "Week 3"
             href: lab3_answers.qmd
           - text: "Week 4"
-            href: lab4_answers.qmd   
+            href: lab4_answers.qmd
+          - text: "Week 6"
+            href: lab6_answers.qmd  
       - text: "Assignments"
         menu:
           - text: "Assignment part 1"
