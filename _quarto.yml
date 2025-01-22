@@ -44,6 +44,12 @@ website:
         menu:
           - text: "Exercises"
             href: lab7.qmd
+      - text: "Labs week 8"
+        menu:
+          - text: "R"
+            href: R_lab8.qmd
+          - text: "SPSS"
+            href: SPSS_lab8.qmd      
       - text: "Answers"
         menu:
           - text: "Week 1"
