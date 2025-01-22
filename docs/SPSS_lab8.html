@@ -280,7 +280,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1-risk-in-hospital-death-in-patients-with-acute-myocardial-infarction" id="toc-part-1-risk-in-hospital-death-in-patients-with-acute-myocardial-infarction" class="nav-link active" data-scroll-target="#part-1-risk-in-hospital-death-in-patients-with-acute-myocardial-infarction">Part 1: Risk in-hospital death in patients with acute myocardial infarction</a>
+  <li><a href="#part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction" id="toc-part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction" class="nav-link active" data-scroll-target="#part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction">Part 1: Risk of in-hospital death in patients with acute myocardial infarction</a>
   <ul class="collapse">
   <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory data analysis</a></li>
   <li><a href="#simple-logistic-regression" id="toc-simple-logistic-regression" class="nav-link" data-scroll-target="#simple-logistic-regression">Simple logistic regression</a></li>
@@ -319,8 +319,8 @@ window.Quarto = {
 </header>
 
 
-<section id="part-1-risk-in-hospital-death-in-patients-with-acute-myocardial-infarction" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-risk-in-hospital-death-in-patients-with-acute-myocardial-infarction">Part 1: Risk in-hospital death in patients with acute myocardial infarction</h2>
+<section id="part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction">Part 1: Risk of in-hospital death in patients with acute myocardial infarction</h2>
 <p>In part 1 of the lab, we are going to continue analyzing the Worcester Heart Attack Study (WHAS) dataset (file <code>whas500.sav</code> on Brightspace). The outcome of interest for today’s analysis is in-hospital death, measured by the variable “discharge status from hospital” (<code>dstat</code>) with values <code>alive</code> and <code>death</code>.</p>
 <section id="exploratory-data-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory data analysis</h3>
@@ -444,7 +444,7 @@ Question 8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>How to the p-value from the likelihood ratio test compare to the one from the Wald test?</p>
+<p>How does the p-value from the likelihood ratio test compare to the one from the Wald test?</p>
 </div>
 </div>
 </section>
@@ -485,7 +485,7 @@ Question 9
 <p>Data from 37 patients receiving a non-depleted allogenic bone marrow transplant were examined to see which variables were associated with the occurrence of acute graft-versus-host disease (GvHD: 0=no, 1=yes) (Bagot et al., 1988). Possible predictors are TYPE (type of leukemia: 1=AML, acute myeloid leukaemia; 2=ALL, acute lymphocytic leukaemia; 3=CML, chronic myeloid leukemia), PREG (donor pregnancy: 0= no, 1=yes), and LOGIND (the logarithm of an index of mixed epidermal cell-lymphocyte reactions). The data are in the file <code>GvHD.sav</code> available on Brightspace.</p>
 <ol type="a">
 <li>Perform a likelihood ratio test to determine whether there is a significant association between the type of leukemia and the occurrence of GvHD after adjusting for donor pregnancy and the logarithm of an index of mixed epidermal cell-lymphocyte reactions.</li>
-<li>What is the estimated odds ratio for the occurrence of GvHD for patients with AML compared to those with ALL?</li>
+<li>In the adjusted model, What is the estimated odds ratio for the occurrence of GvHD for patients with ALL compared to those with ALM?</li>
 <li>Use the Hosmer-Lemeshow goodness-of-fit test to evaluate the fit of the model. Based on the results, does the model provide a satisfactory fit to the data?</li>
 </ol>
 
