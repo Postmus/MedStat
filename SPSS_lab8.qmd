@@ -77,7 +77,7 @@ For example, we can use a likelihood ratio test (LRT) to compare a full model in
 The output will include a table with the results of the likelihood ratio test comparing the full model (variables included in block 1 and 2) to the reduced model (variables included in block 1 only). This table can be found in the section `Block 2: Method = Enter` and is labeled `Omnibus tests of model coefficients`. The p-value for the LRT comparing the full model to the reduced model can be found in the row `block`.
 
 ::: {.callout-important icon=false title="Question 8"}
-How to the p-value from the likelihood ratio test compare to the one from the Wald test?
+How does the p-value from the likelihood ratio test compare to the one from the Wald test?
 :::
 
 ### Evaluating model fit
@@ -110,6 +110,6 @@ where $x_{1}$ stands for the family history of ischaemic disease (0=no, 1=yes) a
 Data from 37 patients receiving a non-depleted allogenic bone marrow transplant were examined to see which variables were associated with the occurrence of acute graft-versus-host disease (GvHD: 0=no, 1=yes) (Bagot et al., 1988). Possible predictors are TYPE (type of leukemia: 1=AML, acute myeloid leukaemia; 2=ALL, acute lymphocytic leukaemia; 3=CML, chronic myeloid leukemia), PREG (donor pregnancy: 0= no, 1=yes), and LOGIND (the logarithm of an index of mixed epidermal cell-lymphocyte reactions). The data are in the file `GvHD.sav` available on Brightspace.
 
 (a) Perform a likelihood ratio test to determine whether there is a significant association between the type of leukemia and the occurrence of GvHD after adjusting for donor pregnancy and the logarithm of an index of mixed epidermal cell-lymphocyte reactions.
-(b) What is the estimated odds ratio for the occurrence of GvHD for patients with AML compared to those with ALL?
+(b) In the adjusted model, What is the estimated odds ratio for the occurrence of GvHD for patients with ALL compared to those with ALM?
 (c) Use the Hosmer-Lemeshow goodness-of-fit test to evaluate the fit of the model. Based on the results, does the model provide a satisfactory fit to the data?
 
