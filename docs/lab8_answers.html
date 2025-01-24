@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Advanced Medical Statistics – Lab 4 – Advanced Statistics</title>
+<title>Advanced Medical Statistics – Answers lab 8 – Advanced Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -284,38 +318,28 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1-inference-for-categorical-data" id="toc-part-1-inference-for-categorical-data" class="nav-link active" data-scroll-target="#part-1-inference-for-categorical-data">Part 1: Inference for categorical data</a>
+  <li><a href="#part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction" id="toc-part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction" class="nav-link active" data-scroll-target="#part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction">Part 1: Risk of in-hospital death in patients with acute myocardial infarction</a>
   <ul class="collapse">
-  <li><a href="#smoking-and-post-surgical-complications" id="toc-smoking-and-post-surgical-complications" class="nav-link" data-scroll-target="#smoking-and-post-surgical-complications">Smoking and post-surgical complications</a>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory data analysis</a></li>
+  <li><a href="#simple-logistic-regression" id="toc-simple-logistic-regression" class="nav-link" data-scroll-target="#simple-logistic-regression">Simple logistic regression</a></li>
+  <li><a href="#multiple-logistic-regression" id="toc-multiple-logistic-regression" class="nav-link" data-scroll-target="#multiple-logistic-regression">Multiple logistic regression</a></li>
+  <li><a href="#likelihood-ratio-tests" id="toc-likelihood-ratio-tests" class="nav-link" data-scroll-target="#likelihood-ratio-tests">Likelihood ratio tests</a></li>
+  <li><a href="#evaluating-model-fit" id="toc-evaluating-model-fit" class="nav-link" data-scroll-target="#evaluating-model-fit">Evaluating model fit</a></li>
+  </ul></li>
+  <li><a href="#part-2-unguided-exercises" id="toc-part-2-unguided-exercises" class="nav-link" data-scroll-target="#part-2-unguided-exercises">Part 2: unguided exercises</a>
   <ul class="collapse">
-  <li><a href="#confidence-intervals-and-hypothesis-testing-for-the-difference-in-proportions-using-the-normal-approximation" id="toc-confidence-intervals-and-hypothesis-testing-for-the-difference-in-proportions-using-the-normal-approximation" class="nav-link" data-scroll-target="#confidence-intervals-and-hypothesis-testing-for-the-difference-in-proportions-using-the-normal-approximation">Confidence intervals and hypothesis testing for the difference in proportions using the normal approximation</a></li>
-  <li><a href="#checking-of-assumptions" id="toc-checking-of-assumptions" class="nav-link" data-scroll-target="#checking-of-assumptions">Checking of assumptions</a></li>
-  <li><a href="#fishers-exact-test" id="toc-fishers-exact-test" class="nav-link" data-scroll-target="#fishers-exact-test">Fisher’s exact test</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
   </ul></li>
-  <li><a href="#vaccine-side-effects-across-age-groups" id="toc-vaccine-side-effects-across-age-groups" class="nav-link" data-scroll-target="#vaccine-side-effects-across-age-groups">Vaccine side effects across age groups</a>
-  <ul class="collapse">
-  <li><a href="#chi-square-test-of-homogeneity" id="toc-chi-square-test-of-homogeneity" class="nav-link" data-scroll-target="#chi-square-test-of-homogeneity">Chi-square test of homogeneity</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#part-2-analysis-of-paired-continous-data" id="toc-part-2-analysis-of-paired-continous-data" class="nav-link" data-scroll-target="#part-2-analysis-of-paired-continous-data">Part 2: Analysis of paired continous data</a>
-  <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
-  <ul class="collapse">
-  <li><a href="#paired-t-test" id="toc-paired-t-test" class="nav-link" data-scroll-target="#paired-t-test">Paired t-test</a></li>
-  <li><a href="#sign-test-and-wilcoxon-signed-rank-test" id="toc-sign-test-and-wilcoxon-signed-rank-test" class="nav-link" data-scroll-target="#sign-test-and-wilcoxon-signed-rank-test">Sign test and Wilcoxon signed-rank test</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#part-3-analysis-of-paired-dichotomous-data" id="toc-part-3-analysis-of-paired-dichotomous-data" class="nav-link" data-scroll-target="#part-3-analysis-of-paired-dichotomous-data">Part 3: Analysis of paired dichotomous data</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="SPSS_lab4.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab8_answers.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Advanced Medical Statistics – Lab 4</h1>
-<p class="subtitle lead">SPSS version</p>
+<h1 class="title">Advanced Medical Statistics – Answers lab 8</h1>
 </div>
 
 
@@ -332,45 +356,25 @@ window.Quarto = {
 </header>
 
 
-<p>Welcome to lab 4 in the advanced medical statistics course. In this lab, we will focus on the analysis of categorical data and the comparison of proportions between groups. We will also perform several statistical tests for the analysis of paired data.</p>
-<section id="part-1-inference-for-categorical-data" class="level1">
-<h1>Part 1: Inference for categorical data</h1>
-<section id="smoking-and-post-surgical-complications" class="level2">
-<h2 class="anchored" data-anchor-id="smoking-and-post-surgical-complications">Smoking and post-surgical complications</h2>
-<p>A study was conducted to investigate whether smoking is associated with an increased risk of post-surgical complications. The relationship between smoking status (smoker or non-smoker) and the occurrence of complications following surgery was examined. The outcome of interest was whether or not a complication occurred (yes or no), with smoking status serving as the explanatory variable to compare complication rates between the two groups.</p>
-<p>The data from the study are summarized in the following 2x2 contingency table:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th>Complication</th>
-<th>No Complication</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Smokers</td>
-<td>8</td>
-<td>12</td>
-<td>20</td>
-</tr>
-<tr class="even">
-<td>Non-smokers</td>
-<td>10</td>
-<td>50</td>
-<td>60</td>
-</tr>
-<tr class="odd">
-<td>Total</td>
-<td>18</td>
-<td>62</td>
-<td>80</td>
-</tr>
-</tbody>
-</table>
-<section id="confidence-intervals-and-hypothesis-testing-for-the-difference-in-proportions-using-the-normal-approximation" class="level3">
-<h3 class="anchored" data-anchor-id="confidence-intervals-and-hypothesis-testing-for-the-difference-in-proportions-using-the-normal-approximation">Confidence intervals and hypothesis testing for the difference in proportions using the normal approximation</h3>
+<section id="part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction">Part 1: Risk of in-hospital death in patients with acute myocardial infarction</h2>
+<p>In part 1 of the lab, we are going to continue analyzing the Worcester Heart Attack Study (WHAS) dataset (file <code>whas500.sav</code> on Brightspace). The outcome of interest for today’s analysis is in-hospital death, measured by the variable “discharge status from hospital” (<code>dstat</code>) with values <code>alive</code> and <code>death</code>.</p>
+<section id="exploratory-data-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory data analysis</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>        
+         alive dead
+  male     282   18
+  female   179   21</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        
+         alive  dead
+  male   0.940 0.060
+  female 0.895 0.105</code></pre>
+</div>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 1">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -381,9 +385,25 @@ Question 1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Using the data provided in the table, calculate an approximate 95% confidence interval for the difference in proportions of post-surgical complications between smokers and non-smokers.</p>
+<p>Based on the group proportions, do you expect gender to have an effect on the risk of in-hospital death?</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 1">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The proportion of in-hospital deaths is higher among females (0.105) than among females (0.06). This suggests that gender might be associated with the risk of in-hospital death.</p>
+</div>
+</div>
+</section>
+<section id="simple-logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="simple-logistic-regression">Simple logistic regression</h3>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 2">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -394,22 +414,53 @@ Question 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on the 95% confidence interval, can we conclude that there is a statistically significant difference in the proportion of post-surgical complications between smokers and non-smokers?</p>
+<p>Perform the chi-square test of homogeneity (see instructions in lab 4 if needed). What conclusion can be drawn from the test?</p>
 </div>
 </div>
-<p>We can also use the normal approximation to test the hypothesis that the proportion of complications is the same for smokers and non-smokers. This test is known as the two-sample Z test for equality of proportions.</p>
-<p>As explained in the syllabus, the two-sample Z test uses the pooled population proportion <span class="math inline">\(\hat{p}\)</span>, which is calculated as the total number of events divided by the total sample size. This pooled proportion is used under the null hypothesis, which assumes that the two groups share the same underlying proportion. The standard error of the difference in proportions is then calculated as <span class="math inline">\(\sqrt{\hat{p}(1-\hat{p})(1/n_1 + 1/n_2)}\)</span>, where <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> are the sample sizes in the two groups.</p>
-<p>In contrast, the 95% confidence interval for the difference in proportions does not rely on the pooled proportion. Instead, it calculates the standard error separately for each group using the observed proportions, resulting in an unpooled standard error: <span class="math inline">\(\sqrt{\frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}}\)</span>, where <span class="math inline">\(p_1\)</span> and <span class="math inline">\(p_2\)</span> are the sample proportions for each group. This approach provides an interval that better reflects the variability in the observed data, independent of the null hypothesis assumption.</p>
-<p>To conduct the two-sample Z test, we need to create a new dataset containing the above observations. To achieve this, go to <code>File</code> -&gt; <code>New</code> -&gt; <code>Data</code> to create a new data file. Navigate to the <code>Variable View</code> tab and create three variables: <code>Group</code>, <code>Complication</code>, and <code>Frequency</code>. The <code>Group</code> variable should have two levels: <code>Smokers</code> (coded as 1) and <code>Non-smokers</code> (coded as 2), while the <code>Complication</code> variable should have two levels: <code>Complication</code> (coded as 1) and <code>No complication</code> (coded as 2). The <code>Frequency</code> variable will contain the counts of observations for each combination of group and complication status.</p>
-<p>Navigate to the <code>Data View</code> tab and enter the data from the contingency table into the new dataset. For example, in the first row in the screenshot below, the <code>Group</code> variable is set to <code>Smokers</code> (value=1), the <code>Complication</code> variable is set to <code>Complication</code> (value=1), and the <code>Frequency</code> variable is set to 8 (number of individuals in that cell of the contingency table). Repeat this process for the remaining rows to enter all the data.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab4_smoking.PNG" class="img-fluid figure-img"></p>
-<figcaption>Screenshot of the SPSS dataset</figcaption>
-</figure>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  contingencyTable
+X-squared = 3.3789, df = 1, p-value = 0.06603</code></pre>
 </div>
-<p>Once the data is entered, we need to weight the data by the <code>Frequency</code> variable to account for the multiple observations in each cell. To do this, go to <code>Data</code> -&gt; <code>Weight Cases</code>. Select the <code>Frequency</code> variable and click <code>OK</code>.</p>
-<p>Finally, we can proceed with the two-sample Z test. Go to <code>Analyze</code> -&gt; <code>Compare Means</code> -&gt; <code>Independent-Samples proportions</code>. Select the <code>Group</code> variable as the <code>Grouping Variable</code> and the <code>Complication</code> variable as the <code>Test Variable</code>. Under <code>Confidence Intervals...</code>, select <code>Wald</code> and <code>Wald (Continuity Corrected)</code> to calculate the approximate 95% confidence intervals for the difference in proportions with and without continuity correction. Under Test Type, select <code>Wald H0 (Continuity Corrected)</code> to conduct the two-sample Z test with continuity correction. Click <code>OK</code> to run the test.</p>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 2">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The p-value of the chi-square test (0.066) is larger than 0.05, indicating that there is no significant association between gender and in-hospital death.</p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = dstat_numeric ~ gender, family = binomial, data = whas500)
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)   -2.7515     0.2431 -11.318   &lt;2e-16 ***
+genderfemale   0.6087     0.3351   1.816   0.0693 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 273.86  on 499  degrees of freedom
+Residual deviance: 270.55  on 498  degrees of freedom
+AIC: 274.55
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 3">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -420,7 +471,20 @@ Question 3
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on the results of the test, can we conclude that there is a statistically significant difference in the proportion of post-surgical complications between smokers and non-smokers?</p>
+<p>What is the odds ratio for in-hospital death for females compared to males? How should this odds ratio be interpreted in the context of the study?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 3">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The odds ratio for in-hospital death for females compared to males is equal to <span class="math inline">\(\exp(0.6087) = 1.83\)</span>. This means that the odds of in-hospital death are 1.83 times higher in females than in males.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 4">
@@ -433,24 +497,31 @@ Question 4
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In addition to the p-value, The SPSS output also provides two approximate 95% confidence intervals for the difference in proportions. How do these confidence intervals compare to the one you calculated manually?</p>
+<p>Based on the estimated regression coefficients (ignoring p-values), what are the predicted proportions of in-hospital deaths for male and female patients? Compare the predicted proportions to the observed proportions from the previously constructed contingency table. Do they match?</p>
 </div>
 </div>
-</section>
-<section id="checking-of-assumptions" class="level3">
-<h3 class="anchored" data-anchor-id="checking-of-assumptions">Checking of assumptions</h3>
-<p>For the use of the normal approximation to be valid, the expected number of events and non-events in each group should be at least 5.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 4">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+Answer question 4
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Check this assumption by calculating the expected counts for each cell in the contingency table.</p>
+<p>The linear predictor models the risk of in-hospital death on the log-odds scale. To obtain the predicted probabilities, we need to transform the log-odds back to the probability scale using the logistic function.</p>
+<p>The predicted probabilities of in-hospital death on the log-odds scale are:</p>
+<ul>
+<li>Males: -2.7515 (intercept)</li>
+<li>Females: -2.7515 + 0.6087 (intercept + coefficient) = -2.1428</li>
+</ul>
+<p>The predicted probabilities on the probability scale are:</p>
+<ul>
+<li>Male: <span class="math inline">\(1 / (1 + exp(-(-2.7515))) = 0.060\)</span></li>
+<li>Female: <span class="math inline">\(1 / (1 + exp(-(-2.1428))) = 0.105\)</span></li>
+</ul>
+<p>The predicted proportions of in-hospital deaths match the observed proportions from the contingency table.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 5">
@@ -463,14 +534,49 @@ Question 5
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Is it reasonable to use the normal approximation in this case?</p>
+<p>What conclusion can be drawn from the logistic regression analysis regarding the association between gender and in-hospital death? Is this in line with the conclusion drawn from the chi-square test?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 5">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The p-value of the Wald test for the regression coefficient of the dummy variable <code>genderfemale</code> is 0.069, which is larger than 0.05. This indicates that there is no significant association between gender and in-hospital death. This conclusion is consistent with the results of the chi-square test.</p>
 </div>
 </div>
 </section>
-<section id="fishers-exact-test" class="level3">
-<h3 class="anchored" data-anchor-id="fishers-exact-test">Fisher’s exact test</h3>
-<p>When the expected cell counts are small, the normal approximation may not be appropriate. In such cases, Fisher’s exact test is recommended for testing the association between two categorical variables.</p>
-<p>In SPSS, we can perform Fisher’s exact test by going to <code>Analyze</code> -&gt; <code>Descriptive Statistics</code> -&gt; <code>Crosstabs</code>. Select the <code>Group</code> variable as the <code>Row(s)</code> and the <code>Complication</code> variable as the <code>Column(s)</code>. Click on <code>Statistics</code> and check the box <code>Chi_square</code>. Click on <code>Exact Tests</code> and check the box <code>Exact</code>. Click <code>OK</code> to run the test.</p>
+<section id="multiple-logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-logistic-regression">Multiple logistic regression</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = dstat_numeric ~ gender + age, family = binomial, 
+    data = whas500)
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  -6.89600    1.19131  -5.789  7.1e-09 ***
+genderfemale  0.26776    0.34618   0.773 0.439246    
+age           0.05770    0.01524   3.785 0.000154 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 273.86  on 499  degrees of freedom
+Residual deviance: 253.45  on 497  degrees of freedom
+AIC: 259.45
+
+Number of Fisher Scoring iterations: 6</code></pre>
+</div>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 6">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -481,73 +587,22 @@ Question 6
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on the results of Fisher’s exact test, can we conclude that there is a statistically significant difference in the proportion of post-surgical complications between smokers and non-smokers?</p>
+<p>How does adjusting for age affect the estimated odds ratio for in-hospital death for females compared to males?</p>
 </div>
 </div>
-</section>
-</section>
-<section id="vaccine-side-effects-across-age-groups" class="level2">
-<h2 class="anchored" data-anchor-id="vaccine-side-effects-across-age-groups">Vaccine side effects across age groups</h2>
-<p>A study was conducted to investigate whether the occurrence of vaccine side effects differs across age groups. Researchers categorized side effects into three types: none, mild, and severe. The study participants were divided into three age groups: 18–39, 40–59, and 60+, and data was collected on the type of side effect experienced by individuals in each group.</p>
-<p>The research objective was to determine whether the distribution of side effects is consistent across these age groups.</p>
-<p>The data is summarized in the following contingency table:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Age Group</th>
-<th>None</th>
-<th>Mild</th>
-<th>Severe</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>18–39</td>
-<td>50</td>
-<td>30</td>
-<td>10</td>
-<td>90</td>
-</tr>
-<tr class="even">
-<td>40–59</td>
-<td>40</td>
-<td>40</td>
-<td>20</td>
-<td>100</td>
-</tr>
-<tr class="odd">
-<td>60+</td>
-<td>30</td>
-<td>50</td>
-<td>40</td>
-<td>120</td>
-</tr>
-<tr class="even">
-<td>Total</td>
-<td>120</td>
-<td>120</td>
-<td>70</td>
-<td>310</td>
-</tr>
-</tbody>
-</table>
-<section id="chi-square-test-of-homogeneity" class="level3">
-<h3 class="anchored" data-anchor-id="chi-square-test-of-homogeneity">Chi-square test of homogeneity</h3>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 6">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+Answer question 6
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Create a new dataset in SPSS to enter the data from the contingency table.</p>
+<p>After adjusting for age, the odds ratio for in-hospital death for females compared to males decreases from 1.83 to <span class="math inline">\(\exp(0.26776) = 1.31\)</span>. This indicates that the effect of gender on in-hospital death is confounded by age.</p>
 </div>
 </div>
-<p>Using the new dataset, we can perform a chi-square test of homogeneity to determine whether the distribution of side effects is consistent across the three age groups. Go to <code>Analyze</code> -&gt; <code>Descriptive Statistics</code> -&gt; <code>Crosstabs</code>. Select the <code>Age Group</code> variable as the <code>Row(s)</code> and the <code>Side Effect</code> variable as the <code>Column(s)</code>. Click on <code>Statistics</code> and check the box <code>Chi_square</code>. Click <code>OK</code> to run the test.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 7">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -558,12 +613,36 @@ Question 7
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on the results of the chi-square test, can we conclude that the distribution of vaccine side effects is consistent across the three age groups?</p>
+<p>Calculate the odds ratio for in-hospital death corresponding to a 10-year increase in age and interpret its meaning.</p>
 </div>
 </div>
-<section id="checking-of-assumptions-1" class="level4">
-<h4 class="anchored" data-anchor-id="checking-of-assumptions-1">Checking of assumptions</h4>
-<p>To use the chi-square test, the expected cell counts should be at least 5 for most cells.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 7">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 7
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The increase in the risk of in-hospital death on the log-odds scale is equal to 0.0577 * 10 = 0.577. This means that for every 10-year increase in age, the odds of in-hospital death increase by a factor of <span class="math inline">\(\exp(0.577) = 1.78\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="likelihood-ratio-tests" class="level3">
+<h3 class="anchored" data-anchor-id="likelihood-ratio-tests">Likelihood ratio tests</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: dstat_numeric ~ age
+Model 2: dstat_numeric ~ gender + age
+  Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)
+1       498     254.05                     
+2       497     253.45  1  0.59934   0.4388</code></pre>
+</div>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 8">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -574,26 +653,71 @@ Question 8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Are the expected cell counts greater than 5 for the different cells in the contingency table?</p>
+<p>How does the p-value from the likelihood ratio test compare to the one from the Wald test?</p>
 </div>
 </div>
-</section>
-<section id="post-hoc-pairwise-comparisons" class="level4">
-<h4 class="anchored" data-anchor-id="post-hoc-pairwise-comparisons">Post-hoc pairwise comparisons</h4>
-<p>Finally, we are interested in determining which age groups have significantly different distributions of side effects. We start by comparing the first two age groups (18–39 and 40–59). Assuming the name of the age group variable is <code>Age_Group</code> and the three age groups are coded as 1, 2, and 3, we can filter out the third age group (60+) by going to <code>Data</code> -&gt; <code>Select Cases</code>. Select <code>If condition is satisfied</code> and enter the condition <code>Age_Group &lt; 3</code>. Click <code>OK</code> to filter the data.</p>
-<p>Now that the data is filtered, we can perform a chi-square test for the subset of the data corresponding to the first two age groups by repeating the steps described above. Manually adjust the p-value for multiple comparisons using the Bonferroni correction.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 8">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+Answer question 8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Perform the pairwise comparison between the other two pairs of age groups (40–59 and 60+, 18–39 and 60+) using the same approach.</p>
+<p>The p-value of the likelihood ratio test (0.4388) is approximately equal to the p-value of the Wald test (0.4392). This indicates that the results of the two tests are consistent, which is expected because, for testing the significance of a single coefficient, the Wald test and the likelihood ratio test often yield similar results. However, they are not strictly equivalent, as the likelihood ratio test is based on comparing model fit, while the Wald test assesses the coefficient’s deviation from zero using its standard error.</p>
 </div>
+</div>
+</section>
+<section id="evaluating-model-fit" class="level3">
+<h3 class="anchored" data-anchor-id="evaluating-model-fit">Evaluating model fit</h3>
+<section id="r-results" class="level4">
+<h4 class="anchored" data-anchor-id="r-results">R results</h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Groups for Hosmer-Lemeshow C statistic:
+cutfit
+[0.00568,0.0178]  (0.0178,0.0279]  (0.0279,0.0369]  (0.0369,0.0514] 
+              55               52               47               52 
+  (0.0514,0.065]   (0.065,0.0864]   (0.0864,0.103]    (0.103,0.126] 
+              44               53               55               43 
+   (0.126,0.154]    (0.154,0.348] 
+              50               49 
+Groups for Hosmer-Lemeshow H statistic:
+cutfit1
+[0.00534,0.0399]  (0.0399,0.0742]   (0.0742,0.108]    (0.108,0.143] 
+             164              110               87               61 
+   (0.143,0.177]    (0.177,0.211]    (0.211,0.245]     (0.245,0.28] 
+              54               19                2                2 
+    (0.28,0.314]    (0.314,0.348] 
+               0                1 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$C
+
+    Hosmer-Lemeshow C statistic
+
+data:  fitted(model.sex.age) and model.sex.age$y
+X-squared = 11.465, df = 8, p-value = 0.1767
+
+
+$H
+
+    Hosmer-Lemeshow H statistic
+
+data:  fitted(model.sex.age) and model.sex.age$y
+X-squared = 6.2434, df = 8, p-value = 0.62</code></pre>
+</div>
+</div>
+</section>
+<section id="spss-results" class="level4">
+<h4 class="anchored" data-anchor-id="spss-results">SPSS results</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/SPSS_lab8_q9.PNG" class="img-fluid figure-img"></p>
+<figcaption>Screenshot of the Hosmer-Lemeshow test results in SPSS</figcaption>
+</figure>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 9">
 <div class="callout-header d-flex align-content-center">
@@ -605,178 +729,155 @@ Question 9
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on the results of the pairwise comparisons, which age groups have significantly different distributions of side effects?</p>
+<p>Based on the results of the Hosmer-Lemeshow goodness-of-fit test, does our model provide a satisfactory fit to the data?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 9">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 9
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The p-value for the Hosmer-Lemeshow test is 0.177 in R (C statistic) and 0.120 in SPSS, indicating that the model provides a satisfactory fit to the data: a non-significant p-value suggests that the model fits the data well, meaning that the observed and expected frequencies do not differ significantly.</p>
+<p>Note: the discrepancy between the p-values from R and SPSS seems to be due to small differences in how the groups are created within the implementation of the test.</p>
 </div>
 </div>
 </section>
 </section>
 </section>
-</section>
-<section id="part-2-analysis-of-paired-continous-data" class="level1">
-<h1>Part 2: Analysis of paired continous data</h1>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>In this part of the lab, we will analyze paired data on pocket depth before and after an intervention. Pocket depth refers to the depth of the gum pockets around teeth, measured using a periodontal probe. It is an important indicator of periodontal health. Healthy gums typically have pocket depths less than 3 mm, while deeper pockets may indicate conditions such as gingivitis or periodontitis.</p>
-<p>The dataset <code>pockets_paired.sav</code>, available on Brightspace, contains the following columns:</p>
-<ul>
-<li><code>subjectID</code>: Unique identifier for each participant</li>
-<li><code>pocket_depth_before</code>: Average pocket depth (in mm) measured before the intervention</li>
-<li><code>pocket_depth_after</code>: Average pocket depth (in mm) measured after the intervention</li>
-</ul>
-<p>The objective is to determine whether the intervention significantly reduces pocket depth. We will apply three statistical methods to analyze the paired data:</p>
-<ol type="1">
-<li>Paired t-test</li>
-<li>Sign test</li>
-<li>Wilcoxon signed-rank test</li>
+<section id="part-2-unguided-exercises" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-unguided-exercises">Part 2: unguided exercises</h2>
+<section id="exercise-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1">Exercise 1</h3>
+<p>Multiple logistic regression was used to construct a prognostic index to predict coronary artery disease from data on 348 patients with valvular heart disease who had undergone routine coronary arteriography before valve replacement (Ramsdale et al.&nbsp;1982). The estimated equation was:</p>
+<p><span class="math display">\[logit(p) = ln(p/(1-p)) = b_{0} + 1.167 \times x{1} + 0.0106 \times x_{2} + \textrm{other terms}\]</span></p>
+<p>where <span class="math inline">\(x_{1}\)</span> stands for the family history of ischaemic disease (0=no, 1=yes) and <span class="math inline">\(x_{2}\)</span> is the estimated total number of cigarettes ever smoked in terms of thousand cigarettes, calculated as the average number smoked annually times the number of years smoking.</p>
+<ol type="a">
+<li>What is the estimated odds ratio for having coronary artery disease for subjects with a positive family history relative to subjects with a negative family history?</li>
+<li>What total number of cigarettes ever smoked carries the same risk as a positive family history? Convert the result into years of smoking 20 cigarettes per day.</li>
+<li>What is the odds ratio for coronary artery disease for someone with a positive family history who had smoked 20 cigarettes a day for 30 years compared to a non smoker with no family history?</li>
 </ol>
-<section id="paired-t-test" class="level3">
-<h3 class="anchored" data-anchor-id="paired-t-test">Paired t-test</h3>
-<p>We start by performing a paired t-test to compare the average pocket depth before and after the intervention. To conduct this analysis in SPSS, follow these steps:</p>
-<ol type="1">
-<li><strong>Perform the Test</strong>: Go to <code>Analyze</code> &gt; <code>Compare Means</code> &gt; <code>Paired-Samples T Test</code>.</li>
-<li><strong>Select Variables</strong>: Move <code>pocket_depth_before</code> and <code>pocket_depth_after</code> to the <code>Paired Variables</code> box.</li>
-<li><strong>Run the Test</strong>: Click <code>OK</code> to run the analysis.</li>
+<p><strong>Answers:</strong></p>
+<ol type="a">
+<li><p><span class="math inline">\(\exp(1.167) = 3.212\)</span>.</p></li>
+<li><p>The log(OR) of positive history, <span class="math inline">\(1.167\)</span>, is to be set equal to <span class="math inline">\(0.0106 \times x_2\)</span>, where <span class="math inline">\(0.0106\)</span> is the log odds ratio of smoking 1000 cigarettes. Thus <span class="math inline">\(x_2=1.167/0.0106=110.094\)</span> thousands of cigarettes. Dividing this result by <span class="math inline">\((365 \times 20) / 1000 = 7.3\)</span>, i.e., the total number cigarettes (per thousand) smoked in 1 year if smoking 20 cigarettes per day, we find <span class="math inline">\(110.094/7.3=15.1\)</span> or just above 15 years. Thus the odds ratio of positive history is equivalent to that of daily smoking of 20 cigarettes for about 15 years.</p></li>
+<li><p>The total number of cigarettes smoked (per thousand) is <span class="math inline">\((20 \times 365 \times 30) / 1000 = 219\)</span>, so the odds ratio is <span class="math inline">\(\exp(1.167 + 219 \times 0.0106) = 32.7\)</span></p></li>
 </ol>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 10">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 10
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Based on the results of the paired t-test, can we conclude that the intervention significantly reduces pocket depth?</p>
-</div>
-</div>
-<section id="checking-of-assumptions-2" class="level4">
-<h4 class="anchored" data-anchor-id="checking-of-assumptions-2">Checking of assumptions</h4>
-<p>To determine whether it is appropriate to apply the paired t-test to these data, we need to verify that the differences in pocket depth before and after the intervention are normally distributed. We can visually inspect the distribution of differences using a histogram.</p>
-<p>First, we need to create a new variable that calculates the difference between the two measurements. In SPSS, a new variable can be created by navigating to <code>Transform</code> &gt; <code>Compute Variable</code>. Enter a name for the new variable (e.g., <code>diff</code>) in the <code>Target Variable</code> field and enter the expression <code>pocket_depth_after - pocket_depth_before</code> in the <code>Numeric Expression</code> field. Then, click <code>OK</code> to create the new variable.</p>
-<p>Next, we can create a histogram of the differences in pocket depth to visually assess the normality of the distribution by following these steps:</p>
-<ol type="1">
-<li>Go to <code>Graphs</code> &gt; <code>Legacy Dialogs</code> &gt; <code>Histogram</code>.</li>
-<li>Select the <code>diff</code> variable as the <code>Variable</code> and click <code>OK</code>.</li>
+</section>
+<section id="exercise-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2">Exercise 2</h3>
+<p>Data from 37 patients receiving a non-depleted allogenic bone marrow transplant were examined to see which variables were associated with the occurrence of acute graft-versus-host disease (GvHD: 0=no, 1=yes) (Bagot et al., 1988). Possible predictors are TYPE (type of leukemia: 1=AML, acute myeloid leukaemia; 2=ALL, acute lymphocytic leukaemia; 3=CML, chronic myeloid leukemia), PREG (donor pregnancy: 0= no, 1=yes), and LOGIND (the logarithm of an index of mixed epidermal cell-lymphocyte reactions). The data are in the file <code>GvHD.sav</code> available on Brightspace.</p>
+<ol type="a">
+<li>Perform a likelihood ratio test to determine whether there is a significant association between the type of leukemia and the occurrence of GvHD after adjusting for donor pregnancy and the logarithm of an index of mixed epidermal cell-lymphocyte reactions.</li>
+<li>In the adjusted model, What is the estimated odds ratio for the occurrence of GvHD for patients with ALL compared to those with ALM?</li>
+<li>Use the Hosmer-Lemeshow goodness-of-fit test to evaluate the fit of the model. Based on the results, does the model provide a satisfactory fit to the data?</li>
 </ol>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 11">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<p><strong>Answers:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 0/1 numeric version of the outcome variable</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>GvHD<span class="sc">$</span>gvhd.numeric <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(GvHD<span class="sc">$</span>gvhd <span class="sc">==</span> <span class="st">"no"</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the full  model</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>model.GvHD <span class="ot">&lt;-</span> <span class="fu">glm</span>(gvhd.numeric <span class="sc">~</span> type <span class="sc">+</span> preg <span class="sc">+</span> logind, <span class="at">family =</span> binomial, <span class="at">data =</span> GvHD)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.GvHD)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = gvhd.numeric ~ type + preg + logind, family = binomial, 
+    data = GvHD)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept)  -2.4496     1.2113  -2.022   0.0431 *
+typeALL      -0.1480     1.1722  -0.126   0.8996  
+typeCML       2.1781     1.2420   1.754   0.0795 .
+pregyes       2.4982     1.1026   2.266   0.0235 *
+logind        1.4577     0.7547   1.932   0.0534 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 51.049  on 36  degrees of freedom
+Residual deviance: 28.832  on 32  degrees of freedom
+AIC: 38.832
+
+Number of Fisher Scoring iterations: 5</code></pre>
 </div>
-<div class="callout-title-container flex-fill">
-Question 11
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the reduced model</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>model.GvHD.reduced <span class="ot">&lt;-</span> <span class="fu">glm</span>(gvhd.numeric <span class="sc">~</span> preg <span class="sc">+</span> logind, <span class="at">family =</span> binomial, <span class="at">data =</span> GvHD)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform likelihood ratio test</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model.GvHD.reduced, model.GvHD, <span class="at">test =</span> <span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: gvhd.numeric ~ preg + logind
+Model 2: gvhd.numeric ~ type + preg + logind
+  Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)  
+1        34     33.654                       
+2        32     28.832  2    4.822  0.08972 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>Based on the histogram, do the differences in pocket depth appear to be approximately normally distributed?</p>
-</div>
-</div>
-</section>
-</section>
-<section id="sign-test-and-wilcoxon-signed-rank-test" class="level3">
-<h3 class="anchored" data-anchor-id="sign-test-and-wilcoxon-signed-rank-test">Sign test and Wilcoxon signed-rank test</h3>
-<p>The sign test is a non-parametric test used to compare two related samples. It is based on the signs of the differences between the pairs of observations. We will apply the sign test to the pocket depth data to determine whether the intervention has a significant effect.</p>
-<p>The Wilcoxon signed-rank test is another non-parametric test used to compare two related samples. It is based on the ranks of the absolute differences between the pairs of observations. In this case, the sign test is more appropriate because the Wilcoxon signed-rank test requires the assumption of symmetry in the distribution of differences, whereas the previously constructed histogram suggests that the distribution of these differences is left-skewed.</p>
-<p>To perform the sign test and the Wilcoxon signed-rank test in SPSS, follow these steps:</p>
-<ol type="1">
-<li><strong>Perform the Test</strong>: <code>Nonparametric Tests</code> &gt; <code>Legacy Dialogs</code> &gt; <code>2 Related Samples</code>.</li>
-<li><strong>Select Variables</strong>: Move <code>pocket_depth_before</code> and <code>pocket_depth_after</code> to the <code>Test Pairs</code> box.</li>
-<li><strong>Run the Test</strong>: Check the <code>Sign</code> box as well as the <code>Wilcoxon</code> box and click <code>OK</code> to run the analysis.</li>
+<ol type="a">
+<li><p>The p-value of the likelihood ratio test is 0.090, indicating that the type of leukemia is not significantly associated with the occurrence of GvHD after adjusting for donor pregnancy and the logarithm of an index of mixed epidermal cell-lymphocyte reactions.</p></li>
+<li><p>By default, R and SPSS both use the first level of the factor (<code>ALM</code>) as the reference category. Therefore, the table with estimated regression coefficients is the same in both outputs. The estimated odds ratio for the occurrence of GvHD for patients with AML compared to those with ALL is <span class="math inline">\(\exp(-0.148) = 0.862\)</span>.</p></li>
+<li><p>The Hosmer-Lemeshow test results are as follows:</p></li>
 </ol>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 12">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<section id="r" class="level4">
+<h4 class="anchored" data-anchor-id="r">R</h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Groups for Hosmer-Lemeshow C statistic:
+cutfit
+[0.0109,0.0254] (0.0254,0.0552]  (0.0552,0.142]   (0.142,0.237]   (0.237,0.529] 
+              4               4               3               4               4 
+  (0.529,0.582]   (0.582,0.756]   (0.756,0.879]   (0.879,0.891]   (0.891,0.988] 
+              3               4               3               4               4 
+Groups for Hosmer-Lemeshow H statistic:
+cutfit1
+[0.00994,0.109]   (0.109,0.206]   (0.206,0.304]   (0.304,0.402]     (0.402,0.5] 
+             11               2               3               1               1 
+    (0.5,0.597]   (0.597,0.695]   (0.695,0.793]    (0.793,0.89]    (0.89,0.989] 
+              5               0               4               6               4 </code></pre>
 </div>
-<div class="callout-title-container flex-fill">
-Question 12
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Based on the results of the sign test, can we conclude that the intervention significantly reduces pocket depth?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 13">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 13
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Based on the results of the Wilcoxon signed-rank test, can we conclude that the intervention significantly reduces pocket depth?</p>
-</div>
-</div>
-</section>
-</section>
-</section>
-<section id="part-3-analysis-of-paired-dichotomous-data" class="level1">
-<h1>Part 3: Analysis of paired dichotomous data</h1>
-<p>In this part of the lab, we will analyze paired dichotomous data from a study investigating the skin response to two substances: <strong>dinitrochlorobenzene (DNCB)</strong>, a contact allergen, and <strong>croton oil</strong>, a skin irritant. The objective is to determine whether the proportion of patients with a negative response to DNCB is the same as the proportion with a negative response to croton oil.</p>
-<p>The data, summarized in the following table, represents the results of simultaneous skin reaction tests on 173 patients with skin cancer:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th>DNCB +ve</th>
-<th>DNCB -ve</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Croton oil +ve</strong></td>
-<td>81</td>
-<td>23</td>
-<td>104</td>
-</tr>
-<tr class="even">
-<td><strong>Croton oil -ve</strong></td>
-<td>48</td>
-<td>21</td>
-<td>69</td>
-</tr>
-<tr class="odd">
-<td><strong>Total</strong></td>
-<td>129</td>
-<td>44</td>
-<td>173</td>
-</tr>
-</tbody>
-</table>
-<p>Because the data are paired, we will use the McNemar test to compare the proportions of positive and negative responses to DNCB and croton oil.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Exercise">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Exercise
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Create a new dataset in SPSS to enter the data from the contingency table.</p>
-</div>
-</div>
-<p>Using the data entered in SPSS, we can perform the McNemar test to compare the proportions of positive and negative responses to DNCB and croton oil. To conduct this analysis in SPSS, go to <code>Analyze</code> &gt; <code>Descriptive Statistics</code> &gt; <code>Crosstabs</code>. Move the variables <code>DNCB</code> and <code>Croton_oil</code> to the <code>Row(s)</code> and <code>Column(s)</code> boxes. In the <code>Statistics</code> dialog box, check the <code>McNemar</code> box, uncheck the <code>Chi-square</code> box, and click <code>Continue</code>. Then, click <code>OK</code> to run the analysis.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 14">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 14
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Based on the results of the McNemar test, can we conclude that there is a significant difference in the proportions of patients with a negative response to DNCB and croton oil? If so, can you determine which substance is associated with a higher proportion of negative responses?</p>
-</div>
-</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$C
+
+    Hosmer-Lemeshow C statistic
+
+data:  fitted(model.GvHD) and GvHD$gvhd.numeric
+X-squared = 12.352, df = 8, p-value = 0.1362
 
 
+$H
+
+    Hosmer-Lemeshow H statistic
+
+data:  fitted(model.GvHD) and GvHD$gvhd.numeric
+X-squared = 14.907, df = 8, p-value = 0.06097</code></pre>
+</div>
+</div>
+</section>
+<section id="spss" class="level4">
+<h4 class="anchored" data-anchor-id="spss">SPSS</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/SPSS_lab8_ex2.PNG" class="img-fluid figure-img"></p>
+<figcaption>Screenshot of the Hosmer-Lemeshow test results in SPSS</figcaption>
+</figure>
+</div>
+<p>While R and SPSS produce different p-values, neither is significant. Therefore, the model provides a satisfactory fit to the data.</p>
+
+
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -1,6 +1,5 @@
 ---
-title: "Advanced Medical Statistics – Lab 8"
-subtitle: R version
+title: "Advanced Medical Statistics – Answers lab 8"
 format:
   html:
     toc: true       
