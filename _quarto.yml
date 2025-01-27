@@ -70,6 +70,8 @@ website:
         menu:
           - text: "Assignment part 1"
             href: Assignment_1.qmd
+          - text: "Assignment part 2"
+            href: Assignment_2.qmd
 format:
   html:
     theme: cosmo

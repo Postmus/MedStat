@@ -322,6 +322,55 @@
     "text": "Submission instructions\nSubmit the following files as part of your assignment:\n\nThe report: Provide your report in Word or PDF format\nThe analysis file: Include your R script or SPSS output file"
   },
   {
+    "objectID": "Assignment_2.html",
+    "href": "Assignment_2.html",
+    "title": "Advanced Medical Statistics",
+    "section": "",
+    "text": "In this second assignment, you will continue working with the Cleveland heart disease dataset. You will apply linear regression to build a prediction model for resting blood pressure and use logistic regression to test an inference-focused research question on heart disease status. Through both parts, you will:\n\nPractice backward elimination in linear regression to arrive at a simpler predictive model.\nDemonstrate the ability to interpret odds ratios in a logistic regression setting, distinguishing unadjusted from adjusted associations."
+  },
+  {
+    "objectID": "Assignment_2.html#introduction",
+    "href": "Assignment_2.html#introduction",
+    "title": "Advanced Medical Statistics",
+    "section": "",
+    "text": "In this second assignment, you will continue working with the Cleveland heart disease dataset. You will apply linear regression to build a prediction model for resting blood pressure and use logistic regression to test an inference-focused research question on heart disease status. Through both parts, you will:\n\nPractice backward elimination in linear regression to arrive at a simpler predictive model.\nDemonstrate the ability to interpret odds ratios in a logistic regression setting, distinguishing unadjusted from adjusted associations."
+  },
+  {
+    "objectID": "Assignment_2.html#dataset-description",
+    "href": "Assignment_2.html#dataset-description",
+    "title": "Advanced Medical Statistics",
+    "section": "Dataset description",
+    "text": "Dataset description\nYou will work with your personalized subset of 200 rows (patients) drawn from the original Cleveland heart disease data (N=303). Key variables include:\n\nage (years)\nsex (1=female; 2=male)\ncp (chest pain type; 4 categories)\ntrestbps (resting blood pressure in mm Hg)\nchol (serum cholesterol in mg/dl)\nfbs (fasting blood sugar &gt;120 mg/dl; binary)\ntarget (heart disease status; 1 = heart disease, 2 = no heart disease)\n\n\n\n\n\n\n\nImportant\n\n\n\nReminder: If you need to recreate your 200-patient subset, use your student/staff number as the random seed, removing any letters (e.g., S123456 → set.seed(123456)). See the previous assignment for detailed instructions."
+  },
+  {
+    "objectID": "Assignment_2.html#research-questions",
+    "href": "Assignment_2.html#research-questions",
+    "title": "Advanced Medical Statistics",
+    "section": "Research questions",
+    "text": "Research questions\n\nWhich demographic and clinical variables best predict resting blood pressure (trestbps)?\n\nYou will use backward elimination to identify a final model and generate a patient-level prediction.\n\nIs sex (male vs. female) significantly associated with heart disease (target) status, after accounting for age, chest pain type, fasting blood sugar, and cholesterol?\n\nYou will fit simple and expanded logistic models to see whether the association between sex and heart disease remains after adjusting for additional factors."
+  },
+  {
+    "objectID": "Assignment_2.html#part-a-linear-regression",
+    "href": "Assignment_2.html#part-a-linear-regression",
+    "title": "Advanced Medical Statistics",
+    "section": "Part A: Linear regression",
+    "text": "Part A: Linear regression\n\nA1. Initial model setup\n\nOutcome variable: trestbps (resting blood pressure)\nCandidate variables:\n\ncp (chest pain type)\nage\nchol\nsex (1 = female; 2 = male)\nfbs (fasting blood sugar &gt;120 mg/dl)\n\n\nFit a multiple linear regression model including all five variables as potential contributors to resting blood pressure. Summarize the model (coefficients, p-values, R-squared, etc.).\n\n\nA2. Backward elimination\n\nRemove the least significant variable (highest p-value).\nRefit the model.\nRepeat until all remaining terms are below the 10% significance threshold for variable inclusion (i.e., p &lt; 0.10 for all remaining predictors).\n\n\n\nA3. Final model summary\n\nPresent the final set of variables. Interpret them in a predictive context (e.g., “An increase of 10 mg/dl in cholesterol corresponds to a 1.2 mm Hg change in resting blood pressure, holding other factors constant.”).\nEvaluate model goodness-of-fit by performing a residual analysis.\n\n\n\nA4. Patient-level prediction\n\nHypothetical patient:\n\nAge = 62\nCP = 1 (typical angina)\nChol = 240 mg/dl\nSex = 1 (female)\nFBS = 0 (≤120 mg/dl)\n\nPlug these values into your final regression equation to calculate the predicted resting blood pressure. If you removed any variables during your model selection, simply exclude them from the calculation.\nInterpret the predicted value. For example, “The model estimates this patient’s resting blood pressure to be around 135 mm Hg.”"
+  },
+  {
+    "objectID": "Assignment_2.html#part-b-logistic-regression",
+    "href": "Assignment_2.html#part-b-logistic-regression",
+    "title": "Advanced Medical Statistics",
+    "section": "Part B: Logistic regression",
+    "text": "Part B: Logistic regression\n\nB1. Simple model (unadjusted)\nBegin by ensuring that heart disease status is coded appropriately, for example 0 for no heart disease and 1 for heart disease if your software or analysis requires it. Then, run a simple logistic regression using sex as the sole explanatory variable, focusing on the odds ratio comparing males to females. Finally, interpret that odds ratio alongside its confidence interval, explaining how much higher or lower the odds of heart disease are for one sex relative to the other.\n\n\nB2. Expanded model (adjusted)\nNext, fit a logistic regression that includes sex, age, chest pain type, fasting blood sugar, and cholesterol. Pay particular attention to how the odds ratio for sex shifts (in terms of magnitude and significance) once these additional factors are taken into account. In your write-up, note any change in its magnitude relative to the simpler model and discuss plausible clinical reasons for any observed differences."
+  },
+  {
+    "objectID": "Assignment_2.html#submission-instructions",
+    "href": "Assignment_2.html#submission-instructions",
+    "title": "Advanced Medical Statistics",
+    "section": "Submission instructions",
+    "text": "Submission instructions\n\nReport\n\nProvide a Word or PDF file with Methods and Results for each part (A: Linear regression, B: Logistic regression).\n\nAnalysis files\n\nR Users: Submit your R script (.R) or Quarto/R Markdown (.qmd / .Rmd).\nSPSS Users: Include syntax or output logs showing the models."
+  },
+  {
     "objectID": "lab1_answers.html",
     "href": "lab1_answers.html",
     "title": "Advanced medical Statistics – Answers lab 1",

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Advanced Medical Statistics – Lab 3 – Advanced Statistics</title>
+<title>Advanced Medical Statistics – Advanced Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -259,37 +259,32 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1-independent-samples-t-test-and-mann-whitney-u-test" id="toc-part-1-independent-samples-t-test-and-mann-whitney-u-test" class="nav-link active" data-scroll-target="#part-1-independent-samples-t-test-and-mann-whitney-u-test">Part 1: Independent Samples t-test and Mann-Whitney U Test</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#dataset-description" id="toc-dataset-description" class="nav-link" data-scroll-target="#dataset-description">Dataset description</a></li>
+  <li><a href="#research-questions" id="toc-research-questions" class="nav-link" data-scroll-target="#research-questions">Research questions</a></li>
+  <li><a href="#part-a-linear-regression" id="toc-part-a-linear-regression" class="nav-link" data-scroll-target="#part-a-linear-regression">Part A: Linear regression</a>
   <ul class="collapse">
-  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory data analysis</a></li>
-  <li><a href="#independent-samples-t-test" id="toc-independent-samples-t-test" class="nav-link" data-scroll-target="#independent-samples-t-test">Independent samples t-test</a></li>
-  <li><a href="#checking-of-assumptions" id="toc-checking-of-assumptions" class="nav-link" data-scroll-target="#checking-of-assumptions">Checking of assumptions</a></li>
-  <li><a href="#confidence-interval-for-the-mean-difference" id="toc-confidence-interval-for-the-mean-difference" class="nav-link" data-scroll-target="#confidence-interval-for-the-mean-difference">95% Confidence Interval for the mean difference</a></li>
-  <li><a href="#mann-whitney-u-test" id="toc-mann-whitney-u-test" class="nav-link" data-scroll-target="#mann-whitney-u-test">Mann-Whitney U Test</a></li>
+  <li><a href="#a1.-initial-model-setup" id="toc-a1.-initial-model-setup" class="nav-link" data-scroll-target="#a1.-initial-model-setup">A1. Initial model setup</a></li>
+  <li><a href="#a2.-backward-elimination" id="toc-a2.-backward-elimination" class="nav-link" data-scroll-target="#a2.-backward-elimination">A2. Backward elimination</a></li>
+  <li><a href="#a3.-final-model-summary" id="toc-a3.-final-model-summary" class="nav-link" data-scroll-target="#a3.-final-model-summary">A3. Final model summary</a></li>
+  <li><a href="#a4.-patient-level-prediction" id="toc-a4.-patient-level-prediction" class="nav-link" data-scroll-target="#a4.-patient-level-prediction">A4. Patient-level prediction</a></li>
   </ul></li>
-  <li><a href="#part-2-one-way-anova-and-kruskal-wallis-test" id="toc-part-2-one-way-anova-and-kruskal-wallis-test" class="nav-link" data-scroll-target="#part-2-one-way-anova-and-kruskal-wallis-test">Part 2: One-Way ANOVA and Kruskal-Wallis Test</a>
+  <li><a href="#part-b-logistic-regression" id="toc-part-b-logistic-regression" class="nav-link" data-scroll-target="#part-b-logistic-regression">Part B: Logistic regression</a>
   <ul class="collapse">
-  <li><a href="#exploratory-data-analysis-1" id="toc-exploratory-data-analysis-1" class="nav-link" data-scroll-target="#exploratory-data-analysis-1">Exploratory data analysis</a></li>
-  <li><a href="#one-way-anova" id="toc-one-way-anova" class="nav-link" data-scroll-target="#one-way-anova">One-way ANOVA</a></li>
-  <li><a href="#post-hoc-tests" id="toc-post-hoc-tests" class="nav-link" data-scroll-target="#post-hoc-tests">Post-hoc tests</a></li>
-  <li><a href="#checking-of-assumptions-1" id="toc-checking-of-assumptions-1" class="nav-link" data-scroll-target="#checking-of-assumptions-1">Checking of assumptions</a></li>
-  <li><a href="#kruskal-wallis-test" id="toc-kruskal-wallis-test" class="nav-link" data-scroll-target="#kruskal-wallis-test">Kruskal-Wallis Test</a></li>
+  <li><a href="#b1.-simple-model-unadjusted" id="toc-b1.-simple-model-unadjusted" class="nav-link" data-scroll-target="#b1.-simple-model-unadjusted">B1. Simple model (unadjusted)</a></li>
+  <li><a href="#b2.-expanded-model-adjusted" id="toc-b2.-expanded-model-adjusted" class="nav-link" data-scroll-target="#b2.-expanded-model-adjusted">B2. Expanded model (adjusted)</a></li>
   </ul></li>
-  <li><a href="#part-3-unguided-exercises" id="toc-part-3-unguided-exercises" class="nav-link" data-scroll-target="#part-3-unguided-exercises">Part 3: Unguided exercises</a>
-  <ul class="collapse">
-  <li><a href="#effect-of-hypertension-on-birth-weight" id="toc-effect-of-hypertension-on-birth-weight" class="nav-link" data-scroll-target="#effect-of-hypertension-on-birth-weight">Effect of hypertension on birth weight</a></li>
-  <li><a href="#comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients" id="toc-comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients" class="nav-link" data-scroll-target="#comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients">Comparing red cell folate levels across ventilation strategies in cardiac bypass patients</a></li>
-  </ul></li>
+  <li><a href="#submission-instructions" id="toc-submission-instructions" class="nav-link" data-scroll-target="#submission-instructions">Submission instructions</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="SPSS_lab3.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Assignment_2.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Advanced Medical Statistics – Lab 3</h1>
-<p class="subtitle lead">SPSS version</p>
+<h1 class="title">Advanced Medical Statistics</h1>
+<p class="subtitle lead">Assignment part 2: Cleveland heart disease dataset</p>
 </div>
 
 
@@ -306,441 +301,127 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Welcome to lab 3 in the advanced medical statistics course. For today’s exercises, we will continue exploring the <code>lowbwt.sav</code> dataset, which you can download from Brightspace.</p>
-<p>As a reminder, the dataset includes the following variables (see the previous lab for more details):</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Variable</th>
-<th>Abbreviation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Identification Code</td>
-<td>ID</td>
-</tr>
-<tr class="even">
-<td>Low Birth Weight (0 = Birth Weight ≥ 2500g, 1 = Birth Weight &lt; 2500g)</td>
-<td>low</td>
-</tr>
-<tr class="odd">
-<td>Age of the Mother in Years</td>
-<td>age</td>
-</tr>
-<tr class="even">
-<td>Weight in Pounds at the Last Menstrual Period</td>
-<td>lwt</td>
-</tr>
-<tr class="odd">
-<td>Ethnicity of the mother (1 = Caucasian, 2 = Afro-American, 3 = Asian)</td>
-<td>ethnicity</td>
-</tr>
-<tr class="even">
-<td>Smoking Status During Pregnancy (1 = Yes, 0 = No)</td>
-<td>smoke</td>
-</tr>
-<tr class="odd">
-<td>History of Premature Labor (0 = None, 1 = One, etc.)</td>
-<td>ptl</td>
-</tr>
-<tr class="even">
-<td>History of Hypertension (1 = Yes, 0 = No)</td>
-<td>ht</td>
-</tr>
-<tr class="odd">
-<td>Presence of Uterine Irritability (1 = Yes, 0 = No)</td>
-<td>urirr</td>
-</tr>
-<tr class="even">
-<td>Number of Physician Visits During the First Trimester (0 = None, 1 = One, 2 = Two, etc.)</td>
-<td>pvft</td>
-</tr>
-<tr class="odd">
-<td>Birth Weight in Grams</td>
-<td>bwt</td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-<section id="part-1-independent-samples-t-test-and-mann-whitney-u-test" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-independent-samples-t-test-and-mann-whitney-u-test">Part 1: Independent Samples t-test and Mann-Whitney U Test</h2>
-<p>In this part of the lab, we will examine the effect of smoking during pregnancy on birth weight.</p>
-<section id="exploratory-data-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory data analysis</h3>
-<p>To get a sense of the data and the extent of a possible effect of smoking, we start by creating a boxplot. In SPSS, this can be achieved by following these steps:</p>
-<ol type="1">
-<li><strong>Create Boxplot</strong>: Go to <code>Graphs</code> &gt; <code>Chart Builder</code>.</li>
-<li><strong>Select Boxplot</strong>: In the <code>Chart Builder</code>, select <code>Boxplot</code> from the gallery.</li>
-<li><strong>Select Variables</strong>: Drag <code>bwt</code> to the y-axis and <code>smoke</code> to the x-axis to create a boxplot comparing the birth weights for mothers who smoked and those who did not.</li>
-<li><strong>Run the Graph</strong>: Click <code>OK</code> to generate the boxplot.</li>
-</ol>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 1">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Based on the boxplot, do you expect the smoking status to have an effect on birth weight?</p>
-</div>
-</div>
-</section>
-<section id="independent-samples-t-test" class="level3">
-<h3 class="anchored" data-anchor-id="independent-samples-t-test">Independent samples t-test</h3>
-<p>Next, we will perform an independent samples t-test to compare the mean birth weights between mothers who smoked and those who did not. To conduct this analysis in SPSS, follow these steps:</p>
-<ol type="1">
-<li><strong>Perform the Test</strong>: Go to <code>Analyze</code> &gt; <code>Compare Means</code> &gt; <code>Independent-Samples t Test</code>.</li>
-<li><strong>Select Test Variable and Grouping Variable</strong>: Move <code>bwt</code> to the <code>Test Variable</code> box and <code>smoke</code> to the <code>Grouping Variable</code> box.</li>
-<li><strong>Define Groups</strong>: Click on <code>Define Groups</code> and specify <code>0</code> and <code>1</code> for mothers who did not smoke and mothers who smoked, respectively.</li>
-<li><strong>Run the Test</strong>: Click <code>OK</code> to run the analysis.</li>
-</ol>
-<p>SPSS will generate several tables. Here we focus on the table <strong>Independent Samples Test</strong>, which includes:</p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this second assignment, you will continue working with the Cleveland heart disease dataset. You will apply <strong>linear regression</strong> to build a <strong>prediction model</strong> for resting blood pressure and use <strong>logistic regression</strong> to test an <strong>inference-focused</strong> research question on heart disease status. Through both parts, you will:</p>
 <ul>
-<li><p><strong>Levene’s Test for Equality of Variances</strong>: Tests the assumption of equal variances between the two groups. The <strong>F</strong> and <strong>Sig.</strong> (p-value) columns represent the results of this test. If the <strong>p-value</strong> is greater than 0.05, the assumption of equal variances holds, and you should use the row labeled “Equal variances assumed” for interpreting the t-test results. If the <strong>p-value</strong> is less than or equal to 0.05, the assumption of equal variances is violated, and you should use the row labeled “Equal variances not assumed” for interpreting the t-test results.</p></li>
-<li><p><strong>t-test for Equality of Means</strong>: Provides the t-test results, including the t-value, degrees of freedom, and p-value. It also includes the <strong>Mean Difference</strong> and <strong>95% Confidence Interval of the Difference</strong>. It is important to choose the appropriate row (“Equal variances assumed” or “Equal variances not assumed”) based on the result of Levene’s test.</p></li>
-</ul>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 2">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 2
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Based on the Levene test, does the assumption of equal variances hold?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 3">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 3
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Is there a significant difference in birth weights between mothers who smoked and those who did not?</p>
-</div>
-</div>
-</section>
-<section id="checking-of-assumptions" class="level3">
-<h3 class="anchored" data-anchor-id="checking-of-assumptions">Checking of assumptions</h3>
-<p>To assess whether the assumption of normality holds for the outcome variable in both groups, follow these steps to create histograms:</p>
-<ol type="1">
-<li><strong>Create the Graph</strong>: Go to <code>Graphs</code> &gt; <code>Chart Builder</code>.</li>
-<li><strong>Create Histogram</strong>: In the <code>Chart Builder</code>, select <code>Histogram</code> from the gallery.</li>
-<li><strong>Select Variables</strong>: Drag <code>bwt</code> into the x-axis box.</li>
-<li><strong>Split by Group</strong>: In the <code>Chart Builder</code>, click on the <code>Groups/Points ID</code> tab. Check the <code>Rows panel variable</code> checkbox to add a panel field to the chart preview. Then, drag the <code>smoke</code> variable into this field to split the histograms by group.</li>
-<li><strong>Run the Graph</strong>: Click <code>OK</code> to generate the histograms.</li>
-</ol>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 4">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 4
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Do the histograms indicate that the birth weight data are approximately normally distributed for both groups?</p>
-</div>
-</div>
-</section>
-<section id="confidence-interval-for-the-mean-difference" class="level3">
-<h3 class="anchored" data-anchor-id="confidence-interval-for-the-mean-difference">95% Confidence Interval for the mean difference</h3>
-<p>In addition to performing hypothesis tests, it is often informative to estimate the effect size and its uncertainty. One way to do this is by calculating a confidence interval for the mean difference in birth weight between the two groups. The 95% confidence interval is included in the output provided by the independent samples t-test procedure, so in principle, we could extract it from there. As an exercise, we are also going to calculate it manually based on the formulas provided in the lecture/course syllabus.</p>
-<p>To calculate the summary statistics required for the manual calculation, follow these steps:</p>
-<ol type="1">
-<li><strong>Navigate to Explore Analysis</strong>:
-<ul>
-<li>Go to <code>Analyze</code> &gt; <code>Descriptive Statistics</code> &gt; <code>Explore</code>.</li>
-</ul></li>
-<li><strong>Select Variables</strong>:
-<ul>
-<li>Move <code>bwt</code> to the <code>Dependent List</code> box.</li>
-<li>Move <code>smoke</code> to the <code>Factor List</code> box.</li>
-</ul></li>
-<li><strong>Set Display Options</strong>:
-<ul>
-<li>Check the option <code>Statistics</code> to prevent SPSS from cluttering the output with a range of plots.</li>
-</ul></li>
-<li><strong>Run the Analysis</strong>:
-<ul>
-<li>Click <code>OK</code> to run the analysis. The output will provide group-wise means, standard deviations, and sample sizes, which can be used for manual calculations.</li>
-</ul></li>
-</ol>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Exercise">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Exercise
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Based on these summary statistics, calculate the pooled standard deviation and the standard error of the mean difference. Then compute the 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not. You may simplify the calculation by using the 97.5th percentile from the standard normal distribution (1.96) rather than the corresponding percentile from the t-distribution.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 5">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 5
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Does your manually calculated 95% confidence interval for the mean difference in birth weight between the two groups agree with the one provided in the output of the independent samples t-test procedure?</p>
-</div>
-</div>
-</section>
-<section id="mann-whitney-u-test" class="level3">
-<h3 class="anchored" data-anchor-id="mann-whitney-u-test">Mann-Whitney U Test</h3>
-<p>In case the assumption of normality is violated, we can use the Mann-Whitney U test as a non-parametric alternative to the independent samples t-test. To perform this test in SPSS, follow these steps:</p>
-<ol type="1">
-<li><strong>Navigate to the Mann-Whitney U Test</strong>:
-<ul>
-<li>Go to <code>Analyze</code> &gt; <code>Nonparametric Tests</code> &gt; <code>Legacy Dialogs</code> &gt; <code>2 Independent Samples</code>.</li>
-</ul></li>
-<li><strong>Select Variables</strong>:
-<ul>
-<li>Move <code>bwt</code> to the <code>Test Variable List</code>.</li>
-<li>Move <code>smoke</code> to the <code>Grouping Variable</code>.</li>
-<li>Click <code>Define Groups</code> and specify the values of the <code>smoke</code> variable (e.g., 0 = No, 1 = Yes). Click <code>Continue</code>.</li>
-</ul></li>
-<li><strong>Select the Mann-Whitney U Test</strong>:
-<ul>
-<li>Under <code>Test Type</code>, ensure that <strong>Mann-Whitney U</strong> is selected.</li>
-</ul></li>
-<li><strong>Run the Test</strong>:
-<ul>
-<li>Click <code>OK</code> to run the analysis. The output will include the test statistic and associated p-value.</li>
-</ul></li>
-</ol>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 6">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 6
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>What are the null and alternative hypotheses for the Mann-Whitney U test, and what does the p-value indicate about the difference in birth weight between mothers who smoked and those who did not?</p>
-</div>
-</div>
-</section>
-</section>
-<section id="part-2-one-way-anova-and-kruskal-wallis-test" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-one-way-anova-and-kruskal-wallis-test">Part 2: One-Way ANOVA and Kruskal-Wallis Test</h2>
-<p>In this part of the lab, we are going to examine the effect of ethnicity on birth weight.</p>
-<section id="exploratory-data-analysis-1" class="level3">
-<h3 class="anchored" data-anchor-id="exploratory-data-analysis-1">Exploratory data analysis</h3>
-<p>To get a sense of the differences in birth weights across the different ethnic groups, we will create a boxplot. In SPSS, follow these steps:</p>
-<ol type="1">
-<li><strong>Create Boxplot</strong>:
-<ul>
-<li>Go to <code>Graphs</code> &gt; <code>Chart Builder</code>.</li>
-<li>Select <code>Boxplot</code> from the gallery.</li>
-</ul></li>
-<li><strong>Assign Variables</strong>:
-<ul>
-<li>Drag <code>bwt</code> to the y-axis.</li>
-<li>Drag <code>ethnicity</code> to the x-axis.</li>
-</ul></li>
-<li><strong>Run the Graph</strong>:
-<ul>
-<li>Click <code>OK</code> to generate the boxplot.</li>
-</ul></li>
-</ol>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 7">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 7
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>What does the boxplot suggest about the distribution of birth weights across different ethnic groups?</p>
-</div>
-</div>
-</section>
-<section id="one-way-anova" class="level3">
-<h3 class="anchored" data-anchor-id="one-way-anova">One-way ANOVA</h3>
-<p>To test whether the mean birth weights differ across ethnic groups, we will perform a one-way ANOVA. Follow these steps:</p>
-<ol type="1">
-<li><strong>Perform the Test</strong>:
-<ul>
-<li>Go to <code>Analyze</code> &gt; <code>Compare Means</code> &gt; <code>One-Way ANOVA</code>.</li>
-</ul></li>
-<li><strong>Select Variables</strong>:
-<ul>
-<li>Set <strong>Dependent Variable</strong>: Birth Weight (<code>bwt</code>).</li>
-<li>Set <strong>Factor</strong>: Ethnicity (<code>ethnicity</code>).</li>
-</ul></li>
-<li><strong>Run the Test</strong>:
-<ul>
-<li>Click <code>OK</code> to run the analysis.</li>
-</ul></li>
-</ol>
-<p>SPSS will generate the following key output:</p>
-<ul>
-<li><strong>ANOVA Table</strong>: Contains the F-statistic and the associated p-value. These values indicate whether there is a statistically significant difference in mean birth weights across ethnic groups.</li>
-</ul>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 8">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 8
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>What conclusions can be drawn from the results of the one-way ANOVA?</p>
-</div>
-</div>
-</section>
-<section id="post-hoc-tests" class="level3">
-<h3 class="anchored" data-anchor-id="post-hoc-tests">Post-hoc tests</h3>
-<p>If the one-way ANOVA indicates a statistically significant difference, we will perform post-hoc tests to determine which specific groups differ from each other. To do this in SPSS:</p>
-<ol type="1">
-<li><strong>Enable Post-Hoc Tests</strong>:
-<ul>
-<li>In the one-way ANOVA dialog, click on the <code>Post Hoc</code> button.</li>
-<li>Select <strong>Bonferroni</strong> as the method.</li>
-</ul></li>
-<li><strong>Run the Test</strong>:
-<ul>
-<li>Click <code>Continue</code> and then <code>OK</code> to run the analysis.</li>
-</ul></li>
-</ol>
-<p>The post-hoc output will include pairwise comparisons of the means between all groups, with adjusted p-values.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 9">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 9
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Which groups differ significantly, and what do the results suggest about the differences in birth weights across ethnic groups?</p>
-</div>
-</div>
-</section>
-<section id="checking-of-assumptions-1" class="level3">
-<h3 class="anchored" data-anchor-id="checking-of-assumptions-1">Checking of assumptions</h3>
-<p>To assess whether the results of the one-way ANOVA are valid, we need to check the assumptions of normality and homogeneity of variances. This step is analogous to the previous examples, and is left as an exercise.</p>
-</section>
-<section id="kruskal-wallis-test" class="level3">
-<h3 class="anchored" data-anchor-id="kruskal-wallis-test">Kruskal-Wallis Test</h3>
-<p>If the assumptions of the one-way ANOVA are not satisfied, we can use the Kruskal-Wallis test as a non-parametric alternative. To perform this test in SPSS, follow these steps:</p>
-<ol type="1">
-<li><strong>Navigate to the Kruskal-Wallis Test</strong>:
-<ul>
-<li>Go to <code>Analyze</code> &gt; <code>Nonparametric Tests</code> &gt; <code>Legacy Dialogs</code> &gt; <code>K Independent Samples</code>.</li>
-</ul></li>
-<li><strong>Select Variables</strong>:
-<ul>
-<li>Move <code>bwt</code> to the <code>Test Variable List</code>.</li>
-<li>Move <code>ethnicity</code> to the <code>Grouping Variable</code>.</li>
-<li>Click <code>Define Range</code> and specify the range of the grouping variable (e.g., 1 to 3 for the ethnicity variable). Click <code>Continue</code>.</li>
-</ul></li>
-<li><strong>Select the Kruskal-Wallis Test</strong>:
-<ul>
-<li>Under <code>Test Type</code>, ensure that <strong>Kruskal-Wallis H</strong> is selected.</li>
-</ul></li>
-<li><strong>Run the Test</strong>:
-<ul>
-<li>Click <code>OK</code> to run the analysis. The output will include the test statistic and associated p-value.</li>
-</ul></li>
-</ol>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 10">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 10
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Are the results of the Kruskal-Wallis test consistent with the one-way ANOVA results?</p>
-</div>
-</div>
-</section>
-</section>
-<section id="part-3-unguided-exercises" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-unguided-exercises">Part 3: Unguided exercises</h2>
-<section id="effect-of-hypertension-on-birth-weight" class="level3">
-<h3 class="anchored" data-anchor-id="effect-of-hypertension-on-birth-weight">Effect of hypertension on birth weight</h3>
-<p>Examine the effect of history of hypertension on birth weight by performing the following steps:</p>
-<ul>
-<li>Create a boxplot to visualize the distribution of birth weights by history of hypertension</li>
-<li>Perform an independent samples t-test to compare the mean birth weights between mothers with and without a history of hypertension</li>
-<li>Check the assumptions of the t-test, including normality and homogeneity of variances</li>
-<li>If the assumptions of the t-test are violated, perform a Mann-Whitney U test as a non-parametric alternative</li>
+<li>Practice <strong>backward elimination</strong> in linear regression to arrive at a simpler predictive model.</li>
+<li>Demonstrate the ability to interpret <strong>odds ratios</strong> in a logistic regression setting, distinguishing unadjusted from adjusted associations.</li>
 </ul>
 </section>
-<section id="comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients" class="level3">
-<h3 class="anchored" data-anchor-id="comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients">Comparing red cell folate levels across ventilation strategies in cardiac bypass patients</h3>
-<p>Twenty-two patients undergoing cardiac bypass surgery were randomized to one of three ventilation groups:</p>
+<section id="dataset-description" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-description">Dataset description</h2>
+<p>You will work with your personalized subset of 200 rows (patients) drawn from the original Cleveland heart disease data (N=303). Key variables include:</p>
 <ul>
-<li><strong>Group I</strong>: Received a 50% nitrous oxide and 50% oxygen mixture continuously for 24 hours</li>
-<li><strong>Group II</strong>: Received a 50% nitrous oxide and 50% oxygen mixture only during the operation</li>
-<li><strong>Group III</strong>: Received no nitrous oxide and a 35-50% oxygen mixture continuously for 24 hours</li>
+<li><code>age</code> (years)</li>
+<li><code>sex</code> (1=female; 2=male)</li>
+<li><code>cp</code> (chest pain type; 4 categories)</li>
+<li><code>trestbps</code> (resting blood pressure in mm Hg)</li>
+<li><code>chol</code> (serum cholesterol in mg/dl)</li>
+<li><code>fbs</code> (fasting blood sugar &gt;120 mg/dl; binary)</li>
+<li><code>target</code> (heart disease status; 1 = heart disease, 2 = no heart disease)</li>
 </ul>
-<p>The data file <code>ex5_6.sav</code> (available on Brightspace) contains the red cell folate levels for the three groups after 24 hours of ventilation. The aim of this study is to compare the three groups and test whether they have the same red cell folate levels.</p>
-<section id="tasks" class="level4">
-<h4 class="anchored" data-anchor-id="tasks">Tasks</h4>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Reminder</strong>: If you need to recreate your 200-patient subset, use your student/staff number as the random seed, removing any letters (e.g., S123456 → <code>set.seed(123456)</code>). See the previous assignment for detailed instructions.</p>
+</div>
+</div>
+</section>
+<section id="research-questions" class="level2">
+<h2 class="anchored" data-anchor-id="research-questions">Research questions</h2>
 <ol type="1">
-<li><strong>Exploratory data analysis</strong> Create a boxplot to visualize the distribution of red cell folate levels by ventilation group. Based on this plot:
+<li><em>Which demographic and clinical variables best predict resting blood pressure (<code>trestbps</code>)?</em>
 <ul>
-<li>What are your first conclusions regarding the means and variances of the different groups?</li>
+<li>You will use <strong>backward elimination</strong> to identify a final model and generate a <strong>patient-level prediction</strong>.</li>
 </ul></li>
-<li><strong>Perform a one-way ANOVA</strong>:
+<li><em>Is sex (male vs.&nbsp;female) significantly associated with heart disease (<code>target</code>) status, after accounting for age, chest pain type, fasting blood sugar, and cholesterol?</em>
 <ul>
-<li>Interpret the results</li>
-<li>Are the assumptions satisfied?</li>
+<li>You will fit <strong>simple</strong> and <strong>expanded</strong> logistic models to see whether the association between sex and heart disease remains after adjusting for additional factors.</li>
 </ul></li>
-<li><strong>Try a log transformation on the data</strong>:
+</ol>
+</section>
+<section id="part-a-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="part-a-linear-regression">Part A: Linear regression</h2>
+<section id="a1.-initial-model-setup" class="level3">
+<h3 class="anchored" data-anchor-id="a1.-initial-model-setup">A1. Initial model setup</h3>
 <ul>
-<li>Perform another one-way ANOVA</li>
-<li>Are the assumptions satisfied after the transformation?</li>
+<li><strong>Outcome variable</strong>: <code>trestbps</code> (resting blood pressure)</li>
+<li><strong>Candidate variables</strong>:
+<ul>
+<li><code>cp</code> (chest pain type)</li>
+<li><code>age</code></li>
+<li><code>chol</code></li>
+<li><code>sex</code> (1 = female; 2 = male)</li>
+<li><code>fbs</code> (fasting blood sugar &gt;120 mg/dl)</li>
 </ul></li>
-<li><strong>Determine which means differ</strong>:
+</ul>
+<p>Fit a multiple linear regression model including all five variables as potential contributors to resting blood pressure. Summarize the model (coefficients, p-values, R-squared, etc.).</p>
+</section>
+<section id="a2.-backward-elimination" class="level3">
+<h3 class="anchored" data-anchor-id="a2.-backward-elimination">A2. Backward elimination</h3>
+<ol type="1">
+<li><strong>Remove</strong> the least significant variable (highest p-value).</li>
+<li><strong>Refit</strong> the model.</li>
+<li><strong>Repeat</strong> until all remaining terms are below the 10% significance threshold for variable inclusion (i.e., p &lt; 0.10 for all remaining predictors).</li>
+</ol>
+</section>
+<section id="a3.-final-model-summary" class="level3">
+<h3 class="anchored" data-anchor-id="a3.-final-model-summary">A3. Final model summary</h3>
 <ul>
-<li>Which means do you think differ?</li>
-<li>Explain your reasoning.</li>
+<li>Present the final set of variables. Interpret them in a predictive context (e.g., “An increase of 10 mg/dl in cholesterol corresponds to a 1.2 mm Hg change in resting blood pressure, holding other factors constant.”).</li>
+<li>Evaluate model goodness-of-fit by performing a residual analysis.</li>
+</ul>
+</section>
+<section id="a4.-patient-level-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="a4.-patient-level-prediction">A4. Patient-level prediction</h3>
+<ul>
+<li><strong>Hypothetical patient</strong>:
+<ul>
+<li>Age = 62</li>
+<li>CP = 1 (typical angina)</li>
+<li>Chol = 240 mg/dl</li>
+<li>Sex = 1 (female)</li>
+<li>FBS = 0 (≤120 mg/dl)</li>
 </ul></li>
-<li><strong>Try a non-parametric approach</strong>:
+<li><strong>Plug</strong> these values into your final regression equation to calculate the predicted resting blood pressure. If you removed any variables during your model selection, simply exclude them from the calculation.</li>
+<li><strong>Interpret</strong> the predicted value. For example, “The model estimates this patient’s resting blood pressure to be around 135 mm Hg.”</li>
+</ul>
+</section>
+</section>
+<section id="part-b-logistic-regression" class="level2">
+<h2 class="anchored" data-anchor-id="part-b-logistic-regression">Part B: Logistic regression</h2>
+<section id="b1.-simple-model-unadjusted" class="level3">
+<h3 class="anchored" data-anchor-id="b1.-simple-model-unadjusted">B1. Simple model (unadjusted)</h3>
+<p>Begin by ensuring that heart disease status is coded appropriately, for example 0 for no heart disease and 1 for heart disease if your software or analysis requires it. Then, run a simple logistic regression using sex as the sole explanatory variable, focusing on the odds ratio comparing males to females. Finally, interpret that odds ratio alongside its confidence interval, explaining how much higher or lower the odds of heart disease are for one sex relative to the other.</p>
+</section>
+<section id="b2.-expanded-model-adjusted" class="level3">
+<h3 class="anchored" data-anchor-id="b2.-expanded-model-adjusted">B2. Expanded model (adjusted)</h3>
+<p>Next, fit a logistic regression that includes sex, age, chest pain type, fasting blood sugar, and cholesterol. Pay particular attention to how the odds ratio for sex shifts (in terms of magnitude and significance) once these additional factors are taken into account. In your write-up, note any change in its magnitude relative to the simpler model and discuss plausible clinical reasons for any observed differences.</p>
+</section>
+</section>
+<section id="submission-instructions" class="level2">
+<h2 class="anchored" data-anchor-id="submission-instructions">Submission instructions</h2>
+<ol type="1">
+<li><strong>Report</strong>
 <ul>
-<li>What are your conclusions from this method?</li>
+<li>Provide a Word or PDF file with <strong>Methods</strong> and <strong>Results</strong> for each part (A: Linear regression, B: Logistic regression).</li>
+</ul></li>
+<li><strong>Analysis files</strong>
+<ul>
+<li><strong>R Users</strong>: Submit your R script (<code>.R</code>) or Quarto/R Markdown (<code>.qmd</code> / <code>.Rmd</code>).</li>
+<li><strong>SPSS Users</strong>: Include syntax or output logs showing the models.</li>
 </ul></li>
 </ol>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
