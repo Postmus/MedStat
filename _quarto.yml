@@ -71,7 +71,9 @@ website:
           - text: "Week 7"
             href: lab7_answers.qmd
           - text: "Week 8"
-            href: lab8_answers.qmd  
+            href: lab8_answers.qmd
+          - text: "Week 9"
+            href: lab9_answers.qmd    
       - text: "Assignments"
         menu:
           - text: "Assignment part 1"
