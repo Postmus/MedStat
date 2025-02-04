@@ -80,6 +80,8 @@ website:
             href: Assignment_1.qmd
           - text: "Assignment part 2"
             href: Assignment_2.qmd
+          - text: "Answers assignment part 1"
+            href: Assignment_1_modelAnswer.qmd  
 format:
   html:
     theme: cosmo
