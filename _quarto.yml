@@ -5,7 +5,7 @@ project:
     - "/datasets"
     
 website:
-  title: "Advanced Statistics"
+  title: "Medical Statistics"
   navbar:
     left:
       - text: "Home"
@@ -16,72 +16,6 @@ website:
             href: R_lab1.qmd
           - text: "SPSS"
             href: SPSS_lab1.qmd
-      - text: "Labs week 2"
-        menu:
-          - text: "R"
-            href: R_lab2.qmd
-          - text: "SPSS"
-            href: SPSS_lab2.qmd      
-      - text: "Labs week 3"
-        menu:
-          - text: "R"
-            href: R_lab3.qmd
-          - text: "SPSS"
-            href: SPSS_lab3.qmd
-      - text: "Labs week 4"
-        menu:
-          - text: "R"
-            href: R_lab4.qmd
-          - text: "SPSS"
-            href: SPSS_lab4.qmd
-      - text: "Labs week 6"
-        menu:
-          - text: "R"
-            href: R_lab6.qmd
-          - text: "SPSS"
-            href: SPSS_lab6.qmd
-      - text: "Lab week 7"
-        menu:
-          - text: "Exercises"
-            href: lab7.qmd
-      - text: "Labs week 8"
-        menu:
-          - text: "R"
-            href: R_lab8.qmd
-          - text: "SPSS"
-            href: SPSS_lab8.qmd
-      - text: "Labs week 9"
-        menu:
-          - text: "R"
-            href: R_lab9.qmd
-          - text: "SPSS"
-            href: SPSS_lab9.qmd      
-      - text: "Answers"
-        menu:
-          - text: "Week 1"
-            href: lab1_answers.qmd 
-          - text: "Week 2"
-            href: lab2_answers.qmd 
-          - text: "Week 3"
-            href: lab3_answers.qmd
-          - text: "Week 4"
-            href: lab4_answers.qmd
-          - text: "Week 6"
-            href: lab6_answers.qmd
-          - text: "Week 7"
-            href: lab7_answers.qmd
-          - text: "Week 8"
-            href: lab8_answers.qmd
-          - text: "Week 9"
-            href: lab9_answers.qmd    
-      - text: "Assignments"
-        menu:
-          - text: "Assignment part 1"
-            href: Assignment_1.qmd
-          - text: "Assignment part 2"
-            href: Assignment_2.qmd
-          - text: "Answers assignment part 1"
-            href: Assignment_1_modelAnswer.qmd  
 format:
   html:
     theme: cosmo
