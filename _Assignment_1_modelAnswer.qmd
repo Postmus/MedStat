@@ -1,0 +1,257 @@
+---
+title: "Assignment part 1"
+subtitle: "feedback and coding tips"
+format:
+  html: default
+  pdf: default
+execute:
+  warning: false
+  message: false
+  error: false
+  eval: true
+  echo: true
+---
+
+## Introduction
+
+In this assignment, you will work with an individualized dataset derived from the Cleveland heart disease dataset. This dataset contains information on patients with suspected heart disease and includes various demographic, clinical, and diagnostic variables. Your task is to perform a series of analyses to explore the dataset and investigate the relationship between different variables and the presence of heart disease.
+
+## Dataset description
+
+The Cleveland heart disease dataset originates from the Cleveland Clinic Foundation and focuses on heart disease diagnosis. It includes data from 303 patients on the following variables:
+
+* `age`: Age in years
+* `sex`: Sex (1 = female; 2 = male)
+* `cp`: Chest pain type (1 = typical angina; 2 = atypical angina; 3 = non-anginal pain; 4 = asymptomatic)
+* `trestbps`: Resting blood pressure (mm Hg at hospital admission)
+* `chol`: Serum cholesterol in mg/dl
+* `fbs`: Fasting blood sugar > 120 mg/dl
+* `restecg`: Resting electrocardiographic results (1 = normal; 2 = ST-T wave abnormality; 3 = left ventricular hypertrophy)
+* `thalach`: Maximum heart rate achieved
+* `exang`: Exercise-induced angina (1 = no; 2 = yes)
+* `oldpeak`: ST depression induced by exercise relative to rest
+* `slope`: Slope of the peak exercise ST segment (1 = upsloping; 2 = flat; 3 = downsloping)
+* `ca`: Number of major vessels (0-3) colored by fluoroscopy
+* `thal`: Thallium heart scan results (1 = normal; 2 = fixed defect; 3 = reversible defect)
+* `target`: Diagnosis of heart disease (1 = heart disease; 2 = no heart disease)
+
+## Objectives
+
+In this assignment, you will explore the Cleveland heart disease dataset to answer the following research questions:
+
+* Does maximum heart rate achieved differ across chest pain types?
+* Is the presence of heart disease associated with sex or fasting blood sugar?
+
+## Steps to complete the assignment
+
+### **Step 1:** Create an individualized dataset
+
+```{r}
+#| include: false
+
+# Load the required libraries
+library(haven)
+library(dplyr)
+
+# Load the SPSS file
+heart_data <- read_sav("datasets/heart_disease_cleveland.sav")
+
+# Convert all variables to factors where needed
+heart_data <- heart_data %>% mutate(across(where(is.labelled), as_factor))
+
+# Set the random seed (replace 123456 with your student or staff number without S or P)
+set.seed(123456)
+
+#heart_data <- heart_data %>% filter(complete.cases(.))
+
+#Create an individualized dataset with 200 patients
+heart_data <- heart_data[sample(nrow(heart_data), 200), ]
+```
+
+### **Step 2:** Create a baseline characteristics table
+
+* Include all variables in the dataset apart from the outcome variable `target`
+  - Summarize demographic variables (e.g., `age`, `sex`)
+  - Summarize clinical variables (e.g., `chol`, `trestbps`, `thalach`, `cp`)
+
+* Decide on suitable summary measures for each variable
+  - Use appropriate measures for continuous variables (e.g., mean, standard deviation, median, interquartile range)
+  - Use frequency counts and percentages for categorical variables
+
+* Present your table clearly
+  - Use meaningful labels, headings, and clear formatting
+  
+```{r}  
+library(tableone) # for creating baseline characteristics table
+library(knitr) # for rendering tables
+library(labelled) # for setting variable labels
+
+library(ggplot2) # for creating plots
+library(gridExtra) # for arranging plots
+
+# Customize variable labels
+heart_data <- heart_data %>%
+  set_variable_labels(
+    age = "Age (years)",
+    sex = "Sex",
+    cp = "Chest Pain Type",
+    trestbps = "Resting Blood Pressure (mmHg)",
+    chol = "Cholesterol (mg/dL)",
+    fbs = "Fasting Blood Sugar",
+    restecg = "Resting ECG Results",
+    thalach = "Max Heart Rate Achieved",
+    exang = "Exercise-Induced Angina",
+    oldpeak = "ST Depression",
+    slope = "Slope of ST Segment",
+    ca = "Number of Major Vessels",
+    thal = "Thalassemia Type",
+    target = "Heart Disease Status"
+  )
+
+# Define categorical variables
+categorical_vars <- c("sex", "cp", "fbs", "restecg", "exang", "slope", "ca", "thal")
+continuous_vars <- c("age", "trestbps", "chol", "thalach", "oldpeak")
+
+# Define all variables for the table
+all_vars <- c(continuous_vars, categorical_vars)
+
+# Create the table
+table1 <- CreateTableOne(vars = all_vars, 
+                         data = heart_data, 
+                         factorVars = categorical_vars)
+
+# Create histograms for continuous variables
+histograms <- lapply(heart_data[continuous_vars], function(x) ggplot(heart_data, aes(x = x)) + geom_histogram(bins = 20) + theme_minimal())
+grid.arrange(grobs = histograms, ncol = 2)
+
+# Render the table with knitr::kable
+kable(print(table1, nonnormal = c("oldpeak"), varLabels = TRUE, printToggle = FALSE))
+
+```
+  
+### **Step 3:** Perform the analysis for the first research question
+
+**Research Question**: *Does maximum heart rate achieved differ across chest pain types?*
+
+* Visualize the data
+  - Create a boxplot to compare the distribution of maximum heart rate achieved across the four chest pain types
+
+```{r}  
+# Create a boxplot to compare the distribution of maximum heart rate achieved across the four chest pain types
+library(ggplot2)
+ggplot(heart_data, aes(x = factor(cp), y = thalach)) +
+  geom_boxplot() +
+  labs(x = "Chest pain type", y = "Maximum heart rate achieved") +
+  theme_minimal()
+```
+
+* Calculate the estimated population means and 95% confidence intervals for maximum heart rate achieved for each of the four chest pain types
+
+```{r}
+# Calculate the estimated population means and 95% confidence intervals for maximum heart rate achieved for each of the four chest pain types
+for (i in levels(heart_data$cp)) {
+  mean_thalach <- mean(heart_data$thalach[heart_data$cp == i], na.rm = TRUE)
+  se_thalach <- sd(heart_data$thalach[heart_data$cp == i], na.rm = TRUE) / sqrt(sum(heart_data$cp == i, na.rm = TRUE))
+  ci_thalach <- qt(0.975, sum(heart_data$cp == i, na.rm = TRUE) - 1) * se_thalach
+  cat(paste("Chest pain type", i, ": Mean = ", round(mean_thalach, 2), ", 95% CI = (", round(mean_thalach - ci_thalach, 2), ", ", round(mean_thalach + ci_thalach, 2), ")\n"))
+}
+```
+
+* Select and perform an appropriate test
+  - Use one-way ANOVA if normality and equal variances are met
+  - Use Kruskal-Wallis test if assumptions are violated
+  - Perform post-hoc comparisons using Bonferroni adjusted p-values if significant differences are found
+
+```{r}
+# Create histograms of maximum heart rate achieved for each chest pain type
+ggplot(heart_data, aes(x = thalach, fill = factor(cp))) +
+  geom_histogram(bins = 20, alpha = 0.5) +
+  facet_wrap(~ cp) +
+  labs(x = "Maximum heart rate achieved", y = "Frequency", fill = "Chest pain type") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+# Perform levene's test for homogeneity of variances
+library(car)
+leveneTest(heart_data$thalach ~ heart_data$cp) # variances are equal
+```
+
+#### one-way ANOVA
+
+```{r}
+# Perform one-way ANOVA
+anova_thalach <- aov(thalach ~ cp, data = heart_data)
+summary(anova_thalach)
+
+# Perform post-hoc comparisons using Bonferroni adjusted p-values
+pairwise.t.test(heart_data$thalach, heart_data$cp, p.adj = "bonferroni")
+
+# Perform Tukey's HSD post-hoc test
+tukey_results <- TukeyHSD(anova_thalach)
+print(tukey_results)
+```
+  
+#### Kruskal-Wallis test
+
+```{r}
+# Perform Kruskal-Wallis test
+kruskal.test(heart_data$thalach ~ heart_data$cp)
+
+# Perform post-hoc comparisons using pairwise Wilcoxon tests
+pairwise.wilcox.test(heart_data$thalach, heart_data$cp, p.adjust.method = "bonferroni")
+
+# Perform post-hoc comparisons using Dunn's test
+library(dunn.test)
+dunn.test(heart_data$thalach, heart_data$cp, method = "bonferroni", altp = TRUE)
+```
+  
+  
+### **Step 4:** Perform the analysis for the second research question
+
+**Research Question**: *Is the presence of heart disease associated with sex or fasting blood sugar?*
+
+* Summarize the data
+  - Calculate and report the prevalence of heart disease for each group within sex and fasting blood sugar
+  - Include percentages and 95% confidence intervals for each group
+* Select and perform an appropriate test
+  - Use a Chi-Square test of homogeneity or Fisher’s Exact Test, depending on the expected cell counts
+
+#### Association between heart disease and sex
+
+![95% CIs using the orginal variable coding (1 = heart disease; 2 = no heart disease)](images/SPSS_original.PNG)
+
+![95% CIs using the 0/1 recoded variable (1 = heart disease; 0 = no heart disease)](images/SPSS_transformed.PNG)
+
+```{r}
+table(heart_data$sex, heart_data$target)
+
+# Calculate and report the prevalence of heart disease for sex
+prop.table(table(heart_data$sex, heart_data$target), margin = 1)
+
+# Calculate and report the prevalence of heart disease for sex
+prop.table(table(heart_data$sex, heart_data$target))
+```
+
+```{r}
+# Perform a chi-square test of homogeneity
+chisq.test(table(heart_data$sex, heart_data$target))
+
+# Retrieve expected cell counts
+chisq.test(table(heart_data$sex, heart_data$target))$expected
+```  
+
+#### Association between heart disease and fasting blood sugar
+
+```{r}
+# Construct contingency table
+table(heart_data$fbs, heart_data$target)
+
+# Calculate and report the prevalence of heart disease for fasting blood sugar
+prop.table(table(heart_data$fbs, heart_data$target), margin = 1)
+
+# Perform a chi-square test of homogeneity
+chisq.test(table(heart_data$fbs, heart_data$target))
+
+# Retrieve expected cell counts
+chisq.test(table(heart_data$fbs, heart_data$target))$expected
+```

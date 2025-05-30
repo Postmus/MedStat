@@ -1,0 +1,251 @@
+---
+title: "Advanced Medical Statistics – Answers lab 8"
+format:
+  html:
+    toc: true       
+    toc-depth: 3    
+    toc-location: right
+    code-overflow: wrap 
+  pdf:
+    toc: false
+execute:
+  warning: false
+  message: false
+  error: false
+  eval: true
+  echo: false
+---
+
+## Part 1: Risk of in-hospital death in patients with acute myocardial infarction
+
+In part 1 of the lab, we are going to continue analyzing the Worcester Heart Attack Study (WHAS) dataset (file `whas500.sav` on Brightspace). The outcome of interest for today's analysis is in-hospital death, measured by the variable "discharge status from hospital" (`dstat`) with values `alive` and `death`. 
+
+```{r}
+library(haven)   # for reading SPSS files
+library(dplyr)   # for data manipulation
+library(DescTools)  # for performing Hosmer-Lemeshow Goodness of Fit Tests
+
+# Load the dataset
+whas500 <- read_sav("datasets/whas500.sav")
+
+# Convert labeled variables to factors
+whas500 <- whas500 %>%
+  mutate(across(where(is.labelled), as_factor))
+```
+
+### Exploratory data analysis
+
+```{r}
+contingencyTable <- table(whas500$gender, whas500$dstat) # create 2 x 2 table
+contingencyTable
+
+prop.table(contingencyTable, margin = 1) # Calculate the row proportions (margin = 1)
+```
+
+::: {.callout-important icon=false title="Question 1"}
+Based on the group proportions, do you expect gender to have an effect on the risk of in-hospital death?
+:::
+
+::: {.callout-tip icon=false title="Answer question 1"}
+The proportion of in-hospital deaths is higher among females (0.105) than among females (0.06). This suggests that gender might be associated with the risk of in-hospital death.  
+:::
+
+### Simple logistic regression
+
+::: {.callout-important icon=false title="Question 2"}
+Perform the chi-square test of homogeneity (see instructions in lab 4 if needed). What conclusion can be drawn from the test?
+:::
+
+```{r}
+chisq.test(contingencyTable, correct = FALSE)
+```
+
+::: {.callout-tip icon=false title="Answer question 2"}
+The p-value of the chi-square test (0.066) is larger than 0.05, indicating that there is no significant association between gender and in-hospital death.
+:::
+
+```{r}
+# Create a 0/1 numeric version of the dependent variable, where a value of 1 means "success" (i.e., occurrence of the event of interest)
+whas500$dstat_numeric <- ifelse(whas500$dstat=="dead", 1, 0)
+
+# Fit logistic regression model 
+model.sex <- glm(dstat_numeric ~ gender, family = binomial, data = whas500)
+summary(model.sex)
+```
+
+::: {.callout-important icon=false title="Question 3"}
+What is the odds ratio for in-hospital death for females compared to males? How should this odds ratio be interpreted in the context of the study? 
+:::
+
+::: {.callout-tip icon=false title="Answer question 3"}
+The odds ratio for in-hospital death for females compared to males is equal to $\exp(0.6087) = 1.83$. This means that the odds of in-hospital death are 1.83 times higher in females than in males.
+:::
+
+::: {.callout-important icon=false title="Question 4"}
+Based on the estimated regression coefficients (ignoring p-values), what are the predicted proportions of in-hospital deaths for male and female patients? Compare the predicted proportions to the observed proportions from the previously constructed contingency table. Do they match?
+:::
+
+::: {.callout-tip icon=false title="Answer question 4"}
+The linear predictor models the risk of in-hospital death on the log-odds scale. To obtain the predicted probabilities, we need to transform the log-odds back to the probability scale using the logistic function. 
+
+The predicted probabilities of in-hospital death on the log-odds scale are:
+
+- Males: -2.7515 (intercept)
+- Females: -2.7515 + 0.6087 (intercept + coefficient) = -2.1428
+
+The predicted probabilities on the probability scale are:
+
+- Male: $1 / (1 + exp(-(-2.7515))) = 0.060$
+- Female: $1 / (1 + exp(-(-2.1428))) = 0.105$
+
+The predicted proportions of in-hospital deaths match the observed proportions from the contingency table.
+:::
+
+::: {.callout-important icon=false title="Question 5"}
+What conclusion can be drawn from the logistic regression analysis regarding the association between gender and in-hospital death? Is this in line with the conclusion drawn from the chi-square test?
+:::
+
+::: {.callout-tip icon=false title="Answer question 5"}
+The p-value of the Wald test for the regression coefficient of the dummy variable `genderfemale` is 0.069, which is larger than 0.05. This indicates that there is no significant association between gender and in-hospital death. This conclusion is consistent with the results of the chi-square test.
+:::
+
+### Multiple logistic regression
+
+```{r}
+# Fit logistic regression model 
+model.sex.age <- glm(dstat_numeric ~ gender + age, family = binomial, data = whas500)
+summary(model.sex.age)
+```
+
+::: {.callout-important icon=false title="Question 6"}
+How does adjusting for age affect the estimated odds ratio for in-hospital death for females compared to males?
+:::
+
+::: {.callout-tip icon=false title="Answer question 6"}
+After adjusting for age, the odds ratio for in-hospital death for females compared to males decreases from 1.83 to $\exp(0.26776) = 1.31$. This indicates that the effect of gender on in-hospital death is confounded by age.
+:::
+
+::: {.callout-important icon=false title="Question 7"}
+Calculate the odds ratio for in-hospital death corresponding to a 10-year increase in age and interpret its meaning.
+:::
+
+::: {.callout-tip icon=false title="Answer question 7"}
+The increase in the risk of in-hospital death on the log-odds scale is equal to 0.0577 * 10 = 0.577. This means that for every 10-year increase in age, the odds of in-hospital death increase by a factor of $\exp(0.577) = 1.78$.
+:::
+
+### Likelihood ratio tests
+
+```{r}
+# Fit reduced model
+model.age <- glm(dstat_numeric ~ age, family = binomial, data = whas500)
+
+# Perform likelihood ratio test
+anova(model.age, model.sex.age, test="LRT")
+```  
+
+::: {.callout-important icon=false title="Question 8"}
+How does the p-value from the likelihood ratio test compare to the one from the Wald test?
+:::
+
+::: {.callout-tip icon=false title="Answer question 8"}
+The p-value of the likelihood ratio test (0.4388) is approximately equal to the p-value of the Wald test (0.4392). This indicates that the results of the two tests are consistent, which is expected because, for testing the significance of a single coefficient, the Wald test and the likelihood ratio test often yield similar results. However, they are not strictly equivalent, as the likelihood ratio test is based on comparing model fit, while the Wald test assesses the coefficient's deviation from zero using its standard error.
+:::
+
+### Evaluating model fit
+
+#### R results
+
+```{r}
+HosmerLemeshowTest(fit=fitted(model.sex.age), obs=model.sex.age$y, ngr = 10, verbose = TRUE)
+```
+
+#### SPSS results
+
+![Screenshot of the Hosmer-Lemeshow test results in SPSS](images/SPSS_lab8_q9.PNG)
+
+::: {.callout-important icon=false title="Question 9"}
+Based on the results of the Hosmer-Lemeshow goodness-of-fit test, does our model provide a satisfactory fit to the data?
+:::  
+   
+::: {.callout-tip icon=false title="Answer question 9"}
+The p-value for the Hosmer-Lemeshow test is 0.177 in R (C statistic) and 0.120 in SPSS, indicating that the model provides a satisfactory fit to the data: a non-significant p-value suggests that the model fits the data well, meaning that the observed and expected frequencies do not differ significantly. 
+
+Note: the discrepancy between the p-values from R and SPSS seems to be due to small differences in how the groups are created within the implementation of the test. 
+:::   
+     
+## Part 2: unguided exercises
+
+### Exercise 1
+
+Multiple logistic regression was used to construct a prognostic index to predict coronary artery disease from data on 348 patients with valvular heart disease who had undergone routine coronary arteriography before valve replacement (Ramsdale et al. 1982). The estimated equation was:
+
+$$logit(p) = ln(p/(1-p)) = b_{0} + 1.167 \times x{1} + 0.0106 \times x_{2} + \textrm{other terms}$$
+
+where $x_{1}$ stands for the family history of ischaemic disease (0=no, 1=yes) and $x_{2}$ is the estimated total number of cigarettes ever smoked in terms of thousand cigarettes, calculated as the average number smoked annually times the number of years smoking.
+
+(a)	What is the estimated odds ratio for having coronary artery disease for subjects with a positive family history relative to subjects with a negative family history?
+(b)	What total number of cigarettes ever smoked carries the same risk as a positive family history? Convert the result into years of smoking 20 cigarettes per day.
+(c)	What is the odds ratio for coronary artery disease for someone with a positive family history who had smoked 20 cigarettes a day for 30 years compared to a non smoker with no family history?
+
+**Answers:**
+
+(a) $\exp(1.167) = 3.212$.
+
+(b) The log(OR) of positive history, $1.167$, is to be set equal to $0.0106 \times x_2$, where $0.0106$ is the log odds ratio of smoking 1000 cigarettes. Thus $x_2=1.167/0.0106=110.094$ thousands of cigarettes. Dividing this result by $(365 \times 20) / 1000 = 7.3$, i.e., the total number cigarettes (per thousand) smoked in 1 year if smoking 20 cigarettes per day, we find $110.094/7.3=15.1$ or just above 15 years. Thus the odds ratio of positive history is equivalent to that of daily smoking of 20 cigarettes for about 15 years.
+
+(c) The total number of cigarettes smoked (per thousand) is $(20 \times 365 \times 30) / 1000 = 219$, so the odds ratio is $\exp(1.167 + 219 \times 0.0106) = 32.7$
+
+### Exercise 2
+
+Data from 37 patients receiving a non-depleted allogenic bone marrow transplant were examined to see which variables were associated with the occurrence of acute graft-versus-host disease (GvHD: 0=no, 1=yes) (Bagot et al., 1988). Possible predictors are TYPE (type of leukemia: 1=AML, acute myeloid leukaemia; 2=ALL, acute lymphocytic leukaemia; 3=CML, chronic myeloid leukemia), PREG (donor pregnancy: 0= no, 1=yes), and LOGIND (the logarithm of an index of mixed epidermal cell-lymphocyte reactions). The data are in the file `GvHD.sav` available on Brightspace.
+
+(a) Perform a likelihood ratio test to determine whether there is a significant association between the type of leukemia and the occurrence of GvHD after adjusting for donor pregnancy and the logarithm of an index of mixed epidermal cell-lymphocyte reactions.
+(b) In the adjusted model, What is the estimated odds ratio for the occurrence of GvHD for patients with ALL compared to those with ALM?
+(c) Use the Hosmer-Lemeshow goodness-of-fit test to evaluate the fit of the model. Based on the results, does the model provide a satisfactory fit to the data?
+
+**Answers:**
+
+```{r}
+# Load the dataset
+GvHD <- read_sav("datasets/GvHD.sav")
+
+# Convert labeled variables to factors
+GvHD <- GvHD %>%
+  mutate(across(where(is.labelled), as_factor))
+```
+
+```{r}  
+#| echo: true
+
+# Create a 0/1 numeric version of the outcome variable
+GvHD$gvhd.numeric <- ifelse(GvHD$gvhd == "no", 0, 1)
+
+# Fit the full  model
+model.GvHD <- glm(gvhd.numeric ~ type + preg + logind, family = binomial, data = GvHD)
+summary(model.GvHD)
+
+# Fit the reduced model
+model.GvHD.reduced <- glm(gvhd.numeric ~ preg + logind, family = binomial, data = GvHD)
+
+# Perform likelihood ratio test
+anova(model.GvHD.reduced, model.GvHD, test = "LRT")
+```
+
+(a) The p-value of the likelihood ratio test is 0.090, indicating that the type of leukemia is not significantly associated with the occurrence of GvHD after adjusting for donor pregnancy and the logarithm of an index of mixed epidermal cell-lymphocyte reactions.
+
+(b) By default, R and SPSS both use the first level of the factor (`ALM`) as the reference category. Therefore, the table with estimated regression coefficients is the same in both outputs. The estimated odds ratio for the occurrence of GvHD for patients with AML compared to those with ALL is $\exp(-0.148) = 0.862$.
+
+(c) The Hosmer-Lemeshow test results are as follows:
+
+#### R
+
+```{r}
+HosmerLemeshowTest(fit=fitted(model.GvHD), obs=GvHD$gvhd.numeric, ngr = 10, verbose = TRUE)
+``` 
+
+#### SPSS
+
+![Screenshot of the Hosmer-Lemeshow test results in SPSS](images/SPSS_lab8_ex2.PNG)
+
+While R and SPSS produce different p-values, neither is significant. Therefore, the model provides a satisfactory fit to the data.
+
