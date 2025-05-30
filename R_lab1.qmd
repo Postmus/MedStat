@@ -53,6 +53,9 @@ library(ggplot2)
 
 # Load the dataset
 lowbwt <- read_sav("lowbwt.sav")
+
+# Convert alll labelled variables into factor variables 
+lowbwt <- lowbwt %>% mutate(across(where(is.labelled), as_factor))
 ```
 
 ```{r}
@@ -64,6 +67,9 @@ library(ggplot2)
 
 # Load the dataset
 lowbwt <- read_sav("datasets/lowbwt.sav")
+
+# Convert alll labelled variables into factor variables 
+lowbwt <- lowbwt %>% mutate(across(where(is.labelled), as_factor))
 ```
 
 The dataset includes the following variables:
@@ -74,7 +80,7 @@ The dataset includes the following variables:
 | Low Birth Weight (0 = Birth Weight ≥ 2500g, 1 = Birth Weight < 2500g) | low |
 | Age of the Mother in Years | age |
 | Weight in Pounds at the Last Menstrual Period | lwt |
-| Socio-Economic Status (1 = Low, 2 = Middle, 3 = High) | ses |
+| Ethnicity (1 = Caucasian, 2 = Afro-American, 3 = Asian) | ethnicity |
 | Smoking Status During Pregnancy (1 = Yes, 0 = No) | smoke |
 | History of Premature Labor (0 = None, 1 = One, etc.) | ptl |
 | History of Hypertension (1 = Yes, 0 = No) | ht |
@@ -162,7 +168,7 @@ In addition to calculating frequencies and percentages, it can also be helpful t
 ggplot(lowbwt, aes(x = factor(smoke))) +
   geom_bar(fill = "blue", color = "black") +
   labs(title = "Smoking Status During Pregnancy", 
-       x = "Smoking Status (0 = No, 1 = Yes)", 
+       x = "Smoking Status", 
        y = "Frequency") +
   theme_minimal()
 ```

@@ -1,5 +1,5 @@
 ---
-title: "Advanced medical Statistics – Answers lab 1"
+title: "Medical Statistics – Answers lab 1"
 format: 
   html:
     toc: true       
@@ -30,6 +30,9 @@ library(ggplot2)
 
 # Load the dataset
 lowbwt <- read_sav("datasets/lowbwt.sav")
+
+# Convert alll labelled variables into factor variables 
+lowbwt <- lowbwt %>% mutate(across(where(is.labelled), as_factor))
 ```
 
 # Part 1 - Descriptive statistics
@@ -94,7 +97,7 @@ Create a bar chart for the variable `ht` to visualize the frequency of mothers w
 ggplot(lowbwt, aes(x = factor(ht))) +
   geom_bar(fill = "blue", color = "black") +
   labs(title = "History of Hypertension",
-       x = "0 = No, 1 = Yes",
+       x = "History of Hypertension",
        y = "Frequency") +
   theme_minimal()
 ```

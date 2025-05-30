@@ -1,11 +1,11 @@
 ---
-title: "Advanced medical Statistics – Lab 2"
+title: "Medical Statistics – Lab 2"
 subtitle: R version
 format: 
   html:
     toc: true       
     toc-depth: 3    
-    toc-location: right   # Optional: Can be left, right, or floating    
+    toc-location: right
   pdf:
     toc: false  
 ---
@@ -20,7 +20,7 @@ format:
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, eval=FALSE)
 ```
 
-Welcome to lab 2 in the advanced medical statistics course. For today’s exercises, we will continue exploring the `lowbwt.sav` dataset, which you can download from Brightspace. 
+Welcome to lab 2 in the medical statistics course. For today’s exercises, we will continue exploring the `lowbwt.sav` dataset. 
 
 ```{r}
 library(haven)
@@ -29,6 +29,9 @@ library(ggplot2)
 
 # Load the dataset
 lowbwt <- read_sav("lowbwt.sav")
+
+# Convert alll labelled variables into factor variables 
+lowbwt <- lowbwt %>% mutate(across(where(is.labelled), as_factor))
 ```
 
 As a reminder, the dataset includes the following variables (see the previous lab for more details):
@@ -39,7 +42,7 @@ As a reminder, the dataset includes the following variables (see the previous la
 | Low Birth Weight (0 = Birth Weight ≥ 2500g, 1 = Birth Weight < 2500g) | low |
 | Age of the Mother in Years | age |
 | Weight in Pounds at the Last Menstrual Period | lwt |
-| Socio-Economic Status (1 = Low, 2 = Middle, 3 = High) | ses |
+| Ethnicity (1 = Caucasian, 2 = Afro-American, 3 = Asian) | ethnicity |
 | Smoking Status During Pregnancy (1 = Yes, 0 = No) | smoke |
 | History of Premature Labor (0 = None, 1 = One, etc.) | ptl |
 | History of Hypertension (1 = Yes, 0 = No) | ht |
@@ -71,7 +74,7 @@ Based on these summary statistics, what is the estimated mean birth weight for t
 Calculate the corresponding 95% confidence interval based on the normal approximation.
 :::
 
-You can also use R to calculate the 95% confidence interval by using the `qt()` function to determine the appropriate t-value. This approach uses  the t-distribution, which provides a more accurate confidence interval when the population standard deviation is unknown and the sample size is small.
+You can also use R to calculate the 95% confidence interval by using the `qt()` function to determine the appropriate t-value. This approach uses the t-distribution, which provides a more accurate confidence interval when the population standard deviation is unknown and the sample size is small.
 
 ```{r}
 n <- sum(!is.na(lowbwt$bwt))
