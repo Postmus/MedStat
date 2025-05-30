@@ -10,12 +10,16 @@ website:
     left:
       - text: "Home"
         href: index.qmd
-      - text: "Labs week 1"
+      - text: "Labs day 1"
         menu:
           - text: "R"
             href: R_lab1.qmd
           - text: "SPSS"
             href: SPSS_lab1.qmd
+      - text: "Datasets"
+        menu:
+          - text: "lowbwt.sav"
+            href: datasets/lowbwt.sav
 format:
   html:
     theme: cosmo

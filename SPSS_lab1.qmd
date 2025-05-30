@@ -1,5 +1,5 @@
 ---
-title: "Advanced medical Statistics – Lab 1"
+title: "Medical Statistics – Lab 1"
 subtitle: SPSS version
 format: 
   html:
@@ -16,7 +16,7 @@ Welcome to lab 1 in the advanced medical statistics course. In this lab, we will
 
 # Part 1 - Descriptive statistics
 
-For this part of the lab, we will use the dataset `lowbwt.sav`, which you can download from Brightspace. This dataset contains information collected at Baystate Medical Center Springfield, MA, during 1986 and is from Appendix 1 of Hosmer and Lemeshow (1989). The data include information about factors related to low birth weight, an important concern due to its association with high infant mortality rates and birth defects.
+For this part of the lab, we will use the `lowbwt.sav` dataset. This dataset contains information collected at Baystate Medical Center Springfield, MA, during 1986 and is from Appendix 1 of Hosmer and Lemeshow (1989). The data include information about factors related to low birth weight, an important concern due to its association with high infant mortality rates and birth defects.
 
 The dataset includes the following variables:
 

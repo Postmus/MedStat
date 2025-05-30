@@ -1,5 +1,5 @@
 ---
-title: "Advanced medical Statistics – Lab 1"
+title: "Medical Statistics – Lab 1"
 subtitle: R version
 format: 
   html:
@@ -17,16 +17,20 @@ editor_options:
 #| include: false
 
 # configure global options for R code chunks:
-# warning = F to suppress the display of warning messages generated during the execution of code chunks
-# message = F to suppress the display of messages produced during the execution of code chunks
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, eval=FALSE)
+# warning = F to suppress the display of warning messages 
+# generated during the execution of code chunks
+# message = F to suppress the display of messages produced 
+# during the execution of code chunks
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      eval = FALSE)
 ```
 
-Welcome to lab 1 in the advanced medical statistics course. In this lab, we will explore descriptive statistics and probability calculations for random variables. We will use an example dataset to practice summarizing continuous and categorical variables, and introduce some basic concepts of probability distributions.
+Welcome to lab 1 in the medical statistics course. In this lab, we will explore descriptive statistics and probability calculations for random variables. We will use an example dataset to practice summarizing continuous and categorical variables, and introduce some basic concepts of probability distributions.
 
 # Part 1 - Descriptive statistics
 
-For this part of the lab, we will use the dataset `lowbwt.sav`, which you can download from Brightspace. This dataset contains information collected at Baystate Medical Center Springfield, MA, during 1986 and is from Appendix 1 of Hosmer and Lemeshow (1989). The data include information about factors related to low birth weight, an important concern due to its association with high infant mortality rates and birth defects.
+For this part of the lab, we will use the `lowbwt.sav` dataset. This dataset contains information collected at Baystate Medical Center Springfield, MA, during 1986 and is from Appendix 1 of Hosmer and Lemeshow (1989). The data include information about factors related to low birth weight, an important concern due to its association with high infant mortality rates and birth defects.
 
 The dataset is in SPSS format, but you can easily load it into R using the `haven` package. To get started, make sure to install the necessary packages:
 
@@ -114,8 +118,12 @@ To decide which summary measures (mean and standard deviation, or median and IQR
 
 ```{r}
 ggplot(lowbwt, aes(x = age)) +
-  geom_histogram(binwidth = 2, fill = "blue", color = "black") +
-  labs(title = "Histogram of Age", x = "Age of Mother (years)", y = "Frequency") +
+  geom_histogram(binwidth = 2, 
+                 fill = "blue", 
+                 color = "black") +
+  labs(title = "Histogram of Age", 
+       x = "Age of Mother (years)", 
+       y = "Frequency") +
   theme_minimal()
 ```
 
@@ -153,7 +161,9 @@ In addition to calculating frequencies and percentages, it can also be helpful t
 ```{r}
 ggplot(lowbwt, aes(x = factor(smoke))) +
   geom_bar(fill = "blue", color = "black") +
-  labs(title = "Smoking Status During Pregnancy", x = "Smoking Status (0 = No, 1 = Yes)", y = "Frequency") +
+  labs(title = "Smoking Status During Pregnancy", 
+       x = "Smoking Status (0 = No, 1 = Yes)", 
+       y = "Frequency") +
   theme_minimal()
 ```
 
@@ -172,7 +182,8 @@ In this section, we will focus on two commonly used probability distributions: t
 A binomial distribution represents the number of successes in a fixed number of independent trials, each with the same probability of success. For example, if we have 10 patients and we want to know the probability that exactly 3 of them respond to a given treatment, where the response rate is known to be 40%, we can use the `dbinom()` function:
 
 ```{r}
-# Probability that exactly 3 out of 10 patients respond to the treatment (assuming p = 0.4)
+# Probability that exactly 3 out of 10 patients respond 
+# to the treatment (assuming p = 0.4)
 p_response_3 <- dbinom(3, size = 10, prob = 0.4)
 p_response_3
 ```
@@ -227,7 +238,8 @@ Using R, we can then use the `pnorm()` function to find the corresponding cumula
 z_value <- (80 - 72) / 10
 z_value
 
-# Use the standard normal distribution to find the cumulative probability
+# Use the standard normal distribution to find 
+# the cumulative probability
 cum_prob_weight <- pnorm(z_value)
 cum_prob_weight
 ```
