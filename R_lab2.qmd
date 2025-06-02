@@ -124,12 +124,11 @@ Looking at the histogram, would you say that the data are normally distributed?
 
 ## Point Estimates and 95% Confidence Intervals for Population Proportions
 
-Next, we will explore the variable 'low birth weight' (low), which is a dichotomous variable that takes a value 1 if the baby had a low birth weight (defined as a birth weight < 2500g) and a value of 0 otherwise.
+Next, we will explore the variable 'low birth weight' (low), which is a dichotomous variable with the value 'yes (bwt < 2500)' if the baby had a low birth weight (defined as a birth weight < 2500g) and a value of 'no (bwt >= 2500 g)' otherwise.
 
 We start by using the `table()` function to calculate the frequency of each category of the 'low' variable:
 
 ```{r}
-# Calculate the frequency of each category of the 'low' variable
 freq_table <- table(lowbwt$low)
 freq_table
 ```
@@ -147,7 +146,7 @@ Calculate the corresponding 95% confidence interval based on the Normal approxim
 Subsequently, we perform an exact binomial test to assess whether the proportion of low birth weight babies in the population differs significantly from a hypothesized value of 30%:
 
 ```{r}
-binom_test_result <- binom.test(sum(lowbwt$low == 1, na.rm = TRUE),
+binom_test_result <- binom.test(sum(lowbwt$low == "yes (bwt < 2500)", na.rm = TRUE),
                                 length(na.omit(lowbwt$low)),
                                 p = 0.30)
 binom_test_result
@@ -156,7 +155,7 @@ binom_test_result
 **Explanation**:
 
 - `binom.test()` is the function used to perform the binomial test.
-- `sum(lowbwt$low == 1, na.rm = TRUE)` calculates the number of babies in the dataset with low birth weight (where `low` is 1). The `na.rm = TRUE` argument tells R to ignore missing values.
+- `sum(lowbwt$low == "yes (bwt < 2500)", na.rm = TRUE)` calculates the number of babies in the dataset with low birth weight (where `low` is "yes (bwt < 2500)"). The `na.rm = TRUE` argument tells R to ignore missing values.
 - `length(na.omit(lowbwt$lbw))` gives the total number of non-missing observations in the `low` variable.
 - `p = 0.30` specifies the hypothesized population proportion (30%).
 

@@ -16,6 +16,16 @@ website:
             href: R_lab1.qmd
           - text: "SPSS"
             href: SPSS_lab1.qmd
+      - text: "Labs day 2"
+        menu:
+          - text: "R"
+            href: R_lab2.qmd
+          - text: "SPSS"
+            href: SPSS_lab2.qmd
+      - text: "Answers"
+        menu:
+          - text: "Lab 1"
+            href: lab1_answers.qmd
       - text: "Datasets"
         menu:
           - text: "lowbwt.sav"

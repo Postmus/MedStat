@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R/SPSS labs for the Medical Statistics course – Medical Statistics</title>
+<title>Medical Statistics – Answers lab 1 – Medical Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,6 +67,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -89,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -155,15 +184,23 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#part-1---descriptive-statistics" id="toc-part-1---descriptive-statistics" class="nav-link active" data-scroll-target="#part-1---descriptive-statistics">Part 1 - Descriptive statistics</a></li>
+  <li><a href="#part-2---probability-calculations-for-random-variables" id="toc-part-2---probability-calculations-for-random-variables" class="nav-link" data-scroll-target="#part-2---probability-calculations-for-random-variables">Part 2 - Probability calculations for random variables</a></li>
+  <li><a href="#part-3---some-conceptual-questions" id="toc-part-3---some-conceptual-questions" class="nav-link" data-scroll-target="#part-3---some-conceptual-questions">Part 3 - Some conceptual questions</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab1_answers.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">R/SPSS labs for the Medical Statistics course</h1>
+<h1 class="title">Medical Statistics – Answers lab 1</h1>
 </div>
 
 
@@ -180,9 +217,393 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This website hosts the R and SPSS labs for the Medical Statistics course. You can navigate between the different labs using the menu above.</p>
+<section id="part-1---descriptive-statistics" class="level1">
+<h1>Part 1 - Descriptive statistics</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab1_answers_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 1">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Based on the shape of the histogram, determine which summary statistics are more appropriate to report.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 1">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>From the histogram, it follows that the distribution of age is right-skewed. In such a situation, we would generally prefer reporting median [IQR] or median [Q1, Q3] over mean (SD).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 2">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Calculate the mean, standard deviation, median, and IQR for the variable <code>lwt</code>. Additionally, create a histogram to determine the shape of its distribution and decide which summary measures are most appropriate to report.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 2">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We start by making a histogram of the variable <code>lwt</code>:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab1_answers_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From the histogram, it follows that the distribution of lwt is right-skewed. We therefore prefer reporting median [IQR] or median [Q1, Q3], depending on the style conventions of the journal (typically the latter in the medical field). The median [IQR] is equal to 121 [30]. The first and third quartiles, calculated using <code>Analyze -&gt; Explore</code> in SPSS or <code>quantile(lowbwt$lwt, probs = c(0.25, 0.75), na.rm = TRUE)</code> in R, are equal to [110, 140].</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 3">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Calculate the frequencies and percentages for the variable history of hypertension (<code>ht</code>)</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 3">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ht</th>
+<th>frequency</th>
+<th>percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>177</td>
+<td>93.7%</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>12</td>
+<td>6.3%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 4">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 4
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Create a bar chart for the variable <code>ht</code> to visualize the frequency of mothers with a history of hypertension.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 4">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 4
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab1_answers_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-2---probability-calculations-for-random-variables" class="level1">
+<h1>Part 2 - Probability calculations for random variables</h1>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 5">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The probability of being blood group B is 0.08. What is the probability that if 500 ml of blood is taken from each of 100 unrelated blood donors fewer than 1,500 ml of group B blood will be obtained?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 5">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If we let the random variable X denote the number of blood donors of blood group B, it follows from the text in the exercise that X ~ Bin(0.08, 100). Fewer than 1,500 ml of group B blood will be obtained if X is equal to or smaller than 2. We can therefore answer this question by calculating <span class="math inline">\(P(X \leq 2)\)</span> using the cumulative distribution function of the binomial distribution, which gives a probability of 0.01 or 1%.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 6">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 6
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In a clinical trial in which a total of 100 patients are allocated to two treatments A and B by simple randomization (tossing a coin for each new patient). What is the probability that the difference between the numbers of patients in the two treatment groups exceeds 20? (Hint: the number of individuals in one treatment group (for example A) follows a Binomial distribution).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 6">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 6
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If we let the random variable X denote the number of individuals in treatment group A, we get a difference between the number of patients in the two treatment groups of over 20 if <span class="math inline">\(X &lt; 40\)</span> or if <span class="math inline">\(X &gt; 60\)</span>. Using the cumulative distribution function of the binomial distribution, these probabilities are equal to <span class="math inline">\(P(X &lt; 40) = 0.0176\)</span> and <span class="math inline">\(P(X &gt; 60) = 1 - P(X \leq 60) = 0.0176\)</span>. The probability that the difference between the number of patients in the two treatment groups exceeds 20 is therefore equal to 2*0.0176 = 0.035 or 3.5%</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 7">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 7
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Over a 25 year period the mean height of adult males increased from 175.8 cm to 179.1 cm, but the standard deviation stayed at 5.84 cm. The minimum height requirement for men to join the police force is 172 cm. What proportion of men would be too short to become policemen at the beginning and end of the 25 year period, assuming that the height of adult males has a Normal distribution?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 7">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 7
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>At the start, the minimum height was <span class="math inline">\((172 - 175.8) / 5.84 = -0.65\)</span> standard deviations from the mean. From the cumulative distribution function of the standard normal distribution, the proportion of men smaller than this would be about <span class="math inline">\(26\%\)</span>. At the end of the <span class="math inline">\(25\)</span>-year period, the minimum height was <span class="math inline">\((172 - 179.1) / 5.84 = -1.22\)</span> standard deviations from the mean. From the cumulative distribution function of the standard normal distribution, the proportion of men below the minimum is now about <span class="math inline">\(11\%\)</span>. Thus, the proportion of ineligible men has more than halved.</p>
+</div>
+</div>
+</section>
+<section id="part-3---some-conceptual-questions" class="level1">
+<h1>Part 3 - Some conceptual questions</h1>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 8">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 8
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Imagine we have some observations on blood pressure and calculate the mean, standard deviation, median and IQR. How do these measures change if all observations are</p>
+<ol type="a">
+<li>increased by 10</li>
+<li>decreased by their mean</li>
+<li>multiplied by 10</li>
+<li>divided by their standard deviation</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 8">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 8
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li>Standard deviation and IQR remain the same, mean and median increase by 10.</li>
+<li>Standard deviation and IQR remain the same, mean and median decrease by the mean (the mean becomes zero).</li>
+<li>All are multiplied by 10.</li>
+<li>All are divided by standard deviation; the standard deviation becomes one.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 9">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 9
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Two fair dice are rolled, the results are X1 and X2.</p>
+<ol type="a">
+<li>What is the probability Prob(X1=X2)?</li>
+<li>What is the expected value E(X1), and the standard deviation SD(X1)?</li>
+<li>Give the expected value and the variance of X1+X2 and of X1-X2.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 9">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 9
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Question (a)</strong></p>
+<p>Assume the dice have different colors, red (R) and blue (B). <span class="math inline">\(P(R = 1) = \frac{1}{6}\)</span>, <span class="math inline">\(P(R = 2) = \frac{1}{6}\)</span>, etc. The outcomes of Red and Blue are independent of each other. So for example: <span class="math inline">\(P(R = 1 \text{ and } B = 4) = P(R = 1) \times P(B = 4) = \frac{1}{6} \times \frac{1}{6} = \frac{1}{36}\)</span>.</p>
+<p>This is true for all possible combinations of outcomes. There are only <span class="math inline">\(6\)</span> possible outcomes with equal results: <span class="math inline">\(R = 1\)</span> and <span class="math inline">\(B = 1\)</span>, <span class="math inline">\(R = 2\)</span> and <span class="math inline">\(B = 2\)</span>, and so on. In total: <span class="math inline">\(\text{Prob} = 6 \cdot (\frac{1}{6} \cdot \frac{1}{6}) = 6 \times \frac{1}{36} = \frac{1}{6}\)</span>.</p>
+<p><strong>Question (b)</strong></p>
+<p>Using the formula on page 3.3 of the syllabus:</p>
+<p><span class="math inline">\(E(X_1) = \frac{1}{6} \cdot (1 + 2 + 3 + 4 + 5 + 6) = 3.5\)</span></p>
+<p><span class="math inline">\(\text{Var}(X_1) = \frac{1}{6} \cdot [(1 - 3.5)^2 + (2 - 3.5)^2 + \ldots] = 2.92\)</span></p>
+<p><span class="math inline">\(\text{SD} = \sqrt{2.92} = 1.71\)</span></p>
+<p><strong>Question (c)</strong> Using the calculation rules on page 3.5 of the syllabus:</p>
+<p><span class="math inline">\(E(X_1 + X_2) = E(X_1) + E(X_2) = 3.5 + 3.5 = 7\)</span></p>
+<p><span class="math inline">\(\text{Var}(X_1 + X_2) = 2.92 + 2.92 = 5.84\)</span></p>
+<p><span class="math inline">\(E(X_1 - X_2) = 0\)</span></p>
+<p><span class="math inline">\(\text{Var}(X_1 - X_2) = 2.92 + 2.92 = 5.84\)</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 10">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 10
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are two hospitals in town. On average 45 deliveries take place each day in the larger hospital, and 15 in the smaller. The probability of a baby being a boy is about 0.52, and the probability of twins is about 0.012. On any day, which hospital is more likely</p>
+<ol type="a">
+<li>to have a set of twins delivered</li>
+<li>to have more than 60 % of babies being boys?</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 10">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 10
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>The larger hospital, simply because there are more births. (This question is about an absolute number: a set of twins).</p></li>
+<li><p>The day-to-day variation in the proportion of boys will be greater in the smaller hospital, so it is more likely to have more than 60% of babies being boys on any day. (This question is about a relative number: 60% of the babies).</p></li>
+</ol>
+<p>To make the differences more clear: consider a very small hospital (only one delivery per day) and a very large hospital (1000 deliveries a day).</p>
+<ol type="a">
+<li><p>The probability that the delivery in the small hospital will concern twins equals 0.012. The same is true for each delivery in the larger hospital, but since we have 1000 deliveries, we expect 12 of them to concern twins.</p></li>
+<li><p>In the small hospital, the probability that the child is a boy is 0.52. If a boy is born, then 100% of the babies that day are boys. This will happen in 52% of the days. For the larger hospital, we expect to see 520 boys and 480 girls on an arbitrary day. Some days there will be more than 520 boys, and other days there will be fewer. However, the probability that more than 60% of the children (more than 600 out of 1000) will be boys is very small—for sure less than 0.52.</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 11">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question 11
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The probability of a baby being a boy is 0.52. For six women delivering consecutively in the same labour ward on one day, which of the following exact sequences of boys and girls is most likely and which least likely?</p>
+<p>GBGBGB</p>
+<p>BBBGGG</p>
+<p>GBBBBB</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 11">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 11
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As the probability of a boy is slightly greater than the probability of a girl, the sequence with the most boys is most likely, which is the last sequence. The other two sequences are equally likely.</p>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
