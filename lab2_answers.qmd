@@ -1,5 +1,5 @@
 ---
-title: "Advanced medical Statistics – Answers lab 2"
+title: "Medical Statistics – Answers lab 2"
 format: 
   html:
     toc: true       
@@ -20,8 +20,6 @@ editor_options:
 # message = F to suppress the display of messages produced during the execution of code chunks
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, eval=TRUE, echo = FALSE)
 ```
-
-Welcome to lab 2 in the advanced medical statistics course. For today’s exercises, we will continue exploring the `lowbwt.sav` dataset, which you can download from Brightspace. 
 
 ```{r}
 #| include: false

@@ -22,16 +22,27 @@ website:
             href: R_lab2.qmd
           - text: "SPSS"
             href: SPSS_lab2.qmd
+      - text: "Labs day 3"
+        menu:
+          - text: "R"
+            href: R_lab3.qmd
+          - text: "SPSS"
+            href: SPSS_lab3.qmd      
       - text: "Answers"
         menu:
           - text: "Lab 1"
             href: lab1_answers.qmd
+          - text: "Lab 2"
+            href: lab2_answers.qmd
       - text: "Datasets"
         menu:
           - text: "lowbwt.sav"
             href: datasets/lowbwt.sav
+          - text: "ex5_6.sav"
+            href: datasets/ex5_6.sav
 format:
   html:
     theme: cosmo
     css: styles.css
     toc: true
+

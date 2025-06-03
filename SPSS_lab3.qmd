@@ -1,16 +1,16 @@
 ---
-title: "Advanced Medical Statistics – Lab 3"
+title: "Medical Statistics – Lab 3"
 subtitle: SPSS version
 format: 
   html:
     toc: true       
     toc-depth: 3    
-    toc-location: right   # Optional: Can be left, right, or floating    
+    toc-location: right 
   pdf:
     toc: false  
 ---
 
-Welcome to lab 3 in the advanced medical statistics course. For today’s exercises, we will continue exploring the `lowbwt.sav` dataset, which you can download from Brightspace. 
+Welcome to lab 3 in the medical statistics course. For today’s exercises, we will continue exploring the `lowbwt.sav` dataset, which you can downloaded from the Dataset section of the menu.
 
 As a reminder, the dataset includes the following variables (see the previous lab for more details):
 
