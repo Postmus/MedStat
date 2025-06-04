@@ -1,5 +1,5 @@
 ---
-title: "Advanced Medical Statistics – Lab 4"
+title: "Medical Statistics – Lab 4"
 subtitle: SPSS version
 format:
   html:
@@ -16,7 +16,7 @@ execute:
   eval: false
 ---
 
-Welcome to lab 4 in the advanced medical statistics course. In this lab, we will focus on the analysis of categorical data and the comparison of proportions between groups. We will also perform several statistical tests for the analysis of paired data.
+Welcome to lab 4 in the medical statistics course. In this lab, we will focus on the analysis of categorical data and the comparison of proportions between groups. We will also perform several statistical tests for the analysis of paired data.
 
 # Part 1: Inference for categorical data
 
@@ -64,7 +64,7 @@ Based on the results of the test, can we conclude that there is a statistically 
 :::
 
 ::: {.callout-important icon=false title="Question 4"}
-In addition to the p-value, The SPSS output also provides two approximate 95% confidence intervals for the difference in proportions. How do these  confidence intervals compare to the one you calculated manually?
+In addition to the p-value, The SPSS output also provides two approximate 95% confidence intervals for the difference in proportions. How do these confidence intervals compare to the one you calculated manually?
 :::
 
 ### Checking of assumptions
@@ -144,7 +144,7 @@ Based on the results of the pairwise comparisons, which age groups have signific
 
 In this part of the lab, we will analyze paired data on pocket depth before and after an intervention. Pocket depth refers to the depth of the gum pockets around teeth, measured using a periodontal probe. It is an important indicator of periodontal health. Healthy gums typically have pocket depths less than 3 mm, while deeper pockets may indicate conditions such as gingivitis or periodontitis.
 
-The dataset `pockets_paired.sav`, available on Brightspace, contains the following columns:
+The dataset `pockets_paired.sav`, available from the Datasets menu, contains the following columns:
 
 - `subjectID`: Unique identifier for each participant
 - `pocket_depth_before`: Average pocket depth (in mm) measured before the intervention

@@ -27,19 +27,29 @@ website:
           - text: "R"
             href: R_lab3.qmd
           - text: "SPSS"
-            href: SPSS_lab3.qmd      
+            href: SPSS_lab3.qmd
+      - text: "Labs day 4"
+        menu:
+          - text: "R"
+            href: R_lab4.qmd
+          - text: "SPSS"
+            href: SPSS_lab4.qmd
       - text: "Answers"
         menu:
           - text: "Lab 1"
             href: lab1_answers.qmd
           - text: "Lab 2"
             href: lab2_answers.qmd
+          - text: "Lab 3"
+            href: lab3_answers.qmd
       - text: "Datasets"
         menu:
           - text: "lowbwt.sav"
             href: datasets/lowbwt.sav
           - text: "ex5_6.sav"
             href: datasets/ex5_6.sav
+          - text: "pockets_paired.sav"
+            href: datasets/pockets_paired.sav
 format:
   html:
     theme: cosmo

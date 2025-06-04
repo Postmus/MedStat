@@ -267,7 +267,7 @@ Twenty-two patients undergoing cardiac bypass surgery were randomized to one of 
 - **Group II**: Received a 50% nitrous oxide and 50% oxygen mixture only during the operation
 - **Group III**: Received no nitrous oxide and a 35-50% oxygen mixture continuously for 24 hours
 
-The data file `ex5_6.sav` (available on Brightspace) contains the red cell folate levels for the three groups after 24 hours of ventilation. The aim of this study is to compare the three groups and test whether they have the same red cell folate levels.
+The data file `ex5_6.sav` contains the red cell folate levels for the three groups after 24 hours of ventilation. The aim of this study is to compare the three groups and test whether they have the same red cell folate levels.
 
 #### Tasks
 
