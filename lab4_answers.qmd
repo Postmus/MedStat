@@ -1,5 +1,5 @@
 ---
-title: "Advanced Medical Statistics – Answers lab 4"
+title: "Medical Statistics – Answers lab 4"
 format: 
   html:
     toc: true       
