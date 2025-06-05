@@ -232,6 +232,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./lab3_answers.html">
  <span class="dropdown-text">Lab 3</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./lab4_answers.html">
+ <span class="dropdown-text">Lab 4</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -847,17 +851,17 @@ Answer question 10
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform independent samples t-test</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>t_test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(bwt <span class="sc">~</span> ht, <span class="at">data =</span> lowbwt, <span class="at">equal.var =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>t_test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(bwt <span class="sc">~</span> ht, <span class="at">data =</span> lowbwt, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>t_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Welch Two Sample t-test
+    Two Sample t-test
 
 data:  bwt by ht
-t = 1.6124, df = 11.908, p-value = 0.133
+t = 2.0192, df = 187, p-value = 0.04489
 alternative hypothesis: true difference in means between group no and group yes is not equal to 0
 95 percent confidence interval:
- -153.4955 1024.6170
+  10.02413 861.09734
 sample estimates:
  mean in group no mean in group yes 
          2972.311          2536.750 </code></pre>

@@ -281,7 +281,7 @@ ggplot(lowbwt, aes(x = ht, y = bwt)) +
   labs(x = "History of Hypertension", y = "Birth Weight (grams)", title = "Birth Weight by History of Hypertension")
 
 # Perform independent samples t-test
-t_test <- t.test(bwt ~ ht, data = lowbwt, equal.var = TRUE)
+t_test <- t.test(bwt ~ ht, data = lowbwt, var.equal = TRUE)
 t_test
 
 # Create histograms to check normality

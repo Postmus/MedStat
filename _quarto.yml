@@ -42,6 +42,8 @@ website:
             href: lab2_answers.qmd
           - text: "Lab 3"
             href: lab3_answers.qmd
+          - text: "Lab 4"
+            href: lab4_answers.qmd
       - text: "Datasets"
         menu:
           - text: "lowbwt.sav"
