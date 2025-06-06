@@ -34,6 +34,10 @@ website:
             href: R_lab4.qmd
           - text: "SPSS"
             href: SPSS_lab4.qmd
+      - text: "Lab day 5"
+        menu:
+          - text: "Lab 5"
+            href: lab5.qmd
       - text: "Answers"
         menu:
           - text: "Lab 1"
@@ -52,6 +56,8 @@ website:
             href: datasets/ex5_6.sav
           - text: "pockets_paired.sav"
             href: datasets/pockets_paired.sav
+          - text: "heart_disease_cleveland.sav"
+            href: datasets/heart_disease_cleveland.sav
 format:
   html:
     theme: cosmo

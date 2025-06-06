@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Medical Statistics – Lab 1 – Medical Statistics</title>
+<title>Medical Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -67,35 +101,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -254,27 +259,25 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1---descriptive-statistics" id="toc-part-1---descriptive-statistics" class="nav-link active" data-scroll-target="#part-1---descriptive-statistics">Part 1 - Descriptive statistics</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#dataset-description" id="toc-dataset-description" class="nav-link" data-scroll-target="#dataset-description">Dataset description</a></li>
+  <li><a href="#steps-to-complete-the-lab" id="toc-steps-to-complete-the-lab" class="nav-link" data-scroll-target="#steps-to-complete-the-lab">Steps to complete the lab</a>
   <ul class="collapse">
-  <li><a href="#descriptive-analysis-of-continuous-variables" id="toc-descriptive-analysis-of-continuous-variables" class="nav-link" data-scroll-target="#descriptive-analysis-of-continuous-variables">Descriptive analysis of continuous variables</a></li>
-  <li><a href="#descriptive-analysis-of-categorical-variables" id="toc-descriptive-analysis-of-categorical-variables" class="nav-link" data-scroll-target="#descriptive-analysis-of-categorical-variables">Descriptive analysis of categorical variables</a></li>
+  <li><a href="#step-1-download-and-loadopen-the-dataset" id="toc-step-1-download-and-loadopen-the-dataset" class="nav-link" data-scroll-target="#step-1-download-and-loadopen-the-dataset"><strong>Step 1:</strong> Download and load/open the dataset</a></li>
+  <li><a href="#step-2-create-a-baseline-characteristics-table" id="toc-step-2-create-a-baseline-characteristics-table" class="nav-link" data-scroll-target="#step-2-create-a-baseline-characteristics-table"><strong>Step 2:</strong> Create a baseline characteristics table</a></li>
+  <li><a href="#step-3-perform-the-analysis-for-the-first-research-question" id="toc-step-3-perform-the-analysis-for-the-first-research-question" class="nav-link" data-scroll-target="#step-3-perform-the-analysis-for-the-first-research-question"><strong>Step 3:</strong> Perform the analysis for the first research question</a></li>
+  <li><a href="#step-4-perform-the-analysis-for-the-second-research-question" id="toc-step-4-perform-the-analysis-for-the-second-research-question" class="nav-link" data-scroll-target="#step-4-perform-the-analysis-for-the-second-research-question"><strong>Step 4:</strong> Perform the analysis for the second research question</a></li>
   </ul></li>
-  <li><a href="#part-2---probability-calculations-for-random-variables" id="toc-part-2---probability-calculations-for-random-variables" class="nav-link" data-scroll-target="#part-2---probability-calculations-for-random-variables">Part 2 - Probability calculations for random variables</a>
-  <ul class="collapse">
-  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution">Binomial Distribution</a></li>
-  <li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link" data-scroll-target="#normal-distribution">Normal Distribution</a></li>
-  </ul></li>
-  <li><a href="#part-3---some-conceptual-questions" id="toc-part-3---some-conceptual-questions" class="nav-link" data-scroll-target="#part-3---some-conceptual-questions">Part 3 - Some conceptual questions</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="SPSS_lab1.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab5.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Medical Statistics – Lab 1</h1>
-<p class="subtitle lead">SPSS version</p>
+<h1 class="title">Medical Statistics</h1>
+<p class="subtitle lead">Lab 5: Cleveland heart disease dataset</p>
 </div>
 
 
@@ -291,285 +294,100 @@ window.Quarto = {
 </header>
 
 
-<p>Welcome to lab 1 in the advanced medical statistics course. In this lab, we will explore descriptive statistics and probability calculations for random variables. We will use an example dataset to practice summarizing continuous and categorical variables, and introduce some basic concepts of probability distributions.</p>
-<section id="part-1---descriptive-statistics" class="level1">
-<h1>Part 1 - Descriptive statistics</h1>
-<p>For this part of the lab, we will use the <code>lowbwt.sav</code> dataset. This dataset contains information collected at Baystate Medical Center Springfield, MA, during 1986 and is from Appendix 1 of Hosmer and Lemeshow (1989). The data include information about factors related to low birth weight, an important concern due to its association with high infant mortality rates and birth defects.</p>
-<p>The dataset includes the following variables:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Variable</th>
-<th>Abbreviation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Identification Code</td>
-<td>ID</td>
-</tr>
-<tr class="even">
-<td>Low Birth Weight (0 = Birth Weight ≥ 2500g, 1 = Birth Weight &lt; 2500g)</td>
-<td>low</td>
-</tr>
-<tr class="odd">
-<td>Age of the Mother in Years</td>
-<td>age</td>
-</tr>
-<tr class="even">
-<td>Weight in Pounds at the Last Menstrual Period</td>
-<td>lwt</td>
-</tr>
-<tr class="odd">
-<td>Ethnicity (1 = Caucasian, 2 = Afro-American, 3 = Asian)</td>
-<td>ethnicity</td>
-</tr>
-<tr class="even">
-<td>Smoking Status During Pregnancy (1 = Yes, 0 = No)</td>
-<td>smoke</td>
-</tr>
-<tr class="odd">
-<td>History of Premature Labor (0 = None, 1 = One, etc.)</td>
-<td>ptl</td>
-</tr>
-<tr class="even">
-<td>History of Hypertension (1 = Yes, 0 = No)</td>
-<td>ht</td>
-</tr>
-<tr class="odd">
-<td>Presence of Uterine Irritability (1 = Yes, 0 = No)</td>
-<td>urirr</td>
-</tr>
-<tr class="even">
-<td>Number of Physician Visits During the First Trimester (0 = None, 1 = One, 2 = Two, etc.)</td>
-<td>pvft</td>
-</tr>
-<tr class="odd">
-<td>Birth Weight in Grams</td>
-<td>bwt</td>
-</tr>
-</tbody>
-</table>
-<p>The variables <code>bwt</code> (birth weight in grams) and <code>low</code> (low birth weight) are the outcome variables, while all other variables are considered independent variables. The outcome variables will be analyzed in more detail in subsequent labs. In this lab, we will focus on describing the study population in terms of the independent variables to obtain a set of summary statistics that could be used to populate a baseline characteristics table.</p>
-<section id="descriptive-analysis-of-continuous-variables" class="level2">
-<h2 class="anchored" data-anchor-id="descriptive-analysis-of-continuous-variables">Descriptive analysis of continuous variables</h2>
-<p>Let’s start by calculating the summary statistics for the continuous variable <code>age</code>.</p>
-<ol type="1">
-<li><p><strong>Mean</strong> and <strong>Standard Deviation</strong>: Use the “Analyze &gt; Descriptive Statistics &gt; Descriptives…” menu in SPSS to calculate the mean age of the mothers. Select <code>age</code> as the variable, and ensure that the mean and standard deviation are checked in the “Options” dialog.</p></li>
-<li><p><strong>Median and Interquartile Range (IQR)</strong>: To calculate the median and IQR for <code>age</code>, use the “Analyze &gt; Descriptive Statistics &gt; Frequencies…” menu. Select <code>age</code> as the variable and click on “Statistics…” to choose the median and quartiles.</p></li>
-</ol>
-<p>To decide which summary measures (mean and standard deviation, or median and IQR) are appropriate to report, we need to understand the shape of the distribution of the <code>age</code> variable. Create a histogram by using “Graphs &gt; Legacy Dialogs &gt; Histogram…” and selecting <code>age</code> as the variable.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 1">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Based on the shape of the histogram, determine which summary statistics are more appropriate to report.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 2">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 2
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Calculate the mean, standard deviation, median, and IQR for the variable <code>lwt</code>. Additionally, create a histogram to determine the shape of its distribution and decide which summary measures are most appropriate to report.</p>
-</div>
-</div>
-</section>
-<section id="descriptive-analysis-of-categorical-variables" class="level2">
-<h2 class="anchored" data-anchor-id="descriptive-analysis-of-categorical-variables">Descriptive analysis of categorical variables</h2>
-<p>Let’s move on to analyzing the categorical variables. We will start by calculating the frequency and percentage of mothers who smoked during pregnancy (<code>smoke</code>):</p>
-<ol type="1">
-<li><p><strong>Frequency Table</strong>: Use the “Analyze &gt; Descriptive Statistics &gt; Frequencies…” menu to calculate the frequency of each category for <code>smoke</code>.</p></li>
-<li><p><strong>Percentage Calculation</strong>: SPSS will automatically calculate the percentages for each category in the frequency table output.</p></li>
-</ol>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 3">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 3
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Calculate the frequencies and percentages for the variable <code>ht</code> (history of hypertension).</p>
-</div>
-</div>
-<p>In addition to calculating frequencies and percentages, it can also be helpful to visualize categorical data. One common way to do this is by creating a bar chart. To create a bar chart for the <code>smoke</code> variable, use “Graphs &gt; Legacy Dialogs &gt; Bar…” and select “Simple” and “Summaries for Groups of Cases.” Then select <code>smoke</code> as the Category Axis.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 4">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 4
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Create a bar chart for the variable <code>ht</code> to visualize the frequency of mothers with a history of hypertension.</p>
-</div>
-</div>
-</section>
-</section>
-<section id="part-2---probability-calculations-for-random-variables" class="level1">
-<h1>Part 2 - Probability calculations for random variables</h1>
-<p>In this section, we will focus on two commonly used probability distributions: the binomial distribution and the normal distribution. We will explore how to work with these distributions in SPSS using practical examples.</p>
-<section id="binomial-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="binomial-distribution">Binomial Distribution</h2>
-<p>A binomial distribution represents the number of successes in a fixed number of independent trials, each with the same probability of success. For example, if we have 10 patients and we want to know the probability that exactly 3 of them respond to a given treatment, where the response rate is known to be 40%, we can use SPSS to calculate this probability.</p>
-<p>To perform this calculation in SPSS, go to “Transform &gt; Compute Variable…” and create a new variable called <code>p_response_3</code>. Use the function <code>PDF.BINOM(x, n, p)</code> to calculate the cumulative probability:</p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Welcome to lab 5 in the Medical Statistics course. In this lab, you will combine your learnings from the previous lectures and labs in part I of the course to address the following research questions:</p>
 <ul>
-<li><strong><code>x</code></strong>: The number of successes we are interested in (in this example, <code>3</code> patients responding).</li>
-<li><strong><code>n</code></strong>: The number of trials (in this example, <code>10</code> patients).</li>
-<li><strong><code>p</code></strong>: The probability of success in each trial (in this example, <code>0.4</code> or 40% response rate).</li>
+<li>Does maximum heart rate achieved differ across chest pain types?</li>
+<li>Is the presence of heart disease associated with sex or fasting blood sugar?</li>
 </ul>
-<p>Cumulative probabilities, such as the probability that 3 or fewer patients out of 10 respond to the treatment, can similarly be calculated by creating a new variable with the <code>CDF.BINOM(x, n, p)</code> function.</p>
-<p><strong>Note</strong>: Unlike other statistical software, SPSS requires that calculations performed using the “Transform &gt; Compute Variable…” tool always have a target variable specified. This means you cannot perform calculations without creating an output variable in your dataset, which can make one-time calculations cumbersome. This is a limitation of SPSS, especially when you just want to explore different scenarios without cluttering your dataset with temporary variables.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 5">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 5
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The probability of being blood group B is 0.08. What is the probability that if 500 ml of blood is taken from each of 100 unrelated blood donors fewer than 1,500 ml of group B blood will be obtained?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 6">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 6
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>In a clinical trial in which a total of 100 patients are allocated to two treatments A and B by simple randomization (tossing a coin for each new patient). What is the probability that the difference between the numbers of patients in the two treatment groups exceeds 20? (Hint: the number of individuals in one treatment group (for example A) follows a Binomial distribution).</p>
-</div>
-</div>
 </section>
-<section id="normal-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="normal-distribution">Normal Distribution</h2>
-<p>Suppose that we want to calculate the probability that a randomly selected individual has a weight less than or equal to 80 kg, assuming that the distribution of weight in the population follows a normal distribution with mean 72 kg and standard deviation 10 kg.</p>
-<p>To calculate this probability, we first need to <strong>standardize</strong> the value using the formula:</p>
-<p><span class="math display">\[
-Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
-\]</span></p>
-<p>where:</p>
+<section id="dataset-description" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-description">Dataset description</h2>
+<p>The Cleveland heart disease dataset originates from the Cleveland Clinic Foundation and focuses on heart disease diagnosis. It includes data from 303 patients on the following variables:</p>
 <ul>
-<li><strong><code>x</code></strong> is the value we want to standardize (in this case, 80 kg).</li>
-<li><strong><code>μ</code></strong> is the mean of the distribution (in this case, 72 kg).</li>
-<li><strong><code>σ</code></strong> is the standard deviation of the distribution (in this case, 10 kg).</li>
+<li><code>age</code>: Age in years</li>
+<li><code>sex</code>: Sex (1 = female; 2 = male)</li>
+<li><code>cp</code>: Chest pain type (1 = typical angina; 2 = atypical angina; 3 = non-anginal pain; 4 = asymptomatic)</li>
+<li><code>trestbps</code>: Resting blood pressure (mm Hg at hospital admission)</li>
+<li><code>chol</code>: Serum cholesterol in mg/dl</li>
+<li><code>fbs</code>: Fasting blood sugar &gt; 120 mg/dl</li>
+<li><code>restecg</code>: Resting electrocardiographic results (1 = normal; 2 = ST-T wave abnormality; 3 = left ventricular hypertrophy)</li>
+<li><code>thalach</code>: Maximum heart rate achieved</li>
+<li><code>exang</code>: Exercise-induced angina (1 = no; 2 = yes)</li>
+<li><code>oldpeak</code>: ST depression induced by exercise relative to rest</li>
+<li><code>slope</code>: Slope of the peak exercise ST segment (1 = upsloping; 2 = flat; 3 = downsloping)</li>
+<li><code>ca</code>: Number of major vessels (0-3) colored by fluoroscopy</li>
+<li><code>thal</code>: Thallium heart scan results (1 = normal; 2 = fixed defect; 3 = reversible defect)</li>
+<li><code>target</code>: Diagnosis of heart disease (1 = heart disease; 2 = no heart disease)</li>
 </ul>
-<p>Using SPSS, we can then use the “Transform &gt; Compute Variable…” menu and the <code>CDF.NORMAL(z, mean, sd)</code> function to find the corresponding cumulative probability from the standard normal distribution by setting <code>z = 0.8</code>, <code>mean = 0</code> and <code>sd = 1</code>.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 7">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 7
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Over a 25 year period the mean height of adult males increased from 175.8 cm to 179.1 cm, but the standard deviation stayed at 5.84 cm. The minimum height requirement for men to join the police force is 172 cm. What proportion of men would be too short to become policemen at the beginning and end of the 25 year period, assuming that the height of adult males has a Normal distribution?</p>
-</div>
+</section>
+<section id="steps-to-complete-the-lab" class="level2">
+<h2 class="anchored" data-anchor-id="steps-to-complete-the-lab">Steps to complete the lab</h2>
+<section id="step-1-download-and-loadopen-the-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-download-and-loadopen-the-dataset"><strong>Step 1:</strong> Download and load/open the dataset</h3>
+<p>Download the Cleveland heart disease dataset (heart_disease_cleveland.sav) from the Datasets menu. SPSS users can simply double click on the downloaded file to open the dataset. R users can follow the instructions below to load and clean the dataset:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the required libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the SPSS file</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>heart_data <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"heart_disease_cleveland.sav"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert all variables to factors where needed</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>heart_data <span class="ot">&lt;-</span> heart_data <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.labelled), as_factor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
+<section id="step-2-create-a-baseline-characteristics-table" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-create-a-baseline-characteristics-table"><strong>Step 2:</strong> Create a baseline characteristics table</h3>
+<ul>
+<li>Include all variables in the dataset apart from the outcome variable <code>target</code>
+<ul>
+<li>Summarize demographic variables (e.g., <code>age</code>, <code>sex</code>)</li>
+<li>Summarize clinical variables (e.g., <code>chol</code>, <code>trestbps</code>, <code>thalach</code>, <code>cp</code>)</li>
+</ul></li>
+<li>Decide on suitable summary measures for each variable
+<ul>
+<li>Use appropriate measures for continuous variables (e.g., mean, standard deviation, median, interquartile range)</li>
+<li>Use frequency counts and percentages for categorical variables</li>
+</ul></li>
+</ul>
 </section>
-<section id="part-3---some-conceptual-questions" class="level1">
-<h1>Part 3 - Some conceptual questions</h1>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 8">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 8
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Imagine we have some observations on blood pressure and calculate the mean, standard deviation, median and IQR. How do these measures change if all observations are</p>
-<ol type="a">
-<li>increased by 10</li>
-<li>decreased by their mean</li>
-<li>multiplied by 10</li>
-<li>divided by their standard deviation</li>
-</ol>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 9">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 9
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Two fair dice are rolled, the results are X1 and X2.</p>
-<ol type="a">
-<li>What is the probability Prob(X1=X2)?</li>
-<li>What is the expected value E(X1), and the standard deviation SD(X1)?</li>
-<li>Give the expected value and the variance of X1+X2 and of X1-X2.</li>
-</ol>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 10">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 10
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>There are two hospitals in town. On average 45 deliveries take place each day in the larger hospital, and 15 in the smaller. The probability of a baby being a boy is about 0.52, and the probability of twins is about 0.012. On any day, which hospital is more likely</p>
-<ol type="a">
-<li>to have a set of twins delivered</li>
-<li>to have more than 60 % of babies being boys?</li>
-</ol>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 11">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 11
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The probability of a baby being a boy is 0.52. For six women delivering consecutively in the same labour ward on one day, which of the following exact sequences of boys and girls is most likely and which least likely?</p>
-<p>GBGBGB</p>
-<p>BBBGGG</p>
-<p>GBBBBB</p>
-</div>
-</div>
+<section id="step-3-perform-the-analysis-for-the-first-research-question" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-perform-the-analysis-for-the-first-research-question"><strong>Step 3:</strong> Perform the analysis for the first research question</h3>
+<p><strong>Research Question</strong>: <em>Does maximum heart rate achieved differ across chest pain types?</em></p>
+<ul>
+<li>Visualize the data
+<ul>
+<li>Create a boxplot to compare the distribution of maximum heart rate achieved across the four chest pain types</li>
+</ul></li>
+<li>Calculate the estimated population means and 95% confidence intervals for maximum heart rate achieved for each of the four chest pain types</li>
+<li>Select and perform an appropriate test
+<ul>
+<li>Use one-way ANOVA if normality and equal variances are met</li>
+<li>Use Kruskal-Wallis test if assumptions are violated</li>
+<li>Perform post-hoc comparisons using Bonferroni adjusted p-values if significant differences are found</li>
+</ul></li>
+</ul>
+</section>
+<section id="step-4-perform-the-analysis-for-the-second-research-question" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-perform-the-analysis-for-the-second-research-question"><strong>Step 4:</strong> Perform the analysis for the second research question</h3>
+<p><strong>Research Question</strong>: <em>Is the presence of heart disease associated with sex or fasting blood sugar?</em></p>
+<ul>
+<li>Summarize the data
+<ul>
+<li>Calculate and report the prevalence of heart disease for each group within sex and fasting blood sugar</li>
+<li>Include percentages and 95% confidence intervals for each group</li>
+</ul></li>
+<li>Select and perform an appropriate test
+<ul>
+<li>Use a Chi-Square test of homogeneity or Fisher’s Exact Test, depending on the expected cell counts</li>
+</ul></li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
