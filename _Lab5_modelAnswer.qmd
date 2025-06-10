@@ -1,5 +1,5 @@
 ---
-title: "Lab 1"
+title: "Lab 5"
 subtitle: "Model answer"
 format:
   html: default
@@ -109,7 +109,10 @@ table1 <- CreateTableOne(vars = all_vars,
                          factorVars = categorical_vars)
 
 # Create histograms for continuous variables
-histograms <- lapply(heart_data[continuous_vars], function(x) ggplot(heart_data, aes(x = x)) + geom_histogram(bins = 20) + theme_minimal())
+histograms <- lapply(heart_data[continuous_vars], 
+  function(x) ggplot(heart_data, aes(x = x)) + 
+  geom_histogram(bins = 20) +
+  theme_minimal())
 grid.arrange(grobs = histograms, ncol = 2)
 
 # Render the table with knitr::kable

@@ -38,6 +38,12 @@ website:
         menu:
           - text: "Lab 5"
             href: lab5.qmd
+      - text: "Labs day 6"
+        menu:
+          - text: "R"
+            href: R_lab6.qmd
+          - text: "SPSS"
+            href: SPSS_lab6.qmd      
       - text: "Answers"
         menu:
           - text: "Lab 1"
@@ -58,6 +64,8 @@ website:
             href: datasets/pockets_paired.sav
           - text: "heart_disease_cleveland.sav"
             href: datasets/heart_disease_cleveland.sav
+          - text: "pockets.sav"
+            href: datasets/pockets.sav  
 format:
   html:
     theme: cosmo

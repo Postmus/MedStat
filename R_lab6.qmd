@@ -16,7 +16,7 @@ execute:
   eval: false
 ---
 
-Welcome to lab 6 on correlation and linear regression. In today’s exercises, we will be analyzing a dataset named `pockets.sav`, which you can download from Brightspace. This dataset contains measurements of periodontal pocket depth for a group of individuals, along with several demographic and lifestyle variables.
+Welcome to lab 6 on correlation and linear regression. In today’s exercises, we will be analyzing a dataset named `pockets.sav`, which you can download from the Datasets menu. This dataset contains measurements of periodontal pocket depth for a group of individuals, along with several demographic and lifestyle variables.
 
 Below is an overview of the variables we will be working with:
 
