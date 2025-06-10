@@ -1,5 +1,5 @@
 ---
-title: "Advanced Medical Statistics – Lab 6"
+title: "Medical Statistics – Lab 6"
 subtitle: SPSS version
 format:
   html:
