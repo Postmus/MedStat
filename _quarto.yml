@@ -43,7 +43,13 @@ website:
           - text: "R"
             href: R_lab6.qmd
           - text: "SPSS"
-            href: SPSS_lab6.qmd      
+            href: SPSS_lab6.qmd
+      - text: "Labs day 7"
+        menu:
+          - text: "R"
+            href: R_lab8.qmd
+          - text: "SPSS"
+            href: SPSS_lab8.qmd            
       - text: "Answers"
         menu:
           - text: "Lab 1"
@@ -54,6 +60,8 @@ website:
             href: lab3_answers.qmd
           - text: "Lab 4"
             href: lab4_answers.qmd
+          - text: "Lab 6"
+            href: lab6_answers.qmd  
       - text: "Datasets"
         menu:
           - text: "lowbwt.sav"
@@ -65,7 +73,11 @@ website:
           - text: "heart_disease_cleveland.sav"
             href: datasets/heart_disease_cleveland.sav
           - text: "pockets.sav"
-            href: datasets/pockets.sav  
+            href: datasets/pockets.sav
+          - text: "whas500.sav"
+            href: datasets/whas500.sav  
+          - text: "GvHD.sav"
+            href: datasets/GvHD.sav        
 format:
   html:
     theme: cosmo

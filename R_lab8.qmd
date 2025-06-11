@@ -1,6 +1,6 @@
 ---
-title: "Advanced Medical Statistics – Lab 8"
-subtitle: SPSS version
+title: "Medical Statistics – Lab 7"
+subtitle: R version
 format:
   html:
     toc: true       
@@ -18,13 +18,31 @@ execute:
 
 ## Part 1: Risk of in-hospital death in patients with acute myocardial infarction
 
-In part 1 of the lab, we are going to continue analyzing the Worcester Heart Attack Study (WHAS) dataset (file `whas500.sav` on Brightspace). The outcome of interest for today's analysis is in-hospital death, measured by the variable "discharge status from hospital" (`dstat`) with values `alive` and `death`. 
+In part 1 of the lab, we are going to analyze the risk of in-hospital death in patients hospitalized because of acute myocardial infarction. The dataset comes from the Worcester Heart Attack Study (WHAS) and includes data from 500 patients admitted in Worcester, Massachusetts in 1997, 1999, and 2001 (file `whas500.sav` from the Datasets menu). The outcome of interest is in-hospital death, measured by the variable "discharge status from hospital" (`dstat`) with values `alive` and `death`. 
+
+```{r}
+library(haven)   # for reading SPSS files
+library(dplyr)   # for data manipulation
+library(DescTools)  # for performing Hosmer-Lemeshow Goodness of Fit Tests
+
+# Load the dataset
+whas500 <- read_sav("datasets/whas500.sav")
+
+# Convert labeled variables to factors
+whas500 <- whas500 %>%
+  mutate(across(where(is.labelled), as_factor))
+```
 
 ### Exploratory data analysis
 
 To explore whether gender has an effect on the risk of in-hospital death, we start by creating a contingency table and use the table to calculate the proportion in-hospital death in the two gender subgroups:
 
-Go to `Analyze` -> `Descriptive Statistics` -> `Crosstabs`. Select the `gender` variable as the `Row(s)` and the `stat` variable as the `Column(s)`. Click on `Cells` and under percentages check the box `Row`. Click op `Continue` and `OK` to create the table.
+```{r}
+contingencyTable <- table(whas500$gender, whas500$dstat) # create 2 x 2 table
+contingencyTable
+
+prop.table(contingencyTable, margin = 1) # Calulate the row proportions (margin = 1)
+```
 
 ::: {.callout-important icon=false title="Question 1"}
 Based on the group proportions, do you expect gender to have an effect on the risk of in-hospital death?
@@ -38,7 +56,18 @@ To determine whether gender is significantly associated with in-hospital death, 
 Perform the chi-square test of homogeneity (see instructions in lab 4 if needed). What conclusion can be drawn from the test?
 :::
 
-Another option is to perform logistic regression. To perform this analysis in SPSS, go to `Analyze` -> `Regression` -> `Binary Logistic`. Move the `dstat` variable to the `Dependent` box and the `gender` variable to the `Block 1 of 1` box. Press `Categorical`. Specify that the `gender` variable is categorical by moving it from the `Covariates` box to the `Categorical Covariates` box. Press `Continue` to return to the main dialog. Press `Options` and check the box `CI for exp(B)` to include confidence intervals for the estimated hazard ratios. Press `Continue` to return to the main dialog and click on `OK` to run the analysis.
+Another option is to perform logistic regression. In R, this can be achieved using the `glm()` function:
+
+```{r}
+# Create a 0/1 numeric version of the dependent variable, where a value of 1 means "success" (i.e., occurrence of the event of interest)
+whas500$dstat_numeric <- ifelse(whas500$dstat=="dead", 1, 0)
+
+# Fit logistic regression model 
+model.sex <- glm(dstat_numeric ~ gender, family = binomial, data = whas500)
+summary(model.sex)
+```
+
+**Explanation:** glm stands for "generalized linear model," an extension of linear regression that accommodates different types of outcome distributions and includes a link function to model the relationship between predictors and the outcome. The argument `family = binomial` specifies that the outcome distribution is Bernoulli/binomial. By default, the link function for this model is "logit," which corresponds to logistic regression.
 
 ::: {.callout-important icon=false title="Question 3"}
 What is the odds ratio for in-hospital death for females compared to males? How should this odds ratio be interpreted in the context of the study? 
@@ -56,7 +85,11 @@ What conclusion can be drawn from the logistic regression analysis regarding the
 
 To assess the extent to which the effect of gender is confounded by age, we will fit a multiple regression model with in-hospital death as the dependent variable and gender and age as the independent variables:
 
-Go to `Analyze` -> `Regression` -> `Binary Logistic`. Move the `dstat` variable to the `Dependent` box and the `gender` and `age` variables to the `Block 1 of 1` box. Press `Categorical`. Specify that the `gender` variable is categorical by moving it from the `Covariates` box to the `Categorical Covariates` box. Press `Continue` to return to the main dialog. Press `Options` and check the box `CI for exp(B)` to include confidence intervals for the estimated hazard ratios. Press `Continue` to return to the main dialog and click on `OK` to run the analysis.
+```{r}
+# Fit logistic regression model 
+model.sex.age <- glm(dstat_numeric ~ gender + age, family = binomial, data = whas500)
+summary(model.sex.age)
+```
 
 ::: {.callout-important icon=false title="Question 6"}
 How does adjusting for age affect the estimated odds ratio for in-hospital death for females compared to males?
@@ -72,9 +105,15 @@ As explained in the syllabus, the p-values in the table of estimated regression 
 
 Instead of the Wald tests, we can also obtain p-values using likelihood ratio tests, which compare the goodness of fit of the full model (including the predictor of interest) to a reduced model (excluding the predictor) to test the null hypothesis that the predictor has no effect on the outcome. This approach is particularly useful for testing predictors with non-linear or complex effects, as it evaluates their contribution to the model as a whole. Examples include categorical variables with three or more categories (requiring the creation of multiple dummy variables) and relationships modeled using multiple terms, such as including both a linear and a quadratic term to capture a quadratic relationship. 
 
-For example, we can use a likelihood ratio test (LRT) to compare a full model including both sex and age as predictors to a reduced model including only age. To perform this test in SPSS, go to `Analyze` -> `Regression` -> `Binary Logistic`. Press `reset` to clear the previous analysis. Move the `dstat` variable to the `Dependent` box and the `age` variables to the `Block 1 of 1` box. Press `Next` to create a second block. Move the `gender` variable to the `Block 2 of 2` box. Press `Categorical`. Specify that the `gender` variable is categorical by moving it from the `Covariates` box to the `Categorical Covariates` box. Press `Continue` to return to the main dialog. Press `Options` and check the box `CI for exp(B)` to include confidence intervals for the estimated hazard ratios.  Press `Continue` to return to the main dialog and click on `OK` to run the analysis.
+For example, we can use a likelihood ratio test (LRT) to compare a full model including both sex and age as predictors to a reduced model including only age. To achieve this, we first need to fit the reduced model that only includes age and then perform the LRT using the `anova()` function:
 
-The output will include a table with the results of the likelihood ratio test comparing the full model (variables included in block 1 and 2) to the reduced model (variables included in block 1 only). This table can be found in the section `Block 2: Method = Enter` and is labeled `Omnibus tests of model coefficients`. The p-value for the LRT comparing the full model to the reduced model can be found in the row `block`.
+```{r}
+# Fit reduced model
+model.age <- glm(dstat_numeric ~ age, family = binomial, data = whas500)
+
+# Perform likelihood ratio test
+anova(model.age, model.sex.age, test="LRT")
+```  
 
 ::: {.callout-important icon=false title="Question 8"}
 How does the p-value from the likelihood ratio test compare to the one from the Wald test?
@@ -82,10 +121,20 @@ How does the p-value from the likelihood ratio test compare to the one from the 
 
 ### Evaluating model fit
 
-One way to examine the fit of the logistic regression model is the Hosmer-Lemeshow Goodness of Fit test. In SPSS, this can be achieved by checking the option `Hosmer-Lemeshow goodness-of-fit` in the logistic regression dialog box. 
+One way to examine the fit of the logistic regression model is the Hosmer-Lemeshow Goodness of Fit test. In R, this test can be performed using the `HosmerLemeshowTest()` function from the `DescTools` package:
 
-Go to `Analyze` -> `Regression` -> `Binary Logistic`. Press `reset` to clear the previous analysis. Move the `dstat` variable to the `Dependent` box and the `gender` and `age` variables to the `Block 1 of 1` box. Press `Categorical`. Specify that the `gender` variable is categorical by moving it from the `Covariates` box to the `Categorical Covariates` box. Press `Continue` to return to the main dialog. Press `Options` and check the box `Hosmer-Lemeshow goodness-of-fit` to include the results of the Hosmer-Lemeshow test in the output produced. Press `Continue` to return to the main dialog and click on `OK` to perform the analysis.
+```{r}
+HosmerLemeshowTest(fit=fitted(model.sex.age), obs=model.sex.age$y, ngr = 10, verbose = TRUE)
+```
 
+**Explanation:** 
+
+- `fitted(model.sex.age)` returns the caclulated in-hospital death probabilities based on the fitted logistic regression model for each patient in the dataset. These are the 
+- `model.sex.age$y` retrieves the outcome variable from the fitted logistic regression model. 
+- `ngr = 10` specifies the number of groups to be used in the test, which is set to 10 by default.
+- `verbose = TRUE` not only prints the test-statistic, degrees of freedom, and p-value but also the groups used to perform the test.
+
+The Hosmer-Lemeshow goodness-of-fit test has two variations: the C statistic and the H statistic, which differ in how they group predicted probabilities for comparison. The C statistic groups predicted probabilities into deciles (10 equal-sized groups based on the range of probabilities), while the H statistic uses fixed cutoffs (e.g., evenly spaced intervals between 0 and 1). The C statistic is the most commonly used version as it adapts to the data distribution, ensuring well-populated groups, making it suitable for general model fit evaluation. In this lab, we therefore focus on this latter statistics (with matches the explanation in the syllabus).
 
 ::: {.callout-important icon=false title="Question 9"}
 Based on the results of the Hosmer-Lemeshow goodness-of-fit test, does our model provide a satisfactory fit to the data?
@@ -107,7 +156,7 @@ where $x_{1}$ stands for the family history of ischaemic disease (0=no, 1=yes) a
 
 ### Exercise 2
 
-Data from 37 patients receiving a non-depleted allogenic bone marrow transplant were examined to see which variables were associated with the occurrence of acute graft-versus-host disease (GvHD: 0=no, 1=yes) (Bagot et al., 1988). Possible predictors are TYPE (type of leukemia: 1=AML, acute myeloid leukaemia; 2=ALL, acute lymphocytic leukaemia; 3=CML, chronic myeloid leukemia), PREG (donor pregnancy: 0= no, 1=yes), and LOGIND (the logarithm of an index of mixed epidermal cell-lymphocyte reactions). The data are in the file `GvHD.sav` available on Brightspace.
+Data from 37 patients receiving a non-depleted allogenic bone marrow transplant were examined to see which variables were associated with the occurrence of acute graft-versus-host disease (GvHD: 0=no, 1=yes) (Bagot et al., 1988). Possible predictors are TYPE (type of leukemia: 1=AML, acute myeloid leukaemia; 2=ALL, acute lymphocytic leukaemia; 3=CML, chronic myeloid leukemia), PREG (donor pregnancy: 0= no, 1=yes), and LOGIND (the logarithm of an index of mixed epidermal cell-lymphocyte reactions). The data are in the file `GvHD.sav` available from the Downloads menu.
 
 (a) Perform a likelihood ratio test to determine whether there is a significant association between the type of leukemia and the occurrence of GvHD after adjusting for donor pregnancy and the logarithm of an index of mixed epidermal cell-lymphocyte reactions.
 (b) In the adjusted model, What is the estimated odds ratio for the occurrence of GvHD for patients with ALL compared to those with ALM?
