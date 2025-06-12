@@ -1,5 +1,5 @@
 ---
-title: "Advanced Medical Statistics – Answers lab 8"
+title: "Medical Statistics – Answers lab 7"
 format:
   html:
     toc: true       
@@ -17,8 +17,6 @@ execute:
 ---
 
 ## Part 1: Risk of in-hospital death in patients with acute myocardial infarction
-
-In part 1 of the lab, we are going to continue analyzing the Worcester Heart Attack Study (WHAS) dataset (file `whas500.sav` on Brightspace). The outcome of interest for today's analysis is in-hospital death, measured by the variable "discharge status from hospital" (`dstat`) with values `alive` and `death`. 
 
 ```{r}
 library(haven)   # for reading SPSS files

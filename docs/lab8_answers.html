@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Medical Statistics – Lab 3 – Medical Statistics</title>
+<title>Medical Statistics – Answers lab 7 – Medical Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -72,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ddd961a2510921635943dfbbd19534c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-3790baeb23ec48fe6a2a71a48d01fb7e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -101,6 +101,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -309,37 +338,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1-independent-samples-t-test-and-mann-whitney-u-test" id="toc-part-1-independent-samples-t-test-and-mann-whitney-u-test" class="nav-link active" data-scroll-target="#part-1-independent-samples-t-test-and-mann-whitney-u-test">Part 1: Independent Samples t-test and Mann-Whitney U Test</a>
+  <li><a href="#part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction" id="toc-part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction" class="nav-link active" data-scroll-target="#part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction">Part 1: Risk of in-hospital death in patients with acute myocardial infarction</a>
   <ul class="collapse">
   <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory data analysis</a></li>
-  <li><a href="#independent-samples-t-test" id="toc-independent-samples-t-test" class="nav-link" data-scroll-target="#independent-samples-t-test">Independent samples t-test</a></li>
-  <li><a href="#checking-of-assumptions" id="toc-checking-of-assumptions" class="nav-link" data-scroll-target="#checking-of-assumptions">Checking of assumptions</a></li>
-  <li><a href="#confidence-interval-for-the-mean-difference" id="toc-confidence-interval-for-the-mean-difference" class="nav-link" data-scroll-target="#confidence-interval-for-the-mean-difference">95% Confidence Interval for the mean difference</a></li>
-  <li><a href="#mann-whitney-u-test" id="toc-mann-whitney-u-test" class="nav-link" data-scroll-target="#mann-whitney-u-test">Mann-Whitney U Test</a></li>
+  <li><a href="#simple-logistic-regression" id="toc-simple-logistic-regression" class="nav-link" data-scroll-target="#simple-logistic-regression">Simple logistic regression</a></li>
+  <li><a href="#multiple-logistic-regression" id="toc-multiple-logistic-regression" class="nav-link" data-scroll-target="#multiple-logistic-regression">Multiple logistic regression</a></li>
+  <li><a href="#likelihood-ratio-tests" id="toc-likelihood-ratio-tests" class="nav-link" data-scroll-target="#likelihood-ratio-tests">Likelihood ratio tests</a></li>
+  <li><a href="#evaluating-model-fit" id="toc-evaluating-model-fit" class="nav-link" data-scroll-target="#evaluating-model-fit">Evaluating model fit</a></li>
   </ul></li>
-  <li><a href="#part-2-one-way-anova-and-kruskal-wallis-test" id="toc-part-2-one-way-anova-and-kruskal-wallis-test" class="nav-link" data-scroll-target="#part-2-one-way-anova-and-kruskal-wallis-test">Part 2: One-Way ANOVA and Kruskal-Wallis Test</a>
+  <li><a href="#part-2-unguided-exercises" id="toc-part-2-unguided-exercises" class="nav-link" data-scroll-target="#part-2-unguided-exercises">Part 2: unguided exercises</a>
   <ul class="collapse">
-  <li><a href="#explaratory-data-analysis" id="toc-explaratory-data-analysis" class="nav-link" data-scroll-target="#explaratory-data-analysis">Explaratory data analysis</a></li>
-  <li><a href="#one-way-anova" id="toc-one-way-anova" class="nav-link" data-scroll-target="#one-way-anova">One-way ANOVA</a></li>
-  <li><a href="#post-hoc-tests" id="toc-post-hoc-tests" class="nav-link" data-scroll-target="#post-hoc-tests">Post-hoc tests</a></li>
-  <li><a href="#checking-of-assumptions-1" id="toc-checking-of-assumptions-1" class="nav-link" data-scroll-target="#checking-of-assumptions-1">Checking of assumptions</a></li>
-  <li><a href="#kruskal-wallis-test" id="toc-kruskal-wallis-test" class="nav-link" data-scroll-target="#kruskal-wallis-test">Kruskal-Wallis Test</a></li>
-  </ul></li>
-  <li><a href="#part-3-unguided-exercises" id="toc-part-3-unguided-exercises" class="nav-link" data-scroll-target="#part-3-unguided-exercises">Part 3: Unguided exercises</a>
-  <ul class="collapse">
-  <li><a href="#effect-of-hypertension-on-birth-weight" id="toc-effect-of-hypertension-on-birth-weight" class="nav-link" data-scroll-target="#effect-of-hypertension-on-birth-weight">Effect of hypertension on birth weight</a></li>
-  <li><a href="#comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients" id="toc-comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients" class="nav-link" data-scroll-target="#comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients">Comparing red cell folate levels across ventilation strategies in cardiac bypass patients</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="R_lab3.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab8_answers.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Medical Statistics – Lab 3</h1>
-<p class="subtitle lead">R version</p>
+<h1 class="title">Medical Statistics – Answers lab 7</h1>
 </div>
 
 
@@ -356,90 +376,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Welcome to lab 3 in the medical statistics course. For today’s exercises, we will continue exploring the <code>lowbwt.sav</code> dataset, which you can downloaded from the Dataset section of the menu.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>lowbwt <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"lowbwt.sav"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert all variables to factors where needed</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>lowbwt <span class="ot">&lt;-</span> lowbwt <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.labelled), as_factor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>As a reminder, the dataset includes the following variables (see the previous lab for more details):</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Variable</th>
-<th>Abbreviation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Identification Code</td>
-<td>ID</td>
-</tr>
-<tr class="even">
-<td>Low Birth Weight (0 = Birth Weight ≥ 2500g, 1 = Birth Weight &lt; 2500g)</td>
-<td>low</td>
-</tr>
-<tr class="odd">
-<td>Age of the Mother in Years</td>
-<td>age</td>
-</tr>
-<tr class="even">
-<td>Weight in Pounds at the Last Menstrual Period</td>
-<td>lwt</td>
-</tr>
-<tr class="odd">
-<td>Ethnicity of the mother (1 = Caucasian, 2 = Afro-American, 3 = Asian)</td>
-<td>ethnicity</td>
-</tr>
-<tr class="even">
-<td>Smoking Status During Pregnancy (1 = Yes, 0 = No)</td>
-<td>smoke</td>
-</tr>
-<tr class="odd">
-<td>History of Premature Labor (0 = None, 1 = One, etc.)</td>
-<td>ptl</td>
-</tr>
-<tr class="even">
-<td>History of Hypertension (1 = Yes, 0 = No)</td>
-<td>ht</td>
-</tr>
-<tr class="odd">
-<td>Presence of Uterine Irritability (1 = Yes, 0 = No)</td>
-<td>urirr</td>
-</tr>
-<tr class="even">
-<td>Number of Physician Visits During the First Trimester (0 = None, 1 = One, 2 = Two, etc.)</td>
-<td>pvft</td>
-</tr>
-<tr class="odd">
-<td>Birth Weight in Grams</td>
-<td>bwt</td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-<section id="part-1-independent-samples-t-test-and-mann-whitney-u-test" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-independent-samples-t-test-and-mann-whitney-u-test">Part 1: Independent Samples t-test and Mann-Whitney U Test</h2>
-<p>In this part of the lab, we will examine the effect of smoking during pregnancy on birth weight.</p>
+<section id="part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction">Part 1: Risk of in-hospital death in patients with acute myocardial infarction</h2>
 <section id="exploratory-data-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory data analysis</h3>
-<p>We will start by creating a boxplot to visualize the distribution of birth weights for mothers who smoked and those who did not.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create boxplot comparing birth weights for mothers who smoked and those who did not</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lowbwt, <span class="fu">aes</span>(<span class="at">x =</span> smoke, <span class="at">y =</span> bwt)) <span class="sc">+</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Smoking Status"</span>, <span class="at">y =</span> <span class="st">"Birth Weight (grams)"</span>, <span class="at">title =</span> <span class="st">"Birth Weight by Smoking Status"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        
+         alive dead
+  male     282   18
+  female   179   21</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        
+         alive  dead
+  male   0.940 0.060
+  female 0.895 0.105</code></pre>
+</div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 1">
 <div class="callout-header d-flex align-content-center">
@@ -451,26 +404,25 @@ Question 1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on the boxplot, do you expect the smoking status to have an effect on birth weight?</p>
+<p>Based on the group proportions, do you expect gender to have an effect on the risk of in-hospital death?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 1">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The proportion of in-hospital deaths is higher among females (0.105) than among females (0.06). This suggests that gender might be associated with the risk of in-hospital death.</p>
 </div>
 </div>
 </section>
-<section id="independent-samples-t-test" class="level3">
-<h3 class="anchored" data-anchor-id="independent-samples-t-test">Independent samples t-test</h3>
-<p>Next, we will perform an independent samples t-test to compare the mean birth weights between mothers who smoked and those who did not. In R, this can be done using the <code>t.test()</code> function:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform independent samples t-test</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>independent_t_test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(bwt <span class="sc">~</span> smoke, <span class="at">data =</span> lowbwt, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print results</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(independent_t_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Explanation</strong>:</p>
-<ul>
-<li>The first argument <code>bwt ~ smoke</code> specifies the formula for the test, indicating that we are comparing the birth weights (<code>bwt</code>) between the two groups defined by the <code>smoke</code> variable.</li>
-<li>The second argument <code>data = lowbwt</code> specifies the dataset.</li>
-<li>The argument <code>var.equal = TRUE</code> indicates that we are assuming equal variances in the two groups, meaning that the classical independent samples t-test is performed. If you suspect unequal variances, Welch’s t-test can be conducted by setting <code>var.equal = FALSE</code>.</li>
-</ul>
+<section id="simple-logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="simple-logistic-regression">Simple logistic regression</h3>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 2">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -481,19 +433,52 @@ Question 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on the results of the independent samples t-test, is there a statistically significant difference in birth weight between mothers who smoked and those who did not?</p>
+<p>Perform the chi-square test of homogeneity (see instructions in lab 4 if needed). What conclusion can be drawn from the test?</p>
 </div>
 </div>
-</section>
-<section id="checking-of-assumptions" class="level3">
-<h3 class="anchored" data-anchor-id="checking-of-assumptions">Checking of assumptions</h3>
-<p>To assess whether the assumption of normality holds for the outcome variable in both groups, we create the following plot:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create histograms of birth weight by smoking status</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lowbwt, <span class="fu">aes</span>(<span class="at">x =</span> bwt)) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">200</span>, <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">colour=</span><span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>smoke) <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Birth Weight (grams)"</span>, <span class="at">title =</span> <span class="st">"Histograms of Birth Weight by Smoking Status"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  contingencyTable
+X-squared = 3.3789, df = 1, p-value = 0.06603</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 2">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The p-value of the chi-square test (0.066) is larger than 0.05, indicating that there is no significant association between gender and in-hospital death.</p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = dstat_numeric ~ gender, family = binomial, data = whas500)
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)   -2.7515     0.2431 -11.318   &lt;2e-16 ***
+genderfemale   0.6087     0.3351   1.816   0.0693 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 273.86  on 499  degrees of freedom
+Residual deviance: 270.55  on 498  degrees of freedom
+AIC: 274.55
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 3">
 <div class="callout-header d-flex align-content-center">
@@ -505,14 +490,21 @@ Question 3
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Do the histograms indicate that the birth weight data are approximately normally distributed for both groups?</p>
+<p>What is the odds ratio for in-hospital death for females compared to males? How should this odds ratio be interpreted in the context of the study?</p>
 </div>
 </div>
-<p>We also need to check whether the assumption of a common population standard deviation holds. This can be done by performing the Levene test:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform Levene's test for homogeneity of variances</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>levene_test <span class="ot">&lt;-</span> <span class="fu">leveneTest</span>(bwt <span class="sc">~</span> smoke, <span class="at">data =</span> lowbwt)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>levene_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 3">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The odds ratio for in-hospital death for females compared to males is equal to <span class="math inline">\(\exp(0.6087) = 1.83\)</span>. This means that the odds of in-hospital death are 1.83 times higher in females than in males.</p>
+</div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 4">
 <div class="callout-header d-flex align-content-center">
@@ -524,32 +516,31 @@ Question 4
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on the Levene test, does the assumption of equal variances hold?</p>
+<p>Based on the estimated regression coefficients (ignoring p-values), what are the predicted proportions of in-hospital deaths for male and female patients? Compare the predicted proportions to the observed proportions from the previously constructed contingency table. Do they match?</p>
 </div>
 </div>
-</section>
-<section id="confidence-interval-for-the-mean-difference" class="level3">
-<h3 class="anchored" data-anchor-id="confidence-interval-for-the-mean-difference">95% Confidence Interval for the mean difference</h3>
-<p>In addition to performing hypothesis tests, it is often informative to estimate the effect size and its uncertainty. One way to do this is by calculating a confidence interval for the mean difference in birth weight between the two groups. The 95% confidence interval is included in the default output of the <code>t.test()</code> function, so in principle we could extract it from there. As an exercise, we are also going to calculate it manually based on the formulas provided in the lecture/course syllabus.</p>
-<p>To calculate the summary statistics required for the manual calculation, we use the following code:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate summary statistics by smoking status</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>summary_stats <span class="ot">&lt;-</span> lowbwt <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(smoke) <span class="sc">%&gt;%</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(bwt), <span class="at">sd =</span> <span class="fu">sd</span>(bwt), <span class="at">n =</span> <span class="fu">n</span>())</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>summary_stats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Exercise">
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 4">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+Answer question 4
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on these summary statistics, calculate the pooled standard deviation and the standard error of the mean difference. Then compute the 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not. You may simplify the calculation by using the 97.5th percentile from the standard normal distribution (1.96) rather than the corresponding percentile from the t-distribution.</p>
+<p>The linear predictor models the risk of in-hospital death on the log-odds scale. To obtain the predicted probabilities, we need to transform the log-odds back to the probability scale using the logistic function.</p>
+<p>The predicted probabilities of in-hospital death on the log-odds scale are:</p>
+<ul>
+<li>Males: -2.7515 (intercept)</li>
+<li>Females: -2.7515 + 0.6087 (intercept + coefficient) = -2.1428</li>
+</ul>
+<p>The predicted probabilities on the probability scale are:</p>
+<ul>
+<li>Male: <span class="math inline">\(1 / (1 + exp(-(-2.7515))) = 0.060\)</span></li>
+<li>Female: <span class="math inline">\(1 / (1 + exp(-(-2.1428))) = 0.105\)</span></li>
+</ul>
+<p>The predicted proportions of in-hospital deaths match the observed proportions from the contingency table.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 5">
@@ -562,17 +553,48 @@ Question 5
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Does your manually calculated 95% confidence interval for the mean difference in birth weight between the two groups agree with the one provided in the output of the <code>t.test()</code> function?</p>
+<p>What conclusion can be drawn from the logistic regression analysis regarding the association between gender and in-hospital death? Is this in line with the conclusion drawn from the chi-square test?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 5">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The p-value of the Wald test for the regression coefficient of the dummy variable <code>genderfemale</code> is 0.069, which is larger than 0.05. This indicates that there is no significant association between gender and in-hospital death. This conclusion is consistent with the results of the chi-square test.</p>
 </div>
 </div>
 </section>
-<section id="mann-whitney-u-test" class="level3">
-<h3 class="anchored" data-anchor-id="mann-whitney-u-test">Mann-Whitney U Test</h3>
-<p>In case the assumptions of the independent samples t-test are violated, we can use the Mann-Whitney U test as a non-parametric alternative. This test can be performed in R using the <code>wilcox.test()</code> function:</p>
+<section id="multiple-logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-logistic-regression">Multiple logistic regression</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform Mann-Whitney U test</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>wilcoxon_test <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(bwt <span class="sc">~</span> smoke, <span class="at">data =</span> lowbwt)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>wilcoxon_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = dstat_numeric ~ gender + age, family = binomial, 
+    data = whas500)
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  -6.89600    1.19131  -5.789  7.1e-09 ***
+genderfemale  0.26776    0.34618   0.773 0.439246    
+age           0.05770    0.01524   3.785 0.000154 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 273.86  on 499  degrees of freedom
+Residual deviance: 253.45  on 497  degrees of freedom
+AIC: 259.45
+
+Number of Fisher Scoring iterations: 6</code></pre>
+</div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 6">
 <div class="callout-header d-flex align-content-center">
@@ -584,21 +606,21 @@ Question 6
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>What are the null and alternative hypotheses for the Mann-Whitney U test, and what does the p-value indicate about the difference in birth weight between mothers who smoked and those who did not?</p>
+<p>How does adjusting for age affect the estimated odds ratio for in-hospital death for females compared to males?</p>
 </div>
 </div>
-</section>
-</section>
-<section id="part-2-one-way-anova-and-kruskal-wallis-test" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-one-way-anova-and-kruskal-wallis-test">Part 2: One-Way ANOVA and Kruskal-Wallis Test</h2>
-<p>In this part of the lab, we are going to examine the effect of ethnicity on birth weight.</p>
-<section id="explaratory-data-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="explaratory-data-analysis">Explaratory data analysis</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create boxplot comparing birth weights across ethnic groups</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lowbwt, <span class="fu">aes</span>(<span class="at">x =</span> ethnicity, <span class="at">y =</span> bwt)) <span class="sc">+</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Ethnicity"</span>, <span class="at">y =</span> <span class="st">"Birth Weight (grams)"</span>, <span class="at">title =</span> <span class="st">"Birth Weight by Ethnicity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 6">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 6
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>After adjusting for age, the odds ratio for in-hospital death for females compared to males decreases from 1.83 to <span class="math inline">\(\exp(0.26776) = 1.31\)</span>. This indicates that the effect of gender on in-hospital death is confounded by age.</p>
+</div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 7">
 <div class="callout-header d-flex align-content-center">
@@ -610,19 +632,35 @@ Question 7
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>What does the boxplot suggest about the distribution of birth weights across different ethnic groups?</p>
+<p>Calculate the odds ratio for in-hospital death corresponding to a 10-year increase in age and interpret its meaning.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 7">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 7
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The increase in the risk of in-hospital death on the log-odds scale is equal to 0.0577 * 10 = 0.577. This means that for every 10-year increase in age, the odds of in-hospital death increase by a factor of <span class="math inline">\(\exp(0.577) = 1.78\)</span>.</p>
 </div>
 </div>
 </section>
-<section id="one-way-anova" class="level3">
-<h3 class="anchored" data-anchor-id="one-way-anova">One-way ANOVA</h3>
-<p>To test the null hypothesis that the mean birth weights are equal across all ethnic groups, we can perform a one-way ANOVA using the <code>aov()</code> function:</p>
+<section id="likelihood-ratio-tests" class="level3">
+<h3 class="anchored" data-anchor-id="likelihood-ratio-tests">Likelihood ratio tests</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform One-Way ANOVA</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>anova_result <span class="ot">&lt;-</span> <span class="fu">aov</span>(bwt <span class="sc">~</span> ethnicity, <span class="at">data =</span> lowbwt)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print summary of ANOVA</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: dstat_numeric ~ age
+Model 2: dstat_numeric ~ gender + age
+  Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)
+1       498     254.05                     
+2       497     253.45  1  0.59934   0.4388</code></pre>
+</div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 8">
 <div class="callout-header d-flex align-content-center">
@@ -634,24 +672,72 @@ Question 8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>What conclusions can be drawn from the results of the one-way ANOVA?</p>
+<p>How does the p-value from the likelihood ratio test compare to the one from the Wald test?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 8">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Answer question 8
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The p-value of the likelihood ratio test (0.4388) is approximately equal to the p-value of the Wald test (0.4392). This indicates that the results of the two tests are consistent, which is expected because, for testing the significance of a single coefficient, the Wald test and the likelihood ratio test often yield similar results. However, they are not strictly equivalent, as the likelihood ratio test is based on comparing model fit, while the Wald test assesses the coefficient’s deviation from zero using its standard error.</p>
 </div>
 </div>
 </section>
-<section id="post-hoc-tests" class="level3">
-<h3 class="anchored" data-anchor-id="post-hoc-tests">Post-hoc tests</h3>
-<p>If the one-way ANOVA indicates a statistically significant difference in birth weight across ethnic groups, we can perform Bonferroni-corrected post-hoc tests to determine which specific groups differ from each other. In R, this can be done using the <code>pairwise.t.test()</code> function:</p>
+<section id="evaluating-model-fit" class="level3">
+<h3 class="anchored" data-anchor-id="evaluating-model-fit">Evaluating model fit</h3>
+<section id="r-results" class="level4">
+<h4 class="anchored" data-anchor-id="r-results">R results</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform pairwise comparisons with Bonferroni correction</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>posthoc <span class="ot">&lt;-</span> <span class="fu">pairwise.t.test</span>(lowbwt<span class="sc">$</span>bwt, lowbwt<span class="sc">$</span>ethnicity, <span class="at">p.adjust.method =</span> <span class="st">"bonferroni"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>posthoc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Groups for Hosmer-Lemeshow C statistic:
+cutfit
+[0.00568,0.0178]  (0.0178,0.0279]  (0.0279,0.0369]  (0.0369,0.0514] 
+              55               52               47               52 
+  (0.0514,0.065]   (0.065,0.0864]   (0.0864,0.103]    (0.103,0.126] 
+              44               53               55               43 
+   (0.126,0.154]    (0.154,0.348] 
+              50               49 
+Groups for Hosmer-Lemeshow H statistic:
+cutfit1
+[0.00534,0.0399]  (0.0399,0.0742]   (0.0742,0.108]    (0.108,0.143] 
+             164              110               87               61 
+   (0.143,0.177]    (0.177,0.211]    (0.211,0.245]     (0.245,0.28] 
+              54               19                2                2 
+    (0.28,0.314]    (0.314,0.348] 
+               0                1 </code></pre>
 </div>
-<p><strong>Explanation</strong>:</p>
-<ul>
-<li>The first argument of the <code>pairwise.t.test()</code> function specifies the outcome variable, which is the column of the lowbwt dataset that contains the birth weight values</li>
-<li>The second argument specifies the grouping variable, which is the column of the lowbwt dataset that contains the ethnicity values</li>
-<li>The <code>p.adjust.method = "bonferroni"</code> argument specifies that the p-values should be adjusted using the Bonferroni correction</li>
-</ul>
+<div class="cell-output cell-output-stdout">
+<pre><code>$C
+
+    Hosmer-Lemeshow C statistic
+
+data:  fitted(model.sex.age) and model.sex.age$y
+X-squared = 11.465, df = 8, p-value = 0.1767
+
+
+$H
+
+    Hosmer-Lemeshow H statistic
+
+data:  fitted(model.sex.age) and model.sex.age$y
+X-squared = 6.2434, df = 8, p-value = 0.62</code></pre>
+</div>
+</div>
+</section>
+<section id="spss-results" class="level4">
+<h4 class="anchored" data-anchor-id="spss-results">SPSS results</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/SPSS_lab8_q9.PNG" class="img-fluid figure-img"></p>
+<figcaption>Screenshot of the Hosmer-Lemeshow test results in SPSS</figcaption>
+</figure>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 9">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -662,85 +748,151 @@ Question 9
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>What conclusions can be drawn from the post-hoc comparisons?</p>
+<p>Based on the results of the Hosmer-Lemeshow goodness-of-fit test, does our model provide a satisfactory fit to the data?</p>
 </div>
 </div>
-</section>
-<section id="checking-of-assumptions-1" class="level3">
-<h3 class="anchored" data-anchor-id="checking-of-assumptions-1">Checking of assumptions</h3>
-<p>To assess whether the results of the one-way ANOVA are valid, we need to check the assumptions of normality and homogeneity of variances. This step is analogous to the previous examples, and is left as an exercise.</p>
-</section>
-<section id="kruskal-wallis-test" class="level3">
-<h3 class="anchored" data-anchor-id="kruskal-wallis-test">Kruskal-Wallis Test</h3>
-<p>If the assumptions of the one-way ANOVA are violated, we can use the Kruskal-Wallis test as a non-parametric alternative. The test can be performed in R using the <code>kruskal.test()</code> function:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform Kruskal-Wallis test</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>kruskal_test <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(bwt <span class="sc">~</span> ethnicity, <span class="at">data =</span> lowbwt)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>kruskal_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 10">
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 9">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question 10
+Answer question 9
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Are the results of the Kruskal-Wallis test consistent with the one-way ANOVA results?</p>
+<p>The p-value for the Hosmer-Lemeshow test is 0.177 in R (C statistic) and 0.120 in SPSS, indicating that the model provides a satisfactory fit to the data: a non-significant p-value suggests that the model fits the data well, meaning that the observed and expected frequencies do not differ significantly.</p>
+<p>Note: the discrepancy between the p-values from R and SPSS seems to be due to small differences in how the groups are created within the implementation of the test.</p>
 </div>
 </div>
 </section>
 </section>
-<section id="part-3-unguided-exercises" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-unguided-exercises">Part 3: Unguided exercises</h2>
-<section id="effect-of-hypertension-on-birth-weight" class="level3">
-<h3 class="anchored" data-anchor-id="effect-of-hypertension-on-birth-weight">Effect of hypertension on birth weight</h3>
-<p>Examine the effect of history of hypertension on birth weight by performing the following steps:</p>
-<ul>
-<li>Create a boxplot to visualize the distribution of birth weights by history of hypertension</li>
-<li>Perform an independent samples t-test to compare the mean birth weights between mothers with and without a history of hypertension</li>
-<li>Check the assumptions of the t-test, including normality and homogeneity of variances</li>
-<li>If the assumptions of the t-test are violated, perform a Mann-Whitney U test as a non-parametric alternative</li>
-</ul>
 </section>
-<section id="comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients" class="level3">
-<h3 class="anchored" data-anchor-id="comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients">Comparing red cell folate levels across ventilation strategies in cardiac bypass patients</h3>
-<p>Twenty-two patients undergoing cardiac bypass surgery were randomized to one of three ventilation groups:</p>
-<ul>
-<li><strong>Group I</strong>: Received a 50% nitrous oxide and 50% oxygen mixture continuously for 24 hours</li>
-<li><strong>Group II</strong>: Received a 50% nitrous oxide and 50% oxygen mixture only during the operation</li>
-<li><strong>Group III</strong>: Received no nitrous oxide and a 35-50% oxygen mixture continuously for 24 hours</li>
-</ul>
-<p>The data file <code>ex5_6.sav</code> contains the red cell folate levels for the three groups after 24 hours of ventilation. The aim of this study is to compare the three groups and test whether they have the same red cell folate levels.</p>
-<section id="tasks" class="level4">
-<h4 class="anchored" data-anchor-id="tasks">Tasks</h4>
-<ol type="1">
-<li><strong>Exploratory data analysis</strong> Create a boxplot to visualize the distribution of red cell folate levels by ventilation group. Based on this plot:
-<ul>
-<li>What are your first conclusions regarding the means and variances of the different groups?</li>
-</ul></li>
-<li><strong>Perform a one-way ANOVA</strong>:
-<ul>
-<li>Interpret the results</li>
-<li>Are the assumptions satisfied?</li>
-</ul></li>
-<li><strong>Try a log transformation on the data</strong>:
-<ul>
-<li>Perform another one-way ANOVA</li>
-<li>Are the assumptions satisfied after the transformation?</li>
-</ul></li>
-<li><strong>Determine which means differ</strong>:
-<ul>
-<li>Which means do you think differ?</li>
-<li>Explain your reasoning.</li>
-</ul></li>
-<li><strong>Try a non-parametric approach</strong>:
-<ul>
-<li>What are your conclusions from this method?</li>
-</ul></li>
+<section id="part-2-unguided-exercises" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-unguided-exercises">Part 2: unguided exercises</h2>
+<section id="exercise-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1">Exercise 1</h3>
+<p>Multiple logistic regression was used to construct a prognostic index to predict coronary artery disease from data on 348 patients with valvular heart disease who had undergone routine coronary arteriography before valve replacement (Ramsdale et al.&nbsp;1982). The estimated equation was:</p>
+<p><span class="math display">\[logit(p) = ln(p/(1-p)) = b_{0} + 1.167 \times x{1} + 0.0106 \times x_{2} + \textrm{other terms}\]</span></p>
+<p>where <span class="math inline">\(x_{1}\)</span> stands for the family history of ischaemic disease (0=no, 1=yes) and <span class="math inline">\(x_{2}\)</span> is the estimated total number of cigarettes ever smoked in terms of thousand cigarettes, calculated as the average number smoked annually times the number of years smoking.</p>
+<ol type="a">
+<li>What is the estimated odds ratio for having coronary artery disease for subjects with a positive family history relative to subjects with a negative family history?</li>
+<li>What total number of cigarettes ever smoked carries the same risk as a positive family history? Convert the result into years of smoking 20 cigarettes per day.</li>
+<li>What is the odds ratio for coronary artery disease for someone with a positive family history who had smoked 20 cigarettes a day for 30 years compared to a non smoker with no family history?</li>
 </ol>
+<p><strong>Answers:</strong></p>
+<ol type="a">
+<li><p><span class="math inline">\(\exp(1.167) = 3.212\)</span>.</p></li>
+<li><p>The log(OR) of positive history, <span class="math inline">\(1.167\)</span>, is to be set equal to <span class="math inline">\(0.0106 \times x_2\)</span>, where <span class="math inline">\(0.0106\)</span> is the log odds ratio of smoking 1000 cigarettes. Thus <span class="math inline">\(x_2=1.167/0.0106=110.094\)</span> thousands of cigarettes. Dividing this result by <span class="math inline">\((365 \times 20) / 1000 = 7.3\)</span>, i.e., the total number cigarettes (per thousand) smoked in 1 year if smoking 20 cigarettes per day, we find <span class="math inline">\(110.094/7.3=15.1\)</span> or just above 15 years. Thus the odds ratio of positive history is equivalent to that of daily smoking of 20 cigarettes for about 15 years.</p></li>
+<li><p>The total number of cigarettes smoked (per thousand) is <span class="math inline">\((20 \times 365 \times 30) / 1000 = 219\)</span>, so the odds ratio is <span class="math inline">\(\exp(1.167 + 219 \times 0.0106) = 32.7\)</span></p></li>
+</ol>
+</section>
+<section id="exercise-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2">Exercise 2</h3>
+<p>Data from 37 patients receiving a non-depleted allogenic bone marrow transplant were examined to see which variables were associated with the occurrence of acute graft-versus-host disease (GvHD: 0=no, 1=yes) (Bagot et al., 1988). Possible predictors are TYPE (type of leukemia: 1=AML, acute myeloid leukaemia; 2=ALL, acute lymphocytic leukaemia; 3=CML, chronic myeloid leukemia), PREG (donor pregnancy: 0= no, 1=yes), and LOGIND (the logarithm of an index of mixed epidermal cell-lymphocyte reactions). The data are in the file <code>GvHD.sav</code> available on Brightspace.</p>
+<ol type="a">
+<li>Perform a likelihood ratio test to determine whether there is a significant association between the type of leukemia and the occurrence of GvHD after adjusting for donor pregnancy and the logarithm of an index of mixed epidermal cell-lymphocyte reactions.</li>
+<li>In the adjusted model, What is the estimated odds ratio for the occurrence of GvHD for patients with ALL compared to those with ALM?</li>
+<li>Use the Hosmer-Lemeshow goodness-of-fit test to evaluate the fit of the model. Based on the results, does the model provide a satisfactory fit to the data?</li>
+</ol>
+<p><strong>Answers:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 0/1 numeric version of the outcome variable</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>GvHD<span class="sc">$</span>gvhd.numeric <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(GvHD<span class="sc">$</span>gvhd <span class="sc">==</span> <span class="st">"no"</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the full  model</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>model.GvHD <span class="ot">&lt;-</span> <span class="fu">glm</span>(gvhd.numeric <span class="sc">~</span> type <span class="sc">+</span> preg <span class="sc">+</span> logind, <span class="at">family =</span> binomial, <span class="at">data =</span> GvHD)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.GvHD)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = gvhd.numeric ~ type + preg + logind, family = binomial, 
+    data = GvHD)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept)  -2.4496     1.2113  -2.022   0.0431 *
+typeALL      -0.1480     1.1722  -0.126   0.8996  
+typeCML       2.1781     1.2420   1.754   0.0795 .
+pregyes       2.4982     1.1026   2.266   0.0235 *
+logind        1.4577     0.7547   1.932   0.0534 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 51.049  on 36  degrees of freedom
+Residual deviance: 28.832  on 32  degrees of freedom
+AIC: 38.832
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the reduced model</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>model.GvHD.reduced <span class="ot">&lt;-</span> <span class="fu">glm</span>(gvhd.numeric <span class="sc">~</span> preg <span class="sc">+</span> logind, <span class="at">family =</span> binomial, <span class="at">data =</span> GvHD)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform likelihood ratio test</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model.GvHD.reduced, model.GvHD, <span class="at">test =</span> <span class="st">"LRT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: gvhd.numeric ~ preg + logind
+Model 2: gvhd.numeric ~ type + preg + logind
+  Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)  
+1        34     33.654                       
+2        32     28.832  2    4.822  0.08972 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<ol type="a">
+<li><p>The p-value of the likelihood ratio test is 0.090, indicating that the type of leukemia is not significantly associated with the occurrence of GvHD after adjusting for donor pregnancy and the logarithm of an index of mixed epidermal cell-lymphocyte reactions.</p></li>
+<li><p>By default, R and SPSS both use the first level of the factor (<code>ALM</code>) as the reference category. Therefore, the table with estimated regression coefficients is the same in both outputs. The estimated odds ratio for the occurrence of GvHD for patients with AML compared to those with ALL is <span class="math inline">\(\exp(-0.148) = 0.862\)</span>.</p></li>
+<li><p>The Hosmer-Lemeshow test results are as follows:</p></li>
+</ol>
+<section id="r" class="level4">
+<h4 class="anchored" data-anchor-id="r">R</h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Groups for Hosmer-Lemeshow C statistic:
+cutfit
+[0.0109,0.0254] (0.0254,0.0552]  (0.0552,0.142]   (0.142,0.237]   (0.237,0.529] 
+              4               4               3               4               4 
+  (0.529,0.582]   (0.582,0.756]   (0.756,0.879]   (0.879,0.891]   (0.891,0.988] 
+              3               4               3               4               4 
+Groups for Hosmer-Lemeshow H statistic:
+cutfit1
+[0.00994,0.109]   (0.109,0.206]   (0.206,0.304]   (0.304,0.402]     (0.402,0.5] 
+             11               2               3               1               1 
+    (0.5,0.597]   (0.597,0.695]   (0.695,0.793]    (0.793,0.89]    (0.89,0.989] 
+              5               0               4               6               4 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$C
+
+    Hosmer-Lemeshow C statistic
+
+data:  fitted(model.GvHD) and GvHD$gvhd.numeric
+X-squared = 12.352, df = 8, p-value = 0.1362
+
+
+$H
+
+    Hosmer-Lemeshow H statistic
+
+data:  fitted(model.GvHD) and GvHD$gvhd.numeric
+X-squared = 14.907, df = 8, p-value = 0.06097</code></pre>
+</div>
+</div>
+</section>
+<section id="spss" class="level4">
+<h4 class="anchored" data-anchor-id="spss">SPSS</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/SPSS_lab8_ex2.PNG" class="img-fluid figure-img"></p>
+<figcaption>Screenshot of the Hosmer-Lemeshow test results in SPSS</figcaption>
+</figure>
+</div>
+<p>While R and SPSS produce different p-values, neither is significant. Therefore, the model provides a satisfactory fit to the data.</p>
 
 
 </section>
