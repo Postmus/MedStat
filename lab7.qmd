@@ -1,5 +1,5 @@
 ---
-title: "Advanced Medical Statistics – Lab 7"
+title: "Medical Statistics – Lab 8"
 format:
   html:
     toc: true       
@@ -33,7 +33,7 @@ Key variables in the dataset include:
 
 ### Step 1: Fit the initial linear regression model
 
-Download the dataset from Brighspace (`whas500.sav`) and open it in R or SPSS. When using R, make sure that the categorical variables are correctly coded as factors.
+Download the dataset from the Datasets menu (`whas500.sav`) and open it in R or SPSS. When using R, make sure that the categorical variables are correctly coded as factors.
 
 Create an initial model for hospital length of stay (`los`) using the following predictors: `age`, `gender`, `hr`, `sysbp`, `diasbp`, `bmi`, `cvd`, `sho`. Run/summarize the model to inspect coefficients and p-values.
 

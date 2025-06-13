@@ -49,7 +49,11 @@ website:
           - text: "R"
             href: R_lab8.qmd
           - text: "SPSS"
-            href: SPSS_lab8.qmd            
+            href: SPSS_lab8.qmd
+      - text: "Lab day 8"
+        menu:
+          - text: "Lab 8"
+            href: lab7.qmd                  
       - text: "Answers"
         menu:
           - text: "Lab 1"
