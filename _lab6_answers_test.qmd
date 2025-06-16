@@ -1,0 +1,353 @@
+---
+title: "Medical Statistics – Answers lab 6"
+format:
+  html:
+    toc: true       
+    toc-depth: 3    
+    toc-location: right
+    code-overflow: wrap 
+  pdf:
+    toc: false
+execute:
+  warning: false
+  message: false
+  error: false
+  eval: true
+  echo: false
+---
+
+```{r}
+library(haven)   # for reading SPSS files
+library(dplyr)   # for data manipulation
+library(ggplot2) # for data visualization
+library(car)    # for calculating type-III ANOVA tables
+
+# Load the dataset
+pockets <- read_sav("datasets/pockets.sav")
+hardheid <- read_sav("datasets/hardheid Engels.sav")
+
+# Convert labeled variables to factors
+pockets <- pockets %>%
+  mutate(across(where(is.labelled), as_factor))
+
+# Convert labeled variables to factors
+hardheid <- hardheid %>%
+  mutate(across(where(is.labelled), as_factor))  
+```
+
+## Part 1: Pearson's correlation coefficient and simple linear regression
+
+```{r}
+# Scatterplot of pocket depth vs. age
+ggplot(pockets, aes(x = age, y = pocketdepth)) +
+  geom_point() +
+  labs(
+    x     = "Age (years)",
+    y     = "Pocket Depth (mm)",
+    title = "Scatterplot of Pocket Depth vs Age"
+  )
+```
+
+::: {.callout-important icon=false title="Question 1"}
+Based on the scatterplot, is there an indication of a linear association between `age` and `pocketdepth`? If so, is this association positive or negative?
+:::
+
+::: {.callout-tip icon=false title="Answer question 1"}
+The scatterplot suggests that there is a positive linear association between `age` and `pocketdepth`. As age increases, pocket depth tends to increase.
+:::
+
+### Pearson's Correlation Coefficient
+
+```{r}
+# Test the significance of the correlation coefficient
+cor_test <- cor.test(pockets$age, pockets$pocketdepth)
+cor_test
+```
+
+::: {.callout-important icon=false title="Question 2"}
+What does the correlation coefficient tell us about the relationship between `age` and `pocketdepth`? Does this align with your interpretation of the scatterplot?
+:::
+
+::: {.callout-tip icon=false title="Answer question 2"}
+The correlation coefficient is approximately 0.37, indicating a moderate positive linear relationship between `age` and `pocketdepth`. This aligns with the interpretation of the scatterplot.
+:::
+
+::: {.callout-important icon=false title="Question 3"}
+What is the p-value for the correlation coefficient test? Based on this p-value, do we have sufficient evidence to reject the null hypothesis?
+:::
+
+::: {.callout-tip icon=false title="Answer question 3"}
+The p-value for the correlation coefficient test is approximately 0.00014, indicating that we have sufficient evidence to reject the null hypothesis of no correlation between `age` and `pocketdepth`.
+:::
+
+### Fitting a Simple Linear Regression Model
+
+```{r}
+# Fit a simple linear regression model
+model_slr <- lm(pocketdepth ~ age, data = pockets)
+
+# Print the summary of the model
+summary(model_slr)
+```
+
+::: {.callout-important icon=false title="Question 4"}
+Is the relationship between `age` and `pocketdepth` statistically significant (at α = 0.05)?
+:::
+
+::: {.callout-tip icon=false title="Answer question 4"}
+The estimated coefficient for `age` (0.021) is statistically significant with a p-value of 0.00014, indicating that the relationship between `age` and `pocketdepth` is statistically significant at α = 0.05.
+:::
+
+::: {.callout-important icon=false title="Question 5"}
+How does the p-value for `age` in the regression output compare to the p-value for the correlation coefficient test? Are they consistent with each other?
+:::
+
+::: {.callout-tip icon=false title="Answer question 5"}
+The p-value for `age` in the regression output (0.00014) and the p-value for the correlation coefficient test (0.00014) are consistent with each other. They both indicate a statistically significant relationship between `age` and `pocketdepth`.
+:::
+
+::: {.callout-important icon=false title="Question 6"}
+What is the interpretation of the intercept and the coefficient for `age` in the regression output? 
+:::
+
+::: {.callout-tip icon=false title="Answer question 6"}
+The intercept (3.859) represents the estimated pocket depth when age is 0, which may not have a meaningful interpretation in this context. The coefficient for `age` (0.021) represents the estimated change in pocket depth for each additional year of age.
+:::
+
+::: {.callout-important icon=false title="Question 7"}
+Based on the fitted model, what is the expected pocket depth for a person who is 40 years old?
+:::
+
+::: {.callout-tip icon=false title="Answer question 7"}
+The expected pocket depth for a person who is 40 years old can be calculated using the intercept and coefficient from the regression output:
+3.859 + 0.021 * 40 = 4.699 mm
+:::
+
+::: {.callout-important icon=false title="Question 8"}
+How much of the variation in pocket depth is explained by age in this model?
+:::
+
+::: {.callout-tip icon=false title="Answer question 8"}
+The R-squared value of 0.138 indicates that approximately 14% of the variation in pocket depth is explained by age in this model.
+:::
+
+### Assumption Checking
+
+#### Normality of Residuals
+
+```{r}
+# Histogram of residuals
+hist(residuals(model_slr), breaks = 15, col = "lightblue", border = "black", main = "Histogram of Residuals", xlab = "Residuals")
+```
+
+```{r}
+plot(model_slr, which = 2)  # Q-Q plot
+```
+
+::: {.callout-important icon=false title="Question 9"}
+Do the histogram and Q-Q plot suggest that the residuals are reasonably normally distributed?
+:::
+
+::: {.callout-tip icon=false title="Answer question 9"}
+The two plots suggest that the residuals are approximately normally distributed, with the histogram showing a roughly symmetric shape and the Q-Q plot showing the residuals closely following the diagonal line.
+:::
+
+#### Homoscedasticity and linearity
+
+```{r}
+plot(model_slr, which = 1)  # residuals vs fitted
+```
+
+::: {.callout-important icon=false title="Question 10"}
+Does the residual-versus-fitted plot suggest constant variance?
+:::
+
+::: {.callout-tip icon=false title="Answer question 10"}
+The residual-versus-fitted plot suggests that the variance of the residuals is relatively constant across the range of fitted values, indicating homoscedasticity.
+:::
+
+::: {.callout-important icon=false title="Question 11"}
+Does the residual-versus-fitted plot suggest any violation of the linearity assumption?
+:::
+
+::: {.callout-tip icon=false title="Answer question 11"}
+There is no obvious pattern or curvature in the residual-versus-fitted plot, indicating that the linearity assumption is not violated.
+:::
+
+## Part 2: ANCOVA (Analysis of Covariance)
+
+### Exploratory Data Analysis
+
+```{r}
+# Scatterplot of pocketdepth vs. age, colored by alcohol
+ggplot(pockets, aes(x = age, y = pocketdepth, color = alcohol)) +
+  geom_point() +
+  labs(title = "Scatterplot of Pocket Depth vs. Age by Alcohol Consumption", x = "Age", y = "Pocket Depth") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+::: {.callout-important icon=false title="Question 12"}
+What can you infer from the scatterplot about the relationship between `age`, `pocketdepth`, and `alcohol` consumption?
+:::
+
+::: {.callout-tip icon=false title="Answer question 12"}
+As discussed previously, the scatterplot suggests a positive relationship between `age` and `pocketdepth`, with higher pocket depths observed for older individuals. It also suggests that there is a U-shaped relationship between `alcohol` consumption and `pocketdepth`, with individuals consuming "1-2 glasses/day" having lower pocket depths compared to those consuming "None" or ">2 glasses/day".
+:::
+
+### Fitting the ANCOVA Model
+
+#### R output
+
+```{r}
+model_ancova <- lm(pocketdepth ~ I(age - 45) + alcohol, data = pockets)
+summary(model_ancova)
+
+model_hardheid_full <- lm(hardness ~ composite_type * curing_time, data = hardheid)
+summary(model_hardheid_full)
+Anova(model_hardheid_full, type="III")
+
+```
+
+#### SPSS output
+
+![Screenshot of the SPSS output tables](images/SPSS_lab6_q13.PNG)
+
+::: {.callout-important icon=false title="Question 13"}
+Based on the ANCOVA model output, what is the expected difference in pocket depth between individuals who consume `"None"` and those who consume `">2 glasses/day"`, while controlling for age?
+:::
+
+::: {.callout-tip icon=false title="Answer question 13"}
+By default, the reference level for the `alcohol` variable is set to `"None"` in R and to `">2 glasses/day"` in SPSS. 
+
+Looking at the R output, the coefficient for `">2 glasses/day"` is 0.365, which means that individuals who consume `">2 glasses/day"` are expected to have a pocket depth that is 0.365 mm higher than those who consume `"None"`, while controlling for age.
+
+Looking at the SPSS output, the coefficient for `"None"` is -0.365, which means that individuals who consume `"None"` are expected to have a pocket depth that is 0.365 mm lower than those who consume `">2 glasses/day"`, while controlling for age.
+
+Therefore, the expected difference in pocket depth between individuals who consume `"None"` and those who consume `">2 glasses/day"` is 0.365 mm, independent of the reference level chosen.
+:::
+
+::: {.callout-important icon=false title="Question 14"}
+Based on the ANCOVA model output, what is the expected difference in pocket depth between individuals who consume `"1-2 glasses/day"` and those who consume `">2 glasses/day"`, while controlling for age?
+:::
+
+::: {.callout-tip icon=false title="Answer question 14"}
+By default, the reference level for the `alcohol` variable is set to `"None"` in R and to `">2 glasses/day"` in SPSS. 
+
+Looking at the R output, the coefficient for `">2 glasses/day"` is 0.365 and the coefficient for `"1-2 glasses/day"` is -0.395. This means that individuals who consume `">2 glasses/day"` are expected to have a pocket depth that is 0.365 - -0.395 = 0.76 mm higher than those who consume `"1-2 glasses/day"`, while controlling for age.
+
+Looking at the SPSS output, the coefficient for `"1-2 glasses/day"` is -0.759, which means that individuals who consume `"1-2 glasses/day"` are expected to have a pocket depth that is 0.759 mm lower than those who consume `">2 glasses/day"`, while controlling for age.
+
+Therefore, the expected difference in pocket depth between individuals who consume `"1-2 glasses/day"` and those who consume `">2 glasses/day"` is 0.76 mm, independent of the reference level chosen.
+:::
+
+```{r}
+Anova(model_ancova, type="III")
+```
+
+::: {.callout-important icon=false title="Question 15"}
+Based on the ANOVA table, is the `alcohol` variable significantly associated with `pocketdepth` after accounting for `age`?
+:::
+
+::: {.callout-tip icon=false title="Answer question 15"}
+The p-value for the `alcohol` variable in the ANOVA table is less than 0.05, indicating that the `alcohol` variable is significantly associated with `pocketdepth` after accounting for `age`.
+:::
+
+### Model Diagnostics
+
+::: {.callout-important icon=false title="Exercise"}
+Check the normality of residuals and homoscedasticity assumptions for the ANCOVA model.
+:::
+
+::: {.callout-tip icon=false title="Answer question 15"}
+
+#### Normality of Residuals
+
+```{r}
+# Histogram of residuals
+hist(model_ancova$residuals, main = "Histogram of Residuals", xlab = "Residuals")
+
+# Normal Q-Q plot of residuals
+plot(model_ancova, which = 2)
+```
+
+The histogram and normal Q-Q plot of residuals shows that the residuals are approximately normally distributed, indicating that the normality assumption is not violated.
+
+#### Homoscedasticity
+
+```{r}
+# Residuals vs. Fitted plot
+plot(model_ancova, which = 1)
+```
+
+The residuals vs. fitted plot shows that the residuals are randomly scattered around zero, indicating that the homoscedasticity assumption is not violated.
+:::
+
+## Part 3: Interactions in ANCOVA
+
+### Fitting the Interaction Model
+
+```{r}
+model_interaction <- lm(pocketdepth ~ age * alcohol, data = pockets)
+summary(model_interaction)
+```  
+
+```{r}
+Anova(model_interaction, type="III")
+```
+
+::: {.callout-important icon=false title="Question 16"}
+Based on the output in the ANOVA table, is there a significant interaction between `age` and `alcohol` in predicting `pocketdepth`?
+:::
+
+::: {.callout-tip icon=false title="Answer question 16"}
+The p-value for the interaction term `age:alcohol` in the ANOVA table is approximately equal to 1, indicating that there is no interaction between `age` and `alcohol` in predicting `pocketdepth`.
+:::
+
+## Part 4: Relationship Between Smoking and Pocket Depth
+
+In addition to information about alcohol consumption, the dataset also contains information about smoking habits. Explore the relationship between smoking and pocket depth, and how it interacts with age. You can use the same approach as in the previous sections to fit models, test for significance, and check assumptions.
+
+### Exploratory Data Analysis
+
+```{r}
+# Scatterplot of pocketdepth vs. age colored by smoking status
+ggplot(pockets, aes(x = age, y = pocketdepth, color = smoking)) +
+  geom_point() +
+  labs(title = "Scatterplot of Pocket Depth vs. Age by Smoking Status", x = "Age", y = "Pocket Depth")
+```
+
+### Fitting the ANCOVA Model
+
+```{r}
+model_smoking <- lm(pocketdepth ~ age + smoking, data = pockets)
+summary(model_smoking)
+```
+
+The p-value for the `smoking` variable in the ANOVA table is 0.071, indicating that the `smoking` variable is not significantly associated with `pocketdepth` after accounting for `age`.
+
+### Model Diagnostics
+
+```{r}
+# Normality of Residuals
+hist(model_smoking$residuals, main = "Histogram of Residuals", xlab = "Residuals")
+plot(model_smoking, which = 2)
+
+# Homoscedasticity
+plot(model_smoking, which = 1)
+```
+
+The plots do not show any violations of the normality or homoscedasticity assumptions.
+
+### Fitting the Interaction Model
+
+```{r}
+model_interaction_smoking <- lm(pocketdepth ~ age * smoking, data = pockets)
+summary(model_interaction_smoking)
+
+Anova(model_interaction_smoking, type="III")
+```
+
+The p-value for the interaction term `age:smoking` is 0.407, indicating that there is no significant interaction between `age` and `smoking` in predicting `pocketdepth`. 
+
+

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Medical Statistics – Lab 1 – Medical Statistics</title>
+<title>Medical Statistics – Answers lab 8 – Medical Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -38,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ddd961a2510921635943dfbbd19534c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-3790baeb23ec48fe6a2a71a48d01fb7e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -338,27 +372,35 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1---descriptive-statistics" id="toc-part-1---descriptive-statistics" class="nav-link active" data-scroll-target="#part-1---descriptive-statistics">Part 1 - Descriptive statistics</a>
+  <li><a href="#part-1-building-prediction-models-using-backward-elimination" id="toc-part-1-building-prediction-models-using-backward-elimination" class="nav-link active" data-scroll-target="#part-1-building-prediction-models-using-backward-elimination">Part 1: Building prediction models using backward elimination</a>
   <ul class="collapse">
-  <li><a href="#descriptive-analysis-of-continuous-variables" id="toc-descriptive-analysis-of-continuous-variables" class="nav-link" data-scroll-target="#descriptive-analysis-of-continuous-variables">Descriptive analysis of continuous variables</a></li>
-  <li><a href="#descriptive-analysis-of-categorical-variables" id="toc-descriptive-analysis-of-categorical-variables" class="nav-link" data-scroll-target="#descriptive-analysis-of-categorical-variables">Descriptive analysis of categorical variables</a></li>
+  <li><a href="#step-1-fit-the-initial-linear-regression-model" id="toc-step-1-fit-the-initial-linear-regression-model" class="nav-link" data-scroll-target="#step-1-fit-the-initial-linear-regression-model">Step 1: Fit the initial linear regression model</a></li>
+  <li><a href="#step-2-eliminate-the-least-significant-predictor" id="toc-step-2-eliminate-the-least-significant-predictor" class="nav-link" data-scroll-target="#step-2-eliminate-the-least-significant-predictor">Step 2: Eliminate the least significant predictor</a></li>
+  <li><a href="#step-3-repeat-the-steps" id="toc-step-3-repeat-the-steps" class="nav-link" data-scroll-target="#step-3-repeat-the-steps">Step 3: Repeat the steps</a></li>
+  <li><a href="#step-4-final-model" id="toc-step-4-final-model" class="nav-link" data-scroll-target="#step-4-final-model">Step 4: Final model</a></li>
   </ul></li>
-  <li><a href="#part-2---probability-calculations-for-random-variables" id="toc-part-2---probability-calculations-for-random-variables" class="nav-link" data-scroll-target="#part-2---probability-calculations-for-random-variables">Part 2 - Probability calculations for random variables</a>
+  <li><a href="#part-2-automated-procedures-for-building-prediction-models" id="toc-part-2-automated-procedures-for-building-prediction-models" class="nav-link" data-scroll-target="#part-2-automated-procedures-for-building-prediction-models">Part 2: Automated procedures for building prediction models</a>
   <ul class="collapse">
-  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution">Binomial Distribution</a></li>
-  <li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link" data-scroll-target="#normal-distribution">Normal Distribution</a></li>
+  <li><a href="#exercise-automated-procedures-vs-manual-model" id="toc-exercise-automated-procedures-vs-manual-model" class="nav-link" data-scroll-target="#exercise-automated-procedures-vs-manual-model">Exercise: Automated procedures vs manual model</a></li>
   </ul></li>
-  <li><a href="#part-3---some-conceptual-questions" id="toc-part-3---some-conceptual-questions" class="nav-link" data-scroll-target="#part-3---some-conceptual-questions">Part 3 - Some conceptual questions</a></li>
+  <li><a href="#part-3-causal-diagrams" id="toc-part-3-causal-diagrams" class="nav-link" data-scroll-target="#part-3-causal-diagrams">Part 3: Causal diagrams</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
+  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise 3</a></li>
+  <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise 4</a></li>
+  <li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a></li>
+  <li><a href="#exercise-6" id="toc-exercise-6" class="nav-link" data-scroll-target="#exercise-6">Exercise 6</a></li>
+  </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="SPSS_lab1.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab7_answers.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Medical Statistics – Lab 1</h1>
-<p class="subtitle lead">SPSS version</p>
+<h1 class="title">Medical Statistics – Answers lab 8</h1>
 </div>
 
 
@@ -375,285 +417,327 @@ window.Quarto = {
 </header>
 
 
-<p>Welcome to lab 1 in the advanced medical statistics course. In this lab, we will explore descriptive statistics and probability calculations for random variables. We will use an example dataset to practice summarizing continuous and categorical variables, and introduce some basic concepts of probability distributions.</p>
-<section id="part-1---descriptive-statistics" class="level1">
-<h1>Part 1 - Descriptive statistics</h1>
-<p>For this part of the lab, we will use the <code>lowbwt.sav</code> dataset. This dataset contains information collected at Baystate Medical Center Springfield, MA, during 1986 and is from Appendix 1 of Hosmer and Lemeshow (1989). The data include information about factors related to low birth weight, an important concern due to its association with high infant mortality rates and birth defects.</p>
-<p>The dataset includes the following variables:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Variable</th>
-<th>Abbreviation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Identification Code</td>
-<td>ID</td>
-</tr>
-<tr class="even">
-<td>Low Birth Weight (0 = Birth Weight ≥ 2500g, 1 = Birth Weight &lt; 2500g)</td>
-<td>low</td>
-</tr>
-<tr class="odd">
-<td>Age of the Mother in Years</td>
-<td>age</td>
-</tr>
-<tr class="even">
-<td>Weight in Pounds at the Last Menstrual Period</td>
-<td>lwt</td>
-</tr>
-<tr class="odd">
-<td>Ethnicity (1 = Caucasian, 2 = Afro-American, 3 = Asian)</td>
-<td>ethnicity</td>
-</tr>
-<tr class="even">
-<td>Smoking Status During Pregnancy (1 = Yes, 0 = No)</td>
-<td>smoke</td>
-</tr>
-<tr class="odd">
-<td>History of Premature Labor (0 = None, 1 = One, etc.)</td>
-<td>ptl</td>
-</tr>
-<tr class="even">
-<td>History of Hypertension (1 = Yes, 0 = No)</td>
-<td>ht</td>
-</tr>
-<tr class="odd">
-<td>Presence of Uterine Irritability (1 = Yes, 0 = No)</td>
-<td>urirr</td>
-</tr>
-<tr class="even">
-<td>Number of Physician Visits During the First Trimester (0 = None, 1 = One, 2 = Two, etc.)</td>
-<td>pvft</td>
-</tr>
-<tr class="odd">
-<td>Birth Weight in Grams</td>
-<td>bwt</td>
-</tr>
-</tbody>
-</table>
-<p>The variables <code>bwt</code> (birth weight in grams) and <code>low</code> (low birth weight) are the outcome variables, while all other variables are considered independent variables. The outcome variables will be analyzed in more detail in subsequent labs. In this lab, we will focus on describing the study population in terms of the independent variables to obtain a set of summary statistics that could be used to populate a baseline characteristics table.</p>
-<section id="descriptive-analysis-of-continuous-variables" class="level2">
-<h2 class="anchored" data-anchor-id="descriptive-analysis-of-continuous-variables">Descriptive analysis of continuous variables</h2>
-<p>Let’s start by calculating the summary statistics for the continuous variable <code>age</code>.</p>
+<section id="part-1-building-prediction-models-using-backward-elimination" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-building-prediction-models-using-backward-elimination">Part 1: Building prediction models using backward elimination</h2>
+<section id="step-1-fit-the-initial-linear-regression-model" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-fit-the-initial-linear-regression-model">Step 1: Fit the initial linear regression model</h3>
+<p>Create an initial model for hospital length of stay (<code>los</code>) using the following predictors: <code>age</code>, <code>gender</code>, <code>hr</code>, <code>sysbp</code>, <code>diasbp</code>, <code>bmi</code>, <code>cvd</code>, <code>sho</code>. Run/summarize the model to inspect coefficients and p-values.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = los ~ age + gender + hr + sysbp + diasbp + bmi + 
+    cvd + sho, data = whas)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-8.335 -2.653 -1.071  1.200 40.073 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   3.2648144  2.1394896   1.526 0.127659    
+age           0.0031994  0.0168850   0.189 0.849792    
+genderfemale  0.8575246  0.4489334   1.910 0.056698 .  
+hr            0.0190577  0.0090828   2.098 0.036396 *  
+sysbp        -0.0008358  0.0085656  -0.098 0.922304    
+diasbp        0.0141799  0.0128884   1.100 0.271780    
+bmi          -0.0304532  0.0427613  -0.712 0.476700    
+cvdyes        0.3903925  0.4981468   0.784 0.433600    
+shoyes        3.5265170  1.0329265   3.414 0.000693 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 4.632 on 491 degrees of freedom
+Multiple R-squared:  0.04991,   Adjusted R-squared:  0.03443 
+F-statistic: 3.224 on 8 and 491 DF,  p-value: 0.001388</code></pre>
+</div>
+</div>
+</section>
+<section id="step-2-eliminate-the-least-significant-predictor" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-eliminate-the-least-significant-predictor">Step 2: Eliminate the least significant predictor</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type III tests)
+
+Response: los
+             Sum Sq  Df F value    Pr(&gt;F)    
+(Intercept)    50.0   1  2.3286 0.1276592    
+age             0.8   1  0.0359 0.8497924    
+gender         78.3   1  3.6486 0.0566978 .  
+hr             94.5   1  4.4025 0.0363962 *  
+sysbp           0.2   1  0.0095 0.9223042    
+diasbp         26.0   1  1.2105 0.2717799    
+bmi            10.9   1  0.5072 0.4766997    
+cvd            13.2   1  0.6142 0.4336001    
+sho           250.1   1 11.6561 0.0006929 ***
+Residuals   10535.8 491                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>The ANOVA table shows that the predictor with the highest p-value is <code>sysbp</code> (<span class="math inline">\(p = 0.92\)</span>). Systolic blood pressure is the least significant predictor and should be removed from the model.</p>
+</section>
+<section id="step-3-repeat-the-steps" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-repeat-the-steps">Step 3: Repeat the steps</h3>
+<p>The following variables are sequentially removed from the model (after initially removing <code>sysbp</code>):</p>
 <ol type="1">
-<li><p><strong>Mean</strong> and <strong>Standard Deviation</strong>: Use the “Analyze &gt; Descriptive Statistics &gt; Descriptives…” menu in SPSS to calculate the mean age of the mothers. Select <code>age</code> as the variable, and ensure that the mean and standard deviation are checked in the “Options” dialog.</p></li>
-<li><p><strong>Median and Interquartile Range (IQR)</strong>: To calculate the median and IQR for <code>age</code>, use the “Analyze &gt; Descriptive Statistics &gt; Frequencies…” menu. Select <code>age</code> as the variable and click on “Statistics…” to choose the median and quartiles.</p></li>
+<li><code>age</code>: p-value = 0.86</li>
+<li><code>cvd</code>: p-value = 0.41</li>
+<li><code>bmi</code>: p-value = 0.44</li>
+<li><code>diasbp</code>: p-value = 0.22</li>
 </ol>
-<p>To decide which summary measures (mean and standard deviation, or median and IQR) are appropriate to report, we need to understand the shape of the distribution of the <code>age</code> variable. Create a histogram by using “Graphs &gt; Legacy Dialogs &gt; Histogram…” and selecting <code>age</code> as the variable.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 1">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Based on the shape of the histogram, determine which summary statistics are more appropriate to report.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 2">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 2
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Calculate the mean, standard deviation, median, and IQR for the variable <code>lwt</code>. Additionally, create a histogram to determine the shape of its distribution and decide which summary measures are most appropriate to report.</p>
-</div>
-</div>
 </section>
-<section id="descriptive-analysis-of-categorical-variables" class="level2">
-<h2 class="anchored" data-anchor-id="descriptive-analysis-of-categorical-variables">Descriptive analysis of categorical variables</h2>
-<p>Let’s move on to analyzing the categorical variables. We will start by calculating the frequency and percentage of mothers who smoked during pregnancy (<code>smoke</code>):</p>
-<ol type="1">
-<li><p><strong>Frequency Table</strong>: Use the “Analyze &gt; Descriptive Statistics &gt; Frequencies…” menu to calculate the frequency of each category for <code>smoke</code>.</p></li>
-<li><p><strong>Percentage Calculation</strong>: SPSS will automatically calculate the percentages for each category in the frequency table output.</p></li>
-</ol>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 3">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 3
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Calculate the frequencies and percentages for the variable <code>ht</code> (history of hypertension).</p>
-</div>
-</div>
-<p>In addition to calculating frequencies and percentages, it can also be helpful to visualize categorical data. One common way to do this is by creating a bar chart. To create a bar chart for the <code>smoke</code> variable, use “Graphs &gt; Legacy Dialogs &gt; Bar…” and select “Simple” and “Summaries for Groups of Cases.” Then select <code>smoke</code> as the Category Axis.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 4">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 4
+<section id="step-4-final-model" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-final-model">Step 4: Final model</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = los ~ gender + hr + sho, data = whas)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-8.663 -2.661 -1.064  1.136 40.826 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  3.796075   0.799047   4.751 2.66e-06 ***
+genderfemale 0.910388   0.424827   2.143 0.032602 *  
+hr           0.020680   0.008843   2.339 0.019751 *  
+shoyes       3.550448   1.009081   3.518 0.000474 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 4.622 on 496 degrees of freedom
+Multiple R-squared:  0.04443,   Adjusted R-squared:  0.03865 
+F-statistic: 7.687 on 3 and 496 DF,  p-value: 4.976e-05</code></pre>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>Create a bar chart for the variable <code>ht</code> to visualize the frequency of mothers with a history of hypertension.</p>
+<section id="residual-plots" class="level4">
+<h4 class="anchored" data-anchor-id="residual-plots">Residual plots</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab7_answers_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab7_answers_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The overall fit of the model appears reasonable, as the residuals are generally centered around zero with no major patterns suggesting severe violations of linearity. However, there are some outliers with very long lengths of stay (LOS) that are not adequately captured by the model. These outliers lead to a right skew in the residual distribution, as seen in the histogram, influencing model fit. While the current model seems to work reasonably well for most observations, further steps (e.g., transformations or robust regression techniques) could be considered to better account for these extreme cases.</p>
 </section>
 </section>
-<section id="part-2---probability-calculations-for-random-variables" class="level1">
-<h1>Part 2 - Probability calculations for random variables</h1>
-<p>In this section, we will focus on two commonly used probability distributions: the binomial distribution and the normal distribution. We will explore how to work with these distributions in SPSS using practical examples.</p>
-<section id="binomial-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="binomial-distribution">Binomial Distribution</h2>
-<p>A binomial distribution represents the number of successes in a fixed number of independent trials, each with the same probability of success. For example, if we have 10 patients and we want to know the probability that exactly 3 of them respond to a given treatment, where the response rate is known to be 40%, we can use SPSS to calculate this probability.</p>
-<p>To perform this calculation in SPSS, go to “Transform &gt; Compute Variable…” and create a new variable called <code>p_response_3</code>. Use the function <code>PDF.BINOM(x, n, p)</code> to calculate the cumulative probability:</p>
+</section>
+<section id="part-2-automated-procedures-for-building-prediction-models" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-automated-procedures-for-building-prediction-models">Part 2: Automated procedures for building prediction models</h2>
+<section id="exercise-automated-procedures-vs-manual-model" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-automated-procedures-vs-manual-model">Exercise: Automated procedures vs manual model</h3>
+<section id="r" class="level4">
+<h4 class="anchored" data-anchor-id="r">R</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(los <span class="sc">~</span> age <span class="sc">+</span> gender <span class="sc">+</span> hr <span class="sc">+</span> sysbp <span class="sc">+</span> diasbp <span class="sc">+</span> bmi <span class="sc">+</span> cvd <span class="sc">+</span> sho, <span class="at">data =</span> whas)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>step_model <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(fit, <span class="at">direction =</span> <span class="st">"backward"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=1541.96
+los ~ age + gender + hr + sysbp + diasbp + bmi + cvd + sho
+
+         Df Sum of Sq   RSS    AIC
+- sysbp   1     0.204 10536 1540.0
+- age     1     0.770 10537 1540.0
+- bmi     1    10.883 10547 1540.5
+- cvd     1    13.179 10549 1540.6
+- diasbp  1    25.974 10562 1541.2
+&lt;none&gt;                10536 1542.0
+- gender  1    78.292 10614 1543.7
+- hr      1    94.469 10630 1544.4
+- sho     1   250.115 10786 1551.7
+
+Step:  AIC=1539.97
+los ~ age + gender + hr + diasbp + bmi + cvd + sho
+
+         Df Sum of Sq   RSS    AIC
+- age     1     0.682 10537 1538.0
+- bmi     1    11.109 10547 1538.5
+- cvd     1    12.975 10549 1538.6
+- diasbp  1    38.551 10575 1539.8
+&lt;none&gt;                10536 1540.0
+- gender  1    78.719 10615 1541.7
+- hr      1    96.991 10633 1542.6
+- sho     1   260.543 10797 1550.2
+
+Step:  AIC=1538.01
+los ~ gender + hr + diasbp + bmi + cvd + sho
+
+         Df Sum of Sq   RSS    AIC
+- cvd     1    14.624 10551 1536.7
+- bmi     1    15.372 10552 1536.7
+- diasbp  1    37.888 10575 1537.8
+&lt;none&gt;                10537 1538.0
+- gender  1    84.736 10621 1540.0
+- hr      1   101.448 10638 1540.8
+- sho     1   264.134 10801 1548.4
+
+Step:  AIC=1536.7
+los ~ gender + hr + diasbp + bmi + sho
+
+         Df Sum of Sq   RSS    AIC
+- bmi     1    12.883 10564 1535.3
+- diasbp  1    38.599 10590 1536.5
+&lt;none&gt;                10551 1536.7
+- gender  1    97.518 10649 1539.3
+- hr      1    99.732 10651 1539.4
+- sho     1   266.183 10818 1547.2
+
+Step:  AIC=1535.31
+los ~ gender + hr + diasbp + sho
+
+         Df Sum of Sq   RSS    AIC
+- diasbp  1    32.352 10597 1534.8
+&lt;none&gt;                10564 1535.3
+- hr      1   104.369 10669 1538.2
+- gender  1   108.564 10673 1538.4
+- sho     1   273.160 10837 1546.1
+
+Step:  AIC=1534.84
+los ~ gender + hr + sho
+
+         Df Sum of Sq   RSS    AIC
+&lt;none&gt;                10597 1534.8
+- gender  1     98.11 10695 1537.5
+- hr      1    116.84 10713 1538.3
+- sho     1    264.48 10861 1545.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(step_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = los ~ gender + hr + sho, data = whas)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-8.663 -2.661 -1.064  1.136 40.826 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  3.796075   0.799047   4.751 2.66e-06 ***
+genderfemale 0.910388   0.424827   2.143 0.032602 *  
+hr           0.020680   0.008843   2.339 0.019751 *  
+shoyes       3.550448   1.009081   3.518 0.000474 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 4.622 on 496 degrees of freedom
+Multiple R-squared:  0.04443,   Adjusted R-squared:  0.03865 
+F-statistic: 7.687 on 3 and 496 DF,  p-value: 4.976e-05</code></pre>
+</div>
+</div>
+<p>The final model obtained from the automated procedure is identical to the manually created model in Part 1.</p>
+</section>
+<section id="spss" class="level4">
+<h4 class="anchored" data-anchor-id="spss">SPSS</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_SPSS_BW.PNG" class="img-fluid figure-img"></p>
+<figcaption>SPSS results of the backward elimination procedure</figcaption>
+</figure>
+</div>
+<p>The table above shows the variables eliminated at each step of the backward elimination procedure in SPSS. The final model obtained from the automated procedure is identical to the manually created model in Part 1.</p>
+</section>
+</section>
+</section>
+<section id="part-3-causal-diagrams" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-causal-diagrams">Part 3: Causal diagrams</h2>
+<p>For each of the exercises below:</p>
 <ul>
-<li><strong><code>x</code></strong>: The number of successes we are interested in (in this example, <code>3</code> patients responding).</li>
-<li><strong><code>n</code></strong>: The number of trials (in this example, <code>10</code> patients).</li>
-<li><strong><code>p</code></strong>: The probability of success in each trial (in this example, <code>0.4</code> or 40% response rate).</li>
+<li>Try solving the diagrams by hand by using the recipe from the lecture (see lecture slides on Brightspace)</li>
+<li>Check your answer using the <a href="http://www.dagitty.net/dags.html">DAGitty webtool</a></li>
 </ul>
-<p>Cumulative probabilities, such as the probability that 3 or fewer patients out of 10 respond to the treatment, can similarly be calculated by creating a new variable with the <code>CDF.BINOM(x, n, p)</code> function.</p>
-<p><strong>Note</strong>: Unlike other statistical software, SPSS requires that calculations performed using the “Transform &gt; Compute Variable…” tool always have a target variable specified. This means you cannot perform calculations without creating an output variable in your dataset, which can make one-time calculations cumbersome. This is a limitation of SPSS, especially when you just want to explore different scenarios without cluttering your dataset with temporary variables.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 5">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<section id="exercise-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1">Exercise 1</h3>
+<p>In the graph depicted below, for which variables do you need to adjust to assess the unconfounded effect of E on O (there may be several possibilities)?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG1.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 1</figcaption>
+</figure>
 </div>
-<div class="callout-title-container flex-fill">
-Question 5
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The probability of being blood group B is 0.08. What is the probability that if 500 ml of blood is taken from each of 100 unrelated blood donors fewer than 1,500 ml of group B blood will be obtained?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 6">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 6
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>In a clinical trial in which a total of 100 patients are allocated to two treatments A and B by simple randomization (tossing a coin for each new patient). What is the probability that the difference between the numbers of patients in the two treatment groups exceeds 20? (Hint: the number of individuals in one treatment group (for example A) follows a Binomial distribution).</p>
-</div>
-</div>
+<p><strong>Answer:</strong><br>
+Following the recipe: after removing all arrows leaving E, there are several unblocked paths leading from E to O. Just like in the lecture, adjusting for v2 opens a backdoor path (E – v1 – v3 – O) This newly opened backdoor path needs to be closed by also conditioning on v1 or v3, or both. Hence, there are 3 options: (v1, v2, v3) ; (v1, v2) ; and finally, (v2, v3).</p>
 </section>
-<section id="normal-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="normal-distribution">Normal Distribution</h2>
-<p>Suppose that we want to calculate the probability that a randomly selected individual has a weight less than or equal to 80 kg, assuming that the distribution of weight in the population follows a normal distribution with mean 72 kg and standard deviation 10 kg.</p>
-<p>To calculate this probability, we first need to <strong>standardize</strong> the value using the formula:</p>
-<p><span class="math display">\[
-Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
-\]</span></p>
-<p>where:</p>
-<ul>
-<li><strong><code>x</code></strong> is the value we want to standardize (in this case, 80 kg).</li>
-<li><strong><code>μ</code></strong> is the mean of the distribution (in this case, 72 kg).</li>
-<li><strong><code>σ</code></strong> is the standard deviation of the distribution (in this case, 10 kg).</li>
-</ul>
-<p>Using SPSS, we can then use the “Transform &gt; Compute Variable…” menu and the <code>CDF.NORMAL(z, mean, sd)</code> function to find the corresponding cumulative probability from the standard normal distribution by setting <code>z = 0.8</code>, <code>mean = 0</code> and <code>sd = 1</code>.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 7">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<section id="exercise-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2">Exercise 2</h3>
+<p>In the graph depicted below, what happens when you additionally adjust for <strong>v5</strong>?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG2.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 2</figcaption>
+</figure>
 </div>
-<div class="callout-title-container flex-fill">
-Question 7
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Over a 25 year period the mean height of adult males increased from 175.8 cm to 179.1 cm, but the standard deviation stayed at 5.84 cm. The minimum height requirement for men to join the police force is 172 cm. What proportion of men would be too short to become policemen at the beginning and end of the 25 year period, assuming that the height of adult males has a Normal distribution?</p>
-</div>
-</div>
+<p><strong>Answer:</strong> When adjusting for v5, we are blocking the effect through this indirect path from E to O (v5 is a mediator between E and O). Instead of the total effect of E on O, we will be estimating the direct effect.</p>
+<p>In DAGitty, when you set v5 to ‘adjusted’, the algorithm will say the following: “The total effect cannot be estimated due to adjustment for an intermediate or a descendant of an intermediate.”</p>
 </section>
+<section id="exercise-3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-3">Exercise 3</h3>
+<p>This diagram is slightly different: <strong>v1</strong> now is the exposure. For which variables do you need toadjust to assess the unconfounded effect of <strong>v1</strong> on <strong>O</strong>?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG3.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 3</figcaption>
+</figure>
+</div>
+<p><strong>Answer:</strong> No adjustment is needed: there are no backdoor paths (removing all arrows leaving v1 reveals no remaining unblocked path from v1 to O).</p>
 </section>
-<section id="part-3---some-conceptual-questions" class="level1">
-<h1>Part 3 - Some conceptual questions</h1>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 8">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<section id="exercise-4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4">Exercise 4</h3>
+<p>Now, <strong>v2</strong> is the exposure. For which variables do you need to adjust to assess the total unconfounded effect of <strong>v2</strong> on <strong>O</strong>?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG4.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 4</figcaption>
+</figure>
 </div>
-<div class="callout-title-container flex-fill">
-Question 8
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Imagine we have some observations on blood pressure and calculate the mean, standard deviation, median and IQR. How do these measures change if all observations are</p>
+<p><strong>Answer:</strong> Following the recipe, there are three unblocked paths left after removing the arrows leaving v2:</p>
 <ol type="a">
-<li>increased by 10</li>
-<li>decreased by their mean</li>
-<li>multiplied by 10</li>
-<li>divided by their standard deviation</li>
+<li>v2 – v3 – O and</li>
+<li>v2 – v1 – E – O</li>
+<li>v2 - v1 – E -v5 - O</li>
 </ol>
+<p>Backdoor path a) can be closed by conditioning on v3.</p>
+<p>Backdoor path b) can be closed by conditioning on v1 (but not by conditioning on E, as you would no longer be estimating the total effect by blocking the paths from v2 to O mediated by E).</p>
+<p>In this case, you should therefore condition on v1 and v3.</p>
+</section>
+<section id="exercise-5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5">Exercise 5</h3>
+<p>Back to the first DAG. However, <strong>v2</strong> is now unmeasured. Can we still obtain an unconfounded estimate of the effect of <strong>E</strong> on <strong>O</strong>?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG5.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 5</figcaption>
+</figure>
 </div>
+<p><strong>Answer:</strong> No, we cannot close the backdoor path between E and O since v2 is unmeasured and cannot be corrected for.</p>
+</section>
+<section id="exercise-6" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-6">Exercise 6</h3>
+<p>See the DAG below: you adjusted for <strong>v5</strong>. What would be the consequence of this action?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG6.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 6</figcaption>
+</figure>
 </div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 9">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 9
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Two fair dice are rolled, the results are X1 and X2.</p>
-<ol type="a">
-<li>What is the probability Prob(X1=X2)?</li>
-<li>What is the expected value E(X1), and the standard deviation SD(X1)?</li>
-<li>Give the expected value and the variance of X1+X2 and of X1-X2.</li>
-</ol>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 10">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 10
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>There are two hospitals in town. On average 45 deliveries take place each day in the larger hospital, and 15 in the smaller. The probability of a baby being a boy is about 0.52, and the probability of twins is about 0.012. On any day, which hospital is more likely</p>
-<ol type="a">
-<li>to have a set of twins delivered</li>
-<li>to have more than 60 % of babies being boys?</li>
-</ol>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 11">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Question 11
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The probability of a baby being a boy is 0.52. For six women delivering consecutively in the same labour ward on one day, which of the following exact sequences of boys and girls is most likely and which least likely?</p>
-<p>GBGBGB</p>
-<p>BBBGGG</p>
-<p>GBBBBB</p>
-</div>
-</div>
+<p><strong>Answer:</strong> There is no consequence: conditioning on v5 cannot alter any of the estimated effects in the DAG (it is neither a confounder, collider, nor a mediator in the E-O relationship).</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

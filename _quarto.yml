@@ -53,7 +53,13 @@ website:
       - text: "Lab day 8"
         menu:
           - text: "Lab 8"
-            href: lab7.qmd                  
+            href: lab7.qmd 
+      - text: "Labs day 9"
+        menu:
+          - text: "R"
+            href: R_lab9.qmd
+          - text: "SPSS"
+            href: SPSS_lab9.qmd
       - text: "Answers"
         menu:
           - text: "Lab 1"
@@ -67,7 +73,9 @@ website:
           - text: "Lab 6"
             href: lab6_answers.qmd
           - text: "Lab 7"
-            href: lab8_answers.qmd     
+            href: lab8_answers.qmd    
+          - text: "Lab 8"
+            href: lab7_answers.qmd   
       - text: "Datasets"
         menu:
           - text: "lowbwt.sav"
@@ -83,7 +91,9 @@ website:
           - text: "whas500.sav"
             href: datasets/whas500.sav  
           - text: "GvHD.sav"
-            href: datasets/GvHD.sav        
+            href: datasets/GvHD.sav 
+          - text: "Ex9_1.sav"
+            href: datasets/Ex9_1.sav
 format:
   html:
     theme: cosmo

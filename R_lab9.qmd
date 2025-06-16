@@ -1,5 +1,5 @@
 ---
-title: "Advanced Medical Statistics – Lab 9"
+title: "Medical Statistics – Lab 9"
 subtitle: R version
 format:
   html:
@@ -18,7 +18,7 @@ execute:
 
 # Part 1: Analysis of overall survival in the Worcester Heart Attack study
 
-In this section, we are going to continue analyzing the Worcester Heart Attack Study (WHAS) dataset (file `whas500.sav` on Brightspace). The outcome of interest for today's analysis is overall survival, defined as the time from hospital admission to death from any cause. This information is captured in the variable `lenfol` (length of follow-up in days) and the variable `fstat` (follow-up status; dead or censored).
+In this section, we are going to continue analyzing the Worcester Heart Attack Study (WHAS) dataset (file `whas500.sav`). The outcome of interest for today's analysis is overall survival, defined as the time from hospital admission to death from any cause. This information is captured in the variable `lenfol` (length of follow-up in days) and the variable `fstat` (follow-up status; dead or censored).
 
 
 ```{r}
@@ -119,7 +119,7 @@ After adjusting for age and gender, what is the hazard ratio (HR) for patients w
 
 ### Excercise 1
 
-File `Ex9_1.sav` (available on Brightspace) contains data from a small experiment concerning motion sickness at sea (Burns, 1984). Subjects were placed in a cabin subjected to vertical motion for two hours. The outcome variable was the waiting time to emesis (vomiting). Some subjects requested an early stop to the experiment although they had not vomited, yielding censored observations, while others successfully survived two hours. The experiment was carried out with two "treatments": two combinations of movement accelerations and frequency. One combination was used for a group of 21 subjects, the other in a different group of 28 subjects.
+File `Ex9_1.sav` (available from the Datasets menu) contains data from a small experiment concerning motion sickness at sea (Burns, 1984). Subjects were placed in a cabin subjected to vertical motion for two hours. The outcome variable was the waiting time to emesis (vomiting). Some subjects requested an early stop to the experiment although they had not vomited, yielding censored observations, while others successfully survived two hours. The experiment was carried out with two "treatments": two combinations of movement accelerations and frequency. One combination was used for a group of 21 subjects, the other in a different group of 28 subjects.
 
 (a) Calculate and plot Kaplan-Meier estimates of survival probabilities in the two groups.
 
