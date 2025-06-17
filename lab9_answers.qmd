@@ -1,5 +1,5 @@
 ---
-title: "Advanced Medical Statistics – Answers lab 9"
+title: "Medical Statistics – Answers lab 9"
 format:
   html:
     toc: true       
@@ -120,7 +120,7 @@ After adjusting for gender and age, the HR for patients with a recurrent MI comp
 
 ### Excercise 1
 
-File `Ex9_1.sav` (available on Brightspace) contains data from a small experiment concerning motion sickness at sea (Burns, 1984). Subjects were placed in a cabin subjected to vertical motion for two hours. The outcome variable was the waiting time to emesis (vomiting). Some subjects requested an early stop to the experiment although they had not vomited, yielding censored observations, while others successfully survived two hours. The experiment was carried out with two "treatments": two combinations of movement accelerations and frequency. One combination was used for a group of 21 subjects, the other in a different group of 28 subjects.
+File `Ex9_1.sav` contains data from a small experiment concerning motion sickness at sea (Burns, 1984). Subjects were placed in a cabin subjected to vertical motion for two hours. The outcome variable was the waiting time to emesis (vomiting). Some subjects requested an early stop to the experiment although they had not vomited, yielding censored observations, while others successfully survived two hours. The experiment was carried out with two "treatments": two combinations of movement accelerations and frequency. One combination was used for a group of 21 subjects, the other in a different group of 28 subjects.
 
 ```{r}
 #| echo: true

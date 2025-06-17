@@ -60,6 +60,10 @@ website:
             href: R_lab9.qmd
           - text: "SPSS"
             href: SPSS_lab9.qmd
+      - text: "Lab day 10"
+        menu:
+          - text: "Lab 10"
+            href: lab10.qmd
       - text: "Answers"
         menu:
           - text: "Lab 1"
@@ -76,6 +80,8 @@ website:
             href: lab8_answers.qmd    
           - text: "Lab 8"
             href: lab7_answers.qmd   
+          - text: "Lab 9"
+            href: lab9_answers.qmd
       - text: "Datasets"
         menu:
           - text: "lowbwt.sav"
