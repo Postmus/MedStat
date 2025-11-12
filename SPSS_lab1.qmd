@@ -5,14 +5,17 @@ format:
   html:
     toc: true       
     toc-depth: 3    
-    toc-location: right   # Optional: Can be left, right, or floating    
+    toc-location: right
   pdf:
     toc: false      
-editor_options:
-  chunk_output_type: console
+execute:
+  warning: false
+  message: false
+  eval: false
+  echo: true
 ---
 
-Welcome to lab 1 in the advanced medical statistics course. In this lab, we will explore descriptive statistics and probability calculations for random variables. We will use an example dataset to practice summarizing continuous and categorical variables, and introduce some basic concepts of probability distributions.
+Welcome to lab 1 in the Medical statistics course. In this lab, we will explore descriptive statistics and probability calculations for random variables. We will use an example dataset to practice summarizing continuous and categorical variables, and introduce some basic concepts of probability distributions.
 
 # Part 1 - Descriptive statistics
 

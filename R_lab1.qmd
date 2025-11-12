@@ -5,28 +5,21 @@ format:
   html:
     toc: true       
     toc-depth: 3    
-    toc-location: right   # Optional: Can be left, right, or floating    
+    toc-location: right
   pdf:
     toc: false      
-editor_options:
-  chunk_output_type: console
+execute:
+  warning: false
+  message: false
+  eval: false
+  echo: true
 ---
 
-```{r}
-#| label: setup
-#| include: false
-
-# configure global options for R code chunks:
-# warning = F to suppress the display of warning messages 
-# generated during the execution of code chunks
-# message = F to suppress the display of messages produced 
-# during the execution of code chunks
-knitr::opts_chunk$set(warning = FALSE, 
-                      message = FALSE, 
-                      eval = FALSE)
-```
-
 Welcome to lab 1 in the medical statistics course. In this lab, we will explore descriptive statistics and probability calculations for random variables. We will use an example dataset to practice summarizing continuous and categorical variables, and introduce some basic concepts of probability distributions.
+
+::: {.callout-note title="Learning R"}
+Throughout this course, we use the `ggplot2` package for data visualization and the `dplyr` package for data transformation and summary. Students who want to learn more about these packages are recommended to study chapters 1 (Data visualization) and 3 (Data transformation) from Hadley Wickham's *R for Data Science* book: <https://r4ds.hadley.nz/>
+:::
 
 # Part 1 - Descriptive statistics
 
@@ -45,22 +38,6 @@ install.packages("ggplot2")
 Then, load the dataset as follows:
 
 ```{r}
-#| eval: false
-
-library(haven)
-library(dplyr)
-library(ggplot2)
-
-# Load the dataset
-lowbwt <- read_sav("lowbwt.sav")
-
-# Convert alll labelled variables into factor variables 
-lowbwt <- lowbwt %>% mutate(across(where(is.labelled), as_factor))
-```
-
-```{r}
-#| include: false
-
 library(haven)
 library(dplyr)
 library(ggplot2)
@@ -69,7 +46,7 @@ library(ggplot2)
 lowbwt <- read_sav("datasets/lowbwt.sav")
 
 # Convert alll labelled variables into factor variables 
-lowbwt <- lowbwt %>% mutate(across(where(is.labelled), as_factor))
+lowbwt <- lowbwt |> mutate(across(where(is.labelled), as_factor))
 ```
 
 The dataset includes the following variables:
@@ -92,33 +69,27 @@ The variables `bwt` (birth weight in grams) and `low` (low birth weight) are the
 
 ## Descriptive analysis of continuous variables
 
-Let's start by calculating the summary statistics for the continuous variable `age`.
+Let's start by calculating the summary statistics for the continuous variable `age`. We'll use the `summarise()` function from the `dplyr` package, which allows us to calculate multiple summary statistics in a single, organized call: 
+```{r}
+age_summary <- lowbwt |>
+  summarise(
+    mean = mean(age, na.rm = TRUE),
+    sd = sd(age, na.rm = TRUE),
+    median = median(age, na.rm = TRUE),
+    iqr = IQR(age, na.rm = TRUE)
+  )
 
-1. **Mean**: Use the `mean()` function to calculate the average age.
-   ```{r}
-   mean_age <- mean(lowbwt$age, na.rm = TRUE)
-   mean_age
-   ```
-   Here, `na.rm = TRUE` ensures that any missing values are ignored in the calculation.
+age_summary
+```
 
-2. **Standard Deviation**: Use the `sd()` function to calculate the standard deviation of age.
-   ```{r}
-   sd_age <- sd(lowbwt$age, na.rm = TRUE)
-   sd_age
-   ```
+The `summarise()` function creates a new data frame containing the summary statistics you specify. The functions `mean()`, `sd()`, `median()`, and `IQR()` are built-in base R functions that work within `summarise()`. The `na.rm = TRUE` argument ensures that any missing values are ignored in the calculations.
 
-3. **Median**: Use the `median()` function to calculate the median age.
-   ```{r}
-   median_age <- median(lowbwt$age, na.rm = TRUE)
-   median_age
-   ```
+Let's break down what each summary statistic represents:
 
-4. **Interquartile Range (IQR)**: Use the `IQR()` function to calculate the interquartile range of age.
-   ```{r}
-   iqr_age <- IQR(lowbwt$age, na.rm = TRUE)
-   iqr_age
-   ```
-   The `IQR()` function calculates the range between the 25th and 75th percentiles of `age`.
+- **Mean**: The average age of mothers in the dataset.
+- **Standard Deviation (sd)**: A measure of the spread or variability of ages around the mean.
+- **Median**: The middle value when all ages are arranged in order.
+- **Interquartile Range (IQR)**: The range between the 25th and 75th percentiles, representing the middle 50% of the data.
 
 To decide which summary measures (mean and standard deviation, or median and IQR) are appropriate to report, we need to understand the shape of the distribution of the `age` variable. We do this by creating a histogram:
 
@@ -138,28 +109,25 @@ Based on the shape of the histogram, determine which summary statistics are more
 :::
 
 ::: {.callout-important icon=false title="Question 2"}
-Calculate the mean, standard deviation, median, and IQR for the variable `lwt`. Additionally, create a histogram to determine the shape of its distribution and decide which summary measures are most appropriate to report.
+Calculate the mean, standard deviation, median, and IQR for the variable `lwt` using the `summarise()` function. Additionally, create a histogram to determine the shape of its distribution and decide which summary measures are most appropriate to report.
 :::
 
 ## Descriptive analysis of categorical variables
 
-Let's move on to analyzing the categorical variables. We will start by calculating the frequency and percentage of mothers who smoked during pregnancy (`smoke`):
+Let's move on to analyzing the categorical variables. We'll calculate the frequency and percentage of mothers who smoked during pregnancy (`smoke`) using the `count()` and `mutate()` functions from `dplyr` package:
 
-1. **Frequency Table**: Use the `table()` function to calculate the frequency of each category.
-   ```{r}
-   freq_smoke <- table(lowbwt$smoke)
-   freq_smoke
-   ```
+```{r}
+smoke_summary <- lowbwt |>
+  count(smoke) |>
+  mutate(percentage = n / sum(n) * 100)
 
-2. **Percentage Calculation**: Convert the counts to percentages by dividing by the total number of observations and multiplying by 100.
-   ```{r}
-   perc_smoke <- prop.table(freq_smoke) * 100
-   perc_smoke
-   ```
-   The `prop.table()` function in R is used to convert a frequency table into a table of proportions, essentially calculating the relative frequencies. When you multiply the result by 100, it converts these proportions into percentages.
+smoke_summary
+```
+
+The `count()` function calculates the frequency of each category and automatically creates a new column called `n` that contains these frequencies. The `mutate()` function then adds another column with the percentages, calculated by dividing each frequency (`n`) by the total number of observations (`sum(n)`) and multiplying by 100.
 
 ::: {.callout-important icon=false title="Question 3"}
-Calculate the frequencies and percentages for the variable history of hypertension (`ht`)
+Calculate the frequencies and percentages for the variable history of hypertension (`ht`).
 :::
 
 In addition to calculating frequencies and percentages, it can also be helpful to visualize categorical data. One common way to do this is by creating a bar chart. Below is an example of how you can create a bar chart for the `smoke` variable:

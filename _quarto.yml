@@ -10,78 +10,13 @@ website:
     left:
       - text: "Home"
         href: index.qmd
-      - text: "Labs day 1"
+      - text: "Labs week 1"
         menu:
           - text: "R"
             href: R_lab1.qmd
           - text: "SPSS"
             href: SPSS_lab1.qmd
-      - text: "Labs day 2"
-        menu:
-          - text: "R"
-            href: R_lab2.qmd
-          - text: "SPSS"
-            href: SPSS_lab2.qmd
-      - text: "Labs day 3"
-        menu:
-          - text: "R"
-            href: R_lab3.qmd
-          - text: "SPSS"
-            href: SPSS_lab3.qmd
-      - text: "Labs day 4"
-        menu:
-          - text: "R"
-            href: R_lab4.qmd
-          - text: "SPSS"
-            href: SPSS_lab4.qmd
-      - text: "Lab day 5"
-        menu:
-          - text: "Lab 5"
-            href: lab5.qmd
-      - text: "Labs day 6"
-        menu:
-          - text: "R"
-            href: R_lab6.qmd
-          - text: "SPSS"
-            href: SPSS_lab6.qmd
-      - text: "Labs day 7"
-        menu:
-          - text: "R"
-            href: R_lab8.qmd
-          - text: "SPSS"
-            href: SPSS_lab8.qmd
-      - text: "Lab day 8"
-        menu:
-          - text: "Lab 8"
-            href: lab7.qmd 
-      - text: "Labs day 9"
-        menu:
-          - text: "R"
-            href: R_lab9.qmd
-          - text: "SPSS"
-            href: SPSS_lab9.qmd
-      - text: "Lab day 10"
-        menu:
-          - text: "Lab 10"
-            href: lab10.qmd
       - text: "Answers"
-        menu:
-          - text: "Lab 1"
-            href: lab1_answers.qmd
-          - text: "Lab 2"
-            href: lab2_answers.qmd
-          - text: "Lab 3"
-            href: lab3_answers.qmd
-          - text: "Lab 4"
-            href: lab4_answers.qmd
-          - text: "Lab 6"
-            href: lab6_answers.qmd
-          - text: "Lab 7"
-            href: lab8_answers.qmd    
-          - text: "Lab 8"
-            href: lab7_answers.qmd   
-          - text: "Lab 9"
-            href: lab9_answers.qmd
       - text: "Datasets"
         menu:
           - text: "lowbwt.sav"
