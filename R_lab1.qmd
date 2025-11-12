@@ -76,22 +76,26 @@ age_summary <- lowbwt |>
     mean = mean(age, na.rm = TRUE),
     sd = sd(age, na.rm = TRUE),
     median = median(age, na.rm = TRUE),
+    q1 = quantile(age, 0.25, na.rm = TRUE),
+    q3 = quantile(age, 0.75, na.rm = TRUE),
     iqr = IQR(age, na.rm = TRUE)
   )
 
 age_summary
 ```
 
-The `summarise()` function creates a new data frame containing the summary statistics you specify. The functions `mean()`, `sd()`, `median()`, and `IQR()` are built-in base R functions that work within `summarise()`. The `na.rm = TRUE` argument ensures that any missing values are ignored in the calculations.
+The `summarise()` function creates a new data frame containing the summary statistics you specify. The functions `mean()`, `sd()`, `median()`, and `IQR()` are built-in base R functions that work within `summarise()`. The `quantile()` function calculates the quartiles: Q1 (25th percentile) and Q3 (75th percentile). The `na.rm = TRUE` argument ensures that any missing values are ignored in the calculations.
 
-Let's break down what each summary statistic represents:
+::: {.callout-note title="IQR vs [Q1, Q3]"}
+Note the difference between IQR and the quartile interval:
 
-- **Mean**: The average age of mothers in the dataset.
-- **Standard Deviation (sd)**: A measure of the spread or variability of ages around the mean.
-- **Median**: The middle value when all ages are arranged in order.
-- **Interquartile Range (IQR)**: The range between the 25th and 75th percentiles, representing the middle 50% of the data.
+- **IQR** (Interquartile Range) = Q3 - Q1, which is a single number representing the spread of the middle 50% of the data
+- **[Q1, Q3]** is the interval itself, showing the actual range where the middle 50% of observations fall
 
-To decide which summary measures (mean and standard deviation, or median and IQR) are appropriate to report, we need to understand the shape of the distribution of the `age` variable. We do this by creating a histogram:
+In scientific papers, it's more common to report the median along with [Q1, Q3] (e.g., "median age: 23 years [19, 26]") rather than reporting the IQR as a single value.
+:::
+
+To decide which summary measures (mean and standard deviation, or median and [Q1, Q3]) are appropriate to report, we need to understand the shape of the distribution of the `age` variable. We do this by creating a histogram:
 
 ```{r}
 ggplot(lowbwt, aes(x = age)) +
@@ -109,7 +113,7 @@ Based on the shape of the histogram, determine which summary statistics are more
 :::
 
 ::: {.callout-important icon=false title="Question 2"}
-Calculate the mean, standard deviation, median, and IQR for the variable `lwt` using the `summarise()` function. Additionally, create a histogram to determine the shape of its distribution and decide which summary measures are most appropriate to report.
+Calculate the mean, standard deviation, median, Q1, Q3, and IQR for the variable `lwt` using the `summarise()` function. Additionally, create a histogram to determine the shape of its distribution and decide which summary measures are most appropriate to report.
 :::
 
 ## Descriptive analysis of categorical variables

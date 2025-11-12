@@ -380,20 +380,33 @@ window.Quarto = {
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="fu">sd</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">median =</span> <span class="fu">median</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">iqr =</span> <span class="fu">IQR</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>age_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">q1 =</span> <span class="fu">quantile</span>(age, <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">q3 =</span> <span class="fu">quantile</span>(age, <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">iqr =</span> <span class="fu">IQR</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>age_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>The <code>summarise()</code> function creates a new data frame containing the summary statistics you specify. The functions <code>mean()</code>, <code>sd()</code>, <code>median()</code>, and <code>IQR()</code> are built-in base R functions that work within <code>summarise()</code>. The <code>na.rm = TRUE</code> argument ensures that any missing values are ignored in the calculations.</p>
-<p>Let’s break down what each summary statistic represents:</p>
+<p>The <code>summarise()</code> function creates a new data frame containing the summary statistics you specify. The functions <code>mean()</code>, <code>sd()</code>, <code>median()</code>, and <code>IQR()</code> are built-in base R functions that work within <code>summarise()</code>. The <code>quantile()</code> function calculates the quartiles: Q1 (25th percentile) and Q3 (75th percentile). The <code>na.rm = TRUE</code> argument ensures that any missing values are ignored in the calculations.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="IQR vs [Q1, Q3]">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>IQR vs [Q1, Q3]
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note the difference between IQR and the quartile interval:</p>
 <ul>
-<li><strong>Mean</strong>: The average age of mothers in the dataset.</li>
-<li><strong>Standard Deviation (sd)</strong>: A measure of the spread or variability of ages around the mean.</li>
-<li><strong>Median</strong>: The middle value when all ages are arranged in order.</li>
-<li><strong>Interquartile Range (IQR)</strong>: The range between the 25th and 75th percentiles, representing the middle 50% of the data.</li>
+<li><strong>IQR</strong> (Interquartile Range) = Q3 - Q1, which is a single number representing the spread of the middle 50% of the data</li>
+<li><strong>[Q1, Q3]</strong> is the interval itself, showing the actual range where the middle 50% of observations fall</li>
 </ul>
-<p>To decide which summary measures (mean and standard deviation, or median and IQR) are appropriate to report, we need to understand the shape of the distribution of the <code>age</code> variable. We do this by creating a histogram:</p>
+<p>In scientific papers, it’s more common to report the median along with [Q1, Q3] (e.g., “median age: 23 years [19, 26]”) rather than reporting the IQR as a single value.</p>
+</div>
+</div>
+<p>To decide which summary measures (mean and standard deviation, or median and [Q1, Q3]) are appropriate to report, we need to understand the shape of the distribution of the <code>age</code> variable. We do this by creating a histogram:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lowbwt, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, </span>
@@ -427,7 +440,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Calculate the mean, standard deviation, median, and IQR for the variable <code>lwt</code> using the <code>summarise()</code> function. Additionally, create a histogram to determine the shape of its distribution and decide which summary measures are most appropriate to report.</p>
+<p>Calculate the mean, standard deviation, median, Q1, Q3, and IQR for the variable <code>lwt</code> using the <code>summarise()</code> function. Additionally, create a histogram to determine the shape of its distribution and decide which summary measures are most appropriate to report.</p>
 </div>
 </div>
 </section>

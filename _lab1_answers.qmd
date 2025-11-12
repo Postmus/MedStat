@@ -4,22 +4,15 @@ format:
   html:
     toc: true       
     toc-depth: 3    
-    toc-location: right   # Optional: Can be left, right, or floating    
+    toc-location: right
   pdf:
     toc: false      
-editor_options:
-  chunk_output_type: console
+execute:
+  warning: false
+  message: false
+  eval: false
+  echo: true
 ---
-
-```{r}
-#| label: setup
-#| include: false
-
-# configure global options for R code chunks:
-# warning = F to suppress the display of warning messages generated during the execution of code chunks
-# message = F to suppress the display of messages produced during the execution of code chunks
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, eval=TRUE)
-```
 
 ```{r}
 #| include: false
@@ -72,7 +65,7 @@ ggplot(lowbwt, aes(x = lwt)) +
   theme_minimal()
 ```
 
-From the histogram, it follows that the distribution of lwt is right-skewed. We therefore prefer reporting median [IQR] or median [Q1, Q3], depending on the style conventions of the journal (typically the latter in the medical field). The median [IQR] is equal to `r median(lowbwt$lwt, na.rm = TRUE)` [`r IQR(lowbwt$lwt, na.rm = TRUE)`]. The first and third quartiles, calculated using `Analyze -> Explore` in SPSS or `quantile(lowbwt$lwt, probs = c(0.25, 0.75), na.rm = TRUE)` in R, are equal to [`r quantile(lowbwt$lwt, probs = c(0.25, 0.75), na.rm = TRUE)`].
+From the histogram, it follows that the distribution of lwt is right-skewed. We therefore prefer reporting median [Q1, Q3]. The median [Q1, Q3] is equal to `r median(lowbwt$lwt, na.rm = TRUE)` [`r quantile(lowbwt$lwt, probs = c(0.25, 0.75), na.rm = TRUE)`].
 :::
 
 ::: {.callout-important icon=false title="Question 3"}
