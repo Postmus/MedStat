@@ -10,7 +10,7 @@ format:
 execute:
   warning: false
   message: false
-  eval: false
+  eval: true
   echo: true
 ---
 

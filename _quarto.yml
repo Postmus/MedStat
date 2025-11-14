@@ -17,6 +17,9 @@ website:
           - text: "SPSS"
             href: SPSS_lab1.qmd
       - text: "Answers"
+        menu:
+          - text: "Week 1"
+            href: lab1_answers.qmd
       - text: "Datasets"
         menu:
           - text: "lowbwt.sav"
