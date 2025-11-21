@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Medical Statistics – Lab 1 – Medical Statistics</title>
+<title>Medical Statistics – Answers lab 2 – Medical Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -221,27 +256,23 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1---descriptive-statistics" id="toc-part-1---descriptive-statistics" class="nav-link active" data-scroll-target="#part-1---descriptive-statistics">Part 1 - Descriptive statistics</a>
+  <li><a href="#point-estimates-and-95-confidence-intervals-for-population-means" id="toc-point-estimates-and-95-confidence-intervals-for-population-means" class="nav-link active" data-scroll-target="#point-estimates-and-95-confidence-intervals-for-population-means">Point Estimates and 95% Confidence Intervals for Population Means</a></li>
+  <li><a href="#one-sample-t-test" id="toc-one-sample-t-test" class="nav-link" data-scroll-target="#one-sample-t-test">One-Sample t-Test</a></li>
+  <li><a href="#point-estimates-and-95-confidence-intervals-for-population-proportions" id="toc-point-estimates-and-95-confidence-intervals-for-population-proportions" class="nav-link" data-scroll-target="#point-estimates-and-95-confidence-intervals-for-population-proportions">Point Estimates and 95% Confidence Intervals for Population Proportions</a></li>
+  <li><a href="#binomial-test" id="toc-binomial-test" class="nav-link" data-scroll-target="#binomial-test">Binomial Test</a>
   <ul class="collapse">
-  <li><a href="#descriptive-analysis-of-continuous-variables" id="toc-descriptive-analysis-of-continuous-variables" class="nav-link" data-scroll-target="#descriptive-analysis-of-continuous-variables">Descriptive analysis of continuous variables</a></li>
-  <li><a href="#descriptive-analysis-of-categorical-variables" id="toc-descriptive-analysis-of-categorical-variables" class="nav-link" data-scroll-target="#descriptive-analysis-of-categorical-variables">Descriptive analysis of categorical variables</a></li>
+  <li><a href="#r-results" id="toc-r-results" class="nav-link" data-scroll-target="#r-results">R results</a></li>
+  <li><a href="#spss-results" id="toc-spss-results" class="nav-link" data-scroll-target="#spss-results">SPSS results</a></li>
   </ul></li>
-  <li><a href="#part-2---probability-calculations-for-random-variables" id="toc-part-2---probability-calculations-for-random-variables" class="nav-link" data-scroll-target="#part-2---probability-calculations-for-random-variables">Part 2 - Probability calculations for random variables</a>
-  <ul class="collapse">
-  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution">Binomial Distribution</a></li>
-  <li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link" data-scroll-target="#normal-distribution">Normal Distribution</a></li>
-  </ul></li>
-  <li><a href="#part-3---some-conceptual-questions" id="toc-part-3---some-conceptual-questions" class="nav-link" data-scroll-target="#part-3---some-conceptual-questions">Part 3 - Some conceptual questions</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="SPSS_lab1.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab2_answers.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Medical Statistics – Lab 1</h1>
-<p class="subtitle lead">SPSS version</p>
+<h1 class="title">Medical Statistics – Answers lab 2</h1>
 </div>
 
 
@@ -258,78 +289,15 @@ window.Quarto = {
 </header>
 
 
-<p>Welcome to lab 1 in the Medical statistics course. In this lab, we will explore descriptive statistics and probability calculations for random variables. We will use an example dataset to practice summarizing continuous and categorical variables, and introduce some basic concepts of probability distributions.</p>
-<section id="part-1---descriptive-statistics" class="level1">
-<h1>Part 1 - Descriptive statistics</h1>
-<p>For this part of the lab, we will use the <code>lowbwt.sav</code> dataset. This dataset contains information collected at Baystate Medical Center Springfield, MA, during 1986 and is from Appendix 1 of Hosmer and Lemeshow (1989). The data include information about factors related to low birth weight, an important concern due to its association with high infant mortality rates and birth defects.</p>
-<p>The dataset includes the following variables:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Variable</th>
-<th>Abbreviation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Identification Code</td>
-<td>ID</td>
-</tr>
-<tr class="even">
-<td>Low Birth Weight (0 = Birth Weight ≥ 2500g, 1 = Birth Weight &lt; 2500g)</td>
-<td>low</td>
-</tr>
-<tr class="odd">
-<td>Age of the Mother in Years</td>
-<td>age</td>
-</tr>
-<tr class="even">
-<td>Weight in Pounds at the Last Menstrual Period</td>
-<td>lwt</td>
-</tr>
-<tr class="odd">
-<td>Ethnicity (1 = Caucasian, 2 = Afro-American, 3 = Asian)</td>
-<td>ethnicity</td>
-</tr>
-<tr class="even">
-<td>Smoking Status During Pregnancy (1 = Yes, 0 = No)</td>
-<td>smoke</td>
-</tr>
-<tr class="odd">
-<td>History of Premature Labor (0 = None, 1 = One, etc.)</td>
-<td>ptl</td>
-</tr>
-<tr class="even">
-<td>History of Hypertension (1 = Yes, 0 = No)</td>
-<td>ht</td>
-</tr>
-<tr class="odd">
-<td>Presence of Uterine Irritability (1 = Yes, 0 = No)</td>
-<td>urirr</td>
-</tr>
-<tr class="even">
-<td>Number of Physician Visits During the First Trimester (0 = None, 1 = One, 2 = Two, etc.)</td>
-<td>pvft</td>
-</tr>
-<tr class="odd">
-<td>Birth Weight in Grams</td>
-<td>bwt</td>
-</tr>
-</tbody>
-</table>
-<p>The variables <code>bwt</code> (birth weight in grams) and <code>low</code> (low birth weight) are the outcome variables, while all other variables are considered independent variables. The outcome variables will be analyzed in more detail in subsequent labs. In this lab, we will focus on describing the study population in terms of the independent variables to obtain a set of summary statistics that could be used to populate a baseline characteristics table.</p>
-<section id="descriptive-analysis-of-continuous-variables" class="level2">
-<h2 class="anchored" data-anchor-id="descriptive-analysis-of-continuous-variables">Descriptive analysis of continuous variables</h2>
-<p>Let’s start by calculating the summary statistics for the continuous variable <code>age</code>.</p>
-<ol type="1">
-<li><p><strong>Mean</strong> and <strong>Standard Deviation</strong>: Use the “Analyze &gt; Descriptive Statistics &gt; Descriptives…” menu in SPSS to calculate the mean age of the mothers. Select <code>age</code> as the variable, and ensure that the mean and standard deviation are checked in the “Options” dialog.</p></li>
-<li><p><strong>Median and Interquartile Range (IQR)</strong>: To calculate the median and IQR for <code>age</code>, use the “Analyze &gt; Descriptive Statistics &gt; Frequencies…” menu. Select <code>age</code> as the variable and click on “Statistics…” to choose the median and quartiles.</p></li>
-</ol>
-<p>To decide which summary measures (mean and standard deviation, or median and IQR) are appropriate to report, we need to understand the shape of the distribution of the <code>age</code> variable. Create a histogram by using “Graphs &gt; Legacy Dialogs &gt; Histogram…” and selecting <code>age</code> as the variable.</p>
+<section id="point-estimates-and-95-confidence-intervals-for-population-means" class="level2">
+<h2 class="anchored" data-anchor-id="point-estimates-and-95-confidence-intervals-for-population-means">Point Estimates and 95% Confidence Intervals for Population Means</h2>
+<p>We will start by analyzing the variable ‘birth weight in grams’ (bwt), which is the main outcome of this study.</p>
+<p>The mean, standard deviation, and standard error of the mean of the variable ‘birth weight in grams’ (bwt) are as follows:</p>
+<ul>
+<li>Mean: 2944.7</li>
+<li>Standard deviation: 729</li>
+<li>Standard error (SE): 53.03</li>
+</ul>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 1">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -340,7 +308,20 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on the shape of the histogram, determine which summary statistics are more appropriate to report.</p>
+<p>Based on these summary statistics, what is the estimated mean birth weight for the population?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 1">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer question 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The estimated mean birth weight for the population is 2944.7 grams.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 2">
@@ -353,17 +334,23 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Calculate the mean, standard deviation, median, and IQR for the variable <code>lwt</code>. Additionally, create a histogram to determine the shape of its distribution and decide which summary measures are most appropriate to report.</p>
+<p>Manually calculate the corresponding 95% confidence interval based on the normal approximation.</p>
 </div>
 </div>
-</section>
-<section id="descriptive-analysis-of-categorical-variables" class="level2">
-<h2 class="anchored" data-anchor-id="descriptive-analysis-of-categorical-variables">Descriptive analysis of categorical variables</h2>
-<p>Let’s move on to analyzing the categorical variables. We will start by calculating the frequency and percentage of mothers who smoked during pregnancy (<code>smoke</code>):</p>
-<ol type="1">
-<li><p><strong>Frequency Table</strong>: Use the “Analyze &gt; Descriptive Statistics &gt; Frequencies…” menu to calculate the frequency of each category for <code>smoke</code>.</p></li>
-<li><p><strong>Percentage Calculation</strong>: SPSS will automatically calculate the percentages for each category in the frequency table output.</p></li>
-</ol>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 2">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer question 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using the normal approximation, the 95% confidence interval for the population mean birth weight can be calculated as mean ± 1.96 * SE, where the standard error (SE) is equal to 53.03. Therefore, the 95% confidence interval is (2840.7, 3048.6).</p>
+</div>
+</div>
+<p>You can also use SPSS/R to calculate this 95% confidence interval by using the t-distribution. This gives the following result: (2840, 3049.3)</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 3">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -374,10 +361,40 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Calculate the frequencies and percentages for the variable <code>ht</code> (history of hypertension).</p>
+<p>How does the 95% confidence interval based on the t-distribution compare to the 95% confidence interval based on the normal approximation that you manually computed?</p>
 </div>
 </div>
-<p>In addition to calculating frequencies and percentages, it can also be helpful to visualize categorical data. One common way to do this is by creating a bar chart. To create a bar chart for the <code>smoke</code> variable, use “Graphs &gt; Legacy Dialogs &gt; Bar…” and select “Simple” and “Summaries for Groups of Cases.” Then select <code>smoke</code> as the Category Axis.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 3">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer question 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The 95% confidence interval that uses the t-distribution is sightly wider compared to the 95% confidence interval that was manually computed using the normal approximation. However, given that the sample size is relatively large (n = 189), the difference is minimal. Larger differences would be expected with smaller sample sizes.</p>
+</div>
+</div>
+</section>
+<section id="one-sample-t-test" class="level2">
+<h2 class="anchored" data-anchor-id="one-sample-t-test">One-Sample t-Test</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  lowbwt$bwt
+t = -1.0437, df = 188, p-value = 0.298
+alternative hypothesis: true mean is not equal to 3000
+95 percent confidence interval:
+ 2840.049 3049.264
+sample estimates:
+mean of x 
+ 2944.656 </code></pre>
+</div>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 4">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -388,25 +405,22 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Create a bar chart for the variable <code>ht</code> to visualize the frequency of mothers with a history of hypertension.</p>
+<p>You see that the test has 188 degrees of freedom. Why?</p>
 </div>
 </div>
-</section>
-</section>
-<section id="part-2---probability-calculations-for-random-variables" class="level1">
-<h1>Part 2 - Probability calculations for random variables</h1>
-<p>In this section, we will focus on two commonly used probability distributions: the binomial distribution and the normal distribution. We will explore how to work with these distributions in SPSS using practical examples.</p>
-<section id="binomial-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="binomial-distribution">Binomial Distribution</h2>
-<p>A binomial distribution represents the number of successes in a fixed number of independent trials, each with the same probability of success. For example, if we have 10 patients and we want to know the probability that exactly 3 of them respond to a given treatment, where the response rate is known to be 40%, we can use SPSS to calculate this probability.</p>
-<p>To perform this calculation in SPSS, go to “Transform &gt; Compute Variable…” and create a new variable called <code>p_response_3</code>. Use the function <code>PDF.BINOM(x, n, p)</code> to calculate the cumulative probability:</p>
-<ul>
-<li><strong><code>x</code></strong>: The number of successes we are interested in (in this example, <code>3</code> patients responding).</li>
-<li><strong><code>n</code></strong>: The number of trials (in this example, <code>10</code> patients).</li>
-<li><strong><code>p</code></strong>: The probability of success in each trial (in this example, <code>0.4</code> or 40% response rate).</li>
-</ul>
-<p>Cumulative probabilities, such as the probability that 3 or fewer patients out of 10 respond to the treatment, can similarly be calculated by creating a new variable with the <code>CDF.BINOM(x, n, p)</code> function.</p>
-<p><strong>Note</strong>: Unlike other statistical software, SPSS requires that calculations performed using the “Transform &gt; Compute Variable…” tool always have a target variable specified. This means you cannot perform calculations without creating an output variable in your dataset, which can make one-time calculations cumbersome. This is a limitation of SPSS, especially when you just want to explore different scenarios without cluttering your dataset with temporary variables.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 5">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer question 5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The degrees of freedom (df) for the one-sample t-test is equal to (sample size - 1), so df = 189 - 1 = 188 in this case.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 5">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -417,7 +431,29 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The probability of being blood group B is 0.08. What is the probability that if 500 ml of blood is taken from each of 100 unrelated blood donors fewer than 1,500 ml of group B blood will be obtained?</p>
+<p>Based on the results of the test, does the population mean significantly differ from 3000?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 5">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer question 5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The value of t-statistic is -1.04, and the corresponding p-value is 0.298. Since the p-value is greater than the significance level of 0.05, we fail to reject the null hypothesis. Therefore, the current sample does not provide sufficient evidence to conclude that the population mean significantly differs from 3000.</p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab2_answers_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 6">
@@ -430,24 +466,34 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In a clinical trial in which a total of 100 patients are allocated to two treatments A and B by simple randomization (tossing a coin for each new patient). What is the probability that the difference between the numbers of patients in the two treatment groups exceeds 20? (Hint: the number of individuals in one treatment group (for example A) follows a Binomial distribution).</p>
+<p>Looking at the histogram, would you say that the data are normally distributed?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 6">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer question 6
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Based on the histogram, the data appears to be reasonably normally distributed.</p>
 </div>
 </div>
 </section>
-<section id="normal-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="normal-distribution">Normal Distribution</h2>
-<p>Suppose that we want to calculate the probability that a randomly selected individual has a weight less than or equal to 80 kg, assuming that the distribution of weight in the population follows a normal distribution with mean 72 kg and standard deviation 10 kg.</p>
-<p>To calculate this probability, we first need to <strong>standardize</strong> the value using the formula:</p>
-<p><span class="math display">\[
-Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
-\]</span></p>
-<p>where:</p>
-<ul>
-<li><strong><code>x</code></strong> is the value we want to standardize (in this case, 80 kg).</li>
-<li><strong><code>μ</code></strong> is the mean of the distribution (in this case, 72 kg).</li>
-<li><strong><code>σ</code></strong> is the standard deviation of the distribution (in this case, 10 kg).</li>
-</ul>
-<p>Using SPSS, we can then use the “Transform &gt; Compute Variable…” menu and the <code>CDF.NORMAL(z, mean, sd)</code> function to find the corresponding cumulative probability from the standard normal distribution by setting <code>z = 0.8</code>, <code>mean = 0</code> and <code>sd = 1</code>.</p>
+<section id="point-estimates-and-95-confidence-intervals-for-population-proportions" class="level2">
+<h2 class="anchored" data-anchor-id="point-estimates-and-95-confidence-intervals-for-population-proportions">Point Estimates and 95% Confidence Intervals for Population Proportions</h2>
+<p>Next, we will explore the variable ‘low birth weight’ (low), which is a dichotomous variable that takes a value 1 if the baby had a low birth weight (defined as a birth weight &lt; 2500g) and a value of 0 otherwise.</p>
+<p>The frequency table for this variable is as follows:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  0   1 
+130  59 </code></pre>
+</div>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 7">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -458,13 +504,22 @@ Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Over a 25 year period the mean height of adult males increased from 175.8 cm to 179.1 cm, but the standard deviation stayed at 5.84 cm. The minimum height requirement for men to join the police force is 172 cm. What proportion of men would be too short to become policemen at the beginning and end of the 25 year period, assuming that the height of adult males has a Normal distribution?</p>
+<p>Based on these frequencies, what is the estimated proportion of low birth weight babies in the population?</p>
 </div>
 </div>
-</section>
-</section>
-<section id="part-3---some-conceptual-questions" class="level1">
-<h1>Part 3 - Some conceptual questions</h1>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 7">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer question 7
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The estimated proportion of low birth weight babies in the population is 59 / (130 + 59) = 0.31.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 8">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -475,15 +530,53 @@ Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Imagine we have some observations on blood pressure and calculate the mean, standard deviation, median and IQR. How do these measures change if all observations are</p>
-<ol type="a">
-<li>increased by 10</li>
-<li>decreased by their mean</li>
-<li>multiplied by 10</li>
-<li>divided by their standard deviation</li>
-</ol>
+<p>Calculate the corresponding 95% confidence interval based on the Normal approximation.</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 8">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer question 8
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using the sample proportion p, the standard error (SE) can be calculated as <span class="math inline">\(\sqrt(p * (1 - p) / n)\)</span>, where n is the total number of observations. The 95% confidence interval can then be calculated as p ± 1.96 * SE. In this case, the SE is equal to 0.03. Therefore, the 95% confidence interval is (0.24, 0.38).</p>
+</div>
+</div>
+</section>
+<section id="binomial-test" class="level2">
+<h2 class="anchored" data-anchor-id="binomial-test">Binomial Test</h2>
+<p>Subsequently, we perform an exact binomial test to assess whether the proportion of low birth weight babies in the population differs significantly from a hypothesized value of 30%:</p>
+<section id="r-results" class="level3">
+<h3 class="anchored" data-anchor-id="r-results">R results</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Exact binomial test
+
+data:  sum(lowbwt$low == 1, na.rm = TRUE) and length(na.omit(lowbwt$low))
+number of successes = 59, number of trials = 189, p-value = 0.7509
+alternative hypothesis: true probability of success is not equal to 0.3
+95 percent confidence interval:
+ 0.2468886 0.3834546
+sample estimates:
+probability of success 
+             0.3121693 </code></pre>
+</div>
+</div>
+</section>
+<section id="spss-results" class="level3">
+<h3 class="anchored" data-anchor-id="spss-results">SPSS results</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/SPSS_lab2_q9.PNG" class="img-fluid figure-img"></p>
+<figcaption>Screenshot of the SPSS output table</figcaption>
+</figure>
+</div>
+<p>Because the binomial distribution with n=189 and p=0.3 is reasonably symmetric, the two-sided p-value provided by SPSS is close to the one provided by R. In the answers below, we will use the R results.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 9">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -494,12 +587,20 @@ Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Two fair dice are rolled, the results are X1 and X2.</p>
-<ol type="a">
-<li>What is the probability Prob(X1=X2)?</li>
-<li>What is the expected value E(X1), and the standard deviation SD(X1)?</li>
-<li>Give the expected value and the variance of X1+X2 and of X1-X2.</li>
-</ol>
+<p>Does the proportion of low birth weight babies differ significantly from 30%?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 9">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer question 9
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The observed number of successes is 59, and the total number of trials is 189. Assuming a null hypothesis proportion of 30%, the expected number of successes is 0.3 * 189 = 56.7. The observed number of successes is relatively close to the expected number of successes under the null hypothesis, resulting in a p-value of the binomial test of 0.75. Since this p-value is greater than the significance level of 0.05, we fail to reject the null hypothesis. Therefore, the current sample does not provide sufficient evidence to conclude that the proportion of low birth weight babies differs significantly from 30%.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 10">
@@ -512,11 +613,38 @@ Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>There are two hospitals in town. On average 45 deliveries take place each day in the larger hospital, and 15 in the smaller. The probability of a baby being a boy is about 0.52, and the probability of twins is about 0.012. On any day, which hospital is more likely</p>
-<ol type="a">
-<li>to have a set of twins delivered</li>
-<li>to have more than 60 % of babies being boys?</li>
-</ol>
+<p>The Dutch government intends to start a campaign against drinking alcoholic beverages if over 50% of the adolescents drink alcoholic beverages regularly (at least once a week). A random sample of 200 adolescents is taken and 128 admit that they drink alcohol regularly (we assume all 200 speak the truth). Test the null hypothesis that 50% of the Dutch adolescents drink alcohol, using a significance level of 5%. Use the exact binomial test for this question.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 10">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer question 10
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The observed number of successes is 128, and the total number of trials is 200. Assuming a null hypothesis proportion of 50%, the expected number of successes is 0.5 * 200 = 100. The observed number of successes is considerably higher than the expected number of successes under the null hypothesis, resulting in a p-value of the binomial test that is &lt;0.001:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>binom_test_result <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="dv">128</span>, <span class="dv">200</span>, <span class="at">p =</span> <span class="fl">0.50</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>binom_test_result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Exact binomial test
+
+data:  128 and 200
+number of successes = 128, number of trials = 200, p-value = 9.13e-05
+alternative hypothesis: true probability of success is not equal to 0.5
+95 percent confidence interval:
+ 0.5692861 0.7064953
+sample estimates:
+probability of success 
+                  0.64 </code></pre>
+</div>
+</div>
+<p>Therefore, we reject the null hypothesis and conclude that the proportion of Dutch adolescents who drink alcohol regularly is significantly higher than 50%.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 11">
@@ -529,14 +657,27 @@ Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The probability of a baby being a boy is 0.52. For six women delivering consecutively in the same labour ward on one day, which of the following exact sequences of boys and girls is most likely and which least likely?</p>
-<p>GBGBGB</p>
-<p>BBBGGG</p>
-<p>GBBBBB</p>
+<p>Rather than using an exact binomial test, we can also use the normal approximation of the binomial distribution to obtain an approximate p-value for the above hypothesis test. Manually calculate this approximate p-value and compare it to the p-value obtained from the binomial test. Is the use of the normal approximation appropriate in this case?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 11">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer question 11
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To manually calculate an approximate p-value using the normal approximation, we first calculate the sample proportion <span class="math inline">\(p\)</span> as the number of successes divided by the total number of trials (i.e., <span class="math inline">\(p\)</span> = 128 / 200 = 0.64). We then calculate the standard error (SE) as <span class="math inline">\(\sqrt(\pi * (1 - \pi) / n)\)</span>, where <span class="math inline">\(n\)</span> is the total number of observations and <span class="math inline">\(\pi\)</span> is the null hypothesis proportion. This gives a SE of 0.035.</p>
+<p>Under the null hypothesis, the sample proportion is approximately Normally distributed with mean <span class="math inline">\(\pi\)</span> = 0.5 and SE = 0.035. To calculate the probability of observing a sample proportion at least as extreme as the one observed in the data, we can calculate the z-score as <span class="math inline">\((p - \pi) / SE\)</span>. In this case, the z-score is 3.96, resulting in a p-value &lt;0.001, which is consistent with the p-value obtained from the binomial test.</p>
+<p>The use of the normal approximation is very reasonable in this case because <span class="math inline">\(n * \pi = 200 * 0.5 =100\)</span> is considerably larger than 5, which is the minimum requirement for the normal approximation to be valid.</p>
 </div>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

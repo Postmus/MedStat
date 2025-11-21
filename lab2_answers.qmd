@@ -4,22 +4,15 @@ format:
   html:
     toc: true       
     toc-depth: 3    
-    toc-location: right   # Optional: Can be left, right, or floating    
+    toc-location: right
   pdf:
     toc: false      
-editor_options:
-  chunk_output_type: console
+execute:
+  warning: false
+  message: false
+  eval: true
+  echo: false
 ---
-
-```{r}
-#| label: setup
-#| include: false
-
-# configure global options for R code chunks:
-# warning = F to suppress the display of warning messages generated during the execution of code chunks
-# message = F to suppress the display of messages produced during the execution of code chunks
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, eval=TRUE, echo = FALSE)
-```
 
 ```{r}
 #| include: false
@@ -132,7 +125,7 @@ The frequency table for this variable is as follows:
 ```{r}
 # Calculate the frequency of each category of the 'low' variable
 freq_table <- table(lowbwt$low)
-pander::pander(freq_table)
+freq_table
 ```
 
 ::: {.callout-important icon=false title="Question 7"}
@@ -179,7 +172,7 @@ The observed number of successes is 59, and the total number of trials is 189. A
 :::
 
 ::: {.callout-important icon=false title="Question 10"}
-The Dutch government intends to start a campaign against drinking alcoholic beverages if over 50% of the adolescents drink alcoholic beverages regularly (at least once a week). A random sample of 200 adolescents is taken and 128 admit that they drink alcohol regularly (we assume all 200 speak the truth). Test the null hypothesis that 50% of the Dutch adolescents drink alcohol, using a significance level of 5%.
+The Dutch government intends to start a campaign against drinking alcoholic beverages if over 50% of the adolescents drink alcoholic beverages regularly (at least once a week). A random sample of 200 adolescents is taken and 128 admit that they drink alcohol regularly (we assume all 200 speak the truth). Test the null hypothesis that 50% of the Dutch adolescents drink alcohol, using a significance level of 5%. Use the exact binomial test for this question.
 :::
 
 ::: {.callout-tip icon=false title="Answer question 10"}
