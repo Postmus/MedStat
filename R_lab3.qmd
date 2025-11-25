@@ -7,50 +7,30 @@ format:
     toc-depth: 3    
     toc-location: right
   pdf:
-    toc: false  
+    toc: false 
+execute:
+  warning: false
+  message: false
+  eval: false
+  echo: true     
 ---
 
+Welcome to lab 3 in the medical statistics course. For today's exercises, we will continue exploring the `lowbwt.sav` dataset, which you can downloaded from the Dataset section of the menu. In this lab, we will use the following R packages: `haven`, `dplyr`, `ggplot2`, `car`, and `dunn.test`. The first three packages were also used in the previous labs and therefore already installed on your computer. For `car` (used to perform Levene's test) and `dunn.test` (used to perform Dunn's post-hoc test) you may have to download and install them first by running `install.packages(c("car", "dunn.test"))`.
 
 ```{r}
-#| label: setup
-#| include: false
-
-# configure global options for R code chunks:
-# warning = F to suppress the display of warning messages generated during the execution of code chunks
-# message = F to suppress the display of messages produced during the execution of code chunks
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, eval=FALSE)
-```
-
-Welcome to lab 3 in the medical statistics course. For today’s exercises, we will continue exploring the `lowbwt.sav` dataset, which you can downloaded from the Dataset section of the menu. 
-
-```{r}
-#| eval: false
-
+# Load the required packages
 library(haven)
 library(dplyr)
 library(ggplot2)
 library(car)
+library(dunn.test)
 
 # Load the dataset
-lowbwt <- read_sav("lowbwt.sav")
-
-# Convert all variables to factors where needed
-lowbwt <- lowbwt %>% mutate(across(where(is.labelled), as_factor))
-```
-
-```{r}
-#| include: false
-
-library(haven)
-library(dplyr)
-library(ggplot2)
-library(car)
-
-# Load the dataset
+#lowbwt <- read_sav("lowbwt.sav")
 lowbwt <- read_sav("datasets/lowbwt.sav")
 
 # Convert all variables to factors where needed
-lowbwt <- lowbwt %>% mutate(across(where(is.labelled), as_factor))
+lowbwt <- lowbwt |> mutate(across(where(is.labelled), as_factor))
 ```
 
 As a reminder, the dataset includes the following variables (see the previous lab for more details):
@@ -68,8 +48,6 @@ As a reminder, the dataset includes the following variables (see the previous la
 | Presence of Uterine Irritability (1 = Yes, 0 = No) | urirr |
 | Number of Physician Visits During the First Trimester (0 = None, 1 = One, 2 = Two, etc.) | pvft |
 | Birth Weight in Grams | bwt |
-
-<br>
 
 ## Part 1: Independent Samples t-test and Mann-Whitney U Test
 
@@ -106,7 +84,7 @@ print(independent_t_test)
 
 - The first argument `bwt ~ smoke` specifies the formula for the test, indicating that we are comparing the birth weights (`bwt`) between the two groups defined by the `smoke` variable.
 - The second argument `data = lowbwt` specifies the dataset.
-- The argument `var.equal = TRUE` indicates that we are assuming equal variances in the two groups, meaning that the classical independent samples t-test is performed. If you suspect unequal variances, Welch's t-test can be conducted by setting `var.equal = FALSE`.
+- The argument `var.equal = TRUE` indicates that we are assuming equal variances in the two groups, meaning that the classical independent samples t-test is performed. If you suspect unequal variances, the Welch t-test can be conducted by setting `var.equal = FALSE`.
 
 ::: {.callout-important icon=false title="Question 2"}
 Based on the results of the independent samples t-test, is there a statistically significant difference in birth weight between mothers who smoked and those who did not?
@@ -128,7 +106,7 @@ ggplot(lowbwt, aes(x = bwt)) +
 Do the histograms indicate that the birth weight data are approximately normally distributed for both groups?
 :::
 
-We also need to check whether the assumption of a common population standard deviation holds. This can be done by performing the Levene test:
+We also need to check whether the assumption of a common population standard deviation holds. This can be done by performing Levene's test:
 
 ```{r}  
 # Perform Levene's test for homogeneity of variances
@@ -137,7 +115,7 @@ levene_test
 ```
 
 ::: {.callout-important icon=false title="Question 4"}
-Based on the Levene test, does the assumption of equal variances hold?
+Based on Levene's test, does the assumption of equal variances hold?
 :::
 
 ### 95% Confidence Interval for the mean difference
@@ -148,14 +126,19 @@ To calculate the summary statistics required for the manual calculation, we use 
 
 ```{r}
 # Calculate summary statistics by smoking status
-summary_stats <- lowbwt %>%
-  group_by(smoke) %>%
-  summarise(mean = mean(bwt), sd = sd(bwt), n = n())
+summary_stats <- lowbwt |>
+  group_by(smoke) |>
+  summarise(
+    mean = mean(bwt),
+    sd = sd(bwt),
+    n = n(),
+    .groups = "drop"
+  )
 summary_stats
 ```
 
 ::: {.callout-important icon=false title="Exercise"}
-Based on these summary statistics, calculate the pooled standard deviation and the standard error of the mean difference. Then compute the 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not. You may simplify the calculation by using the 97.5th percentile from the standard normal distribution (1.96) rather than the corresponding percentile from the t-distribution.
+Based on these summary statistics, calculate the pooled standard deviation and the standard error of the mean difference. Then compute the 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not. Use the `qt()` function to obtain the appropriate critical value from the t-distribution.
 :::
 
 ::: {.callout-important icon=false title="Question 5"}
@@ -247,6 +230,26 @@ kruskal_test
 Are the results of the Kruskal-Wallis test consistent with the one-way ANOVA results? 
 :::
 
+### Post-hoc tests for Kruskal-Wallis
+
+If the Kruskal-Wallis test indicates a statistically significant difference between groups, we can perform Dunn's test as a post-hoc analysis to determine which specific groups differ from each other. Dunn's test is the non-parametric equivalent of the pairwise t-tests used after ANOVA.
+
+```{r}
+# Perform Dunn's test with Bonferroni correction
+dunn_test <- dunn.test(lowbwt$bwt, lowbwt$ethnicity, method = "bonferroni", altp = TRUE)
+dunn_test
+```
+
+**Explanation**:
+
+- The first argument specifies the outcome variable (birth weight)
+- The second argument specifies the grouping variable (ethnicity)
+- The `method = "bonferroni"` argument specifies that the p-values should be adjusted using the Bonferroni correction
+- The `altp = TRUE` argument ensures that two-sided p-values are reported
+
+::: {.callout-important icon=false title="Question 11"}
+What conclusions can be drawn from Dunn's test? Are these consistent with the post-hoc comparisons from the one-way ANOVA?
+:::
 
 ## Part 3: Unguided exercises
 

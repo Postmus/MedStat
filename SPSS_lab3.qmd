@@ -8,6 +8,11 @@ format:
     toc-location: right 
   pdf:
     toc: false  
+execute:
+  warning: false
+  message: false
+  eval: false
+  echo: true     
 ---
 
 Welcome to lab 3 in the medical statistics course. For today’s exercises, we will continue exploring the `lowbwt.sav` dataset, which you can downloaded from the Dataset section of the menu.
@@ -27,8 +32,6 @@ As a reminder, the dataset includes the following variables (see the previous la
 | Presence of Uterine Irritability (1 = Yes, 0 = No) | urirr |
 | Number of Physician Visits During the First Trimester (0 = None, 1 = One, 2 = Two, etc.) | pvft |
 | Birth Weight in Grams | bwt |
-
-<br>
 
 ## Part 1: Independent Samples t-test and Mann-Whitney U Test
 
@@ -199,21 +202,30 @@ To assess whether the results of the one-way ANOVA are valid, we need to check t
 If the assumptions of the one-way ANOVA are not satisfied, we can use the Kruskal-Wallis test as a non-parametric alternative. To perform this test in SPSS, follow these steps:
 
 1. **Navigate to the Kruskal-Wallis Test**:
-   - Go to `Analyze` > `Nonparametric Tests` > `Legacy Dialogs` > `K Independent Samples`.
+   - Go to `Analyze` > `Nonparametric Tests` > `Independent Samples`.
 
-2. **Select Variables**:
-   - Move `bwt` to the `Test Variable List`.
-   - Move `ethnicity` to the `Grouping Variable`.
-   - Click `Define Range` and specify the range of the grouping variable (e.g., 1 to 3 for the ethnicity variable). Click `Continue`.
+2. **Select Variables** (Fields tab):
+   - Move `bwt` to the `Test Fields` box.
+   - Move `ethnicity` to the `Groups` box.
 
-3. **Select the Kruskal-Wallis Test**:
-   - Under `Test Type`, ensure that **Kruskal-Wallis H** is selected.
+3. **Configure Settings** (Settings tab):
+   - Select `Customize tests`.
+   - Check the box for **Kruskal-Wallis 1-way ANOVA (k samples)**.
+   - Check the box for **All pairwise** under the multiple comparisons options to enable Dunn's post-hoc test.
 
 4. **Run the Test**:
-   - Click `OK` to run the analysis. The output will include the test statistic and associated p-value.
+   - Click `Run` to run the analysis. The output will include the test statistic and associated p-value for the overall Kruskal-Wallis test.
 
 ::: {.callout-important icon=false title="Question 10"}
 Are the results of the Kruskal-Wallis test consistent with the one-way ANOVA results?
+:::
+
+### Post-hoc tests for Kruskal-Wallis
+
+If the Kruskal-Wallis test indicates a statistically significant difference between groups, we can examine the pairwise comparisons to determine which specific groups differ from each other. SPSS performs Dunn's test for these pairwise comparisons.
+
+::: {.callout-important icon=false title="Question 11"}
+What conclusions can be drawn from Dunn's test? Are these consistent with the post-hoc comparisons from the one-way ANOVA?
 :::
 
 ## Part 3: Unguided exercises
