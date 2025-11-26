@@ -1,0 +1,62 @@
+---
+title: "Assignment part 1: Scoring Rubric"
+format:
+  html: default
+  docx: default
+---
+
+## Criterion 1: Selection of statistical tests and summary statistics (40%)
+
+| Level | Score | Description |
+|-------|-------|-------------|
+| Insufficient | 3 | Tests are largely inappropriate; assumptions are ignored or misunderstood. Summary measures do not match variable types. |
+| Sufficient | 6 | Tests are mostly correct but assumptions are not consistently checked or may be misapplied. Summary measures are mostly appropriate. |
+| Good | 8 | All tests are correctly chosen with minor issues in assumption checking or interpretation. Summary measures match variable types and distributions. |
+| Excellent | 10 | All tests are correctly chosen, and all relevant assumptions are appropriately checked and addressed. Appropriate post-hoc tests are selected when needed. Summary measures are well-chosen for variable types and distributions. |
+
+## Criterion 2: Interpretation of results (30%)
+
+| Level | Score | Description |
+|-------|-------|-------------|
+| Insufficient | 3 | Results are largely misinterpreted, with major errors or irrelevant explanations. Confidence intervals are ignored or misunderstood. |
+| Sufficient | 6 | Most results are interpreted correctly but explanations may be unclear or incomplete. Confidence intervals are reported but not always correctly interpreted. |
+| Good | 8 | All results are interpreted correctly, with minor issues in clarity. Confidence intervals are used appropriately. |
+| Excellent | 10 | All results are interpreted correctly, with clear and concise explanations that align with research questions. Confidence intervals are correctly interpreted. |
+
+## Criterion 3: Presentation and reporting (20%)
+
+| Level | Score | Description |
+|-------|-------|-------------|
+| Insufficient | 3 | Presentation is disorganized or unprofessional, with major formatting or content issues. Test statistics are not properly reported. |
+| Sufficient | 6 | Presentation is acceptable but inconsistent, with some formatting issues. Test statistics may be incomplete. |
+| Good | 8 | Presentation is clear and professional overall, with minor issues in formatting. Most test statistics are correctly reported. |
+| Excellent | 10 | Tables, figures, and text are highly professional, clear, and fully aligned with reporting guidelines. Test statistics are properly reported with appropriate detail. |
+
+## Criterion 4: Data handling and reproducibility (10%)
+
+| Level | Score | Description |
+|-------|-------|-------------|
+| Insufficient | 3 | R script or SPSS output is incomplete or poorly structured. Individualized dataset is not correctly created (wrong seed or sampling) or cannot be verified. |
+| Sufficient | 6 | R script or SPSS output is mostly complete but with omissions or unclear structure. Dataset creation steps may be unclear. |
+| Good | 8 | R script or SPSS output is complete with minor documentation issues. Dataset is correctly created. |
+| Excellent | 10 | R script or SPSS output is complete, logically structured, and allows full reproducibility. Individualized dataset is correctly created with proper seed and sampling, clearly documented. |
+
+## Grade calculation
+
+| Criterion | Weight | Score | Weighted Score |
+|-----------|--------|-------|----------------|
+| Selection of statistical tests and summary statistics | 40% | ___ | ___ |
+| Interpretation of results | 30% | ___ | ___ |
+| Presentation and reporting | 20% | ___ | ___ |
+| Data handling and reproducibility | 10% | ___ | ___ |
+| **Final Grade** | **100%** | | **___** |
+
+### Example calculation
+
+| Criterion | Weight | Score | Weighted Score |
+|-----------|--------|-------|----------------|
+| Selection of statistical tests | 40% | 8 | 3.2 |
+| Interpretation of results | 30% | 6 | 1.8 |
+| Presentation and reporting | 20% | 8 | 1.6 |
+| Data handling and reproducibility | 10% | 10 | 1.0 |
+| **Final Grade** | **100%** | | **7.6** |
