@@ -1,6 +1,6 @@
 ---
-title: "Medical Statistics"
-subtitle: "Assignment part 1: Cleveland heart disease dataset"
+title: "Assignment part 1: Cleveland heart disease dataset"
+subtitle: "R version"
 format:
   html: default
   pdf: default
@@ -36,9 +36,9 @@ The Cleveland heart disease dataset originates from the Cleveland Clinic Foundat
 
 ## Objectives
 
-In this assignment, you will explore the Cleveland heart disease dataset to answer two personalized research questions. Your specific research questions are determined by the last two digits of your student number (see the lookup table below).
+In this assignment, you will explore the Cleveland heart disease dataset to answer two personalized research questions. Your specific research questions are determined by the last two digits of your student (or staff) number (see the lookup table below).
 
-**Research Question 1** (ANOVA/Kruskal-Wallis): *Does [Outcome variable] differ across [Grouping variable] categories?*
+**Research Question 1** (ANOVA/Kruskal-Wallis): *Does maximum heart rate differ across [Grouping variable] categories?*
 
 **Research Question 2** (Chi-Square/Fisher's Exact): *Is the presence of heart disease associated with [Binary predictor]?*
 
@@ -46,13 +46,11 @@ In this assignment, you will explore the Cleveland heart disease dataset to answ
 
 ### **Step 1:** Create an individualized dataset
 
-Download the Cleveland heart disease dataset from Brightspace. After loading the dataset into R or SPSS, follow the steps below to create an individualized dataset with 200 patients:
+Download the Cleveland heart disease dataset from Brightspace and follow the steps below to create an individualized dataset with 200 patients:
 
 ::: {.callout-important}
 You must use your individualized dataset for all analyses in this assignment. Each dataset is uniquely sampled based on your student or staff number, ensuring that every student works independently with a unique dataset. This approach also ensures that results remain reproducible and can be individually verified by the instructor.
 :::
-
-#### Instructions for R users
 
 * Load the dataset into R
 * Set a random seed using your student or staff number
@@ -64,17 +62,19 @@ You must use your individualized dataset for all analyses in this assignment. Ea
   - Example: `nrow(heart_data)` should return `200`
 
 ```{r}
-# Load the required libraries
+# Load required packages for importing and cleaning the data
+# You may load additional packages as needed for your analyses
 library(haven)
 library(dplyr)
 
-# Load the SPSS file
-heart_data <- read_sav("heart_disease_cleveland.sav")
+# Import the SPSS file
+heart_data <- read_sav("datasets/heart_disease_cleveland.sav")
 
-# Convert all variables to factors where needed
-heart_data <- heart_data %>% mutate(across(where(is.labelled), as_factor))
+# Convert all categorical variables to factors
+heart_data <- heart_data |> mutate(across(where(is.labelled), as_factor))
 
-# Set the random seed (replace 123456 with your student or staff number without S or P)
+# Set the random seed
+# (replace 123456 with your student or staff number without S or P)
 set.seed(123456)
 
 # Create an individualized dataset with 200 patients
@@ -84,75 +84,22 @@ heart_data <- heart_data[sample(nrow(heart_data), 200), ]
 nrow(heart_data)
 ```
 
-#### Instructions for SPSS users
-
-* Open the dataset in SPSS
-* Open the **Syntax Editor** in SPSS (`File` → `New` → `Syntax`)
-* Copy and paste the syntax from the box below into the Syntax Editor, replacing `123456` with your numeric student or staff number without any letters (e.g., `S` or `P`)
-* Run the syntax to create a custom dataset with 200 patients
-  - Go to `Run` → `All` to run the syntax
-* Verify the dataset contains exactly 200 cases
-  - Go to `Analyze` → `Descriptive Statistics` → `Frequencies`
-  - Select the `sex` variable and click `OK`
-  - The output should show `200` cases
-* Save the dataset as a new file for further analysis
-
-```{r}
-#| eval: false
-
-* Set random seed (replace 123456 with your student or staff number without any letters).
-SET SEED = 123456.
-
-* Initialize sampling counters for 200 samples from 303 cases.
-DO IF $CASENUM = 1.
-  COMPUTE #s_$_1 = 200.
-  COMPUTE #s_$_2 = 303.
-END IF.
-
-* Perform sampling logic.
-DO IF #s_$_2 > 0.
-  COMPUTE filter_$ = RV.UNIFORM(0, 1) * #s_$_2 < #s_$_1.
-  COMPUTE #s_$_1 = #s_$_1 - filter_$.
-  COMPUTE #s_$_2 = #s_$_2 - 1.
-ELSE.
-  COMPUTE filter_$ = 0.
-END IF.
-
-* Apply filter to retain sampled cases.
-VARIABLE LABELS filter_$ '200 from the first 303 cases (SAMPLE)'.
-FORMATS filter_$ (f1.0).
-FILTER BY filter_$.
-EXECUTE.
-```
-
-::: {.callout-important title="Important note for SPSS users"}
-The syntax above will generate a custom dataset containing 200 patients randomly selected from the original dataset. The selected patients are identified using the filter variable `filter_$`, which is added as a column in the dataset. 
-
-To reapply the filter when you reopen the dataset, follow these steps:
-
-1. Go to `Data` → `Select Cases`.
-2. Choose `Use filter variable` and select `filter_$` from the list.
-3. Click `OK` to apply the filter.
-
-Please note that this filtering step must be repeated each time you open the dataset to ensure that only the selected patients are included in your analysis.   
-:::
-
 ### **Step 2:** Identify your personalized research questions
 
 Use the last two digits of your student number to find your personalized research questions in the table below:
 
-| Last 2 digits | RQ1: Grouping variable | RQ1: Outcome variable | RQ2: Binary predictor |
-|---------------|------------------------|----------------------|------------------------|
-| 00–24 | Chest pain type (`cp`) | Max heart rate (`thalach`) | Sex (`sex`) |
-| 25–49 | Chest pain type (`cp`) | Resting blood pressure (`trestbps`) | Fasting blood sugar (`fbs`) |
-| 50–74 | Resting ECG (`restecg`) | Max heart rate (`thalach`) | Exercise-induced angina (`exang`) |
-| 75–99 | Resting ECG (`restecg`) | Serum cholesterol (`chol`) | Sex (`sex`) |
+| Last 2 digits | RQ1: Grouping variable | RQ2: Binary predictor |
+|---------------|------------------------|------------------------|
+| 00–24 | Chest pain type (`cp`) | Sex (`sex`) |
+| 25–49 | Chest pain type (`cp`) | Fasting blood sugar (`fbs`) |
+| 50–74 | Thalassemia (`thal`) | Sex (`sex`) |
+| 75–99 | Thalassemia (`thal`) | Fasting blood sugar (`fbs`) |
 
 ::: {.callout-note title="Example"}
 A student with number **S2734567** has last two digits **67**, which falls in the 50–74 range. Their research questions are:
 
-- **RQ1**: *Does maximum heart rate differ across resting ECG categories?*
-- **RQ2**: *Is the presence of heart disease associated with exercise-induced angina?*
+- **RQ1**: *Does maximum heart rate differ across thalassemia categories?*
+- **RQ2**: *Is the presence of heart disease associated with sex?*
 :::
 
 ### **Step 3:** Create a baseline characteristics table
@@ -170,11 +117,11 @@ A student with number **S2734567** has last two digits **67**, which falls in th
   
 ### **Step 4:** Perform the analysis for your first research question
 
-Using the grouping and outcome variables from the lookup table:
+Using your grouping variable from the lookup table:
 
 * Visualize the data
-  - Create a boxplot to compare the distribution of your outcome variable across the categories of your grouping variable
-* Calculate the estimated population means and 95% confidence intervals for your outcome variable for each category of the grouping variable
+  - Create a boxplot to compare the distribution of maximum heart rate across the categories of your grouping variable
+* Calculate the estimated population means and 95% confidence intervals for maximum heart rate for each category of the grouping variable
 * Select and perform an appropriate test
   - Use one-way ANOVA if normality and equal variances are met
   - Use Kruskal-Wallis test if assumptions are violated
@@ -214,11 +161,11 @@ When presenting your analysis results, ensure clarity and adherence to proper re
 
 > The mean cholesterol levels (95% CI) for the four chest pain types were as follows: typical angina, 245.3 mg/dL (95% CI: 230.1, 260.5); atypical angina, 220.4 mg/dL (95% CI: 205.7, 235.1); non-anginal pain, 230.2 mg/dL (95% CI: 215.6, 244.8); and asymptomatic chest pain, 200.1 mg/dL (95% CI: 185.4, 214.8). A one-way ANOVA was conducted to compare cholesterol levels across these groups, revealing a significant difference, F(3, 299) = 4.32, p = 0.006. Post-hoc pairwise comparisons using Bonferroni-adjusted p-values indicated that patients with typical angina had significantly higher cholesterol levels compared to those with asymptomatic chest pain (adjusted p = 0.015). No other pairwise differences were statistically significant after adjustment.
 
-> The prevalence of heart disease was higher among patients older than 65 (68.5%, 95% CI: 60.2%, 76.8%) compared to those 65 or younger (47.2%, 95% CI: 35.6%, 58.8%). Fisher’s Exact Test indicated a significant difference between these groups (p = 0.028).
+> The prevalence of heart disease was higher among patients older than 65 (68.5%, 95% CI: 60.2%, 76.8%) compared to those 65 or younger (47.2%, 95% CI: 35.6%, 58.8%). Fisher's Exact Test indicated a significant difference between these groups (p = 0.028).
 
 ## Submission instructions
 
 Submit the following files as part of your assignment:
 
 * **The report:** Provide your report in Word or PDF format
-* **The analysis file:** Include your R script or SPSS output file
+* **The R script:** Include your R script (.R file) with all analysis code
