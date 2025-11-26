@@ -4,22 +4,16 @@ format:
   html:
     toc: true       
     toc-depth: 3    
-    toc-location: right   # Optional: Can be left, right, or floating    
+    toc-location: right
+    embed-resources: true
   pdf:
     toc: false      
-editor_options:
-  chunk_output_type: console
+execute:
+  warning: false
+  message: false
+  eval: true
+  echo: false  
 ---
-
-```{r}
-#| label: setup
-#| include: false
-
-# configure global options for R code chunks:
-# warning = F to suppress the display of warning messages generated during the execution of code chunks
-# message = F to suppress the display of messages produced during the execution of code chunks
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, eval=TRUE)
-```
 
 ```{r}
 #| include: false
@@ -28,6 +22,7 @@ library(haven)
 library(dplyr)
 library(ggplot2)
 library(car)
+library(dunn.test)
 
 # Load the dataset
 lowbwt <- read_sav("datasets/lowbwt.sav")
@@ -99,25 +94,30 @@ levene_test
 ```
 
 ::: {.callout-important icon=false title="Question 4"}
-Based on the Levene test, does the assumption of equal variances hold?
+Based on Levene's test, does the assumption of equal variances hold?
 :::
 
 ::: {.callout-tip icon=false title="Answer question 4"}
-The p-value of the Levene test (p = 0.2399) is greater than 0.05, indicating insufficient evidence to reject the null hypothesis of equal variances. Therefore, we can assume that the assumption of equal variances holds.
+The p-value of Levene's test (p = 0.2399) is greater than 0.05, indicating insufficient evidence to reject the null hypothesis of equal variances. Therefore, we can assume that the assumption of equal variances holds.
 :::
 
 ### 95% Confidence Interval for the mean difference
 
 ```{r}
 # Calculate summary statistics by smoking status
-summary_stats <- lowbwt %>%
-  group_by(smoke) %>%
-  summarise(mean = mean(bwt), sd = sd(bwt), n = n())
+summary_stats <- lowbwt |>
+  group_by(smoke) |>
+  summarise(
+    mean = mean(bwt),
+    sd = sd(bwt),
+    n = n(),
+    .groups = "drop"
+  )
 summary_stats
 ```
 
 ::: {.callout-important icon=false title="Exercise"}
-Based on these summary statistics, calculate the pooled standard deviation and the standard error of the mean difference. Then compute the 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not. You may simplify the calculation by using the 97.5th percentile from the standard normal distribution (1.96) rather than the corresponding percentile from the t-distribution.
+Based on these summary statistics, calculate the pooled standard deviation and the standard error of the mean difference. Then compute the 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not. 
 :::
 
 ::: {.callout-tip icon=false title="Answer"}
@@ -151,7 +151,7 @@ Based on these summary statistics, calculate the pooled standard deviation and t
    $$
 
 4. **95% Confidence Interval**  
-   The confidence interval (CI) is calculated as:  
+   To construct the exact 95% CI, we need the 97.5th percentile from the t-distribution with $115 + 74 - 2 = 187$ degrees of freedom. Since the table in Appendix B does not go beyond 150 df, we use 1.96 (the value from the standard normal distribution) as an approximation. The confidence interval is then calculated as:  
    $$
    \text{CI} = \text{Mean Difference} \pm 1.96 \cdot SE
    $$
@@ -171,7 +171,7 @@ Does your manually calculated 95% confidence interval for the mean difference in
 :::
 
 ::: {.callout-tip icon=false title="Answer question 5"}
-The manually calculated 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not is (72.43, 491.57), is approximately equal to the one provided in the output of the `t.test()` function, wich is (70.69, 492.73). The latter is slightly wider due to the use of the 97.5 the percentile of the t-distribution with 187 degrees of freedom (1.97) rather than the standard normal distribution (1.96).
+The manually calculated 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not is (72.43, 491.57), is approximately equal to the one provided in the output of the `t.test()` function, wich is (70.69, 492.73). The latter is marginally wider due to the use of the 97.5 the percentile of the t-distribution with 187 degrees of freedom (1.97) rather than the standard normal distribution (1.96). Additionally, small differences arise from rounding in the manual calculation.
 :::
 
 ### Mann-Whitney U Test
@@ -245,8 +245,6 @@ It follows from the post-hoc comparisons with the Bonferroni-adjusted p-values t
 
 ### Kruskal-Wallis Test
 
-If the assumptions of the one-way ANOVA are violated, we can use the Kruskal-Wallis test as a non-parametric alternative. The test can be performed in R using the `kruskal.test()` function:
-
 ```{r}
 # Perform Kruskal-Wallis test
 kruskal_test <- kruskal.test(bwt ~ ethnicity, data = lowbwt)
@@ -259,6 +257,20 @@ Are the results of the Kruskal-Wallis test consistent with the one-way ANOVA res
 
 ::: {.callout-tip icon=false title="Answer question 10"}
 The p-value from the Kruskal-Wallis test (p=0.014) is consistent with the one-way ANOVA results, indicating that there is at least one ethnic group with a significantly different median birth weight.
+:::
+
+```{r}
+# Perform Dunn's test with Bonferroni correction
+dunn_test <- dunn.test(lowbwt$bwt, lowbwt$ethnicity, method = "bonferroni", altp = TRUE)
+dunn_test
+```
+
+::: {.callout-important icon=false title="Question 11"}
+What conclusions can be drawn from Dunn's test? Are these consistent with the post-hoc comparisons from the one-way ANOVA?
+:::
+
+::: {.callout-tip icon=false title="Answer question 11"}
+Unlike the post-hoc comparisons from the one-way ANOVA, Dunn's test with Bonferroni correction does not show statistically significant differences between any pair of groups at the 0.05 level. Although the adjusted p-values for Caucasian vs. Afro-American (p=0.052) and Caucasian vs. Asian (p=0.058) are close to 0.05, they do not reach statistical significance. This illustrates that non-parametric post-hoc tests can be more conservative than their parametric counterparts.
 :::
 
 ## Part 3: Unguided exercises

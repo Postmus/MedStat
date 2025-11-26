@@ -107,7 +107,7 @@ To calculate the summary statistics required for the manual calculation, follow 
    - Click `OK` to run the analysis. The output will provide group-wise means, standard deviations, and sample sizes, which can be used for manual calculations.
 
 ::: {.callout-important icon=false title="Exercise"}
-Based on these summary statistics, calculate the pooled standard deviation and the standard error of the mean difference. Then compute the 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not. You may simplify the calculation by using the 97.5th percentile from the standard normal distribution (1.96) rather than the corresponding percentile from the t-distribution.
+Based on these summary statistics, calculate the pooled standard deviation and the standard error of the mean difference. Then compute the 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not.
 :::
 
 ::: {.callout-important icon=false title="Question 5"}

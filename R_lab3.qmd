@@ -138,7 +138,7 @@ summary_stats
 ```
 
 ::: {.callout-important icon=false title="Exercise"}
-Based on these summary statistics, calculate the pooled standard deviation and the standard error of the mean difference. Then compute the 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not. Use the `qt()` function to obtain the appropriate critical value from the t-distribution.
+Based on these summary statistics, calculate the pooled standard deviation and the standard error of the mean difference. Then compute the 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not. 
 :::
 
 ::: {.callout-important icon=false title="Question 5"}
