@@ -21,7 +21,13 @@ website:
           - text: "R"
             href: R_lab2.qmd
           - text: "SPSS"
-            href: SPSS_lab2.qmd      
+            href: SPSS_lab2.qmd 
+      - text: "Labs week 3"
+        menu:
+          - text: "R"
+            href: R_lab3.qmd
+          - text: "SPSS"
+            href: SPSS_lab3.qmd               
       - text: "Answers"
         menu:
           - text: "Week 1"

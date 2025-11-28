@@ -5,7 +5,6 @@ format:
     toc: true       
     toc-depth: 3    
     toc-location: right
-    embed-resources: true
   pdf:
     toc: false      
 execute:
