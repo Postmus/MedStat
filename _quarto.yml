@@ -3,7 +3,7 @@ project:
   output-dir: "docs"
   resources:
     - "/datasets"
-    
+
 website:
   title: "Medical Statistics"
   navbar:
@@ -21,13 +21,19 @@ website:
           - text: "R"
             href: R_lab2.qmd
           - text: "SPSS"
-            href: SPSS_lab2.qmd 
+            href: SPSS_lab2.qmd
       - text: "Labs week 3"
         menu:
           - text: "R"
             href: R_lab3.qmd
           - text: "SPSS"
-            href: SPSS_lab3.qmd               
+            href: SPSS_lab3.qmd
+      - text: "Labs week 4"
+        menu:
+          - text: "R"
+            href: R_lab4.qmd
+          - text: "SPSS"
+            href: SPSS_lab4.qmd
       - text: "Answers"
         menu:
           - text: "Week 1"
@@ -35,7 +41,9 @@ website:
           - text: "Week 2"
             href: lab2_answers.qmd
           - text: "Week 3"
-            href: lab3_answers.qmd  
+            href: lab3_answers.qmd
+          - text: "Week 4"
+            href: lab4_answers.qmd
       - text: "Datasets"
         menu:
           - text: "lowbwt.sav"
@@ -49,9 +57,9 @@ website:
           - text: "pockets.sav"
             href: datasets/pockets.sav
           - text: "whas500.sav"
-            href: datasets/whas500.sav  
+            href: datasets/whas500.sav
           - text: "GvHD.sav"
-            href: datasets/GvHD.sav 
+            href: datasets/GvHD.sav
           - text: "Ex9_1.sav"
             href: datasets/Ex9_1.sav
 format:

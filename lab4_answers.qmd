@@ -1,25 +1,18 @@
 ---
 title: "Medical Statistics – Answers lab 4"
-format: 
+format:
   html:
-    toc: true       
-    toc-depth: 3    
+    toc: true
+    toc-depth: 3
     toc-location: right
   pdf:
-    toc: false  
-editor_options: 
-  chunk_output_type: console
+    toc: false
+execute:
+  warning: false
+  message: false
+  error: false
+  eval: true
 ---
-
-```{r}
-#| label: setup
-#| include: false
-
-# configure global options for R code chunks:
-# warning = F to suppress the display of warning messages generated during the execution of code chunks
-# message = F to suppress the display of messages produced during the execution of code chunks
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, eval=TRUE, echo=FALSE)
-```
 
 # Part 1: Inference for categorical data
 
@@ -117,12 +110,12 @@ fisher.test(complications)
 
 ::: {.callout-important icon=false title="Question 6"}
 Based on the results of Fisher's exact test, can we conclude that there is a statistically significant difference in the proportion of post-surgical complications between smokers and non-smokers?
-:::  
+:::
 
 ::: {.callout-tip icon=false title="Answer question 6"}
 The p-value from Fisher's exact test is 0.060. Since this p-value is greater than the significance level of 0.05, we do not have sufficient evidence to reject the null hypothesis. Therefore, we cannot conclude that there is a statistically significant difference in the proportion of post-surgical complications between smokers and non-smokers.
 :::
-  
+
 ## Vaccine side effects across age groups
 
 ### Chi-square test of homogeneity
@@ -167,7 +160,7 @@ The expected counts in all cells are well above 5, which indicates that the norm
 
 #### Post-hoc pairwise comparisons
 
-**Comparison of age groups 18–39 and 40–59** 
+**Comparison of age groups 18–39 and 40–59**
 
 ```{r}
 table_12 <- side_effects[c("18–39", "40–59"), ]
@@ -179,7 +172,7 @@ print(chisq_test_12)
 
 # Adjust the p-value for multiple testing
 p_adjusted_12 <- 3*chisq_test_12$p.value
-```  
+```
 
 The Bonferroni-corrected p-value for this comparison is 0.206.
 
@@ -199,7 +192,7 @@ print(chisq_test_13)
 
 # Adjust the p-value for multiple testing
 p_adjusted_13 <- 3*chisq_test_13$p.value
-```    
+```
 
 The Bonferroni-corrected p-value for this comparison is <0.0001.
 
@@ -224,12 +217,12 @@ Based on the results of the pairwise comparisons, which age groups have signific
 :::
 
 :::{.callout-tip icon=false title="Answer question 9"}
-Based on the adjusted p-values from the pairwise comparisons, we can conclude that the distributions of side effects are significantly different between the age groups 18–39 and 60+ (Bonferroni-corrected p-value < 0.001). However, there were no significant differences between the age groups 40–59 and 60+ (Bonferroni-corrected p-value = 0.072) or between the age groups 18–39 and 40–59 (Bonferroni-corrected p-value = 0.206).   
-:::   
+Based on the adjusted p-values from the pairwise comparisons, we can conclude that the distributions of side effects are significantly different between the age groups 18–39 and 60+ (Bonferroni-corrected p-value < 0.001). However, there were no significant differences between the age groups 40–59 and 60+ (Bonferroni-corrected p-value = 0.072) or between the age groups 18–39 and 40–59 (Bonferroni-corrected p-value = 0.206).
+:::
 
 # Part 2: Analysis of paired continous data
 
-```{r}  
+```{r}
 #| eval: true
 #| include: false
 
@@ -241,7 +234,9 @@ Results of the paired t-test:
 
 ```{r}
 # Perform paired t-test
-t_test <- t.test(pockets$pocket_depth_before, pockets$pocket_depth_after, paired = TRUE)
+t_test <- t.test(pockets$pocket_depth_before,
+                 pockets$pocket_depth_after,
+                 paired = TRUE)
 print(t_test)
 ```
 
@@ -257,12 +252,15 @@ The p-value from the paired t-test is <0.0001, which is less than the significan
 
 ```{r}
 # Calculate the differences in pocket depth
-pockets$diff <- pockets$pocket_depth_after - pockets$pocket_depth_before
+pockets$diff <- pockets$pocket_depth_after -
+                pockets$pocket_depth_before
 
 # Create a histogram of the differences
 library(ggplot2)
 ggplot(pockets, aes(x = diff)) +
-  geom_histogram(binwidth = 0.05, fill = "skyblue", color = "black") +
+  geom_histogram(binwidth = 0.05,
+                 fill = "skyblue",
+                 color = "black") +
   labs(title = "Distribution of differences in pocket depth",
        x = "Difference in pocket depth (mm)",
        y = "Frequency")
@@ -297,7 +295,9 @@ The p-value from the sign test is <0.0001, which is less than the significance l
 
 ```{r}
 # Perform the Wilcoxon signed-rank test
-wilcox_test <- wilcox.test(pockets$pocket_depth_before, pockets$pocket_depth_after, paired = TRUE)
+wilcox_test <- wilcox.test(pockets$pocket_depth_before,
+                           pockets$pocket_depth_after,
+                           paired = TRUE)
 print(wilcox_test)
 ```
 
@@ -320,7 +320,7 @@ skin_response_table <- as.table(skin_response_table)
 
 # Print the table
 skin_response_table
-```  
+```
 
 Results of the McNemar test:
 
@@ -335,5 +335,5 @@ Based on the results of the McNemar test, can we conclude that there is a signif
 :::
 
 :::{.callout-tip icon=false title="Answer question 14"}
-The p-value from the McNemar test is 0.0044, which is less than the significance level of 0.05. Therefore, we have sufficient evidence to reject the null hypothesis and conclude that there is a significant difference in the proportions of patients with a negative response to DNCB and croton oil. The test does not provide information on which substance is associated with a higher proportion of negative responses. To address this question, we can calculate the estimated proportion of negative responses for each substance, which is $44/173 = 0.25$ for DNCB and $69/173 = 0.40$ for croton oil. Therefore, croton oil is associated with a higher proportion of negative responses. 
+The p-value from the McNemar test is 0.0044, which is less than the significance level of 0.05. Therefore, we have sufficient evidence to reject the null hypothesis and conclude that there is a significant difference in the proportions of patients with a negative response to DNCB and croton oil. The test does not provide information on which substance is associated with a higher proportion of negative responses. To address this question, we can calculate the estimated proportion of negative responses for each substance, which is $44/173 = 0.25$ for DNCB and $69/173 = 0.40$ for croton oil. Therefore, croton oil is associated with a higher proportion of negative responses.
 :::

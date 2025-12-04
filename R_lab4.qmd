@@ -3,10 +3,10 @@ title: "Medical Statistics – Lab 4"
 subtitle: R version
 format:
   html:
-    toc: true       
-    toc-depth: 3    
+    toc: true
+    toc-depth: 3
     toc-location: right
-    code-overflow: wrap 
+    code-overflow: wrap
   pdf:
     toc: false
 execute:
@@ -17,6 +17,8 @@ execute:
 ---
 
 Welcome to lab 4 in the medical statistics course. In this lab, we will focus on the analysis of categorical data and the comparison of proportions between groups. We will also perform several statistical tests for the analysis of paired data.
+
+We will use the following R packages: `haven`, `ggplot2`, and `rcompanion`. The first two packages were also used in the previous labs and therefore already installed on your computer. For `rcompanion` (used to perform pairwise chi-square tests) you may have to download and install it first by running `install.packages("rcompanion")`.
 
 # Part 1: Inference for categorical data
 
@@ -59,7 +61,7 @@ complications <- as.table(complications)
 complications
 ```
 
-Next, we supply this table to the `prop.test()` function to calculate the test statistic and p-value: 
+Next, we supply this table to the `prop.test()` function to calculate the test statistic and p-value:
 ```{r}
 prop.test(complications)
 ```
@@ -74,7 +76,7 @@ In addition to the p-value, output of the `prop.test()` function also provides a
 
 ### Checking of assumptions
 
-For the use of the normal approximation to be valid, the expected number of events and non-events in each group should be at least 5. 
+For the use of the normal approximation to be valid, the expected number of events and non-events in each group should be at least 5.
 
 ::: {.callout-important icon=false title="Exercise"}
 Check this assumption by calculating the expected counts for each cell in the contingency table.
@@ -96,11 +98,11 @@ fisher.test(complications)
 
 ::: {.callout-important icon=false title="Question 6"}
 Based on the results of Fisher's exact test, can we conclude that there is a statistically significant difference in the proportion of post-surgical complications between smokers and non-smokers?
-:::  
-  
+:::
+
 ## Vaccine side effects across age groups
 
-A study was conducted to investigate whether the occurrence of vaccine side effects differs across age groups. Researchers categorized side effects into three types: none, mild, and severe. The study participants were divided into three age groups: 18–39, 40–59, and 60+, and data was collected on the type of side effect experienced by individuals in each group. 
+A study was conducted to investigate whether the occurrence of vaccine side effects differs across age groups. Researchers categorized side effects into three types: none, mild, and severe. The study participants were divided into three age groups: 18–39, 40–59, and 60+, and data was collected on the type of side effect experienced by individuals in each group.
 
 The research objective was to determine whether the distribution of side effects is consistent across these age groups.
 
@@ -138,7 +140,7 @@ Based on the results of the chi-square test, can we conclude that the distributi
 
 #### Checking of assumptions
 
-To use the chi-square test, the expected cell counts should be at least 5 for most cells. To check this assumption, we retrieve the table of expected counts from the output of the `chisq.test()` function, which we stored in the `chisq_test_overall` object: 
+To use the chi-square test, the expected cell counts should be at least 5 for most cells. To check this assumption, we retrieve the table of expected counts from the output of the `chisq.test()` function, which we stored in the `chisq_test_overall` object:
 
 ```{r}
 # Retrieve the table of expected counts
@@ -151,14 +153,36 @@ Are the expected cell counts greater than 5 for the different cells in the conti
 
 #### Post-hoc pairwise comparisons
 
-Finally, we are interested in determining which age groups have significantly different distributions of side effects. For a $n \times 2$ table, this can be achieved easily using the `pairwise.prop.test()` function, which performs pairwise comparisons of proportions between groups with adjustments for multiple testing. However, in our case, we are working with a $3 \times 3$ contingency table, where the outcomes have more than two categories (None, Mild, Severe). This complexity requires a manual approach to perform pairwise comparisons.
+Finally, we are interested in determining which age groups have significantly different distributions of side effects. For a $n \times 2$ table, this can be achieved easily using the `pairwise.prop.test()` function, which performs pairwise comparisons of proportions between groups with adjustments for multiple testing. However, in our case, we are working with a $3 \times 3$ contingency table, where the outcomes have more than two categories (None, Mild, Severe).
 
-We start by comparing the first two age groups (18–39 and 40–59). First, we set up the contingency table for these two groups:
+For contingency tables with more than two outcome categories, we can use the `pairwiseNominalIndependence()` function from the `rcompanion` package. This function performs pairwise chi-square tests between all pairs of rows (or columns) and applies a correction for multiple testing:
+
+```{r}
+library(rcompanion)
+pairwiseNominalIndependence(side_effects,
+                            compare = "row",
+                            fisher = FALSE,
+                            method = "bonferroni")
+```
+
+The output shows the results of pairwise comparisons between all age groups. The key columns to focus on are:
+
+- **Comparison**: The pair of age groups being compared
+- **p.Chisq**: The unadjusted p-value from the chi-square test
+- **p.adj.Chisq**: The Bonferroni-adjusted p-value for multiple comparisons
+
+We use the adjusted p-values (`p.adj.Chisq`) to determine statistical significance, as these account for the increased risk of Type I errors when performing multiple comparisons. At a significance level of 0.05, we can see that the distribution of side effects differs significantly between the 18–39 and 60+ age groups (adjusted p < 0.001), while the other pairwise comparisons are not statistically significant after correction.
+
+::: {.callout-note}
+The output also includes p-values from the G-test (`p.Gtest` and `p.adj.Gtest`), which is an alternative to the chi-square test based on the likelihood ratio. In most cases, the chi-square and G-test give similar results.
+:::
+
+Alternatively, we can perform the pairwise comparisons manually to better understand the underlying process. We start by comparing the first two age groups (18–39 and 40–59). First, we set up the contingency table for these two groups:
 
 ```{r}
 table_12 <- side_effects[c("18–39", "40–59"), ]
 table_12
-```  
+```
 
 Next, we perform the chi-square test for this subset of the data and adjust the p-value by applying the Bonferroni correction:
 
@@ -202,7 +226,7 @@ The objective is to determine whether the intervention significantly reduces poc
 
 First, we load the data from the provided SPSS file `pockets_paired.sav`:
 
-```{r}  
+```{r}
 #| eval: false
 
 library(haven)
@@ -210,7 +234,7 @@ pockets <- read_sav("pockets_paired.sav")
 head(pockets)
 ```
 
-```{r}  
+```{r}
 #| eval: true
 #| include: false
 
@@ -223,7 +247,9 @@ Next, we perform a paired t-test to compare the average pocket depth before and 
 
 ```{r}
 # Perform paired t-test
-t_test <- t.test(pockets$pocket_depth_before, pockets$pocket_depth_after, paired = TRUE)
+t_test <- t.test(pockets$pocket_depth_before,
+                 pockets$pocket_depth_after,
+                 paired = TRUE)
 print(t_test)
 ```
 
@@ -239,12 +265,15 @@ To determine whether it is appropriate to apply the paired t-test to these data,
 
 ```{r}
 # Calculate the differences in pocket depth
-pockets$diff <- pockets$pocket_depth_after - pockets$pocket_depth_before
+pockets$diff <- pockets$pocket_depth_after -
+                pockets$pocket_depth_before
 
 # Create a histogram of the differences
 library(ggplot2)
 ggplot(pockets, aes(x = diff)) +
-  geom_histogram(binwidth = 0.05, fill = "skyblue", color = "black") +
+  geom_histogram(binwidth = 0.05,
+                 fill = "skyblue",
+                 color = "black") +
   labs(title = "Distribution of differences in pocket depth",
        x = "Difference in pocket depth (mm)",
        y = "Frequency")
@@ -270,8 +299,9 @@ Next, we perform the sign test using the `binom.test()` function, which calculat
 
 ```{r}
 # Perform the sign test
-# There are 7 positive signs out of 96 pairs with either a positive or negative sign
-sign_test <- binom.test(signs_positive, (signs_positive + signs_negative), p = 0.5)
+sign_test <- binom.test(signs_positive,
+                        signs_positive + signs_negative,
+                        p = 0.5)
 print(sign_test)
 ```
 
@@ -287,7 +317,9 @@ To perform the Wilcoxon signed-rank test, we use the `wilcox.test()` function:
 
 ```{r}
 # Perform the Wilcoxon signed-rank test
-wilcox_test <- wilcox.test(pockets$pocket_depth_before, pockets$pocket_depth_after, paired = TRUE)
+wilcox_test <- wilcox.test(pockets$pocket_depth_before,
+                           pockets$pocket_depth_after,
+                           paired = TRUE)
 print(wilcox_test)
 ```
 
@@ -320,7 +352,7 @@ skin_response_table <- as.table(skin_response_table)
 
 # Print the table
 skin_response_table
-```  
+```
 
 Next, we perform the McNemar test using the `mcnemar.test()` function:
 
