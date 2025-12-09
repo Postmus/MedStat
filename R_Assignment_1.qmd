@@ -46,7 +46,7 @@ In this assignment, you will explore the Cleveland heart disease dataset to answ
 
 ### **Step 1:** Create an individualized dataset
 
-Download the Cleveland heart disease dataset from Brightspace and follow the steps below to create an individualized dataset with 200 patients:
+Download the Cleveland heart disease dataset (see Downloads section at the end of this document) and follow the steps below to create an individualized dataset with 200 patients:
 
 ::: {.callout-important}
 You must use your individualized dataset for all analyses in this assignment. Each dataset is uniquely sampled based on your student or staff number, ensuring that every student works independently with a unique dataset. This approach also ensures that results remain reproducible and can be individually verified by the instructor.
@@ -169,3 +169,7 @@ Submit the following files as part of your assignment:
 
 * **The report:** Provide your report in Word or PDF format
 * **The R script:** Include your R script (.R file) with all analysis code
+
+## Downloads
+
+[Cleveland heart disease dataset (SPSS format)](datasets/heart_disease_cleveland.sav)

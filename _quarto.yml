@@ -44,6 +44,12 @@ website:
             href: lab3_answers.qmd
           - text: "Week 4"
             href: lab4_answers.qmd
+      - text: "Assignment part I"
+        menu:
+          - text: "R"
+            href: R_Assignment_1.qmd
+          - text: "SPSS"
+            href: SPSS_Assignment_1.qmd      
       - text: "Datasets"
         menu:
           - text: "lowbwt.sav"

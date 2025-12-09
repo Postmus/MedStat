@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Medical Statistics – Answers lab 2 – Medical Statistics</title>
+<title>Assignment part 1: Cleveland heart disease dataset – Medical Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -104,35 +69,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -313,23 +249,30 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#point-estimates-and-95-confidence-intervals-for-population-means" id="toc-point-estimates-and-95-confidence-intervals-for-population-means" class="nav-link active" data-scroll-target="#point-estimates-and-95-confidence-intervals-for-population-means">Point Estimates and 95% Confidence Intervals for Population Means</a></li>
-  <li><a href="#one-sample-t-test" id="toc-one-sample-t-test" class="nav-link" data-scroll-target="#one-sample-t-test">One-Sample t-Test</a></li>
-  <li><a href="#point-estimates-and-95-confidence-intervals-for-population-proportions" id="toc-point-estimates-and-95-confidence-intervals-for-population-proportions" class="nav-link" data-scroll-target="#point-estimates-and-95-confidence-intervals-for-population-proportions">Point Estimates and 95% Confidence Intervals for Population Proportions</a></li>
-  <li><a href="#binomial-test" id="toc-binomial-test" class="nav-link" data-scroll-target="#binomial-test">Binomial Test</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#dataset-description" id="toc-dataset-description" class="nav-link" data-scroll-target="#dataset-description">Dataset description</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#steps-to-complete-the-assignment" id="toc-steps-to-complete-the-assignment" class="nav-link" data-scroll-target="#steps-to-complete-the-assignment">Steps to complete the assignment</a>
   <ul class="collapse">
-  <li><a href="#r-results" id="toc-r-results" class="nav-link" data-scroll-target="#r-results">R results</a></li>
-  <li><a href="#spss-results" id="toc-spss-results" class="nav-link" data-scroll-target="#spss-results">SPSS results</a></li>
+  <li><a href="#step-1-load-the-dataset-and-identify-your-personalized-research-questions" id="toc-step-1-load-the-dataset-and-identify-your-personalized-research-questions" class="nav-link" data-scroll-target="#step-1-load-the-dataset-and-identify-your-personalized-research-questions"><strong>Step 1:</strong> Load the dataset and identify your personalized research questions</a></li>
+  <li><a href="#step-2-create-a-baseline-characteristics-table" id="toc-step-2-create-a-baseline-characteristics-table" class="nav-link" data-scroll-target="#step-2-create-a-baseline-characteristics-table"><strong>Step 2:</strong> Create a baseline characteristics table</a></li>
+  <li><a href="#step-3-perform-the-analysis-for-your-first-research-question" id="toc-step-3-perform-the-analysis-for-your-first-research-question" class="nav-link" data-scroll-target="#step-3-perform-the-analysis-for-your-first-research-question"><strong>Step 3:</strong> Perform the analysis for your first research question</a></li>
+  <li><a href="#step-4-perform-the-analysis-for-your-second-research-question" id="toc-step-4-perform-the-analysis-for-your-second-research-question" class="nav-link" data-scroll-target="#step-4-perform-the-analysis-for-your-second-research-question"><strong>Step 4:</strong> Perform the analysis for your second research question</a></li>
+  <li><a href="#step-5-write-a-report" id="toc-step-5-write-a-report" class="nav-link" data-scroll-target="#step-5-write-a-report"><strong>Step 5:</strong> Write a report</a></li>
   </ul></li>
+  <li><a href="#reporting-examples" id="toc-reporting-examples" class="nav-link" data-scroll-target="#reporting-examples">Reporting examples</a></li>
+  <li><a href="#submission-instructions" id="toc-submission-instructions" class="nav-link" data-scroll-target="#submission-instructions">Submission instructions</a></li>
+  <li><a href="#downloads" id="toc-downloads" class="nav-link" data-scroll-target="#downloads">Downloads</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab2_answers.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="SPSS_Assignment_1.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Medical Statistics – Answers lab 2</h1>
+<h1 class="title">Assignment part 1: Cleveland heart disease dataset</h1>
+<p class="subtitle lead">SPSS version</p>
 </div>
 
 
@@ -346,395 +289,189 @@ window.Quarto = {
 </header>
 
 
-<section id="point-estimates-and-95-confidence-intervals-for-population-means" class="level2">
-<h2 class="anchored" data-anchor-id="point-estimates-and-95-confidence-intervals-for-population-means">Point Estimates and 95% Confidence Intervals for Population Means</h2>
-<p>We will start by analyzing the variable ‘birth weight in grams’ (bwt), which is the main outcome of this study.</p>
-<p>The mean, standard deviation, and standard error of the mean of the variable ‘birth weight in grams’ (bwt) are as follows:</p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this assignment, you will work with the Cleveland heart disease dataset. This dataset contains information on patients with suspected heart disease and includes various demographic, clinical, and diagnostic variables. Your task is to perform a series of analyses to explore the dataset and investigate the relationship between different variables and the presence of heart disease.</p>
+</section>
+<section id="dataset-description" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-description">Dataset description</h2>
+<p>The Cleveland heart disease dataset originates from the Cleveland Clinic Foundation and focuses on heart disease diagnosis. It includes data from 303 patients on the following variables:</p>
 <ul>
-<li>Mean: 2944.7</li>
-<li>Standard deviation: 729</li>
-<li>Standard error (SE): 53.03</li>
+<li><code>age</code>: Age in years</li>
+<li><code>sex</code>: Sex (1 = female; 2 = male)</li>
+<li><code>cp</code>: Chest pain type (1 = typical angina; 2 = atypical angina; 3 = non-anginal pain; 4 = asymptomatic)</li>
+<li><code>trestbps</code>: Resting blood pressure (mm Hg at hospital admission)</li>
+<li><code>chol</code>: Serum cholesterol in mg/dl</li>
+<li><code>fbs</code>: Fasting blood sugar &gt; 120 mg/dl</li>
+<li><code>restecg</code>: Resting electrocardiographic results (1 = normal; 2 = ST-T wave abnormality; 3 = left ventricular hypertrophy)</li>
+<li><code>thalach</code>: Maximum heart rate achieved</li>
+<li><code>exang</code>: Exercise-induced angina (1 = no; 2 = yes)</li>
+<li><code>oldpeak</code>: ST depression induced by exercise relative to rest</li>
+<li><code>slope</code>: Slope of the peak exercise ST segment (1 = upsloping; 2 = flat; 3 = downsloping)</li>
+<li><code>ca</code>: Number of major vessels (0-3) colored by fluoroscopy</li>
+<li><code>thal</code>: Thallium heart scan results (1 = normal; 2 = fixed defect; 3 = reversible defect)</li>
+<li><code>target</code>: Diagnosis of heart disease (1 = heart disease; 2 = no heart disease)</li>
 </ul>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 1">
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<p>In this assignment, you will explore the Cleveland heart disease dataset to answer two personalized research questions. Your specific research questions are determined by the last two digits of your student (or staff) number (see the lookup table below).</p>
+<p><strong>Research Question 1</strong> (ANOVA/Kruskal-Wallis): <em>Does maximum heart rate differ across [Grouping variable] categories?</em></p>
+<p><strong>Research Question 2</strong> (Chi-Square/Fisher’s Exact): <em>Is the presence of heart disease associated with [Binary predictor]?</em></p>
+</section>
+<section id="steps-to-complete-the-assignment" class="level2">
+<h2 class="anchored" data-anchor-id="steps-to-complete-the-assignment">Steps to complete the assignment</h2>
+<section id="step-1-load-the-dataset-and-identify-your-personalized-research-questions" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-load-the-dataset-and-identify-your-personalized-research-questions"><strong>Step 1:</strong> Load the dataset and identify your personalized research questions</h3>
+<p>Download the Cleveland heart disease dataset (see Downloads section at the end of this document) and open it in SPSS.</p>
+<p>Use the last two digits of your student number to find your personalized research questions in the table below:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Last 2 digits</th>
+<th>RQ1: Grouping variable</th>
+<th>RQ2: Binary predictor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>00–24</td>
+<td>Chest pain type (<code>cp</code>)</td>
+<td>Sex (<code>sex</code>)</td>
+</tr>
+<tr class="even">
+<td>25–49</td>
+<td>Chest pain type (<code>cp</code>)</td>
+<td>Fasting blood sugar (<code>fbs</code>)</td>
+</tr>
+<tr class="odd">
+<td>50–74</td>
+<td>Thalassemia (<code>thal</code>)</td>
+<td>Sex (<code>sex</code>)</td>
+</tr>
+<tr class="even">
+<td>75–99</td>
+<td>Thalassemia (<code>thal</code>)</td>
+<td>Fasting blood sugar (<code>fbs</code>)</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled" title="Example">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 1
+<span class="screen-reader-only">Note</span>Example
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on these summary statistics, what is the estimated mean birth weight for the population?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 1">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Answer question 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The estimated mean birth weight for the population is 2944.7 grams.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 2">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 2
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Manually calculate the corresponding 95% confidence interval based on the normal approximation.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 2">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Answer question 2
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Using the normal approximation, the 95% confidence interval for the population mean birth weight can be calculated as mean ± 1.96 * SE, where the standard error (SE) is equal to 53.03. Therefore, the 95% confidence interval is (2840.7, 3048.6).</p>
-</div>
-</div>
-<p>You can also use SPSS/R to calculate this 95% confidence interval by using the t-distribution. This gives the following result: (2840, 3049.3)</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 3">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 3
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>How does the 95% confidence interval based on the t-distribution compare to the 95% confidence interval based on the normal approximation that you manually computed?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 3">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Answer question 3
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The 95% confidence interval that uses the t-distribution is sightly wider compared to the 95% confidence interval that was manually computed using the normal approximation. However, given that the sample size is relatively large (n = 189), the difference is minimal. Larger differences would be expected with smaller sample sizes.</p>
+<p>A student with number <strong>S2734567</strong> has last two digits <strong>67</strong>, which falls in the 50–74 range. Their research questions are:</p>
+<ul>
+<li><strong>RQ1</strong>: <em>Does maximum heart rate differ across thalassemia categories?</em></li>
+<li><strong>RQ2</strong>: <em>Is the presence of heart disease associated with sex?</em></li>
+</ul>
 </div>
 </div>
 </section>
-<section id="one-sample-t-test" class="level2">
-<h2 class="anchored" data-anchor-id="one-sample-t-test">One-Sample t-Test</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    One Sample t-test
-
-data:  lowbwt$bwt
-t = -1.0437, df = 188, p-value = 0.298
-alternative hypothesis: true mean is not equal to 3000
-95 percent confidence interval:
- 2840.049 3049.264
-sample estimates:
-mean of x 
- 2944.656 </code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 4">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 4
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>You see that the test has 188 degrees of freedom. Why?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 5">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Answer question 5
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The degrees of freedom (df) for the one-sample t-test is equal to (sample size - 1), so df = 189 - 1 = 188 in this case.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 5">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 5
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Based on the results of the test, does the population mean significantly differ from 3000?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 5">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Answer question 5
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The value of t-statistic is -1.04, and the corresponding p-value is 0.298. Since the p-value is greater than the significance level of 0.05, we fail to reject the null hypothesis. Therefore, the current sample does not provide sufficient evidence to conclude that the population mean significantly differs from 3000.</p>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lab2_answers_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 6">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 6
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Looking at the histogram, would you say that the data are normally distributed?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 6">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Answer question 6
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Based on the histogram, the data appears to be reasonably normally distributed.</p>
-</div>
-</div>
+<section id="step-2-create-a-baseline-characteristics-table" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-create-a-baseline-characteristics-table"><strong>Step 2:</strong> Create a baseline characteristics table</h3>
+<ul>
+<li>Include all variables in the dataset apart from the outcome variable <code>target</code>
+<ul>
+<li>Summarize demographic variables (e.g., <code>age</code>, <code>sex</code>)</li>
+<li>Summarize clinical variables (e.g., <code>chol</code>, <code>trestbps</code>, <code>thalach</code>, <code>cp</code>)</li>
+</ul></li>
+<li>Decide on suitable summary measures for each variable
+<ul>
+<li>Use appropriate measures for continuous variables (e.g., mean, standard deviation, median, interquartile range)</li>
+<li>Use frequency counts and percentages for categorical variables</li>
+</ul></li>
+<li>Present your table clearly
+<ul>
+<li>Use meaningful labels, headings, and clear formatting</li>
+</ul></li>
+</ul>
 </section>
-<section id="point-estimates-and-95-confidence-intervals-for-population-proportions" class="level2">
-<h2 class="anchored" data-anchor-id="point-estimates-and-95-confidence-intervals-for-population-proportions">Point Estimates and 95% Confidence Intervals for Population Proportions</h2>
-<p>Next, we will explore the variable ‘low birth weight’ (low), which is a dichotomous variable that takes a value 1 if the baby had a low birth weight (defined as a birth weight &lt; 2500g) and a value of 0 otherwise.</p>
-<p>The frequency table for this variable is as follows:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-  0   1 
-130  59 </code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 7">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 7
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Based on these frequencies, what is the estimated proportion of low birth weight babies in the population?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 7">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Answer question 7
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The estimated proportion of low birth weight babies in the population is 59 / (130 + 59) = 0.31.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 8">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 8
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Calculate the corresponding 95% confidence interval based on the Normal approximation.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 8">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Answer question 8
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Using the sample proportion p, the standard error (SE) can be calculated as <span class="math inline">\(\sqrt(p * (1 - p) / n)\)</span>, where n is the total number of observations. The 95% confidence interval can then be calculated as p ± 1.96 * SE. In this case, the SE is equal to 0.03. Therefore, the 95% confidence interval is (0.24, 0.38).</p>
-</div>
-</div>
+<section id="step-3-perform-the-analysis-for-your-first-research-question" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-perform-the-analysis-for-your-first-research-question"><strong>Step 3:</strong> Perform the analysis for your first research question</h3>
+<p>Using your grouping variable from the lookup table:</p>
+<ul>
+<li>Visualize the data
+<ul>
+<li>Create a boxplot to compare the distribution of maximum heart rate across the categories of your grouping variable</li>
+</ul></li>
+<li>Calculate the estimated population means and 95% confidence intervals for maximum heart rate for each category of the grouping variable</li>
+<li>Select and perform an appropriate test
+<ul>
+<li>Use one-way ANOVA if normality and equal variances are met</li>
+<li>Use Kruskal-Wallis test if assumptions are violated</li>
+<li>Perform post-hoc comparisons using Bonferroni adjusted p-values if significant differences are found</li>
+</ul></li>
+</ul>
 </section>
-<section id="binomial-test" class="level2">
-<h2 class="anchored" data-anchor-id="binomial-test">Binomial Test</h2>
-<p>Subsequently, we perform an exact binomial test to assess whether the proportion of low birth weight babies in the population differs significantly from a hypothesized value of 30%:</p>
-<section id="r-results" class="level3">
-<h3 class="anchored" data-anchor-id="r-results">R results</h3>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Exact binomial test
-
-data:  sum(lowbwt$low == 1, na.rm = TRUE) and length(na.omit(lowbwt$low))
-number of successes = 59, number of trials = 189, p-value = 0.7509
-alternative hypothesis: true probability of success is not equal to 0.3
-95 percent confidence interval:
- 0.2468886 0.3834546
-sample estimates:
-probability of success 
-             0.3121693 </code></pre>
-</div>
-</div>
+<section id="step-4-perform-the-analysis-for-your-second-research-question" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-perform-the-analysis-for-your-second-research-question"><strong>Step 4:</strong> Perform the analysis for your second research question</h3>
+<p>Using the binary predictor from the lookup table:</p>
+<ul>
+<li>Summarize the data
+<ul>
+<li>Calculate and report the prevalence of heart disease for each category of your binary predictor</li>
+<li>Include percentages and 95% confidence intervals for each group</li>
+</ul></li>
+<li>Select and perform an appropriate test
+<ul>
+<li>Use a Chi-Square test of homogeneity or Fisher’s Exact Test, depending on the expected cell counts</li>
+</ul></li>
+</ul>
 </section>
-<section id="spss-results" class="level3">
-<h3 class="anchored" data-anchor-id="spss-results">SPSS results</h3>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/SPSS_lab2_q9.PNG" class="img-fluid figure-img"></p>
-<figcaption>Screenshot of the SPSS output table</figcaption>
-</figure>
-</div>
-<p>Because the binomial distribution with n=189 and p=0.3 is reasonably symmetric, the two-sided p-value provided by SPSS is close to the one provided by R. In the answers below, we will use the R results.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 9">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 9
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Does the proportion of low birth weight babies differ significantly from 30%?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 9">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Answer question 9
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The observed number of successes is 59, and the total number of trials is 189. Assuming a null hypothesis proportion of 30%, the expected number of successes is 0.3 * 189 = 56.7. The observed number of successes is relatively close to the expected number of successes under the null hypothesis, resulting in a p-value of the binomial test of 0.75. Since this p-value is greater than the significance level of 0.05, we fail to reject the null hypothesis. Therefore, the current sample does not provide sufficient evidence to conclude that the proportion of low birth weight babies differs significantly from 30%.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 10">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 10
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The Dutch government intends to start a campaign against drinking alcoholic beverages if over 50% of the adolescents drink alcoholic beverages regularly (at least once a week). A random sample of 200 adolescents is taken and 128 admit that they drink alcohol regularly (we assume all 200 speak the truth). Test the null hypothesis that 50% of the Dutch adolescents drink alcohol, using a significance level of 5%. Use the exact binomial test for this question.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 10">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Answer question 10
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The observed number of successes is 128, and the total number of trials is 200. Assuming a null hypothesis proportion of 50%, the expected number of successes is 0.5 * 200 = 100. The observed number of successes is considerably higher than the expected number of successes under the null hypothesis, resulting in a p-value of the binomial test that is &lt;0.001:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>binom_test_result <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="dv">128</span>, <span class="dv">200</span>, <span class="at">p =</span> <span class="fl">0.50</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>binom_test_result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Exact binomial test
-
-data:  128 and 200
-number of successes = 128, number of trials = 200, p-value = 9.13e-05
-alternative hypothesis: true probability of success is not equal to 0.5
-95 percent confidence interval:
- 0.5692861 0.7064953
-sample estimates:
-probability of success 
-                  0.64 </code></pre>
-</div>
-</div>
-<p>Therefore, we reject the null hypothesis and conclude that the proportion of Dutch adolescents who drink alcohol regularly is significantly higher than 50%.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 11">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 11
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Rather than using an exact binomial test, we can also use the normal approximation of the binomial distribution to obtain an approximate p-value for the above hypothesis test. Manually calculate this approximate p-value and compare it to the p-value obtained from the binomial test. Is the use of the normal approximation appropriate in this case?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 11">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Answer question 11
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>To manually calculate an approximate p-value using the normal approximation, we first calculate the sample proportion <span class="math inline">\(p\)</span> as the number of successes divided by the total number of trials (i.e., <span class="math inline">\(p\)</span> = 128 / 200 = 0.64). We then calculate the standard error (SE) as <span class="math inline">\(\sqrt(\pi * (1 - \pi) / n)\)</span>, where <span class="math inline">\(n\)</span> is the total number of observations and <span class="math inline">\(\pi\)</span> is the null hypothesis proportion. This gives a SE of 0.035.</p>
-<p>Under the null hypothesis, the sample proportion is approximately Normally distributed with mean <span class="math inline">\(\pi\)</span> = 0.5 and SE = 0.035. To calculate the probability of observing a sample proportion at least as extreme as the one observed in the data, we can calculate the z-score as <span class="math inline">\((p - \pi) / SE\)</span>. In this case, the z-score is 3.96, resulting in a p-value &lt;0.001, which is consistent with the p-value obtained from the binomial test.</p>
-<p>The use of the normal approximation is very reasonable in this case because <span class="math inline">\(n * \pi = 200 * 0.5 =100\)</span> is considerably larger than 5, which is the minimum requirement for the normal approximation to be valid.</p>
-</div>
-</div>
-
-
+<section id="step-5-write-a-report" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-write-a-report"><strong>Step 5:</strong> Write a report</h3>
+<p>Your report should be structured in the form of <strong>Methods</strong> and <strong>Results</strong> sections, as typically encountered in scientific papers.</p>
+<ul>
+<li><strong>Methods</strong>
+<ul>
+<li>State your personalized research questions (based on your student number)</li>
+<li>Outline the steps taken to analyze the data</li>
+<li>Describe statistical tests performed, assumptions checked, and adjustments applied</li>
+</ul></li>
+<li><strong>Results</strong>
+<ul>
+<li>Include the baseline characteristics table</li>
+<li>Present key findings for each research question</li>
+<li>Include visualizations (e.g., boxplots) to support your findings where applicable</li>
+</ul></li>
+<li><strong>Formatting guidelines</strong>
+<ul>
+<li>Properly label all tables and figures</li>
+<li>Limit the report to 2–3 pages, including visuals and tables</li>
+</ul></li>
+</ul>
 </section>
+</section>
+<section id="reporting-examples" class="level2">
+<h2 class="anchored" data-anchor-id="reporting-examples">Reporting examples</h2>
+<p>When presenting your analysis results, ensure clarity and adherence to proper reporting conventions. Use the following examples as a guide:</p>
+<blockquote class="blockquote">
+<p>The mean cholesterol levels (95% CI) for the four chest pain types were as follows: typical angina, 245.3 mg/dL (95% CI: 230.1, 260.5); atypical angina, 220.4 mg/dL (95% CI: 205.7, 235.1); non-anginal pain, 230.2 mg/dL (95% CI: 215.6, 244.8); and asymptomatic chest pain, 200.1 mg/dL (95% CI: 185.4, 214.8). A one-way ANOVA was conducted to compare cholesterol levels across these groups, revealing a significant difference, F(3, 299) = 4.32, p = 0.006. Post-hoc pairwise comparisons using Bonferroni-adjusted p-values indicated that patients with typical angina had significantly higher cholesterol levels compared to those with asymptomatic chest pain (adjusted p = 0.015). No other pairwise differences were statistically significant after adjustment.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>The prevalence of heart disease was higher among patients older than 65 (68.5%, 95% CI: 60.2%, 76.8%) compared to those 65 or younger (47.2%, 95% CI: 35.6%, 58.8%). Fisher’s Exact Test indicated a significant difference between these groups (p = 0.028).</p>
+</blockquote>
+</section>
+<section id="submission-instructions" class="level2">
+<h2 class="anchored" data-anchor-id="submission-instructions">Submission instructions</h2>
+<p>Submit the following files as part of your assignment:</p>
+<ul>
+<li><strong>The report:</strong> Provide your report in Word or PDF format</li>
+<li><strong>The SPSS output:</strong> Include your SPSS output file (.spv) with all analysis results</li>
+</ul>
+</section>
+<section id="downloads" class="level2">
+<h2 class="anchored" data-anchor-id="downloads">Downloads</h2>
+<p><a href="datasets/heart_disease_cleveland.sav">Cleveland heart disease dataset (SPSS format)</a></p>
+
+
 </section>
 
 </main> <!-- /main -->

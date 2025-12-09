@@ -41,7 +41,7 @@ In this assignment, you will explore the Cleveland heart disease dataset to answ
 
 ### **Step 1:** Load the dataset and identify your personalized research questions
 
-Download the Cleveland heart disease dataset from Brightspace and open it in SPSS.
+Download the Cleveland heart disease dataset (see Downloads section at the end of this document) and open it in SPSS.
 
 Use the last two digits of your student number to find your personalized research questions in the table below:
 
@@ -126,3 +126,7 @@ Submit the following files as part of your assignment:
 
 * **The report:** Provide your report in Word or PDF format
 * **The SPSS output:** Include your SPSS output file (.spv) with all analysis results
+
+## Downloads
+
+[Cleveland heart disease dataset (SPSS format)](datasets/heart_disease_cleveland.sav)
