@@ -29,6 +29,24 @@ Below is an overview of the variables we will be working with:
 | `alcohol`     | Alcohol consumption categories (e.g., "None", "1–2 glasses/day", ">2 glasses/day") |
 
 ```{r}
+#| eval: false
+
+library(haven)   # for reading SPSS files
+library(dplyr)   # for data manipulation
+library(ggplot2) # for data visualization
+library(car)    # for calculating type-III ANOVA tables
+
+# Load the dataset
+pockets <- read_sav("pockets.sav")
+
+# Convert labeled variables to factors
+pockets <- pockets %>%
+  mutate(across(where(is.labelled), as_factor))
+```
+
+```{r}
+#| include: false
+
 library(haven)   # for reading SPSS files
 library(dplyr)   # for data manipulation
 library(ggplot2) # for data visualization
@@ -139,7 +157,9 @@ In addition to the Q-Q plot, we can also create a histogram of the residuals to 
 
 ```{r}
 # Histogram of residuals
-hist(residuals(model_slr), breaks = 15, col = "lightblue", border = "black", main = "Histogram of Residuals", xlab = "Residuals")
+hist(residuals(model_slr), breaks = 15, col = "lightblue", 
+     border = "black", main = "Histogram of Residuals", 
+     xlab = "Residuals")
 ```
 
 ::: {.callout-important icon=false title="Question 9"}
@@ -174,7 +194,8 @@ We start by creating a scatterplot to visualize the relationship between `age` a
 # Scatterplot of pocketdepth vs. age, colored by alcohol
 ggplot(pockets, aes(x = age, y = pocketdepth, color = alcohol)) +
   geom_point() +
-  labs(title = "Scatterplot of Pocket Depth vs. Age by Alcohol Consumption", x = "Age", y = "Pocket Depth") +
+  labs(title = "Scatterplot of Pocket Depth vs. Age by Alcohol Consumption", 
+       x = "Age", y = "Pocket Depth") +
   theme_minimal() +
   theme(legend.position = "bottom")
 ```
@@ -202,6 +223,10 @@ To fit the ANCOVA model, we can use the `lm()` function in R. The formula for th
 model_ancova <- lm(pocketdepth ~ age + alcohol, data = pockets)
 summary(model_ancova)
 ```
+
+::: {.callout-note}
+Note that R uses the first level of a factor (alphabetically or numerically) as the default reference category. In this dataset, "None" is the reference category.
+:::
 
 ::: {.callout-important icon=false title="Question 13"}
 Based on the ANCOVA model output, what is the expected difference in pocket depth between individuals who consume `"None"` and those who consume `">2 glasses/day"`, while controlling for age?

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Medical Statistics – Lab 1 – Medical Statistics</title>
+<title>Medical Statistics – Lab 6 – Medical Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e31584831b205ffbb2d98406f31c2a5b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-7d8f446abc168d75111c8ab93f0c9211.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -104,35 +104,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -328,30 +299,33 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1---descriptive-statistics" id="toc-part-1---descriptive-statistics" class="nav-link active" data-scroll-target="#part-1---descriptive-statistics">Part 1 - Descriptive statistics</a>
+  <li><a href="#part-1-pearsons-correlation-coefficient-and-simple-linear-regression" id="toc-part-1-pearsons-correlation-coefficient-and-simple-linear-regression" class="nav-link active" data-scroll-target="#part-1-pearsons-correlation-coefficient-and-simple-linear-regression">Part 1: Pearson’s correlation coefficient and simple linear regression</a>
   <ul class="collapse">
-  <li><a href="#descriptive-analysis-of-continuous-variables" id="toc-descriptive-analysis-of-continuous-variables" class="nav-link" data-scroll-target="#descriptive-analysis-of-continuous-variables">Descriptive analysis of continuous variables</a></li>
-  <li><a href="#descriptive-analysis-of-categorical-variables" id="toc-descriptive-analysis-of-categorical-variables" class="nav-link" data-scroll-target="#descriptive-analysis-of-categorical-variables">Descriptive analysis of categorical variables</a></li>
+  <li><a href="#pearsons-correlation-coefficient" id="toc-pearsons-correlation-coefficient" class="nav-link" data-scroll-target="#pearsons-correlation-coefficient">Pearson’s Correlation Coefficient</a></li>
+  <li><a href="#fitting-a-simple-linear-regression-model" id="toc-fitting-a-simple-linear-regression-model" class="nav-link" data-scroll-target="#fitting-a-simple-linear-regression-model">Fitting a Simple Linear Regression Model</a></li>
+  <li><a href="#assumption-checking" id="toc-assumption-checking" class="nav-link" data-scroll-target="#assumption-checking">Assumption Checking</a></li>
   </ul></li>
-  <li><a href="#part-2---probability-calculations-for-random-variables" id="toc-part-2---probability-calculations-for-random-variables" class="nav-link" data-scroll-target="#part-2---probability-calculations-for-random-variables">Part 2 - Probability calculations for random variables</a>
+  <li><a href="#part-2-ancova-analysis-of-covariance" id="toc-part-2-ancova-analysis-of-covariance" class="nav-link" data-scroll-target="#part-2-ancova-analysis-of-covariance">Part 2: ANCOVA (Analysis of Covariance)</a>
   <ul class="collapse">
-  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution">Binomial Distribution</a>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory Data Analysis</a></li>
+  <li><a href="#dummy-coding-for-alcohol" id="toc-dummy-coding-for-alcohol" class="nav-link" data-scroll-target="#dummy-coding-for-alcohol">Dummy Coding for <code>alcohol</code></a></li>
+  <li><a href="#fitting-the-ancova-model" id="toc-fitting-the-ancova-model" class="nav-link" data-scroll-target="#fitting-the-ancova-model">Fitting the ANCOVA Model</a></li>
+  <li><a href="#model-diagnostics" id="toc-model-diagnostics" class="nav-link" data-scroll-target="#model-diagnostics">Model Diagnostics</a></li>
+  </ul></li>
+  <li><a href="#part-3-interactions-in-ancova" id="toc-part-3-interactions-in-ancova" class="nav-link" data-scroll-target="#part-3-interactions-in-ancova">Part 3: Interactions in ANCOVA</a>
   <ul class="collapse">
-  <li><a href="#explanation-of-dbinom-arguments" id="toc-explanation-of-dbinom-arguments" class="nav-link" data-scroll-target="#explanation-of-dbinom-arguments">Explanation of <code>dbinom()</code> Arguments</a></li>
-  <li><a href="#explanation-of-pbinom-arguments" id="toc-explanation-of-pbinom-arguments" class="nav-link" data-scroll-target="#explanation-of-pbinom-arguments">Explanation of <code>pbinom()</code> Arguments</a></li>
+  <li><a href="#fitting-the-interaction-model" id="toc-fitting-the-interaction-model" class="nav-link" data-scroll-target="#fitting-the-interaction-model">Fitting the Interaction Model</a></li>
   </ul></li>
-  <li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link" data-scroll-target="#normal-distribution">Normal Distribution</a></li>
-  </ul></li>
-  <li><a href="#part-3---some-conceptual-questions" id="toc-part-3---some-conceptual-questions" class="nav-link" data-scroll-target="#part-3---some-conceptual-questions">Part 3 - Some conceptual questions</a></li>
+  <li><a href="#part-4-relationship-between-smoking-and-pocket-depth" id="toc-part-4-relationship-between-smoking-and-pocket-depth" class="nav-link" data-scroll-target="#part-4-relationship-between-smoking-and-pocket-depth">Part 4: Relationship Between Smoking and Pocket Depth</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="R_lab1.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="R_lab6.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Medical Statistics – Lab 1</h1>
+<h1 class="title">Medical Statistics – Lab 6</h1>
 <p class="subtitle lead">R version</p>
 </div>
 
@@ -369,146 +343,67 @@ window.Quarto = {
 </header>
 
 
-<p>Welcome to lab 1 in the medical statistics course. In this lab, we will explore descriptive statistics and probability calculations for random variables. We will use an example dataset to practice summarizing continuous and categorical variables, and introduce some basic concepts of probability distributions.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Learning R">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Learning R
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Throughout this course, we use the <code>ggplot2</code> package for data visualization and the <code>dplyr</code> package for data transformation and summary. Students who want to learn more about these packages are recommended to study chapters 1 (Data visualization) and 3 (Data transformation) from Hadley Wickham’s <em>R for Data Science</em> book: <a href="https://r4ds.hadley.nz/" class="uri">https://r4ds.hadley.nz/</a></p>
-</div>
-</div>
-<section id="part-1---descriptive-statistics" class="level1">
-<h1>Part 1 - Descriptive statistics</h1>
-<p>For this part of the lab, we will use the <code>lowbwt.sav</code> dataset. This dataset contains information collected at Baystate Medical Center Springfield, MA, during 1986 and is from Appendix 1 of Hosmer and Lemeshow (1989). The data include information about factors related to low birth weight, an important concern due to its association with high infant mortality rates and birth defects.</p>
-<p>The dataset is in SPSS format, but you can easily load it into R using the <code>haven</code> package. To get started, make sure to install the necessary packages:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"haven"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Then, load the dataset as follows:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>lowbwt <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"datasets/lowbwt.sav"</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert alll labelled variables into factor variables </span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>lowbwt <span class="ot">&lt;-</span> lowbwt <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.labelled), as_factor))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>The dataset includes the following variables:</p>
+<p>Welcome to lab 6 on correlation and linear regression. In today’s exercises, we will be analyzing a dataset named <code>pockets.sav</code>, which you can download from the Datasets menu. This dataset contains measurements of periodontal pocket depth for a group of individuals, along with several demographic and lifestyle variables.</p>
+<p>Below is an overview of the variables we will be working with:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
+<col style="width: 15%">
+<col style="width: 84%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Variable</th>
-<th>Abbreviation</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Identification Code</td>
-<td>ID</td>
+<td><code>pocketdepth</code></td>
+<td>Pocket depth measurement in millimeters (continuous)</td>
 </tr>
 <tr class="even">
-<td>Low Birth Weight (0 = Birth Weight ≥ 2500g, 1 = Birth Weight &lt; 2500g)</td>
-<td>low</td>
+<td><code>sex</code></td>
+<td>Sex (categorical: “Female” / “Male”)</td>
 </tr>
 <tr class="odd">
-<td>Age of the Mother in Years</td>
-<td>age</td>
+<td><code>age</code></td>
+<td>Age in years (continuous)</td>
 </tr>
 <tr class="even">
-<td>Weight in Pounds at the Last Menstrual Period</td>
-<td>lwt</td>
+<td><code>smoking</code></td>
+<td>Smoking status (categorical: “Non-smoker” / “Smoker”)</td>
 </tr>
 <tr class="odd">
-<td>Ethnicity (1 = Caucasian, 2 = Afro-American, 3 = Asian)</td>
-<td>ethnicity</td>
-</tr>
-<tr class="even">
-<td>Smoking Status During Pregnancy (1 = Yes, 0 = No)</td>
-<td>smoke</td>
-</tr>
-<tr class="odd">
-<td>History of Premature Labor (0 = None, 1 = One, etc.)</td>
-<td>ptl</td>
-</tr>
-<tr class="even">
-<td>History of Hypertension (1 = Yes, 0 = No)</td>
-<td>ht</td>
-</tr>
-<tr class="odd">
-<td>Presence of Uterine Irritability (1 = Yes, 0 = No)</td>
-<td>urirr</td>
-</tr>
-<tr class="even">
-<td>Number of Physician Visits During the First Trimester (0 = None, 1 = One, 2 = Two, etc.)</td>
-<td>pvft</td>
-</tr>
-<tr class="odd">
-<td>Birth Weight in Grams</td>
-<td>bwt</td>
+<td><code>alcohol</code></td>
+<td>Alcohol consumption categories (e.g., “None”, “1–2 glasses/day”, “&gt;2 glasses/day”)</td>
 </tr>
 </tbody>
 </table>
-<p>The variables <code>bwt</code> (birth weight in grams) and <code>low</code> (low birth weight) are the outcome variables, while all other variables are considered independent variables. The outcome variables will be analyzed in more detail in subsequent labs. In this lab, we will focus on describing the study population in terms of the independent variables to obtain a set of summary statistics that could be used to populate a baseline characteristics table.</p>
-<section id="descriptive-analysis-of-continuous-variables" class="level2">
-<h2 class="anchored" data-anchor-id="descriptive-analysis-of-continuous-variables">Descriptive analysis of continuous variables</h2>
-<p>Let’s start by calculating the summary statistics for the continuous variable <code>age</code>. We’ll use the <code>summarise()</code> function from the <code>dplyr</code> package, which allows us to calculate multiple summary statistics in a single, organized call:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>age_summary <span class="ot">&lt;-</span> lowbwt <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="fu">sd</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">median =</span> <span class="fu">median</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">q1 =</span> <span class="fu">quantile</span>(age, <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">q3 =</span> <span class="fu">quantile</span>(age, <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">iqr =</span> <span class="fu">IQR</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>age_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)   <span class="co"># for reading SPSS files</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)   <span class="co"># for data manipulation</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for data visualization</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)    <span class="co"># for calculating type-III ANOVA tables</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>pockets <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"pockets.sav"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert labeled variables to factors</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>pockets <span class="ot">&lt;-</span> pockets <span class="sc">%&gt;%</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.labelled), as_factor))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>The <code>summarise()</code> function creates a new data frame containing the summary statistics you specify. The functions <code>mean()</code>, <code>sd()</code>, <code>median()</code>, and <code>IQR()</code> are built-in base R functions that work within <code>summarise()</code>. The <code>quantile()</code> function calculates the quartiles: Q1 (25th percentile) and Q3 (75th percentile). The <code>na.rm = TRUE</code> argument ensures that any missing values are ignored in the calculations.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="IQR vs [Q1, Q3]">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>IQR vs [Q1, Q3]
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Note the difference between IQR and the quartile interval:</p>
-<ul>
-<li><strong>IQR</strong> (Interquartile Range) = Q3 - Q1, which is a single number representing the spread of the middle 50% of the data</li>
-<li><strong>[Q1, Q3]</strong> is the interval itself, showing the actual range where the middle 50% of observations fall</li>
-</ul>
-<p>In scientific papers, it’s more common to report the median along with [Q1, Q3] (e.g., “median age: 23 years [19, 26]”) rather than reporting the IQR as a single value.</p>
-</div>
-</div>
-<p>To decide which summary measures (mean and standard deviation, or median and [Q1, Q3]) are appropriate to report, we need to understand the shape of the distribution of the <code>age</code> variable. We do this by creating a histogram:</p>
+<section id="part-1-pearsons-correlation-coefficient-and-simple-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-pearsons-correlation-coefficient-and-simple-linear-regression">Part 1: Pearson’s correlation coefficient and simple linear regression</h2>
+<p>In this section, we will investigate whether <strong>age</strong> is associated with <strong>pocket depth</strong>. We start by creating a scatterplot to visualize the relationship between <code>pocketdepth</code> and <code>age</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lowbwt, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">"blue"</span>, </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Age"</span>, </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Age of Mother (years)"</span>, </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot of pocket depth vs. age</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pockets, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> pocketdepth)) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x     =</span> <span class="st">"Age (years)"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y     =</span> <span class="st">"Pocket Depth (mm)"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Scatterplot of Pocket Depth vs Age"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 1">
 <div class="callout-header d-flex align-content-center">
@@ -520,9 +415,17 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on the shape of the histogram, determine which summary statistics are more appropriate to report.</p>
+<p>Based on the scatterplot, is there an indication of a linear association between <code>age</code> and <code>pocketdepth</code>? If so, is this association positive or negative?</p>
 </div>
 </div>
+<section id="pearsons-correlation-coefficient" class="level3">
+<h3 class="anchored" data-anchor-id="pearsons-correlation-coefficient">Pearson’s Correlation Coefficient</h3>
+<p>To quantify the strength and direction of the linear relationship between <code>age</code> and <code>pocketdepth</code>, we can calculate Pearson’s correlation coefficient:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Pearson's correlation coefficient</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(pockets<span class="sc">$</span>age, pockets<span class="sc">$</span>pocketdepth, <span class="at">use=</span><span class="st">"complete.obs"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The argument <code>use = "complete.obs"</code> tells R to exclude any missing values when calculating the correlation coefficient. In this case, there are no missing values in the <code>age</code> and <code>pocketdepth</code> variables, meaning that the argument is not strictly necessary. However, it is good practice to include it to avoid potential issues with missing data in other datasets.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 2">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -533,21 +436,15 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Calculate the mean, standard deviation, median, Q1, Q3, and IQR for the variable <code>lwt</code> using the <code>summarise()</code> function. Additionally, create a histogram to determine the shape of its distribution and decide which summary measures are most appropriate to report.</p>
+<p>What does the correlation coefficient tell us about the relationship between <code>age</code> and <code>pocketdepth</code>? Does this align with your interpretation of the scatterplot?</p>
 </div>
 </div>
-</section>
-<section id="descriptive-analysis-of-categorical-variables" class="level2">
-<h2 class="anchored" data-anchor-id="descriptive-analysis-of-categorical-variables">Descriptive analysis of categorical variables</h2>
-<p>Let’s move on to analyzing the categorical variables. We’ll calculate the frequency and percentage of mothers who smoked during pregnancy (<code>smoke</code>) using the <code>count()</code> and <code>mutate()</code> functions from <code>dplyr</code> package:</p>
+<p>We can also test whether the correlation coefficient is significantly different from zero using a hypothesis test. The null hypothesis is that the correlation coefficient is zero (i.e., no linear relationship between the variables), and the alternative hypothesis is that the correlation coefficient is not zero. In R, we can perform this test using the <code>cor.test()</code> function:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>smoke_summary <span class="ot">&lt;-</span> lowbwt <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(smoke) <span class="sc">|&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentage =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>smoke_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the significance of the correlation coefficient</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>cor_test <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(pockets<span class="sc">$</span>age, pockets<span class="sc">$</span>pocketdepth)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>cor_test</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>The <code>count()</code> function calculates the frequency of each category and automatically creates a new column called <code>n</code> that contains these frequencies. The <code>mutate()</code> function then adds another column with the percentages, calculated by dividing each frequency (<code>n</code>) by the total number of observations (<code>sum(n)</code>) and multiplying by 100.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 3">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -558,19 +455,21 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Calculate the frequencies and percentages for the variable history of hypertension (<code>ht</code>).</p>
+<p>What is the p-value for the correlation coefficient test? Based on this p-value, do we have sufficient evidence to reject the null hypothesis?</p>
 </div>
 </div>
-<p>In addition to calculating frequencies and percentages, it can also be helpful to visualize categorical data. One common way to do this is by creating a bar chart. Below is an example of how you can create a bar chart for the <code>smoke</code> variable:</p>
+</section>
+<section id="fitting-a-simple-linear-regression-model" class="level3">
+<h3 class="anchored" data-anchor-id="fitting-a-simple-linear-regression-model">Fitting a Simple Linear Regression Model</h3>
+<p>Next, we fit a simple linear regression model to quantify the relationship between <code>age</code> and <code>pocketdepth</code>. In R, this can be achieved using the <code>lm()</code> function:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lowbwt, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(smoke))) <span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Smoking Status During Pregnancy"</span>, </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Smoking Status"</span>, </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a simple linear regression model</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>model_slr <span class="ot">&lt;-</span> <span class="fu">lm</span>(pocketdepth <span class="sc">~</span> age, <span class="at">data =</span> pockets)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the summary of the model</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_slr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>This bar chart shows the frequency of mothers who smoked and those who did not during pregnancy. Similarly, you can create a bar chart for the variable <code>ht</code> to visualize the frequency of mothers with a history of hypertension.</p>
+<p>The formula <code>pocketdepth ~ age</code> specifies that <code>pocketdepth</code> is the dependent variable and <code>age</code> is the independent variable. The intercept term is included by default in the linear regression model and is therefore not explicitly specified in the formula.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 4">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -581,44 +480,9 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Create a bar chart for the variable <code>ht</code> to visualize the frequency of mothers with a history of hypertension.</p>
+<p>Is the relationship between <code>age</code> and <code>pocketdepth</code> statistically significant (at α = 0.05)?</p>
 </div>
 </div>
-</section>
-</section>
-<section id="part-2---probability-calculations-for-random-variables" class="level1">
-<h1>Part 2 - Probability calculations for random variables</h1>
-<p>In this section, we will focus on two commonly used probability distributions: the binomial distribution and the normal distribution. We will explore how to work with these distributions in R using practical examples.</p>
-<section id="binomial-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="binomial-distribution">Binomial Distribution</h2>
-<p>A binomial distribution represents the number of successes in a fixed number of independent trials, each with the same probability of success. For example, if we have 10 patients and we want to know the probability that exactly 3 of them respond to a given treatment, where the response rate is known to be 40%, we can use the <code>dbinom()</code> function:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Probability that exactly 3 out of 10 patients respond </span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># to the treatment (assuming p = 0.4)</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>p_response_3 <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.4</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>p_response_3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<section id="explanation-of-dbinom-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="explanation-of-dbinom-arguments">Explanation of <code>dbinom()</code> Arguments</h3>
-<ul>
-<li><strong><code>x</code></strong>: The number of successes we are interested in (in this example, <code>3</code> patients responding).</li>
-<li><strong><code>size</code></strong>: The number of trials, which represents the total number of patients (in this example, <code>10</code> patients).</li>
-<li><strong><code>prob</code></strong>: The probability of success in each trial (in this example, <code>0.4</code> or 40% response rate).</li>
-</ul>
-<p>To calculate cumulative probabilities, use the <code>pbinom()</code> function. For example, to calculate the probability that 3 or fewer patients out of 10 respond to the treatment:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p_cum_3 <span class="ot">&lt;-</span> <span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.4</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>p_cum_3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="explanation-of-pbinom-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="explanation-of-pbinom-arguments">Explanation of <code>pbinom()</code> Arguments</h3>
-<ul>
-<li><strong><code>q</code></strong>: The number of successes we want to calculate the cumulative probability for (in this example, <code>3</code> or fewer successes).</li>
-<li><strong><code>size</code></strong>: The number of trials, which represents the total number of patients (in this example, <code>10</code> patients).</li>
-<li><strong><code>prob</code></strong>: The probability of success in each trial (in this example, <code>0.4</code> or 40% response rate).</li>
-</ul>
-<p>By default, the <code>pbinom()</code> function calculates the probability that the number of successes is less than or equal to <code>q</code>. However, it is also possible to calculate the probability that the number of successes is greater than <code>q</code> by setting <code>lower.tail = FALSE</code>. The <code>lower.tail</code> argument specifies whether the cumulative probability is calculated from the lower tail (default, <code>TRUE</code>) or the upper tail (<code>FALSE</code>).</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 5">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -629,7 +493,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The probability of being blood group B is 0.08. What is the probability that if 500 ml of blood is taken from each of 100 unrelated blood donors fewer than 1,500 ml of group B blood will be obtained?</p>
+<p>How does the p-value for <code>age</code> in the regression output compare to the p-value for the correlation coefficient test? Are they consistent with each other?</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 6">
@@ -642,34 +506,8 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In a clinical trial in which a total of 100 patients are allocated to two treatments A and B by simple randomization (tossing a coin for each new patient). What is the probability that the difference between the numbers of patients in the two treatment groups exceeds 20? (Hint: the number of individuals in one treatment group (for example A) follows a Binomial distribution).</p>
+<p>What is the interpretation of the intercept and the coefficient for <code>age</code> in the regression output?</p>
 </div>
-</div>
-</section>
-</section>
-<section id="normal-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="normal-distribution">Normal Distribution</h2>
-<p>Suppose that we want to calculate the probability that a randomly selected individual has a weight less than or equal to 80 kg, assuming that the distribution of weight in the population follows a normal distribution with mean 72 kg and standard deviation 10 kg.</p>
-<p>To calculate this probability, we first need to <strong>standardize</strong> the value using the formula:</p>
-<p><span class="math display">\[
-Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
-\]</span></p>
-<p>where:</p>
-<ul>
-<li><strong><code>x</code></strong> is the value we want to standardize (in this case, 80 kg).</li>
-<li><strong><code>μ</code></strong> is the mean of the distribution (in this case, 72 kg).</li>
-<li><strong><code>σ</code></strong> is the standard deviation of the distribution (in this case, 10 kg).</li>
-</ul>
-<p>Using R, we can then use the <code>pnorm()</code> function to find the corresponding cumulative probability from the standard normal distribution:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardize the value</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>z_value <span class="ot">&lt;-</span> (<span class="dv">80</span> <span class="sc">-</span> <span class="dv">72</span>) <span class="sc">/</span> <span class="dv">10</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>z_value</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the standard normal distribution to find </span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># the cumulative probability</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>cum_prob_weight <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(z_value)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>cum_prob_weight</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 7">
 <div class="callout-header d-flex align-content-center">
@@ -681,13 +519,9 @@ Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Over a 25 year period the mean height of adult males increased from 175.8 cm to 179.1 cm, but the standard deviation stayed at 5.84 cm. The minimum height requirement for men to join the police force is 172 cm. What proportion of men would be too short to become policemen at the beginning and end of the 25 year period, assuming that the height of adult males has a Normal distribution?</p>
+<p>Based on the fitted model, what is the expected pocket depth for a person who is 40 years old?</p>
 </div>
 </div>
-</section>
-</section>
-<section id="part-3---some-conceptual-questions" class="level1">
-<h1>Part 3 - Some conceptual questions</h1>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 8">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -698,14 +532,28 @@ Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Imagine we have some observations on blood pressure and calculate the mean, standard deviation, median and IQR. How do these measures change if all observations are</p>
-<ol type="a">
-<li>increased by 10</li>
-<li>decreased by their mean</li>
-<li>multiplied by 10</li>
-<li>divided by their standard deviation</li>
-</ol>
+<p>How much of the variation in pocket depth is explained by age in this model?</p>
 </div>
+</div>
+</section>
+<section id="assumption-checking" class="level3">
+<h3 class="anchored" data-anchor-id="assumption-checking">Assumption Checking</h3>
+<p>To obtain diagnostic plots for the simple linear regression model, we can supply the fitted model to the <code>plot()</code> function. By default, R will generate four diagnostic plots. In this lab, we are going to focus on the following two plots:</p>
+<ul>
+<li>Q-Q Plot: This plot helps us assess the normality of the residuals. This plot can be obtained by setting <code>which = 2</code> in the <code>plot()</code> function.</li>
+<li>Residuals vs.&nbsp;Fitted: This plot helps us check for homoscedasticity (constant variance) and linearity assumptions. This plot can be obtained by setting <code>which = 1</code> in the <code>plot()</code> function.</li>
+</ul>
+<section id="normality-of-residuals" class="level4">
+<h4 class="anchored" data-anchor-id="normality-of-residuals">Normality of Residuals</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_slr, <span class="at">which =</span> <span class="dv">2</span>)  <span class="co"># Q-Q plot</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>In addition to the Q-Q plot, we can also create a histogram of the residuals to visually inspect their distribution:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram of residuals</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(model_slr), <span class="at">breaks =</span> <span class="dv">15</span>, <span class="at">col =</span> <span class="st">"lightblue"</span>, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"black"</span>, <span class="at">main =</span> <span class="st">"Histogram of Residuals"</span>, </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Residuals"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 9">
 <div class="callout-header d-flex align-content-center">
@@ -717,13 +565,14 @@ Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Two fair dice are rolled, the results are X1 and X2.</p>
-<ol type="a">
-<li>What is the probability Prob(X1=X2)?</li>
-<li>What is the expected value E(X1), and the standard deviation SD(X1)?</li>
-<li>Give the expected value and the variance of X1+X2 and of X1-X2.</li>
-</ol>
+<p>Do the histogram and Q-Q plot suggest that the residuals are reasonably normally distributed?</p>
 </div>
+</div>
+</section>
+<section id="homoscedasticity-and-linearity" class="level4">
+<h4 class="anchored" data-anchor-id="homoscedasticity-and-linearity">Homoscedasticity and linearity</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_slr, <span class="at">which =</span> <span class="dv">1</span>)  <span class="co"># residuals vs fitted</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 10">
 <div class="callout-header d-flex align-content-center">
@@ -735,13 +584,10 @@ Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>There are two hospitals in town. On average 45 deliveries take place each day in the larger hospital, and 15 in the smaller. The probability of a baby being a boy is about 0.52, and the probability of twins is about 0.012. On any day, which hospital is more likely</p>
-<ol type="a">
-<li>to have a set of twins delivered</li>
-<li>to have more than 60 % of babies being boys?</li>
-</ol>
+<p>Does the residual-versus-fitted plot suggest constant variance?</p>
 </div>
 </div>
+<p>The red line in R’s default residual-versus-fitted plot is a LOESS (locally estimated scatterplot smoothing) curve that shows the average trend in the residuals. It helps you see if there is a systematic pattern (e.g., curvature) that might indicate the linear model is misspecified. Ideally, you want that red line to be close to horizontal (i.e., around zero) with no strong curvature, suggesting that the linear fit is appropriate and there’s no obvious nonlinearity or other systematic pattern left in the residuals.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 11">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -752,12 +598,164 @@ Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The probability of a baby being a boy is 0.52. For six women delivering consecutively in the same labour ward on one day, which of the following exact sequences of boys and girls is most likely and which least likely?</p>
-<p>GBGBGB</p>
-<p>BBBGGG</p>
-<p>GBBBBB</p>
+<p>Does the residual-versus-fitted plot suggest any violation of the linearity assumption?</p>
 </div>
 </div>
+</section>
+</section>
+</section>
+<section id="part-2-ancova-analysis-of-covariance" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-ancova-analysis-of-covariance">Part 2: ANCOVA (Analysis of Covariance)</h2>
+<p>In this section, we will fit an ANCOVA model to determine whether alcohol consumption is associated with pocket depth, controlling for age.</p>
+<section id="exploratory-data-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h3>
+<p>We start by creating a scatterplot to visualize the relationship between <code>age</code> and <code>pocketdepth</code>, using different colors to represent the levels of <code>alcohol</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot of pocketdepth vs. age, colored by alcohol</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pockets, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> pocketdepth, <span class="at">color =</span> alcohol)) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scatterplot of Pocket Depth vs. Age by Alcohol Consumption"</span>, </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Pocket Depth"</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 12">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Question 12
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What can you infer from the scatterplot about the relationship between <code>age</code>, <code>pocketdepth</code>, and <code>alcohol</code> consumption?</p>
+</div>
+</div>
+</section>
+<section id="dummy-coding-for-alcohol" class="level3">
+<h3 class="anchored" data-anchor-id="dummy-coding-for-alcohol">Dummy Coding for <code>alcohol</code></h3>
+<p>The variable <code>alcohol</code> has three categories (e.g., <code>"None"</code>, <code>"1-2 glasses/day"</code>, and <code>"&gt;2 glasses/day"</code>), meaning that we need to create two dummy variables to represent these categories in the model. R automatically generates these dummy variables once <code>alcohol</code> is recognized as a factor. To check if <code>alcohol</code> is a factor, we can use the <code>is.factor()</code> function:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check whether alcohol is a factor</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.factor</span>(pockets<span class="sc">$</span>alcohol)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>In this case, the output should be <code>TRUE</code>, given that we converted all categorical variables to factors when loading the dataset. Should <code>alcohol</code> not be a factor, we can either convert it to a factor using the <code>factor()</code> function or specify it as a factor in the model formula.</p>
+</section>
+<section id="fitting-the-ancova-model" class="level3">
+<h3 class="anchored" data-anchor-id="fitting-the-ancova-model">Fitting the ANCOVA Model</h3>
+<p>To fit the ANCOVA model, we can use the <code>lm()</code> function in R. The formula for the ANCOVA model is specified as <code>pocketdepth ~ age + alcohol</code>, where <code>age</code> is the continuous predictor and <code>alcohol</code> is the categorical predictor.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model_ancova <span class="ot">&lt;-</span> <span class="fu">lm</span>(pocketdepth <span class="sc">~</span> age <span class="sc">+</span> alcohol, <span class="at">data =</span> pockets)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_ancova)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that R uses the first level of a factor (alphabetically or numerically) as the default reference category. In this dataset, “None” is the reference category.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 13">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Question 13
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Based on the ANCOVA model output, what is the expected difference in pocket depth between individuals who consume <code>"None"</code> and those who consume <code>"&gt;2 glasses/day"</code>, while controlling for age?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 14">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Question 14
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Based on the ANCOVA model output, what is the expected difference in pocket depth between individuals who consume <code>"1-2 glasses/day"</code> and those who consume <code>"&gt;2 glasses/day"</code>, while controlling for age?</p>
+</div>
+</div>
+<p>To test the overall significance of the <code>alcohol</code> variable as a predictor of <code>pocketdepth</code>, we construct an analysis of variance (ANOVA) table. The ANOVA table summarizes how much each term in a linear regression model contributes to explaining the overall variation in the response variable. There are different ways to construct this table depending on how the sum of squares is partitioned among model terms. A common approach is Type III ANOVA, which evaluates each variable or interaction after all other terms have been accounted for. Each effect is tested as if it were entered last, so its sum of squares reflects the unique contribution of that variable or interaction beyond what is already explained by the remaining terms.</p>
+<p>To obtain the type III ANOVA table, we use the <code>Anova()</code> function from the <code>car</code> package. This function provides a more detailed ANOVA output compared to the base R <code>anova()</code> function, and has an argument <code>type</code> that allows you to specify the type of sum of squares to use:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(model_ancova, <span class="at">type=</span><span class="st">"III"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 15">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Question 15
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Based on the ANOVA table, is the <code>alcohol</code> variable significantly associated with <code>pocketdepth</code> after accounting for <code>age</code>?</p>
+</div>
+</div>
+</section>
+<section id="model-diagnostics" class="level3">
+<h3 class="anchored" data-anchor-id="model-diagnostics">Model Diagnostics</h3>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Check the normality of residuals and homoscedasticity assumptions for the ANCOVA model.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="part-3-interactions-in-ancova" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-interactions-in-ancova">Part 3: Interactions in ANCOVA</h2>
+<p>In some cases, the relationship between the outcome variable and a predictor may depend on the level of another predictor. This is known as an interaction effect. In the context of ANCOVA, we can test for interactions between the continuous predictor (<code>age</code>) and the categorical predictor (<code>alcohol</code>).</p>
+<section id="fitting-the-interaction-model" class="level3">
+<h3 class="anchored" data-anchor-id="fitting-the-interaction-model">Fitting the Interaction Model</h3>
+<p>To include an interaction term in the model, we can use the <code>:</code> operator in the formula. That is, the interaction term between <code>age</code> and <code>alcohol</code> can be specified as <code>age:alcohol</code>. With this term, the interaction model can be specified as <code>pocketdepth ~ age + alcohol + age:alcohol</code>. A short form for specifying the interaction model is <code>pocketdepth ~ age * alcohol</code>, which includes both the main effects of <code>age</code> and <code>alcohol</code> and their interaction terms.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model_interaction <span class="ot">&lt;-</span> <span class="fu">lm</span>(pocketdepth <span class="sc">~</span> age <span class="sc">*</span> alcohol, <span class="at">data =</span> pockets)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_interaction)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>To test the significance of the interaction term, we again use the <code>Anova()</code> function from the <code>car</code> package:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(model_interaction, <span class="at">type=</span><span class="st">"III"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 16">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Question 16
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Based on the output in the ANOVA table, is there a significant interaction between <code>age</code> and <code>alcohol</code> in predicting <code>pocketdepth</code>?</p>
+</div>
+</div>
+</section>
+</section>
+<section id="part-4-relationship-between-smoking-and-pocket-depth" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-relationship-between-smoking-and-pocket-depth">Part 4: Relationship Between Smoking and Pocket Depth</h2>
+<p>In addition to information about alcohol consumption, the dataset also contains information about smoking habits. Explore the relationship between smoking and pocket depth, and how it interacts with age. You can use the same approach as in the previous sections to fit models, test for significance, and check assumptions.</p>
 
 
 </section>

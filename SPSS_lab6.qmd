@@ -158,6 +158,10 @@ In this case, we have both continuous (`age`) and categorical (`alcohol`) explan
 5. Click **Options**, and select **Parameter estimates**.
 6. Click **OK** to run the analysis.
 
+::: {.callout-note}
+Note that SPSS uses the last category (highest numerical code) as the default reference category in the General Linear Model procedure. In this dataset, ">2 glasses/day" is the reference category.
+:::
+
 ::: {.callout-important icon=false title="Question 13"}
 From the table with the estimated regression coefficients, what is the estimated difference in pocket depth between individuals who consume `"None"` and those who consume `">2 glasses/day"`, while controlling for `age`?
 :::
