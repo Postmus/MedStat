@@ -50,6 +50,8 @@ website:
             href: lab3_answers.qmd
           - text: "Week 4"
             href: lab4_answers.qmd
+          - text: "Week 6"
+            href: lab6_answers.qmd  
       - text: "Assignment part I"
         menu:
           - text: "R"
