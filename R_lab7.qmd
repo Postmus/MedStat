@@ -20,7 +20,26 @@ execute:
 
 In part 1 of the lab, we are going to analyze the risk of in-hospital death in patients hospitalized because of acute myocardial infarction. The dataset comes from the Worcester Heart Attack Study (WHAS) and includes data from 500 patients admitted in Worcester, Massachusetts in 1997, 1999, and 2001 (file `whas500.sav` from the Datasets menu). The outcome of interest is in-hospital death, measured by the variable "discharge status from hospital" (`dstat`) with values `alive` and `death`. 
 
+We will use the following R packages: `haven`, `dplyr`, and `DescTools`. The first two packages were also used in the previous labs and therefore already installed on your computer. For `DescTools` (used to perform Hosmer-Lemeshow Goodness of Fit Tests) you may have to download and install it first by running `install.packages("DescTools")`.
+
 ```{r}
+#| eval: false
+
+library(haven)   # for reading SPSS files
+library(dplyr)   # for data manipulation
+library(DescTools)  # for performing Hosmer-Lemeshow Goodness of Fit Tests
+
+# Load the dataset
+whas500 <- read_sav("whas500.sav")
+
+# Convert labeled variables to factors
+whas500 <- whas500 %>%
+  mutate(across(where(is.labelled), as_factor))
+```
+
+```{r}
+#| include: false
+
 library(haven)   # for reading SPSS files
 library(dplyr)   # for data manipulation
 library(DescTools)  # for performing Hosmer-Lemeshow Goodness of Fit Tests
