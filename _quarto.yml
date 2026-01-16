@@ -4,6 +4,9 @@ project:
   resources:
     - "/datasets"
 
+execute:
+  freeze: auto
+
 website:
   title: "Medical Statistics"
   navbar:
@@ -57,7 +60,9 @@ website:
           - text: "Week 4"
             href: lab4_answers.qmd
           - text: "Week 6"
-            href: lab6_answers.qmd  
+            href: lab6_answers.qmd 
+          - text: "Week 7"
+            href: lab7_answers.qmd     
       - text: "Assignment part I"
         menu:
           - text: "R"
