@@ -1,5 +1,5 @@
 ---
-title: "Advanced Medical Statistics"
+title: "Medical Statistics"
 subtitle: "Assignment part 2: Cleveland heart disease dataset"
 format:
   html: default
@@ -13,86 +13,137 @@ execute:
 
 ## Introduction
 
-In this second assignment, you will continue working with the Cleveland heart disease dataset. You will apply **linear regression** to build a **prediction model** for resting blood pressure and use **logistic regression** to test an **inference-focused** research question on heart disease status. Through both parts, you will:
+In this assignment, you will continue exploring the Cleveland heart disease dataset. The assignment consists of three parts:
 
-- Practice **backward elimination** in linear regression to arrive at a simpler predictive model.
-- Demonstrate the ability to interpret **odds ratios** in a logistic regression setting, distinguishing unadjusted from adjusted associations.
+1.  **Part A: ANCOVA (Analysis of Covariance):** Investigate sex differences in resting blood pressure while adjusting for age.
+2.  **Part B: Logistic Regression:** Use a DAG to choose confounders and compare unadjusted vs adjusted estimates for cholesterol and heart disease.
+3.  **Part C: Building a Prediction Model:** Build a prediction model for maximum heart rate using backward elimination and assess model assumptions.
 
 ## Dataset description
 
-You will work with your personalized subset of 200 rows (patients) drawn from the original Cleveland heart disease data (N=303). Key variables include:
+The Cleveland heart disease dataset includes various demographic, clinical, and diagnostic variables. Key variables for this assignment include:
 
-- `age` (years)
-- `sex` (1=female; 2=male)
-- `cp` (chest pain type; 4 categories)
-- `trestbps` (resting blood pressure in mm Hg)
-- `chol` (serum cholesterol in mg/dl)
-- `fbs` (fasting blood sugar >120 mg/dl; binary)
-- `target` (heart disease status; 1 = heart disease, 2 = no heart disease)
+*   `age`: Age in years
+*   `sex`: Sex (1 = female; 2 = male)
+*   `cp`: Chest pain type (1 = typical angina; 2 = atypical angina; 3 = non-anginal pain; 4 = asymptomatic)
+*   `trestbps`: Resting blood pressure (mm Hg)
+*   `chol`: Serum cholesterol (mg/dl)
+*   `fbs`: Fasting blood sugar > 120 mg/dl (0 = no; 1 = yes)
+*   `thalach`: Maximum heart rate achieved
+*   `target`: Diagnosis of heart disease (1 = heart disease; 2 = no heart disease)
+
+### Individualized dataset
+
+R users must use the same 200-patient subset that they used for Assignment 1. If you need to recreate it, ensure you use the same random seed (the numeric part of your student or staff number). SPSS users can use the whole original dataset (N = 303) for this second assignment without further sampling.
 
 ::: {.callout-important}
-**Reminder**: If you need to recreate your 200-patient subset, use your student/staff number as the random seed, removing any letters (e.g., S123456 → `set.seed(123456)`). See the previous assignment for detailed instructions.
+**Reminder for R Users:**
+```r
+library(haven)
+library(dplyr)
+
+heart_data <- read_sav("datasets/heart_disease_cleveland.sav")
+heart_data <- heart_data |> mutate(across(where(is.labelled), as_factor))
+
+set.seed(123456) # Replace with your student number
+heart_data <- heart_data[sample(nrow(heart_data), 200), ]
+```
 :::
 
-## Research questions
+## **Part A:** ANCOVA (Analysis of Covariance)
 
-1. *Which demographic and clinical variables best predict resting blood pressure (`trestbps`)?*  
-   - You will use **backward elimination** to identify a final model and generate a **patient-level prediction**.
+In this part, you will investigate the relationship between demographic factors and **resting blood pressure** (`trestbps`).
 
-2. *Is sex (male vs. female) significantly associated with heart disease (`target`) status, after accounting for age, chest pain type, fasting blood sugar, and cholesterol?*  
-   - You will fit **simple** and **expanded** logistic models to see whether the association between sex and heart disease remains after adjusting for additional factors.
+### **A1.** Research Question & Exploratory Analysis
+**Research Question:** *Is there a difference in resting blood pressure between males and females, after accounting for age?*
 
-## Part A: Linear regression
+*   **Visualize the data:** Create a scatterplot of `trestbps` (y-axis) versus `age` (x-axis), using different colors to represent `sex`.
+*   **Describe group patterns:** Based on the plot, describe whether males and females appear to have different resting blood pressure levels, and whether those differences seem consistent across ages.
 
-### A1. Initial model setup
+### **A2.** Fitting the ANCOVA Model
+Fit an **additive ANCOVA model** with `trestbps` as the outcome, and `age` and `sex` as predictors (this assumes the effect of age is the same for males and females).
 
-- **Outcome variable**: `trestbps` (resting blood pressure)
-- **Candidate variables**:
-  - `cp` (chest pain type)
-  - `age`
-  - `chol`
-  - `sex` (1 = female; 2 = male)
-  - `fbs` (fasting blood sugar >120 mg/dl)
+Report the estimated difference in resting blood pressure between males and females, holding age constant, together with a 95% CI, and use the regression p-value to determine if `sex` is significantly associated with `trestbps` after adjusting for `age`.
 
-Fit a multiple linear regression model including all five variables as potential contributors to resting blood pressure. Summarize the model (coefficients, p-values, R-squared, etc.).
+### **A3.** Model Evaluation and Assumptions
+Assess whether the additive ANCOVA model is reasonable.
 
-### A2. Backward elimination
+*   **Assumption checks (additive model):** For the fitted additive ANCOVA model, use the **Q-Q plot** and **Residuals vs. Fitted plot** to assess normality, homoscedasticity, and linearity of the errors.
+*   **Interaction check (new model):** Fit an interaction model (`age * sex`) and use a Type III ANOVA table to test the `age:sex` term; state whether this provides evidence against the additive assumption.
 
-1. **Remove** the least significant variable (highest p-value).
-2. **Refit** the model.
-3. **Repeat** until all remaining terms are below the 10% significance threshold for variable inclusion (i.e., p < 0.10 for all remaining predictors).
+## **Part B:** Logistic Regression
 
-### A3. Final model summary
+In this part, you will investigate whether **cholesterol** is associated with the presence of **heart disease** (`target`), after adjusting for confounders identified in a DAG.
 
-- Present the final set of variables. Interpret them in a predictive context (e.g., “An increase of 10 mg/dl in cholesterol corresponds to a 1.2 mm Hg change in resting blood pressure, holding other factors constant.”).
-- Evaluate model goodness-of-fit by performing a residual analysis.
+::: {.callout-tip title="Coding reminder (R users)"}
+For logistic regression in R (`glm(..., family = binomial)`), the outcome should be coded as 0/1. If `target` is a factor, create a numeric version, e.g.:
 
-### A4. Patient-level prediction
+```r
+heart_data <- heart_data |>
+  mutate(target01 = ifelse(target == "Heart Disease", 1, 0))
+```
 
-- **Hypothetical patient**:
-  - Age = 62
-  - CP = 1 (typical angina)
-  - Chol = 240 mg/dl
-  - Sex = 1 (female)
-  - FBS = 0 (≤120 mg/dl)
-- **Plug** these values into your final regression equation to calculate the predicted resting blood pressure. If you removed any variables during your model selection, simply exclude them from the calculation.
-- **Interpret** the predicted value. For example, “The model estimates this patient’s resting blood pressure to be around 135 mm Hg.”
+Then use `target01` as the outcome in your logistic regression models.
+:::
 
-## Part B: Logistic regression
+### **B1.** Unadjusted Model
+Fit a simple logistic regression model with `target` as the outcome and `chol` as the sole predictor.
 
-### B1. Simple model (unadjusted)
+*   Report the **Odds Ratio (OR)** for a one-unit increase in cholesterol (or per 10 mg/dl if you rescale).
+*   Interpret the OR and its 95% confidence interval.
 
-Begin by ensuring that heart disease status is coded appropriately, for example 0 for no heart disease and 1 for heart disease if your software or analysis requires it. Then, run a simple logistic regression using sex as the sole explanatory variable, focusing on the odds ratio comparing males to females. Finally, interpret that odds ratio alongside its confidence interval, explaining how much higher or lower the odds of heart disease are for one sex relative to the other.
+### **B2.** Causal Modeling and Adjusted Model
+Examine the following hypothetical causal diagram (DAG) for the relationship between cholesterol and heart disease, then use it to determine your adjustment set and fit the adjusted model.
 
-### B2. Expanded model (adjusted)
+```{mermaid}
+%%| eval: true
+graph TD
+    Age[Age] --> Chol[Cholesterol]
+    Age[Age] --> Target[Heart Disease]
+    Sex[Sex] --> Chol[Cholesterol]
+    Sex[Sex] --> Target[Heart Disease]
+    Chol[Cholesterol] --> Target[Heart Disease]
+    Target[Heart Disease] --> CP[Chest Pain]
+```
 
-Next, fit a logistic regression that includes sex, age, chest pain type, fasting blood sugar, and cholesterol. Pay particular attention to how the odds ratio for sex shifts (in terms of magnitude and significance) once these additional factors are taken into account. In your write-up, note any change in its magnitude relative to the simpler model and discuss plausible clinical reasons for any observed differences.
+Use the **"recipe" from Week 8** to analyze this diagram:
 
-## Submission instructions
+1.  **Remove all arrows leaving the exposure (`chol`).** Are there any remaining paths between `chol` and `target`? (These are backdoor paths).
+2.  **Identify Confounders:** Which variable(s) must be adjusted for to "block" these backdoor paths?
+3.  **Adjusted Model:** Fit a multiple logistic regression model adjusting only for the confounder(s) you identified to estimate the **total causal effect** of cholesterol on heart disease.
+4.  **Comparison:** Put the unadjusted OR (B1) and adjusted OR (aOR) side by side. Say whether the OR changes, whether the CI widens or narrows, and what that suggests about confounding.
 
-1. **Report**
-   - Provide a Word or PDF file with **Methods** and **Results** for each part (A: Linear regression, B: Logistic regression).
-2. **Analysis files**
-   - **R Users**: Submit your R script (`.R`) or Quarto/R Markdown (`.qmd` / `.Rmd`).
-   - **SPSS Users**: Include syntax or output logs showing the models.
+## **Part C:** Building a Prediction Model
 
+In this final section, you will develop a broader model to predict **maximum heart rate** (`thalach`), using `age`, `sex`, `cp`, `chol`, `fbs`, and `trestbps` as the candidate predictors.
+
+Perform a manual **backward elimination** procedure:
+
+1.  Identify the predictor with the highest p-value that is above the significance threshold of **0.10** (using the Type III ANOVA table).
+2.  Remove that predictor and refit the model.
+3.  Repeat until all remaining predictors have a p-value $< 0.10$.
+
+Present a table showing the removal steps (which variable was removed and its p-value at that step), and report the final model (coefficients, 95% CIs, and p-values).
+
+## Report instructions
+
+Structure your report using the same headings as the assignment (**Part A**, **Part B**, **Part C**). Under each part, write a short results-focused summary and report the requested estimates (with 95% CIs and p-values) and any required figures/tables. Use the **Reporting Examples** below as a template for how to write up numerical results in sentences.
+
+*   **Part A (ANCOVA):** Include the scatterplot, report the adjusted male–female difference in `trestbps` (95% CI, p-value), and briefly state what the diagnostic plots and interaction test suggest.
+*   **Part B (Logistic regression + DAG):** State the adjustment set, report the unadjusted OR and adjusted OR for `chol` (95% CIs), and briefly comment on what the change suggests about confounding.
+*   **Part C (Prediction):** Include the backward-elimination table, report the final model (coefficients, 95% CIs, p-values), and briefly summarize which predictors remain.
+
+## **Reporting Examples**
+
+::: {.callout-note icon=false title="Reporting an ANCOVA Result"}
+"In an ANCOVA of exam score, we adjusted for study hours and compared instruction format. After accounting for study hours, online students scored 3.6 points lower than in‑person students (95% CI: 1.1, 6.1), $p = 0.005$."
+:::
+
+::: {.callout-note icon=false title="Reporting a Logistic Regression Result"}
+"In the unadjusted model, students in the evening program had higher odds of course withdrawal than daytime students (OR = 1.85, 95% CI: 1.10, 3.10, $p = 0.020$). After adjusting for baseline GPA (identified as a confounder in the DAG), the association attenuated but remained (aOR = 1.50, 95% CI: 1.02, 2.40, $p = 0.041$)."
+:::
+
+## **Submission Instructions**
+
+*   **The report:** Submit your report as a Word or PDF document.
+*   **The analysis file:** Submit your R script (`.R`) or SPSS output/syntax files.

@@ -1,0 +1,205 @@
+---
+title: "Assignment part 2"
+subtitle: "Model answer (R)"
+format:
+  html:
+    embed-resources: true
+execute:
+  warning: false
+  message: false
+  error: false
+  eval: true
+  echo: true
+---
+
+## Introduction
+
+This document provides a worked model answer for Assignment part 2 using R. It uses a fixed random seed (`123456`) to create a reproducible 200-patient subset.
+
+```{r}
+#| include: false
+
+library(haven)
+library(dplyr)
+library(ggplot2)
+library(car)
+
+heart_data <- read_sav("datasets/heart_disease_cleveland.sav")
+heart_data <- heart_data |> mutate(across(where(is.labelled), as_factor))
+
+set.seed(123456)
+heart_data <- heart_data[sample(nrow(heart_data), 200), ]
+```
+
+## Part A: ANCOVA (Analysis of Covariance)
+
+### A1. Exploratory plot
+
+```{r}
+ggplot(heart_data, aes(x = age, y = trestbps, color = sex)) +
+  geom_point(alpha = 0.8) +
+  labs(
+    x = "Age (years)",
+    y = "Resting blood pressure (mm Hg)",
+    color = "Sex",
+    title = "Resting blood pressure vs age by sex"
+  ) +
+  theme_minimal()
+```
+
+### A2. Additive ANCOVA model
+
+```{r}
+model_a <- lm(trestbps ~ age + sex, data = heart_data)
+summary(model_a)
+```
+
+```{r}
+coef_a <- summary(model_a)$coefficients
+ci_a <- confint(model_a)
+
+sex_term <- grep("^sex", rownames(coef_a), value = TRUE)[1]
+
+data.frame(
+  term = sex_term,
+  estimate = coef_a[sex_term, "Estimate"],
+  ci_lower = ci_a[sex_term, 1],
+  ci_upper = ci_a[sex_term, 2],
+  p_value = coef_a[sex_term, "Pr(>|t|)"],
+  row.names = NULL
+)
+```
+
+### A3. Model evaluation and assumptions
+
+```{r}
+plot(model_a, which = 2)  # Q-Q plot
+```
+
+```{r}
+plot(model_a, which = 1)  # Residuals vs fitted
+```
+
+```{r}
+op <- options(contrasts = c("contr.sum", "contr.poly"))
+model_a_int <- lm(trestbps ~ age * sex, data = heart_data)
+Anova(model_a_int, type = "III")
+options(op)
+```
+
+## Part B: Logistic regression
+
+### B1. Unadjusted model (cholesterol only)
+
+```{r}
+heart_data <- heart_data |>
+  mutate(
+    target01 = ifelse(target == "Heart Disease", 1, 0),
+    chol10 = chol / 10
+  )
+
+table(heart_data$target, heart_data$target01)
+```
+
+```{r}
+model_b1 <- glm(target01 ~ chol10, family = binomial, data = heart_data)
+summary(model_b1)
+```
+
+```{r}
+or_ci <- function(model, term) {
+  beta <- coef(model)[term]
+  se <- summary(model)$coefficients[term, "Std. Error"]
+  ci <- beta + c(-1, 1) * 1.96 * se
+  data.frame(
+    term = term,
+    OR = exp(beta),
+    CI_lower = exp(ci[1]),
+    CI_upper = exp(ci[2]),
+    row.names = NULL
+  )
+}
+
+or_ci(model_b1, "chol10")
+```
+
+### B2. Adjusted model (DAG-based adjustment set)
+
+```{r}
+model_b2 <- glm(target01 ~ chol10 + age + sex, family = binomial, data = heart_data)
+summary(model_b2)
+```
+
+```{r}
+or_ci(model_b2, "chol10")
+```
+
+## Part C: Building a prediction model (backward elimination)
+
+```{r}
+full_terms <- c("age", "sex", "cp", "chol", "fbs", "trestbps")
+current_terms <- full_terms
+
+op <- options(contrasts = c("contr.sum", "contr.poly"))
+
+fit <- lm(as.formula(paste("thalach ~", paste(current_terms, collapse = " + "))), data = heart_data)
+
+removal_steps <- tibble(step = integer(), removed = character(), p_value = double())
+
+for (iteration in seq_len(length(full_terms))) {
+  tab <- Anova(fit, type = "III")
+  tab <- tab[rownames(tab) != "(Intercept)", , drop = FALSE]
+  pvals <- tab[, "Pr(>F)"]
+
+  max_p <- max(pvals, na.rm = TRUE)
+  if (is.na(max_p) || max_p < 0.10) break
+
+  term_to_remove <- rownames(tab)[which.max(pvals)]
+  if (!term_to_remove %in% current_terms) {
+    stop("Backward elimination error: term not in model terms: ", term_to_remove)
+  }
+
+  removal_steps <- bind_rows(
+    removal_steps,
+    tibble(step = nrow(removal_steps) + 1, removed = term_to_remove, p_value = max_p)
+  )
+
+  current_terms <- setdiff(current_terms, term_to_remove)
+  if (length(current_terms) == 0) break
+  fit <- lm(as.formula(paste("thalach ~", paste(current_terms, collapse = " + "))), data = heart_data)
+}
+
+options(op)
+
+final_model_c <- lm(
+  as.formula(paste("thalach ~", paste(current_terms, collapse = " + "))),
+  data = heart_data
+)
+
+removal_steps
+```
+
+```{r}
+summary(final_model_c)
+```
+
+```{r}
+coef_c <- summary(final_model_c)$coefficients
+ci_c <- confint(final_model_c)
+
+final_table_c <- as.data.frame(coef_c) |>
+  mutate(term = rownames(coef_c)) |>
+  relocate(term) |>
+  rename(
+    estimate = Estimate,
+    std_error = `Std. Error`,
+    statistic = `t value`,
+    p_value = `Pr(>|t|)`
+  ) |>
+  left_join(
+    tibble(term = rownames(ci_c), ci_lower = ci_c[, 1], ci_upper = ci_c[, 2]),
+    by = "term"
+  )
+
+final_table_c
+```

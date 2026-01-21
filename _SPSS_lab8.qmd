@@ -1,5 +1,6 @@
 ---
 title: "Medical Statistics – Lab 8"
+subtitle: SPSS version
 format:
   html:
     toc: true
@@ -14,6 +15,8 @@ execute:
   error: false
   eval: false
 ---
+
+Welcome to lab 8. In this lab, we will build prediction models using backward elimination and automated procedures, and we will practice reasoning with causal diagrams (DAGs).
 
 ## Part 1: Building prediction models using backward elimination
 
@@ -33,13 +36,11 @@ Key variables in the dataset include:
 
 ### Step 1: Fit the initial linear regression model
 
-Download the dataset from the Datasets menu (`whas500.sav`) and open it in R or SPSS. When using R, make sure that the categorical variables are correctly coded as factors.
+Download the dataset from the Datasets menu (`whas500.sav`) and open it in SPSS.
 
 Create an initial model for hospital length of stay (`los`) using the following predictors: `age`, `gender`, `hr`, `sysbp`, `diasbp`, `bmi`, `cvd`, `sho`. Run/summarize the model to inspect coefficients and p-values.
 
-**R instructions:** use the `lm()` function to fit the model.
-
-**SPSS instructions:** use the **General Linear Model** procedure, which can be accessed via `Analyze → General Linear Model → Univariate.`
+Use the **General Linear Model** procedure: `Analyze → General Linear Model → Univariate.`
 
 ### Step 2: Eliminate the least significant predictor
 
@@ -48,9 +49,7 @@ To identify the least significant predictor, we use the Type III ANOVA table:
 * Significance threshold: $p > 0.10$
 * Remove the predictor with the largest p-value above this threshold.
 
-**R instructions:** use the `Anova()` function from the `car` package to obtain the Type III ANOVA table (see previous lab).
-
-**SPSS instructions:** the Type III ANOVA table is generated in the General Linear Model output.
+The Type III ANOVA table is generated in the General Linear Model output.
 
 ### Step 3: Repeat the steps
 
@@ -64,22 +63,12 @@ Iteratively remove the least significant predictor until all predictors have $p 
 
 Present the final linear regression model:
 
-* Summarize the remaining predictors and their coefficients
-* Report 95% confidence intervals (CIs) for the regression coefficients
-* Discuss how each variable contributes to predicting hospital length of stay
+* Report the final model, including regression coefficients and 95% CIs.
+* Create residual plots to assess the model assumptions (normality, homoscedasticity, linearity).
 
-Create residual plots to assess the model assumptions (normality, homoscedasticity, linearity).
-
-**R tip (95% CIs):** after fitting your final model (e.g., `fit <- lm(...)`), use:
-
-```r
-confint(fit)
-```
-
-**SPSS tip (95% CIs):**
-
-- If you use **Analyze → General Linear Model → Univariate**, click **Options** and request **Parameter estimates** (95% CIs are included automatically).
-- If you use **Analyze → Regression → Linear**, click **Statistics** and tick **Confidence intervals**.
+::: {.callout-tip title="95% CIs for regression coefficients"}
+In **Analyze → General Linear Model → Univariate**, click **Options** and request **Parameter estimates** (95% CIs are included automatically).
+:::
 
 ## Part 2: Automated procedures for building prediction models (logistic regression)
 
@@ -99,46 +88,6 @@ In this part, we explore automated procedures for predictor selection in **logis
 ::: {.callout-note title="Related note (linear regression)"}
 For stepwise selection with a continuous outcome, SPSS implements this under **Analyze → Regression → Linear** (Method: Forward/Backward/Stepwise), but this procedure does not have a dedicated “factors” box—categorical predictors must be dummy-coded manually. In that situation, it is possible for some dummy variables to enter/leave the model while others do not. The **General Linear Model → Univariate** procedure does not offer the same automated stepwise selection.
 :::
-
-::: {.callout-important icon=false title="Question"}
-Inspect your final selected logistic regression model. Which predictors are retained in the prediction model?
-:::
-
-### R: Automated model selection (AIC)
-
-In R, `stepAIC()` from the `MASS` package can be used for automated selection based on AIC. Because AIC compares overall model fit (not individual p-values), the selected model may differ from manual backward elimination.
-
-```{r}
-#| eval: false
-
-library(haven)
-library(dplyr)
-library(MASS)
-
-whas500 <- read_sav("datasets/whas500.sav")
-whas500 <- whas500 |> mutate(across(where(is.labelled), as_factor))
-
-# Create a 0/1 outcome (1 = dead)
-whas500 <- whas500 |>
-  mutate(dstat01 = ifelse(dstat == "dead", 1, 0))
-
-fit_full <- glm(
-  dstat01 ~ age + gender + hr + sysbp + diasbp + bmi + cvd + sho,
-  family = binomial,
-  data = whas500
-)
-
-fit_step <- stepAIC(fit_full, direction = "backward", trace = FALSE)
-summary(fit_step)
-```
-
-To report odds ratios with 95% confidence intervals, exponentiate the coefficient estimates and their confidence intervals.
-
-```{r}
-#| eval: false
-
-exp(cbind(OR = coef(fit_step), confint.default(fit_step)))
-```
 
 ::: {.callout-important icon=false title="Question"}
 Inspect your final selected logistic regression model. Which predictors are retained in the prediction model?

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Medical Statistics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="_Assignment_2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="_Assignment_2_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="_Assignment_2_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="_Assignment_2_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="_Assignment_2_files/libs/quarto-html/popper.min.js"></script>
+<script src="_Assignment_2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="_Assignment_2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="_Assignment_2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="_Assignment_2_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="_Assignment_2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="_Assignment_2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="_Assignment_2_files/libs/bootstrap/bootstrap-f04ba10fa9afc68adf907307a1481730.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="_Assignment_2_files/libs/quarto-diagram/mermaid.min.js"></script>
+<script src="_Assignment_2_files/libs/quarto-diagram/mermaid-init.js"></script>
+<link href="_Assignment_2_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="_Assignment_2.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Medical Statistics</h1>
+<p class="subtitle lead">Assignment part 2: Cleveland heart disease dataset</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this assignment, you will continue exploring the Cleveland heart disease dataset. The assignment consists of three parts:</p>
+<ol type="1">
+<li><strong>Part A: ANCOVA (Analysis of Covariance):</strong> Investigate sex differences in resting blood pressure while adjusting for age.</li>
+<li><strong>Part B: Logistic Regression:</strong> Use a DAG to choose confounders and compare unadjusted vs adjusted estimates for cholesterol and heart disease.</li>
+<li><strong>Part C: Building a Prediction Model:</strong> Build a prediction model for maximum heart rate using backward elimination and assess model assumptions.</li>
+</ol>
+</section>
+<section id="dataset-description" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-description">Dataset description</h2>
+<p>The Cleveland heart disease dataset includes various demographic, clinical, and diagnostic variables. Key variables for this assignment include:</p>
+<ul>
+<li><code>age</code>: Age in years</li>
+<li><code>sex</code>: Sex (1 = female; 2 = male)</li>
+<li><code>cp</code>: Chest pain type (1 = typical angina; 2 = atypical angina; 3 = non-anginal pain; 4 = asymptomatic)</li>
+<li><code>trestbps</code>: Resting blood pressure (mm Hg)</li>
+<li><code>chol</code>: Serum cholesterol (mg/dl)</li>
+<li><code>fbs</code>: Fasting blood sugar &gt; 120 mg/dl (0 = no; 1 = yes)</li>
+<li><code>thalach</code>: Maximum heart rate achieved</li>
+<li><code>target</code>: Diagnosis of heart disease (1 = heart disease; 2 = no heart disease)</li>
+</ul>
+<section id="individualized-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="individualized-dataset">Individualized dataset</h3>
+<p>R users must use the same 200-patient subset that they used for Assignment 1. If you need to recreate it, ensure you use the same random seed (the numeric part of your student or staff number). SPSS users can use the whole original dataset (N = 303) for this second assignment without further sampling.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Reminder for R Users:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>heart_data <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"datasets/heart_disease_cleveland.sav"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>heart_data <span class="ot">&lt;-</span> heart_data <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.labelled), as_factor))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123456</span>) <span class="co"># Replace with your student number</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>heart_data <span class="ot">&lt;-</span> heart_data[<span class="fu">sample</span>(<span class="fu">nrow</span>(heart_data), <span class="dv">200</span>), ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+</section>
+<section id="part-a-ancova-analysis-of-covariance" class="level2">
+<h2 class="anchored" data-anchor-id="part-a-ancova-analysis-of-covariance"><strong>Part A:</strong> ANCOVA (Analysis of Covariance)</h2>
+<p>In this part, you will investigate the relationship between demographic factors and <strong>resting blood pressure</strong> (<code>trestbps</code>).</p>
+<section id="a1.-research-question-exploratory-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="a1.-research-question-exploratory-analysis"><strong>A1.</strong> Research Question &amp; Exploratory Analysis</h3>
+<p><strong>Research Question:</strong> <em>Is there a difference in resting blood pressure between males and females, after accounting for age?</em></p>
+<ul>
+<li><strong>Visualize the data:</strong> Create a scatterplot of <code>trestbps</code> (y-axis) versus <code>age</code> (x-axis), using different colors to represent <code>sex</code>.</li>
+<li><strong>Describe group patterns:</strong> Based on the plot, describe whether males and females appear to have different resting blood pressure levels, and whether those differences seem consistent across ages.</li>
+</ul>
+</section>
+<section id="a2.-fitting-the-ancova-model" class="level3">
+<h3 class="anchored" data-anchor-id="a2.-fitting-the-ancova-model"><strong>A2.</strong> Fitting the ANCOVA Model</h3>
+<p>Fit an <strong>additive ANCOVA model</strong> with <code>trestbps</code> as the outcome, and <code>age</code> and <code>sex</code> as predictors (this assumes the effect of age is the same for males and females).</p>
+<p>Report the estimated difference in resting blood pressure between males and females, holding age constant, together with a 95% CI, and use the regression p-value to determine if <code>sex</code> is significantly associated with <code>trestbps</code> after adjusting for <code>age</code>.</p>
+</section>
+<section id="a3.-model-evaluation-and-assumptions" class="level3">
+<h3 class="anchored" data-anchor-id="a3.-model-evaluation-and-assumptions"><strong>A3.</strong> Model Evaluation and Assumptions</h3>
+<p>Assess whether the additive ANCOVA model is reasonable.</p>
+<ul>
+<li><strong>Assumption checks (additive model):</strong> For the fitted additive ANCOVA model, use the <strong>Q-Q plot</strong> and <strong>Residuals vs.&nbsp;Fitted plot</strong> to assess normality, homoscedasticity, and linearity of the errors.</li>
+<li><strong>Interaction check (new model):</strong> Fit an interaction model (<code>age * sex</code>) and use a Type III ANOVA table to test the <code>age:sex</code> term; state whether this provides evidence against the additive assumption.</li>
+</ul>
+</section>
+</section>
+<section id="part-b-logistic-regression" class="level2">
+<h2 class="anchored" data-anchor-id="part-b-logistic-regression"><strong>Part B:</strong> Logistic Regression</h2>
+<p>In this part, you will investigate whether <strong>cholesterol</strong> is associated with the presence of <strong>heart disease</strong> (<code>target</code>), after adjusting for confounders identified in a DAG.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Coding reminder (R users)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Coding reminder (R users)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For logistic regression in R (<code>glm(..., family = binomial)</code>), the outcome should be coded as 0/1. If <code>target</code> is a factor, create a numeric version, e.g.:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>heart_data <span class="ot">&lt;-</span> heart_data <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">target01 =</span> <span class="fu">ifelse</span>(target <span class="sc">==</span> <span class="st">"Heart Disease"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then use <code>target01</code> as the outcome in your logistic regression models.</p>
+</div>
+</div>
+<section id="b1.-unadjusted-model" class="level3">
+<h3 class="anchored" data-anchor-id="b1.-unadjusted-model"><strong>B1.</strong> Unadjusted Model</h3>
+<p>Fit a simple logistic regression model with <code>target</code> as the outcome and <code>chol</code> as the sole predictor.</p>
+<ul>
+<li>Report the <strong>Odds Ratio (OR)</strong> for a one-unit increase in cholesterol (or per 10 mg/dl if you rescale).</li>
+<li>Interpret the OR and its 95% confidence interval.</li>
+</ul>
+</section>
+<section id="b2.-causal-modeling-and-adjusted-model" class="level3">
+<h3 class="anchored" data-anchor-id="b2.-causal-modeling-and-adjusted-model"><strong>B2.</strong> Causal Modeling and Adjusted Model</h3>
+<p>Examine the following hypothetical causal diagram (DAG) for the relationship between cholesterol and heart disease, then use it to determine your adjustment set and fit the adjusted model.</p>
+<div class="cell" data-eval="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TD
+    Age[Age] --&gt; Chol[Cholesterol]
+    Age[Age] --&gt; Target[Heart Disease]
+    Sex[Sex] --&gt; Chol[Cholesterol]
+    Sex[Sex] --&gt; Target[Heart Disease]
+    Chol[Cholesterol] --&gt; Target[Heart Disease]
+    Target[Heart Disease] --&gt; CP[Chest Pain]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Use the <strong>“recipe” from Week 8</strong> to analyze this diagram:</p>
+<ol type="1">
+<li><strong>Remove all arrows leaving the exposure (<code>chol</code>).</strong> Are there any remaining paths between <code>chol</code> and <code>target</code>? (These are backdoor paths).</li>
+<li><strong>Identify Confounders:</strong> Which variable(s) must be adjusted for to “block” these backdoor paths?</li>
+<li><strong>Adjusted Model:</strong> Fit a multiple logistic regression model adjusting only for the confounder(s) you identified to estimate the <strong>total causal effect</strong> of cholesterol on heart disease.</li>
+<li><strong>Comparison:</strong> Put the unadjusted OR (B1) and adjusted OR (aOR) side by side. Say whether the OR changes, whether the CI widens or narrows, and what that suggests about confounding.</li>
+</ol>
+</section>
+</section>
+<section id="part-c-building-a-prediction-model" class="level2">
+<h2 class="anchored" data-anchor-id="part-c-building-a-prediction-model"><strong>Part C:</strong> Building a Prediction Model</h2>
+<p>In this final section, you will develop a broader model to predict <strong>maximum heart rate</strong> (<code>thalach</code>), using <code>age</code>, <code>sex</code>, <code>cp</code>, <code>chol</code>, <code>fbs</code>, and <code>trestbps</code> as the candidate predictors.</p>
+<p>Perform a manual <strong>backward elimination</strong> procedure:</p>
+<ol type="1">
+<li>Identify the predictor with the highest p-value that is above the significance threshold of <strong>0.10</strong> (using the Type III ANOVA table).</li>
+<li>Remove that predictor and refit the model.</li>
+<li>Repeat until all remaining predictors have a p-value <span class="math inline">\(&lt; 0.10\)</span>.</li>
+</ol>
+<p>Present a table showing the removal steps (which variable was removed and its p-value at that step), and report the final model (coefficients, 95% CIs, and p-values).</p>
+</section>
+<section id="report-instructions" class="level2">
+<h2 class="anchored" data-anchor-id="report-instructions">Report instructions</h2>
+<p>Structure your report using the same headings as the assignment (<strong>Part A</strong>, <strong>Part B</strong>, <strong>Part C</strong>). Under each part, write a short results-focused summary and report the requested estimates (with 95% CIs and p-values) and any required figures/tables. Use the <strong>Reporting Examples</strong> below as a template for how to write up numerical results in sentences.</p>
+<ul>
+<li><strong>Part A (ANCOVA):</strong> Include the scatterplot, report the adjusted male–female difference in <code>trestbps</code> (95% CI, p-value), and briefly state what the diagnostic plots and interaction test suggest.</li>
+<li><strong>Part B (Logistic regression + DAG):</strong> State the adjustment set, report the unadjusted OR and adjusted OR for <code>chol</code> (95% CIs), and briefly comment on what the change suggests about confounding.</li>
+<li><strong>Part C (Prediction):</strong> Include the backward-elimination table, report the final model (coefficients, 95% CIs, p-values), and briefly summarize which predictors remain.</li>
+</ul>
+</section>
+<section id="reporting-examples" class="level2">
+<h2 class="anchored" data-anchor-id="reporting-examples"><strong>Reporting Examples</strong></h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Reporting an ANCOVA Result">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Reporting an ANCOVA Result
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>“In an ANCOVA of exam score, we adjusted for study hours and compared instruction format. After accounting for study hours, online students scored 3.6 points lower than in‑person students (95% CI: 1.1, 6.1), <span class="math inline">\(p = 0.005\)</span>.”</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Reporting a Logistic Regression Result">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Reporting a Logistic Regression Result
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>“In the unadjusted model, students in the evening program had higher odds of course withdrawal than daytime students (OR = 1.85, 95% CI: 1.10, 3.10, <span class="math inline">\(p = 0.020\)</span>). After adjusting for baseline GPA (identified as a confounder in the DAG), the association attenuated but remained (aOR = 1.50, 95% CI: 1.02, 2.40, <span class="math inline">\(p = 0.041\)</span>).”</p>
+</div>
+</div>
+</section>
+<section id="submission-instructions" class="level2">
+<h2 class="anchored" data-anchor-id="submission-instructions"><strong>Submission Instructions</strong></h2>
+<ul>
+<li><strong>The report:</strong> Submit your report as a Word or PDF document.</li>
+<li><strong>The analysis file:</strong> Submit your R script (<code>.R</code>) or SPSS output/syntax files.</li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

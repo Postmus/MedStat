@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R/SPSS labs for the Medical Statistics course – Medical Statistics</title>
+<title>Medical Statistics – Lab 8 – Medical Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e28534083635e9d585c433950aea14cb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-34bcb630cce0043a8133d4e869578d01.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -93,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -301,15 +330,41 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#part-1-building-prediction-models-using-backward-elimination-linear-regression" id="toc-part-1-building-prediction-models-using-backward-elimination-linear-regression" class="nav-link active" data-scroll-target="#part-1-building-prediction-models-using-backward-elimination-linear-regression">Part 1: Building prediction models using backward elimination (linear regression)</a>
+  <ul class="collapse">
+  <li><a href="#step-1-fit-the-initial-linear-regression-model" id="toc-step-1-fit-the-initial-linear-regression-model" class="nav-link" data-scroll-target="#step-1-fit-the-initial-linear-regression-model">Step 1: Fit the initial linear regression model</a></li>
+  <li><a href="#step-2-eliminate-the-least-significant-predictor" id="toc-step-2-eliminate-the-least-significant-predictor" class="nav-link" data-scroll-target="#step-2-eliminate-the-least-significant-predictor">Step 2: Eliminate the least significant predictor</a></li>
+  <li><a href="#step-3-repeat-the-steps" id="toc-step-3-repeat-the-steps" class="nav-link" data-scroll-target="#step-3-repeat-the-steps">Step 3: Repeat the steps</a></li>
+  <li><a href="#step-4-final-model" id="toc-step-4-final-model" class="nav-link" data-scroll-target="#step-4-final-model">Step 4: Final model</a></li>
+  </ul></li>
+  <li><a href="#part-2-automated-procedures-for-building-prediction-models-logistic-regression" id="toc-part-2-automated-procedures-for-building-prediction-models-logistic-regression" class="nav-link" data-scroll-target="#part-2-automated-procedures-for-building-prediction-models-logistic-regression">Part 2: Automated procedures for building prediction models (logistic regression)</a>
+  <ul class="collapse">
+  <li><a href="#spss-backward-selection-lr-tests" id="toc-spss-backward-selection-lr-tests" class="nav-link" data-scroll-target="#spss-backward-selection-lr-tests">SPSS: Backward selection (LR tests)</a></li>
+  </ul></li>
+  <li><a href="#part-3-causal-diagrams" id="toc-part-3-causal-diagrams" class="nav-link" data-scroll-target="#part-3-causal-diagrams">Part 3: Causal diagrams</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
+  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise 3</a></li>
+  <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise 4</a></li>
+  <li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a></li>
+  <li><a href="#exercise-6" id="toc-exercise-6" class="nav-link" data-scroll-target="#exercise-6">Exercise 6</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="SPSS_lab8.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">R/SPSS labs for the Medical Statistics course</h1>
+<h1 class="title">Medical Statistics – Lab 8</h1>
+<p class="subtitle lead">SPSS version</p>
 </div>
 
 
@@ -326,9 +381,172 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This website hosts the R and SPSS labs for the Medical Statistics course. You can navigate between the different labs using the menu above.</p>
+<section id="part-1-building-prediction-models-using-backward-elimination-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-building-prediction-models-using-backward-elimination-linear-regression">Part 1: Building prediction models using backward elimination (linear regression)</h2>
+<p>In this part of the lab, we will build a prediction model for hospital length of stay (<code>los</code>) in patients with acute myocardial infarction. The dataset comes from the Worcester Heart Attack Study (WHAS) and includes data from 500 patients admitted in Worcester, Massachusetts in 1997, 1999, and 2001.</p>
+<p>Key variables in the dataset include:</p>
+<ul>
+<li><code>los</code>: Length of hospital stay (days, continuous outcome)</li>
+<li><code>age</code>: Age at hospital admission (years)</li>
+<li><code>gender</code>: Gender (0 = Male, 1 = Female)</li>
+<li><code>hr</code>: Initial heart rate (beats per minute)</li>
+<li><code>sysbp</code> and <code>diasbp</code>: Initial systolic and diastolic blood pressure (mmHg)</li>
+<li><code>bmi</code>: Body mass index (kg/m^2)</li>
+<li><code>cvd</code>: Presence of cardiovascular disease (0 = No, 1 = Yes)</li>
+<li><code>sho</code>: Presence of cardiogenic shock (0 = No, 1 = Yes)</li>
+</ul>
+<section id="step-1-fit-the-initial-linear-regression-model" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-fit-the-initial-linear-regression-model">Step 1: Fit the initial linear regression model</h3>
+<p>Download the dataset from the Datasets menu (<code>whas500.sav</code>) and open it in SPSS.</p>
+<p>Use the <strong>General Linear Model</strong> procedure:</p>
+<ol type="1">
+<li>Go to <strong>Analyze → General Linear Model → Univariate</strong>.</li>
+<li>Put <code>los</code> in <strong>Dependent Variable</strong>.</li>
+<li>Put continuous predictors (e.g., <code>age</code>, <code>hr</code>, <code>sysbp</code>, <code>diasbp</code>, <code>bmi</code>) in <strong>Covariate(s)</strong>.</li>
+<li>Put categorical predictors (e.g., <code>gender</code>, <code>cvd</code>, <code>sho</code>) in <strong>Fixed Factor(s)</strong>.</li>
+<li>Click <strong>Options</strong> and request <strong>Parameter estimates</strong> (95% CIs are included automatically).</li>
+<li>Click <strong>OK</strong>.</li>
+</ol>
+</section>
+<section id="step-2-eliminate-the-least-significant-predictor" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-eliminate-the-least-significant-predictor">Step 2: Eliminate the least significant predictor</h3>
+<p>To identify the least significant predictor, use the Type III table in the output:</p>
+<ul>
+<li>Significance threshold: <span class="math inline">\(p &gt; 0.10\)</span></li>
+<li>Remove the predictor with the largest p-value above this threshold.</li>
+</ul>
+</section>
+<section id="step-3-repeat-the-steps" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-repeat-the-steps">Step 3: Repeat the steps</h3>
+<p>Iteratively remove the least significant predictor until all predictors have <span class="math inline">\(p &lt; 0.10\)</span>. At each step:</p>
+<ul>
+<li>Rerun the model</li>
+<li>Inspect the Type III table</li>
+<li>Remove the least significant predictor</li>
+</ul>
+</section>
+<section id="step-4-final-model" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-final-model">Step 4: Final model</h3>
+<p>Present the final linear regression model:</p>
+<ul>
+<li>Summarize the remaining predictors and their coefficients (with 95% CIs from the <strong>Parameter estimates</strong> output)</li>
+<li>Discuss how each variable contributes to predicting hospital length of stay</li>
+</ul>
+<p>Create residual plots to assess the model assumptions (normality, homoscedasticity, linearity).</p>
+</section>
+</section>
+<section id="part-2-automated-procedures-for-building-prediction-models-logistic-regression" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-automated-procedures-for-building-prediction-models-logistic-regression">Part 2: Automated procedures for building prediction models (logistic regression)</h2>
+<p>In this part, we explore automated procedures for predictor selection in <strong>logistic regression</strong> prediction models. We use the same WHAS dataset but now focus on predicting in-hospital death (<code>dstat</code>: alive/dead) from candidate predictors.</p>
+<section id="spss-backward-selection-lr-tests" class="level3">
+<h3 class="anchored" data-anchor-id="spss-backward-selection-lr-tests">SPSS: Backward selection (LR tests)</h3>
+<ul>
+<li>Go to <strong>Analyze → Regression → Binary Logistic</strong>.</li>
+<li>Put <code>dstat</code> in <strong>Dependent</strong>.</li>
+<li>Add your continuous candidate predictors (e.g., <code>age</code>, <code>hr</code>, <code>sysbp</code>, <code>diasbp</code>, <code>bmi</code>) to <strong>Covariates</strong>.</li>
+<li>Also add any categorical candidate predictors (e.g., <code>gender</code>, <code>cvd</code>, <code>sho</code>) to <strong>Covariates</strong>, then click <strong>Categorical…</strong> and move them into <strong>Categorical Covariates</strong> so SPSS treats them as factors.</li>
+<li>Under <strong>Method</strong>, select <strong>Backward: LR</strong> (backward selection based on likelihood ratio tests).</li>
+<li>Click <strong>Options…</strong> and tick <strong>CI for exp(B)</strong> to obtain 95% CIs for the odds ratios.</li>
+</ul>
+<p><strong>Note (categorical predictors):</strong> Make sure you correctly specify categorical predictors via <strong>Categorical…</strong> (otherwise SPSS may treat their numeric codes as continuous). If you include categorical predictors with more than two categories and specify them via <strong>Categorical…</strong>, SPSS will handle the dummy coding internally and the <strong>Backward: LR</strong> procedure evaluates the predictor as a factor (i.e., removal is based on the overall significance of the factor, not separately for each dummy coefficient).</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Inspect your final selected logistic regression model. Which predictors are retained in the prediction model?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Related note (linear regression)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Related note (linear regression)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For stepwise selection with a continuous outcome, SPSS implements this under <strong>Analyze → Regression → Linear</strong> (Method: Forward/Backward/Stepwise), but this procedure does not have a dedicated “factors” box—categorical predictors must be dummy-coded manually. In that situation, it is possible for some dummy variables to enter/leave the model while others do not. The <strong>General Linear Model → Univariate</strong> procedure does not offer the same automated stepwise selection.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="part-3-causal-diagrams" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-causal-diagrams">Part 3: Causal diagrams</h2>
+<p>For each of the exercises below:</p>
+<ul>
+<li>Try solving the diagrams by hand by using the recipe from the lecture (see lecture slides on Brightspace)</li>
+<li>Check your answer using the <a href="http://www.dagitty.net/dags.html">DAGitty webtool</a></li>
+</ul>
+<section id="exercise-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1">Exercise 1</h3>
+<p>In the graph depicted below, for which variables do you need to adjust to assess the unconfounded effect of E on O (there may be several possibilities)?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG1.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 1</figcaption>
+</figure>
+</div>
+</section>
+<section id="exercise-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2">Exercise 2</h3>
+<p>In the graph depicted below, what happens when you additionally adjust for <strong>v5</strong>?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG2.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 2</figcaption>
+</figure>
+</div>
+</section>
+<section id="exercise-3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-3">Exercise 3</h3>
+<p>This diagram is slightly different: <strong>v1</strong> now is the exposure. For which variables do you need toadjust to assess the unconfounded effect of <strong>v1</strong> on <strong>O</strong>?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG3.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 3</figcaption>
+</figure>
+</div>
+</section>
+<section id="exercise-4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4">Exercise 4</h3>
+<p>Now, <strong>v2</strong> is the exposure. For which variables do you need to adjust to assess the total unconfounded effect of <strong>v2</strong> on <strong>O</strong>?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG4.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 4</figcaption>
+</figure>
+</div>
+</section>
+<section id="exercise-5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5">Exercise 5</h3>
+<p>Back to the first DAG. However, <strong>v2</strong> is now unmeasured. Can we still obtain an unconfounded estimate of the effect of <strong>E</strong> on <strong>O</strong>?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG5.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 5</figcaption>
+</figure>
+</div>
+</section>
+<section id="exercise-6" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-6">Exercise 6</h3>
+<p>See the DAG below: you adjusted for <strong>v5</strong>. What would be the consequence of this action?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG6.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 6</figcaption>
+</figure>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

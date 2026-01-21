@@ -1,0 +1,177 @@
+---
+title: "Medical Statistics – Answers lab 8"
+format:
+  html:
+    toc: true       
+    toc-depth: 3    
+    toc-location: right
+    code-overflow: wrap 
+  pdf:
+    toc: false
+execute:
+  warning: false
+  message: false
+  error: false
+  eval: true
+  echo: false
+---
+
+## Part 1: Building prediction models using backward elimination
+
+### Step 1: Fit the initial linear regression model
+
+```{r}  
+library(haven)   # for reading SPSS files
+library(dplyr)   # for data manipulation
+library(ggplot2) # for data visualization
+library(car)    # for calculating type-III ANOVA tables
+
+# Load the dataset
+whas <- read_sav("datasets/whas500.sav")
+
+# Convert labeled variables to factors
+whas <- whas %>%
+  mutate(across(where(is.labelled), as_factor))
+```
+
+Create an initial model for hospital length of stay (`los`) using the following predictors: `age`, `gender`, `hr`, `sysbp`, `diasbp`, `bmi`, `cvd`, `sho`. Run/summarize the model to inspect coefficients and p-values.
+
+
+```{r}
+initial_model <- lm(los ~ age + gender + hr + sysbp + diasbp + bmi + cvd + sho, data = whas)
+summary(initial_model)
+```
+
+### Step 2: Eliminate the least significant predictor
+
+```{r}
+# Obtain the Type III ANOVA table
+Anova(initial_model, type = "III")
+```
+
+The ANOVA table shows that the predictor with the highest p-value is `sysbp` ($p = 0.92$). Systolic blood pressure is the least significant predictor and should be removed from the model.
+
+### Step 3: Repeat the steps
+
+The following variables are sequentially removed from the model (after initially removing `sysbp`):
+
+1. `age`: p-value = 0.86
+2. `cvd`: p-value = 0.41
+3. `bmi`: p-value = 0.44
+4. `diasbp`: p-value = 0.22
+
+### Step 4: Final model
+
+```{r}
+final_model <- lm(los ~ gender + hr + sho, data = whas)
+summary(final_model)
+```  
+
+#### Residual plots
+
+```{r}
+# Histogram of residuals
+hist(residuals(final_model), main = "Histogram of Residuals", xlab = "Residuals", 20)
+
+# Scatterplot of fitted values vs. residuals
+plot(final_model, which = 1)
+```
+  
+The overall fit of the model appears reasonable, as the residuals are generally centered around zero with no major patterns suggesting severe violations of linearity. However, there are some outliers with very long lengths of stay (LOS) that are not adequately captured by the model. These outliers lead to a right skew in the residual distribution, as seen in the histogram, influencing model fit. While the current model seems to work reasonably well for most observations, further steps (e.g., transformations or robust regression techniques) could be considered to better account for these extreme cases.  
+
+## Part 2: Automated procedures for building prediction models
+
+### Exercise: Automated procedures vs manual model
+
+#### R
+
+```{r}
+#| echo: true
+
+library(MASS)
+fit <- lm(los ~ age + gender + hr + sysbp + diasbp + bmi + cvd + sho, data = whas)
+step_model <- stepAIC(fit, direction = "backward")
+summary(step_model)
+```
+
+The final model obtained from the automated procedure is identical to the manually created model in Part 1.
+
+#### SPSS
+
+![SPSS results of the backward elimination procedure](images/lab7_SPSS_BW.PNG)
+
+The table above shows the variables eliminated at each step of the backward elimination procedure in SPSS. The final model obtained from the automated procedure is identical to the manually created model in Part 1.
+
+## Part 3: Causal diagrams
+
+For each of the exercises below: 
+
+-	Try solving the diagrams by hand by using the recipe from the lecture (see lecture slides on Brightspace)
+-	Check your answer using the [DAGitty webtool](http://www.dagitty.net/dags.html)
+
+### Exercise 1
+
+In the graph depicted below, for which variables do you need to adjust to assess the unconfounded effect of E on O (there may be several possibilities)?
+
+![DAG exercise 1](images/lab7_DAG1.PNG)
+
+**Answer:**  
+Following the recipe: after removing all arrows leaving E, there are several unblocked paths leading from E to O. Just like in the lecture, adjusting for v2 opens a backdoor path (E – v1 – v3 – O) This newly opened backdoor path needs to be closed by also conditioning on v1 or v3, or both. 
+Hence, there are 3 options: (v1, v2, v3) ; (v1, v2) ; and finally, (v2, v3).
+
+### Exercise 2
+
+In the graph depicted below, what happens when you additionally adjust for **v5**?
+
+![DAG exercise 2](images/lab7_DAG2.PNG)
+
+**Answer:**
+When adjusting for v5, we are blocking the effect through this indirect path from E to O (v5 is a mediator between E and O). Instead of the total effect of E on O, we will be estimating the direct effect. 
+
+In DAGitty, when you set v5 to ‘adjusted’, the algorithm will say the following:  “The total effect cannot be estimated due to adjustment for an intermediate or a descendant of an intermediate.”
+
+### Exercise 3
+
+This diagram is slightly different: **v1** now is the exposure. For which variables do you need toadjust to assess the unconfounded effect of **v1** on **O**?
+
+![DAG exercise 3](images/lab7_DAG3.PNG)
+
+**Answer:**
+No adjustment is needed: there are no backdoor paths (removing all arrows leaving v1 reveals no remaining unblocked path from v1 to O).
+
+### Exercise 4
+
+Now, **v2** is the exposure. For which variables do you need to adjust to assess the total unconfounded effect of **v2** on **O**?
+
+![DAG exercise 4](images/lab7_DAG4.PNG)
+
+**Answer:**
+Following the recipe, there are three unblocked paths left after removing the arrows leaving v2: 
+
+a) v2 – v3 – O and 
+b) v2 – v1 – E – O 
+c) v2  - v1 – E -v5 - O
+
+Backdoor path a) can be closed by conditioning on v3. 
+
+Backdoor path b) can be closed by conditioning on v1 (but not by conditioning on E, as you would no longer be estimating the total effect by blocking the paths from v2 to O mediated by E).
+
+In this case, you should therefore condition on v1 and v3.
+
+### Exercise 5
+
+Back to the first DAG. However, **v2** is now unmeasured. Can we still obtain an unconfounded estimate of the effect of **E** on **O**?
+
+![DAG exercise 5](images/lab7_DAG5.PNG)
+
+**Answer:**
+No, we cannot close the backdoor path between E and O since v2 is unmeasured and cannot be corrected for.
+
+### Exercise 6
+
+See the DAG below: you adjusted for **v5**. What would be the consequence of this action?
+
+![DAG exercise 6](images/lab7_DAG6.PNG)
+
+**Answer:**
+There is no consequence: conditioning on v5 cannot alter any of the estimated effects in the DAG (it is neither a confounder, collider, nor a mediator in the E-O relationship).
