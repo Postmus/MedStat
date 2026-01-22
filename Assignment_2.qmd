@@ -17,7 +17,7 @@ In this assignment, you will continue exploring the Cleveland heart disease data
 
 1.  **Part A: ANCOVA (Analysis of Covariance):** Investigate sex differences in resting blood pressure while adjusting for age.
 2.  **Part B: Logistic Regression:** Use a DAG to choose confounders and compare unadjusted vs adjusted estimates for cholesterol and heart disease.
-3.  **Part C: Building a Prediction Model:** Build a prediction model for maximum heart rate using backward elimination and assess model assumptions.
+3.  **Part C: Building a Prediction Model:** Build a prediction model for maximum heart rate using backward elimination.
 
 ## Dataset description
 
@@ -54,11 +54,8 @@ heart_data <- heart_data[sample(nrow(heart_data), 200), ]
 
 In this part, you will investigate the relationship between demographic factors and **resting blood pressure** (`trestbps`).
 
-### **A1.** Research Question & Exploratory Analysis
+### **A1.** Research Question
 **Research Question:** *Is there a difference in resting blood pressure between males and females, after accounting for age?*
-
-*   **Visualize the data:** Create a scatterplot of `trestbps` (y-axis) versus `age` (x-axis), using different colors to represent `sex`.
-*   **Describe group patterns:** Based on the plot, describe whether males and females appear to have different resting blood pressure levels, and whether those differences seem consistent across ages.
 
 ### **A2.** Fitting the ANCOVA Model
 Fit an **additive ANCOVA model** with `trestbps` as the outcome, and `age` and `sex` as predictors (this assumes the effect of age is the same for males and females).
@@ -129,7 +126,7 @@ Present a table showing the removal steps (which variable was removed and its p-
 
 Structure your report using the same headings as the assignment (**Part A**, **Part B**, **Part C**). Under each part, write a short results-focused summary and report the requested estimates (with 95% CIs and p-values) and any required figures/tables. Use the **Reporting Examples** below as a template for how to write up numerical results in sentences.
 
-*   **Part A (ANCOVA):** Include the scatterplot, report the adjusted male–female difference in `trestbps` (95% CI, p-value), and briefly state what the diagnostic plots and interaction test suggest.
+*   **Part A (ANCOVA):** Report the adjusted male–female difference in `trestbps` (95% CI, p-value), and briefly state what the diagnostic plots and interaction test suggest.
 *   **Part B (Logistic regression + DAG):** State the adjustment set, report the unadjusted OR and adjusted OR for `chol` (95% CIs), and briefly comment on what the change suggests about confounding.
 *   **Part C (Prediction):** Include the backward-elimination table, report the final model (coefficients, 95% CIs, p-values), and briefly summarize which predictors remain.
 
@@ -147,3 +144,8 @@ Structure your report using the same headings as the assignment (**Part A**, **P
 
 *   **The report:** Submit your report as a Word or PDF document.
 *   **The analysis file:** Submit your R script (`.R`) or SPSS output/syntax files.
+
+
+## Downloads
+
+[Cleveland heart disease dataset (SPSS format)](datasets/heart_disease_cleveland.sav)

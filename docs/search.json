@@ -329,6 +329,69 @@
     "text": "This website hosts the R and SPSS labs for the Medical Statistics course. You can navigate between the different labs using the menu above."
   },
   {
+    "objectID": "Assignment_2.html",
+    "href": "Assignment_2.html",
+    "title": "Medical Statistics",
+    "section": "",
+    "text": "In this assignment, you will continue exploring the Cleveland heart disease dataset. The assignment consists of three parts:\n\nPart A: ANCOVA (Analysis of Covariance): Investigate sex differences in resting blood pressure while adjusting for age.\nPart B: Logistic Regression: Use a DAG to choose confounders and compare unadjusted vs adjusted estimates for cholesterol and heart disease.\nPart C: Building a Prediction Model: Build a prediction model for maximum heart rate using backward elimination."
+  },
+  {
+    "objectID": "Assignment_2.html#introduction",
+    "href": "Assignment_2.html#introduction",
+    "title": "Medical Statistics",
+    "section": "",
+    "text": "In this assignment, you will continue exploring the Cleveland heart disease dataset. The assignment consists of three parts:\n\nPart A: ANCOVA (Analysis of Covariance): Investigate sex differences in resting blood pressure while adjusting for age.\nPart B: Logistic Regression: Use a DAG to choose confounders and compare unadjusted vs adjusted estimates for cholesterol and heart disease.\nPart C: Building a Prediction Model: Build a prediction model for maximum heart rate using backward elimination."
+  },
+  {
+    "objectID": "Assignment_2.html#dataset-description",
+    "href": "Assignment_2.html#dataset-description",
+    "title": "Medical Statistics",
+    "section": "Dataset description",
+    "text": "Dataset description\nThe Cleveland heart disease dataset includes various demographic, clinical, and diagnostic variables. Key variables for this assignment include:\n\nage: Age in years\nsex: Sex (1 = female; 2 = male)\ncp: Chest pain type (1 = typical angina; 2 = atypical angina; 3 = non-anginal pain; 4 = asymptomatic)\ntrestbps: Resting blood pressure (mm Hg)\nchol: Serum cholesterol (mg/dl)\nfbs: Fasting blood sugar &gt; 120 mg/dl (0 = no; 1 = yes)\nthalach: Maximum heart rate achieved\ntarget: Diagnosis of heart disease (1 = heart disease; 2 = no heart disease)\n\n\nIndividualized dataset\nR users must use the same 200-patient subset that they used for Assignment 1. If you need to recreate it, ensure you use the same random seed (the numeric part of your student or staff number). SPSS users can use the whole original dataset (N = 303) for this second assignment without further sampling.\n\n\n\n\n\n\nImportant\n\n\n\nReminder for R Users:\nlibrary(haven)\nlibrary(dplyr)\n\nheart_data &lt;- read_sav(\"datasets/heart_disease_cleveland.sav\")\nheart_data &lt;- heart_data |&gt; mutate(across(where(is.labelled), as_factor))\n\nset.seed(123456) # Replace with your student number\nheart_data &lt;- heart_data[sample(nrow(heart_data), 200), ]"
+  },
+  {
+    "objectID": "Assignment_2.html#part-a-ancova-analysis-of-covariance",
+    "href": "Assignment_2.html#part-a-ancova-analysis-of-covariance",
+    "title": "Medical Statistics",
+    "section": "Part A: ANCOVA (Analysis of Covariance)",
+    "text": "Part A: ANCOVA (Analysis of Covariance)\nIn this part, you will investigate the relationship between demographic factors and resting blood pressure (trestbps).\n\nA1. Research Question\nResearch Question: Is there a difference in resting blood pressure between males and females, after accounting for age?\n\n\nA2. Fitting the ANCOVA Model\nFit an additive ANCOVA model with trestbps as the outcome, and age and sex as predictors (this assumes the effect of age is the same for males and females).\nReport the estimated difference in resting blood pressure between males and females, holding age constant, together with a 95% CI, and use the regression p-value to determine if sex is significantly associated with trestbps after adjusting for age.\n\n\nA3. Model Evaluation and Assumptions\nAssess whether the additive ANCOVA model is reasonable.\n\nAssumption checks (additive model): For the fitted additive ANCOVA model, use the Q-Q plot and Residuals vs. Fitted plot to assess normality, homoscedasticity, and linearity of the errors.\nInteraction check (new model): Fit an interaction model (age * sex) and use a Type III ANOVA table to test the age:sex term; state whether this provides evidence against the additive assumption."
+  },
+  {
+    "objectID": "Assignment_2.html#part-b-logistic-regression",
+    "href": "Assignment_2.html#part-b-logistic-regression",
+    "title": "Medical Statistics",
+    "section": "Part B: Logistic Regression",
+    "text": "Part B: Logistic Regression\nIn this part, you will investigate whether cholesterol is associated with the presence of heart disease (target), after adjusting for confounders identified in a DAG.\n\n\n\n\n\n\nTipCoding reminder (R users)\n\n\n\nFor logistic regression in R (glm(..., family = binomial)), the outcome should be coded as 0/1. If target is a factor, create a numeric version, e.g.:\nheart_data &lt;- heart_data |&gt;\n  mutate(target01 = ifelse(target == \"Heart Disease\", 1, 0))\nThen use target01 as the outcome in your logistic regression models.\n\n\n\nB1. Unadjusted Model\nFit a simple logistic regression model with target as the outcome and chol as the sole predictor.\n\nReport the Odds Ratio (OR) for a one-unit increase in cholesterol (or per 10 mg/dl if you rescale).\nInterpret the OR and its 95% confidence interval.\n\n\n\nB2. Causal Modeling and Adjusted Model\nExamine the following hypothetical causal diagram (DAG) for the relationship between cholesterol and heart disease, then use it to determine your adjustment set and fit the adjusted model.\n\n\n\n\n\ngraph TD\n    Age[Age] --&gt; Chol[Cholesterol]\n    Age[Age] --&gt; Target[Heart Disease]\n    Sex[Sex] --&gt; Chol[Cholesterol]\n    Sex[Sex] --&gt; Target[Heart Disease]\n    Chol[Cholesterol] --&gt; Target[Heart Disease]\n    Target[Heart Disease] --&gt; CP[Chest Pain]\n\n\n\n\n\n\nUse the “recipe” from Week 8 to analyze this diagram:\n\nRemove all arrows leaving the exposure (chol). Are there any remaining paths between chol and target? (These are backdoor paths).\nIdentify Confounders: Which variable(s) must be adjusted for to “block” these backdoor paths?\nAdjusted Model: Fit a multiple logistic regression model adjusting only for the confounder(s) you identified to estimate the total causal effect of cholesterol on heart disease.\nComparison: Put the unadjusted OR (B1) and adjusted OR (aOR) side by side. Say whether the OR changes, whether the CI widens or narrows, and what that suggests about confounding."
+  },
+  {
+    "objectID": "Assignment_2.html#part-c-building-a-prediction-model",
+    "href": "Assignment_2.html#part-c-building-a-prediction-model",
+    "title": "Medical Statistics",
+    "section": "Part C: Building a Prediction Model",
+    "text": "Part C: Building a Prediction Model\nIn this final section, you will develop a broader model to predict maximum heart rate (thalach), using age, sex, cp, chol, fbs, and trestbps as the candidate predictors.\nPerform a manual backward elimination procedure:\n\nIdentify the predictor with the highest p-value that is above the significance threshold of 0.10 (using the Type III ANOVA table).\nRemove that predictor and refit the model.\nRepeat until all remaining predictors have a p-value \\(&lt; 0.10\\).\n\nPresent a table showing the removal steps (which variable was removed and its p-value at that step), and report the final model (coefficients, 95% CIs, and p-values)."
+  },
+  {
+    "objectID": "Assignment_2.html#report-instructions",
+    "href": "Assignment_2.html#report-instructions",
+    "title": "Medical Statistics",
+    "section": "Report instructions",
+    "text": "Report instructions\nStructure your report using the same headings as the assignment (Part A, Part B, Part C). Under each part, write a short results-focused summary and report the requested estimates (with 95% CIs and p-values) and any required figures/tables. Use the Reporting Examples below as a template for how to write up numerical results in sentences.\n\nPart A (ANCOVA): Report the adjusted male–female difference in trestbps (95% CI, p-value), and briefly state what the diagnostic plots and interaction test suggest.\nPart B (Logistic regression + DAG): State the adjustment set, report the unadjusted OR and adjusted OR for chol (95% CIs), and briefly comment on what the change suggests about confounding.\nPart C (Prediction): Include the backward-elimination table, report the final model (coefficients, 95% CIs, p-values), and briefly summarize which predictors remain."
+  },
+  {
+    "objectID": "Assignment_2.html#reporting-examples",
+    "href": "Assignment_2.html#reporting-examples",
+    "title": "Medical Statistics",
+    "section": "Reporting Examples",
+    "text": "Reporting Examples\n\n\n\n\n\n\nNoteReporting an ANCOVA Result\n\n\n\n“In an ANCOVA of exam score, we adjusted for study hours and compared instruction format. After accounting for study hours, online students scored 3.6 points lower than in‑person students (95% CI: 1.1, 6.1), \\(p = 0.005\\).”\n\n\n\n\n\n\n\n\nNoteReporting a Logistic Regression Result\n\n\n\n“In the unadjusted model, students in the evening program had higher odds of course withdrawal than daytime students (OR = 1.85, 95% CI: 1.10, 3.10, \\(p = 0.020\\)). After adjusting for baseline GPA (identified as a confounder in the DAG), the association attenuated but remained (aOR = 1.50, 95% CI: 1.02, 2.40, \\(p = 0.041\\)).”"
+  },
+  {
+    "objectID": "Assignment_2.html#submission-instructions",
+    "href": "Assignment_2.html#submission-instructions",
+    "title": "Medical Statistics",
+    "section": "Submission Instructions",
+    "text": "Submission Instructions\n\nThe report: Submit your report as a Word or PDF document.\nThe analysis file: Submit your R script (.R) or SPSS output/syntax files."
+  },
+  {
     "objectID": "lab1_answers.html",
     "href": "lab1_answers.html",
     "title": "Medical Statistics – Answers lab 1",
@@ -677,5 +740,12 @@
     "title": "Medical Statistics – Lab 7",
     "section": "Part 2: unguided exercises",
     "text": "Part 2: unguided exercises\n\nExercise 1\nMultiple logistic regression was used to construct a prognostic index to predict coronary artery disease from data on 348 patients with valvular heart disease who had undergone routine coronary arteriography before valve replacement (Ramsdale et al. 1982). The estimated equation was:\n\\[logit(p) = ln(p/(1-p)) = b_{0} + 1.167 \\times x{1} + 0.0106 \\times x_{2} + \\textrm{other terms}\\]\nwhere \\(x_{1}\\) stands for the family history of ischaemic disease (0=no, 1=yes) and \\(x_{2}\\) is the estimated total number of cigarettes ever smoked in terms of thousand cigarettes, calculated as the average number smoked annually times the number of years smoking.\n\nWhat is the estimated odds ratio for having coronary artery disease for subjects with a positive family history relative to subjects with a negative family history?\nWhat total number of cigarettes ever smoked carries the same risk as a positive family history? Convert the result into years of smoking 20 cigarettes per day.\nWhat is the odds ratio for coronary artery disease for someone with a positive family history who had smoked 20 cigarettes a day for 30 years compared to a non smoker with no family history?\n\n\n\nExercise 2\nData from 37 patients receiving a non-depleted allogenic bone marrow transplant were examined to see which variables were associated with the occurrence of acute graft-versus-host disease (GvHD: 0=no, 1=yes) (Bagot et al., 1988). Possible predictors are TYPE (type of leukemia: 1=AML, acute myeloid leukaemia; 2=ALL, acute lymphocytic leukaemia; 3=CML, chronic myeloid leukemia), PREG (donor pregnancy: 0= no, 1=yes), and LOGIND (the logarithm of an index of mixed epidermal cell-lymphocyte reactions). The data are in the file GvHD.sav available from the Downloads menu.\n\nPerform a likelihood ratio test to determine whether there is a significant association between the type of leukemia and the occurrence of GvHD after adjusting for donor pregnancy and the logarithm of an index of mixed epidermal cell-lymphocyte reactions.\nIn the adjusted model, What is the estimated odds ratio for the occurrence of GvHD for patients with ALL compared to those with ALM?\nUse the Hosmer-Lemeshow goodness-of-fit test to evaluate the fit of the model. Based on the results, does the model provide a satisfactory fit to the data?"
+  },
+  {
+    "objectID": "Assignment_2.html#downloads",
+    "href": "Assignment_2.html#downloads",
+    "title": "Medical Statistics",
+    "section": "Downloads",
+    "text": "Downloads\nCleveland heart disease dataset (SPSS format)"
   }
 ]

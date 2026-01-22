@@ -1,0 +1,121 @@
+---
+title: "Assignment part 2: Scoring Rubric"
+format:
+  html: default
+  docx: default
+---
+
+## Introduction
+
+This rubric is used to assess the second Medical Statistics assignment. The grade is based on three main parts (ANCOVA, Logistic Regression, Prediction Model) and a general section on data handling and reproducibility.
+
+### Checklist-style scoring (applies to all criteria)
+
+This rubric is intended to work like a checklist:
+
+- **Excellent (10):** All required components are present and correct.
+- **Good (8):** Everything essential is correct, with **one minor issue** (small omission, small reporting error, or slightly unclear wording that does not change the conclusion).
+- **Sufficient (6):** Core idea is present, but there are **multiple minor issues** or **one major issue** (missing a required component, wrong model/test, or interpretation that could change the conclusion).
+- **Insufficient (3):** Major parts are missing/incorrect, or results are not interpretable/gradable.
+
+Use the checklists under each criterion to decide the level.
+
+## Criterion 1: Part A - ANCOVA (30%)
+
+Analysis of sex differences in resting blood pressure while adjusting for age.
+
+**Required components (checklist):**
+
+1. Fit an additive ANCOVA model with resting blood pressure as the outcome and age and sex as predictors.
+2. Report the adjusted male-female difference in resting blood pressure with a **95% CI** and **p-value** (holding age constant).
+3. Additive-model diagnostics included and correctly interpreted:
+   - Q-Q plot
+   - Residuals vs Fitted plot
+4. Fit an interaction model (age by sex) and report the **Type III ANOVA** test for the age-by-sex interaction term.
+5. Clear conclusion on (a) evidence for/against interaction and (b) whether the additive assumption is reasonable.
+
+| Level | Score | Description |
+|-------|-------|-------------|
+| Insufficient | 3 | One or more required components are missing, or the additive/interaction model is wrong, or the diagnostics/tests are misinterpreted. |
+| Sufficient | 6 | Some required components are present, but there are multiple minor issues or one major issue (e.g., missing a required plot/test or unclear/incorrect conclusion). |
+| Good | 8 | All required components are present with at most one minor issue (e.g., small reporting omission or slightly unclear interpretation). |
+| Excellent | 10 | All required components are present and correct; reporting is clear and complete (estimate, 95% CI, p-value; correct use/interpretation of plots and Type III interaction test). |
+
+## Criterion 2: Part B - Logistic Regression & DAG (30%)
+
+Investigation of the causal effect of cholesterol on heart disease using a DAG for adjustment.
+
+**Required components (checklist):**
+
+1. Correct identification of the backdoor path(s) after removing arrows leaving cholesterol (the Week 8 "recipe").
+2. Correct adjustment set for the **total causal effect** of cholesterol on heart disease (given the provided DAG).
+3. Unadjusted logistic regression model fit and reported: OR for cholesterol, **95% CI**, and interpretation.
+4. Adjusted logistic regression model fit and reported using only the identified confounders: aOR, **95% CI**, and interpretation.
+5. Side-by-side comparison of OR vs aOR (direction/magnitude of change + CI width) with a brief confounding explanation.
+
+| Level | Score | Description |
+|-------|-------|-------------|
+| Insufficient | 3 | One or more required components are missing, or the adjustment set is wrong, or ORs/models are wrong/misinterpreted. |
+| Sufficient | 6 | Some required components are present, but there are multiple minor issues or one major issue (e.g., unclear DAG logic, weak/incorrect comparison). |
+| Good | 8 | All required components are present with at most one minor issue (e.g., slight weakness in explanation or a small reporting omission). |
+| Excellent | 10 | All required components are present and correct; DAG logic is clear; OR and aOR are correctly reported/interpreted with a clear confounding comparison. |
+
+## Criterion 3: Part C - Prediction Model (30%)
+
+Building a model for maximum heart rate using manual backward elimination.
+
+**Required components (checklist):**
+
+1. Start with the full model using the specified candidate predictors (age, sex, chest pain type, cholesterol, fasting blood sugar, and resting blood pressure) to predict maximum heart rate.
+2. Manual backward elimination performed using **Type III ANOVA p-values** and the threshold **0.10**.
+3. A clear removal-steps table (predictor removed + p-value at that step).
+4. Final model includes only predictors with p < 0.10 (per Type III ANOVA) and is clearly stated.
+5. Final model is reported with coefficients, **95% CIs**, and p-values (or equivalent output) and a short justification summary.
+
+| Level | Score | Description |
+|-------|-------|-------------|
+| Insufficient | 3 | One or more required components are missing, or backward elimination is not correctly performed (wrong p-values, wrong threshold, or wrong final model). |
+| Sufficient | 6 | Some required components are present, but there are multiple minor issues or one major issue (e.g., incomplete documentation or inconsistent use of Type III ANOVA). |
+| Good | 8 | All required components are present with at most one minor issue (e.g., a small reporting omission or slightly unclear step table). |
+| Excellent | 10 | All required components are present and correct; the removal process is transparent and consistent with Type III p-values and the 0.10 threshold; final model reporting is complete. |
+
+## Criterion 4: Data handling and reproducibility (10%)
+
+**Required components (checklist):**
+
+1. Analysis file is submitted and readable (R script or SPSS output/syntax) and matches the reported results.
+2. Code/output is structured so results can be verified (data import, recoding, model fits, and plots/tables shown).
+3. For R users: individualized 200-patient dataset is created correctly (same subset as Assignment 1; correct seed/sampling documented).
+
+| Level | Score | Description |
+|-------|-------|-------------|
+| Insufficient | 3 | One or more required components are missing, or results cannot be verified from the submitted script/output, or the dataset creation is wrong/undocumented (R users). |
+| Sufficient | 6 | Some required components are present, but there are multiple minor issues or one major issue (e.g., omissions that make verification difficult). |
+| Good | 8 | All required components are present with at most one minor issue (e.g., slight structure/clarity issues). |
+| Excellent | 10 | All required components are present and correct; work is clearly structured and fully reproducible; dataset creation (R users) is correctly documented. |
+
+## Grade calculation
+
+Compute the final grade out of **10** as a weighted average of the four criterion scores:
+
+Let A, B, C, and D be the scores (out of 10) for Part A, Part B, Part C, and Data handling and reproducibility, respectively.
+
+Final grade = 0.30*A + 0.30*B + 0.30*C + 0.10*D.
+
+| Criterion | Weight | Score | Weighted Score |
+|-----------|--------|-------|----------------|
+| Part A: ANCOVA | 30% | ___ | ___ |
+| Part B: Logistic Regression & DAG | 30% | ___ | ___ |
+| Part C: Prediction Model | 30% | ___ | ___ |
+| Data handling and reproducibility | 10% | ___ | ___ |
+| **Final Grade** | **100%** | | **___** |
+
+### Example calculation
+
+| Criterion | Weight | Score | Weighted Score |
+|-----------|--------|-------|----------------|
+| Part A: ANCOVA | 30% | 8 | 2.4 |
+| Part B: Logistic Regression & DAG | 30% | 10 | 3.0 |
+| Part C: Prediction Model | 30% | 6 | 1.8 |
+| Data handling and reproducibility | 10% | 10 | 1.0 |
+| **Final Grade** | **100%** | | **8.2** |

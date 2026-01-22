@@ -33,20 +33,6 @@ heart_data <- heart_data[sample(nrow(heart_data), 200), ]
 
 ## Part A: ANCOVA (Analysis of Covariance)
 
-### A1. Exploratory plot
-
-```{r}
-ggplot(heart_data, aes(x = age, y = trestbps, color = sex)) +
-  geom_point(alpha = 0.8) +
-  labs(
-    x = "Age (years)",
-    y = "Resting blood pressure (mm Hg)",
-    color = "Sex",
-    title = "Resting blood pressure vs age by sex"
-  ) +
-  theme_minimal()
-```
-
 ### A2. Additive ANCOVA model
 
 ```{r}

@@ -75,6 +75,10 @@ website:
             href: R_Assignment_1.qmd
           - text: "SPSS"
             href: SPSS_Assignment_1.qmd      
+      - text: "Assignment part II"
+        menu:
+          - text: "Assignment 2"
+            href: Assignment_2.qmd      
       - text: "Datasets"
         menu:
           - text: "lowbwt.sav"
