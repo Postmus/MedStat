@@ -25,20 +25,20 @@ library(haven)   # for reading SPSS files
 library(dplyr)   # for data manipulation
 library(ggplot2) # for data visualization
 library(car)    # for calculating type-III ANOVA tables
+library(MASS)   # for automated selection
 
 # Load the dataset
-whas <- read_sav("datasets/whas500.sav")
+whas500 <- read_sav("datasets/whas500.sav")
 
 # Convert labeled variables to factors
-whas <- whas %>%
+whas500 <- whas500 %>%
   mutate(across(where(is.labelled), as_factor))
 ```
 
 Create an initial model for hospital length of stay (`los`) using the following predictors: `age`, `gender`, `hr`, `sysbp`, `diasbp`, `bmi`, `cvd`, `sho`. Run/summarize the model to inspect coefficients and p-values.
 
-
 ```{r}
-initial_model <- lm(los ~ age + gender + hr + sysbp + diasbp + bmi + cvd + sho, data = whas)
+initial_model <- lm(los ~ age + gender + hr + sysbp + diasbp + bmi + cvd + sho, data = whas500)
 summary(initial_model)
 ```
 
@@ -63,9 +63,22 @@ The following variables are sequentially removed from the model (after initially
 ### Step 4: Final model
 
 ```{r}
-final_model <- lm(los ~ gender + hr + sho, data = whas)
+#| echo: true
+final_model <- lm(los ~ gender + hr + sho, data = whas500)
 summary(final_model)
-```  
+
+# 95% CIs for regression coefficients
+confint(final_model)
+```
+
+The final model for hospital length of stay includes `gender`, `hr`, and `sho`. All predictors have $p < 0.10$. 
+
+| Predictor | Coefficient | 95% CI | p-value |
+| :--- | :--- | :--- | :--- |
+| (Intercept) | 3.80 | [2.23, 5.37] | < 0.001 |
+| Gender (Female) | 0.91 | [0.08, 1.75] | 0.033 |
+| Heart rate | 0.02 | [0.003, 0.038] | 0.020 |
+| Cardiogenic shock | 3.55 | [1.57, 5.53] | < 0.001 |
 
 #### Residual plots
 
@@ -79,28 +92,42 @@ plot(final_model, which = 1)
   
 The overall fit of the model appears reasonable, as the residuals are generally centered around zero with no major patterns suggesting severe violations of linearity. However, there are some outliers with very long lengths of stay (LOS) that are not adequately captured by the model. These outliers lead to a right skew in the residual distribution, as seen in the histogram, influencing model fit. While the current model seems to work reasonably well for most observations, further steps (e.g., transformations or robust regression techniques) could be considered to better account for these extreme cases.  
 
-## Part 2: Automated procedures for building prediction models
+## Part 2: Automated procedures for building prediction models (logistic regression)
 
-### Exercise: Automated procedures vs manual model
+In this part, we explore automated procedures for predictor selection in **logistic regression** prediction models, focusing on predicting in-hospital death (`dstat`).
 
 #### R
 
 ```{r}
 #| echo: true
 
-library(MASS)
-fit <- lm(los ~ age + gender + hr + sysbp + diasbp + bmi + cvd + sho, data = whas)
-step_model <- stepAIC(fit, direction = "backward")
-summary(step_model)
+# Create a 0/1 outcome (1 = dead)
+whas500 <- whas500 |>
+  mutate(dstat01 = ifelse(dstat == "dead", 1, 0))
+
+fit_full <- glm(
+  dstat01 ~ age + gender + hr + sysbp + diasbp + bmi + cvd + sho,
+  family = binomial,
+  data = whas500
+)
+
+fit_step <- stepAIC(fit_full, direction = "backward", trace = FALSE)
+summary(fit_step)
+
+# Odds ratios and 95% CIs
+exp(cbind(OR = coef(fit_step), confint.default(fit_step)))
 ```
 
-The final model obtained from the automated procedure is identical to the manually created model in Part 1.
+**Question:** Which predictors are retained in the prediction model?
+
+**Answer:**  
+The final logistic regression model obtained via backward elimination using AIC includes the following predictors: **age**, **hr** (heart rate), **sysbp** (systolic blood pressure), and **sho** (cardiogenic shock).
 
 #### SPSS
 
-![SPSS results of the backward elimination procedure](images/lab7_SPSS_BW.PNG)
+In SPSS, using the **Backward: LR** method (standard settings), the procedure also yields a final model with these four predictors.
 
-The table above shows the variables eliminated at each step of the backward elimination procedure in SPSS. The final model obtained from the automated procedure is identical to the manually created model in Part 1.
+![SPSS results of the backward selection for logistic regression](images/lab7_SPSS_BW_logistic.png)
 
 ## Part 3: Causal diagrams
 
