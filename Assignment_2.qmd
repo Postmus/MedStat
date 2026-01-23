@@ -107,7 +107,7 @@ Use the **"recipe" from Week 8** to analyze this diagram:
 
 1.  **Remove all arrows leaving the exposure (`chol`).** Are there any remaining paths between `chol` and `target`? (These are backdoor paths).
 2.  **Identify Confounders:** Which variable(s) must be adjusted for to "block" these backdoor paths?
-3.  **Adjusted Model:** Fit a multiple logistic regression model adjusting only for the confounder(s) you identified to estimate the **total causal effect** of cholesterol on heart disease.
+3.  **Adjusted Model:** Fit a multiple logistic regression model adjusting only for the confounder(s) you identified to estimate the **unconfounded effect** of cholesterol on heart disease.
 4.  **Comparison:** Put the unadjusted OR (B1) and adjusted OR (aOR) side by side. Say whether the OR changes, whether the CI widens or narrows, and what that suggests about confounding.
 
 ## **Part C:** Building a Prediction Model

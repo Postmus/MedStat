@@ -48,7 +48,7 @@ Investigation of the causal effect of cholesterol on heart disease using a DAG f
 **Required components (checklist):**
 
 1. Correct identification of the backdoor path(s) after removing arrows leaving cholesterol (the Week 8 "recipe").
-2. Correct adjustment set for the **total causal effect** of cholesterol on heart disease (given the provided DAG).
+2. Correct adjustment set for the **uncounfounded effect** of cholesterol on heart disease (given the provided DAG).
 3. Unadjusted logistic regression model fit and reported: OR for cholesterol, **95% CI**, and interpretation.
 4. Adjusted logistic regression model fit and reported using only the identified confounders: aOR, **95% CI**, and interpretation.
 5. Side-by-side comparison of OR vs aOR (direction/magnitude of change + CI width) with a brief confounding explanation.

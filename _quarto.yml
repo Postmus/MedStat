@@ -68,7 +68,9 @@ website:
           - text: "Week 6"
             href: lab6_answers.qmd 
           - text: "Week 7"
-            href: lab7_answers.qmd     
+            href: lab7_answers.qmd   
+          - text: "Week 8"
+            href: lab8_answers.qmd         
       - text: "Assignment part I"
         menu:
           - text: "R"
