@@ -1,0 +1,124 @@
+---
+title: "Assignment part 1: Grading Feedback"
+format:
+  html: default
+  docx: default
+---
+
+**Student:** _________________________ **Grade:** _____
+
+### Scoring Convention
+
+- **Excellent (10):** All required components are present and correct.
+- **Good (8):** Everything essential is correct, with **one minor issue**.
+- **Sufficient (6):** Core idea is present, but **multiple minor issues** or **one major issue**.
+- **Insufficient (3):** Major parts are missing/incorrect, or results are not interpretable.
+
+## Criterion 1: Selection of statistical tests and summary statistics (40%)
+
+**Score:** ___ / 10
+
+### RQ1 – ANOVA/Kruskal-Wallis
+
+1. ☐ Boxplot comparing outcome across grouping variable categories
+2. ☐ Normality assessed (Shapiro-Wilk, Q-Q plot, or visual inspection)
+3. ☐ Equal variances assessed (Levene's test)
+4. ☐ Correct test selected (ANOVA if assumptions met; Kruskal-Wallis if violated)
+5. ☐ Post-hoc tests matching omnibus test (e.g., Dunn's test after Kruskal-Wallis, not t-tests)
+6. ☐ Appropriate summary measures (Mean ± SD or Median (IQR))
+
+### RQ2 – Chi-Square/Fisher's Exact
+
+1. ☐ Correct test selected (Chi-Square if expected counts ≥ 5; Fisher's if < 5)
+2. ☐ Prevalence calculated for each group
+3. ☐ 95% CIs reported for prevalence estimates
+
+### Baseline Characteristics Table
+
+1. ☐ All variables included (except `target`)
+2. ☐ Appropriate summary measures for continuous variables
+3. ☐ Frequency counts and percentages for categorical variables
+
+**Comments:**
+
+---
+
+## Criterion 2: Interpretation of results (30%)
+
+**Score:** ___ / 10
+
+### RQ1 Results
+
+1. ☐ Group means/medians and 95% CIs correctly reported
+2. ☐ Test statistic correctly reported (F or H)
+3. ☐ p-value correctly reported and interpreted
+4. ☐ Post-hoc results correctly interpreted (if applicable)
+5. ☐ Clear conclusion answering research question
+
+### RQ2 Results
+
+1. ☐ Prevalence estimates with 95% CIs correctly reported
+2. ☐ Test statistic and p-value correctly reported
+3. ☐ Correct interpretation of association
+4. ☐ Clear conclusion answering research question
+
+### General
+
+1. ☐ Confidence intervals correctly interpreted
+2. ☐ Results align with stated research questions
+
+**Comments:**
+
+---
+
+## Criterion 3: Presentation and reporting (20%)
+
+**Score:** ___ / 10
+
+### Methods Section
+
+1. ☐ Personalized research questions clearly stated
+2. ☐ Statistical tests described with justification
+3. ☐ Assumption checks described
+
+### Results Section
+
+1. ☐ Baseline characteristics table included and clear
+2. ☐ Key findings for each research question presented
+3. ☐ Visualizations included where applicable
+
+### Reporting Standards
+
+1. ☐ Test statistics properly reported (e.g., F(df1, df2) = value, p = value)
+2. ☐ Tables and figures properly labeled
+3. ☐ Report within 2–3 pages with professional formatting
+
+**Comments:**
+
+---
+
+## Criterion 4: Data handling and reproducibility (10%)
+
+**Score:** ___ / 10
+
+1. ☐ Analysis file submitted and readable (R script or SPSS output)
+2. ☐ Code/output matches reported results
+3. ☐ Data import and dataset creation steps visible
+4. ☐ Correct seed used (student number without letters)
+5. ☐ 200 patients sampled and documented
+
+**Comments:**
+
+---
+
+## Grade Calculation
+
+| Criterion | Weight | Score | Weighted |
+|-----------|--------|-------|----------|
+| Selection of statistical tests | 40% | ___ | ___ |
+| Interpretation of results | 30% | ___ | ___ |
+| Presentation and reporting | 20% | ___ | ___ |
+| Data handling and reproducibility | 10% | ___ | ___ |
+| **Final Grade** | | | **___** |
+
+**Overall Comments:**

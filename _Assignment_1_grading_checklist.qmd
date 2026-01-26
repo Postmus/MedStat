@@ -1,0 +1,221 @@
+---
+title: "Assignment part 1: Grading Checklist"
+format:
+  html: default
+  docx: default
+---
+
+## Introduction
+
+This grading checklist is used to assess the first Medical Statistics assignment. The grade is based on four criteria: Selection of statistical tests (40%), Interpretation of results (30%), Presentation and reporting (20%), and Data handling and reproducibility (10%).
+
+This checklist is aligned with the published rubric but provides more detailed guidance for grading.
+
+### Checklist-style scoring (applies to all criteria)
+
+This rubric is intended to work like a checklist:
+
+- **Excellent (10):** All required components are present and correct.
+- **Good (8):** Everything essential is correct, with **one minor issue** (small omission, small reporting error, or slightly unclear wording that does not change the conclusion).
+- **Sufficient (6):** Core idea is present, but there are **multiple minor issues** or **one major issue** (missing a required component, wrong test, or interpretation that could change the conclusion).
+- **Insufficient (3):** Major parts are missing/incorrect, or results are not interpretable/gradable.
+
+Use the checklists under each criterion to decide the level.
+
+---
+
+## Criterion 1: Selection of statistical tests and summary statistics (40%)
+
+### Part A: Research Question 1 – ANOVA/Kruskal-Wallis
+
+Comparison of a continuous outcome across 3+ groups.
+
+**Required components (checklist):**
+
+1. ☐ Appropriate visualization (boxplot) comparing outcome across grouping variable categories.
+2. ☐ Assumption checking performed:
+   - ☐ Normality assessed (e.g., Shapiro-Wilk, Q-Q plot, or visual inspection)
+   - ☐ Equal variances assessed (e.g., Levene's test)
+3. ☐ Correct test selected based on assumptions:
+   - ☐ One-way ANOVA if assumptions met
+   - ☐ Kruskal-Wallis if assumptions violated
+4. ☐ Post-hoc tests performed when main test is significant:
+   - ☐ Bonferroni-adjusted pairwise comparisons (or equivalent)
+5. ☐ Summary measures appropriate for the data:
+   - ☐ Mean ± SD or Median (IQR) depending on distribution
+
+### Part B: Research Question 2 – Chi-Square/Fisher's Exact
+
+Association between heart disease and a binary predictor.
+
+**Required components (checklist):**
+
+1. ☐ Correct test selected based on expected cell counts:
+   - ☐ Chi-Square test if expected counts ≥ 5 in all cells
+   - ☐ Fisher's Exact test if any expected count < 5
+2. ☐ Prevalence calculated for each group
+3. ☐ 95% confidence intervals reported for prevalence estimates
+
+### Part C: Baseline Characteristics Table
+
+**Required components (checklist):**
+
+1. ☐ All variables included (except outcome `target`)
+2. ☐ Appropriate summary measures for continuous variables:
+   - ☐ Mean ± SD for normally distributed variables
+   - ☐ Median (IQR) for skewed variables
+3. ☐ Frequency counts and percentages for categorical variables
+
+| Level | Score | Description |
+|-------|-------|-------------|
+| Insufficient | 3 | Tests are largely inappropriate; assumptions are ignored or misunderstood. Summary measures do not match variable types. |
+| Sufficient | 6 | Tests are mostly correct but assumptions are not consistently checked or may be misapplied. Summary measures are mostly appropriate. |
+| Good | 8 | All tests are correctly chosen with minor issues in assumption checking or interpretation. Summary measures match variable types and distributions. |
+| Excellent | 10 | All tests are correctly chosen, and all relevant assumptions are appropriately checked and addressed. Appropriate post-hoc tests are selected when needed. Summary measures are well-chosen for variable types and distributions. |
+
+---
+
+## Criterion 2: Interpretation of results (30%)
+
+### Part A: Research Question 1 – ANOVA/Kruskal-Wallis Results
+
+**Required components (checklist):**
+
+1. ☐ Group means/medians and 95% CIs correctly reported for each category.
+2. ☐ Test statistic correctly reported (F-statistic for ANOVA or H-statistic for Kruskal-Wallis).
+3. ☐ p-value correctly reported and interpreted.
+4. ☐ If significant: post-hoc results correctly interpreted (which groups differ).
+5. ☐ Clear conclusion answering the research question.
+
+### Part B: Research Question 2 – Chi-Square/Fisher's Exact Results
+
+**Required components (checklist):**
+
+1. ☐ Prevalence estimates with 95% CIs correctly reported for each group.
+2. ☐ Test statistic and p-value correctly reported.
+3. ☐ Correct interpretation of association (or lack thereof).
+4. ☐ Clear conclusion answering the research question.
+
+### General Interpretation
+
+**Required components (checklist):**
+
+1. ☐ Confidence intervals are correctly interpreted (not just reported).
+2. ☐ Statistical significance vs. clinical relevance appropriately distinguished.
+3. ☐ Results align with the stated research questions.
+
+| Level | Score | Description |
+|-------|-------|-------------|
+| Insufficient | 3 | Results are largely misinterpreted, with major errors or irrelevant explanations. Confidence intervals are ignored or misunderstood. |
+| Sufficient | 6 | Most results are interpreted correctly but explanations may be unclear or incomplete. Confidence intervals are reported but not always correctly interpreted. |
+| Good | 8 | All results are interpreted correctly, with minor issues in clarity. Confidence intervals are used appropriately. |
+| Excellent | 10 | All results are interpreted correctly, with clear and concise explanations that align with research questions. Confidence intervals are correctly interpreted. |
+
+---
+
+## Criterion 3: Presentation and reporting (20%)
+
+### Methods Section
+
+**Required components (checklist):**
+
+1. ☐ Personalized research questions clearly stated (based on student number).
+2. ☐ Analysis steps outlined.
+3. ☐ Statistical tests described with justification.
+4. ☐ Assumption checks described.
+
+### Results Section
+
+**Required components (checklist):**
+
+1. ☐ Baseline characteristics table included and clearly formatted.
+2. ☐ Key findings for each research question presented.
+3. ☐ Visualizations (boxplots) included where applicable.
+
+### Reporting Standards
+
+**Required components (checklist):**
+
+1. ☐ Test statistics properly reported (e.g., F(df1, df2) = value, p = value).
+2. ☐ Tables and figures properly labeled and referenced.
+3. ☐ Report is within 2–3 pages.
+4. ☐ Professional formatting and clear structure.
+
+| Level | Score | Description |
+|-------|-------|-------------|
+| Insufficient | 3 | Presentation is disorganized or unprofessional, with major formatting or content issues. Test statistics are not properly reported. |
+| Sufficient | 6 | Presentation is acceptable but inconsistent, with some formatting issues. Test statistics may be incomplete. |
+| Good | 8 | Presentation is clear and professional overall, with minor issues in formatting. Most test statistics are correctly reported. |
+| Excellent | 10 | Tables, figures, and text are highly professional, clear, and fully aligned with reporting guidelines. Test statistics are properly reported with appropriate detail. |
+
+---
+
+## Criterion 4: Data handling and reproducibility (10%)
+
+**Required components (checklist):**
+
+1. ☐ Analysis file submitted and readable (R script or SPSS output/syntax).
+2. ☐ Code/output matches the reported results.
+3. ☐ Code/output is structured so results can be verified:
+   - ☐ Data import shown
+   - ☐ Dataset creation steps clear
+   - ☐ All analyses visible
+4. ☐ Individualized dataset correctly created:
+   - ☐ Correct seed used (student number without letters)
+   - ☐ 200 patients sampled
+   - ☐ Sampling method documented
+
+| Level | Score | Description |
+|-------|-------|-------------|
+| Insufficient | 3 | R script or SPSS output is incomplete or poorly structured. Individualized dataset is not correctly created (wrong seed or sampling) or cannot be verified. |
+| Sufficient | 6 | R script or SPSS output is mostly complete but with omissions or unclear structure. Dataset creation steps may be unclear. |
+| Good | 8 | R script or SPSS output is complete with minor documentation issues. Dataset is correctly created. |
+| Excellent | 10 | R script or SPSS output is complete, logically structured, and allows full reproducibility. Individualized dataset is correctly created with proper seed and sampling, clearly documented. |
+
+---
+
+## Grade Calculation
+
+Compute the final grade out of **10** as a weighted average of the four criterion scores:
+
+Let A, B, C, and D be the scores (out of 10) for Criterion 1, 2, 3, and 4, respectively.
+
+**Final grade = 0.40×A + 0.30×B + 0.20×C + 0.10×D**
+
+| Criterion | Weight | Score | Weighted Score |
+|-----------|--------|-------|----------------|
+| Selection of statistical tests and summary statistics | 40% | ___ | ___ |
+| Interpretation of results | 30% | ___ | ___ |
+| Presentation and reporting | 20% | ___ | ___ |
+| Data handling and reproducibility | 10% | ___ | ___ |
+| **Final Grade** | **100%** | | **___** |
+
+### Example calculation
+
+| Criterion | Weight | Score | Weighted Score |
+|-----------|--------|-------|----------------|
+| Selection of statistical tests | 40% | 8 | 3.2 |
+| Interpretation of results | 30% | 6 | 1.8 |
+| Presentation and reporting | 20% | 8 | 1.6 |
+| Data handling and reproducibility | 10% | 10 | 1.0 |
+| **Final Grade** | **100%** | | **7.6** |
+
+---
+
+## Quick Reference: Common Issues by Score Level
+
+### Minor Issues (one = Good; multiple = Sufficient)
+- Small reporting omission (e.g., missing df in test statistic)
+- Slightly unclear wording that doesn't change conclusion
+- Minor formatting inconsistency
+- CI reported but not explicitly interpreted
+- Post-hoc tests done but not clearly summarized
+
+### Major Issues (one = Sufficient; multiple = Insufficient)
+- Wrong test selected (e.g., ANOVA when Kruskal-Wallis needed)
+- Assumptions not checked at all
+- Missing post-hoc tests when needed
+- Misinterpretation that changes the conclusion
+- Wrong confidence intervals
+- Baseline table missing or incomplete
+- Dataset not correctly created
