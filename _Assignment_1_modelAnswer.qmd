@@ -2,9 +2,9 @@
 title: "Assignment part 1"
 subtitle: "Model answers for all research question combinations"
 format:
-  html:    
+  html:
     embed-resources: true
-execute:  
+execute:
   warning: false
   message: false
   error: false
@@ -60,7 +60,7 @@ heart_data <- heart_data[sample(nrow(heart_data), 200), ]
 ```{r}
 ggplot(heart_data, aes(x = cp, y = thalach)) +
   geom_boxplot() +
-  labs(x = "Chest pain type", y = "Maximum heart rate achieved", 
+  labs(x = "Chest pain type", y = "Maximum heart rate achieved",
        title = "Maximum heart rate by chest pain type") +
   theme_minimal()
 ```
@@ -165,7 +165,7 @@ heart_data %>%
   filter(!is.na(thal)) %>%
   ggplot(aes(x = thal, y = thalach)) +
   geom_boxplot() +
-  labs(x = "Thalassemia", y = "Maximum heart rate achieved", 
+  labs(x = "Thalassemia", y = "Maximum heart rate achieved",
        title = "Maximum heart rate by thalassemia category") +
   theme_minimal()
 ```

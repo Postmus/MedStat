@@ -4,5 +4,6 @@
 .Ruserdata
 
 /.quarto/
+/Assignment part 1 submissions/
 
 **/*.quarto_ipynb
