@@ -40,11 +40,16 @@ whas500$fstat_numeric <- ifelse(whas500$fstat=="dead", 1, 0)
 
 ```{r}
 # Kaplan-Meier by MI order
-group_fit <- survfit(Surv(lenfol, fstat_numeric) ~ miord, data = whas500)
+group_fit <- survfit(Surv(lenfol, fstat_numeric) ~ miord, 
+                     data = whas500)
 summary(group_fit)
 
-plot(group_fit, col = c("blue", "red"), xlab = "Follow-up Time (days)", ylab = "Survival Probability", main = "Survival by MI Order")
-legend("topleft", legend = c("First MI", "Recurrent MI"), col = c("blue", "red"), lty = 1)
+plot(group_fit, col = c("blue", "red"), 
+     xlab = "Follow-up Time (days)", 
+     ylab = "Survival Probability", 
+     main = "Survival by MI Order")
+legend("topleft", legend = c("First MI", "Recurrent MI"), 
+       col = c("blue", "red"), lty = 1)
 ```
 
 ::: {.callout-important icon=false title="Question 1"}
@@ -104,7 +109,9 @@ The p-value associated with the miord variable in the Cox regression model is 0.
 
 ```{r}
 # Adjusted Cox regression
-coxph_model_adj <- coxph(Surv(lenfol, fstat_numeric) ~ miord + age + gender, data = whas500)
+coxph_model_adj <- coxph(Surv(lenfol, fstat_numeric) ~ 
+                           miord + age + gender, 
+                         data = whas500)
 summary(coxph_model_adj)
 ```
 
@@ -138,11 +145,16 @@ ex9$event_numeric <- ifelse(ex9$censor=="exact", 1, 0)
 (a) Calculate and plot Kaplan-Meier estimates of survival probabilities in the two groups.
 
 ```{r}
-group_fit <- survfit(Surv(stime, event_numeric) ~ expgroup, data = ex9)
+group_fit <- survfit(Surv(stime, event_numeric) ~ expgroup, 
+                     data = ex9)
 summary(group_fit)
 
-plot(group_fit, col = c("blue", "red"), xlab = "Follow-up Time (minutes)", ylab = "Survival Probability", main = NULL)
-legend("bottomleft", legend = c("freq=0.167 Hz, 0.111 G", "0.333 Hz, 0.222 G"), col = c("blue", "red"), lty = 1)
+plot(group_fit, col = c("blue", "red"), 
+     xlab = "Follow-up Time (minutes)", 
+     ylab = "Survival Probability", main = NULL)
+legend("bottomleft", 
+       legend = c("freq=0.167 Hz, 0.111 G", "0.333 Hz, 0.222 G"), 
+       col = c("blue", "red"), lty = 1)
 ```  
 
 (b) Calculate the 95% CI for the difference between survival probabilities of the two groups after 60 minutes.
@@ -163,7 +175,8 @@ The p-value from the logrank test (0.07) is larger than 0.05, suggesting that th
 (d) Use Cox regression to compare the two treatments; compare the result to that of the logrank test; calculate the hazard ratio and its 95% CI.
 
 ```{r}
-coxph_model <- coxph(Surv(stime, event_numeric) ~ expgroup, data = ex9)
+coxph_model <- coxph(Surv(stime, event_numeric) ~ expgroup, 
+                     data = ex9)
 summary(coxph_model)
 ```
 
