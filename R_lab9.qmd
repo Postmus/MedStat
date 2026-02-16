@@ -47,11 +47,16 @@ We start by constructing a Kaplan-Meier survival curve to compare the survival p
 
 ```{r}
 # Kaplan-Meier by MI order
-group_fit <- survfit(Surv(lenfol, fstat_numeric) ~ miord, data = whas500)
+group_fit <- survfit(Surv(lenfol, fstat_numeric) ~ miord, 
+                     data = whas500)
 summary(group_fit)
 
-plot(group_fit, col = c("blue", "red"), xlab = "Follow-up Time (days)", ylab = "Survival Probability", main = "Survival by MI Order")
-legend("topleft", legend = c("First MI", "Recurrent MI"), col = c("blue", "red"), lty = 1)
+plot(group_fit, col = c("blue", "red"), 
+     xlab = "Follow-up Time (days)", 
+     ylab = "Survival Probability", 
+     main = "Survival by MI Order")
+legend("topleft", legend = c("First MI", "Recurrent MI"), 
+       col = c("blue", "red"), lty = 1)
 ```
 
 **Explanation of the code:**
@@ -107,7 +112,9 @@ Now, let's adjust the Cox regression model using `age` and `gender` as potential
 
 ```{r}
 # Adjusted Cox regression
-coxph_model_adj <- coxph(Surv(lenfol, fstat_numeric) ~ miord + age + gender, data = whas500)
+coxph_model_adj <- coxph(Surv(lenfol, fstat_numeric) ~ 
+                           miord + age + gender, 
+                         data = whas500)
 summary(coxph_model_adj)
 ```
 
