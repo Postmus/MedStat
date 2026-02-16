@@ -5,5 +5,6 @@
 
 /.quarto/
 /Assignment part 1 submissions/
+/Assignment part 2 submissions/
 
 **/*.quarto_ipynb

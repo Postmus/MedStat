@@ -1,0 +1,75 @@
+---
+title: "Assignment part 2: Grading Form"
+format:
+  html: default
+  docx: default
+---
+
+See `assignment_2_grading_criteria.md` for the full scoring descriptions, common issues reference, and instructions on how to score each checklist item (+, +/-, or -).
+
+Student name: <add student name>
+Student number: <add student number>
+Grade: <add grade>
+
+### Scoring convention
+
+- **Excellent (10):** All required components are present and correct.
+- **Good (8):** Everything essential is correct, with **one minor issue** (small omission, small reporting error, or slightly unclear wording that does not change the conclusion).
+- **Sufficient (6):** Core idea is present, but there are **multiple minor issues** or **one major issue** (missing a required component, wrong model/test, or interpretation that could change the conclusion).
+- **Insufficient (3):** Major parts are missing/incorrect, or results are not interpretable/gradable.
+
+## Criterion 1: Part A – ANCOVA (30%)
+
+Score: <points>/10
+
+1. Additive ANCOVA model fitted with resting blood pressure as the outcome and age and sex as predictors:
+2. Adjusted male-female difference in resting blood pressure reported with a 95% CI and p-value (holding age constant):
+3. Additive-model diagnostics included and correctly interpreted:
+   - Q-Q plot:
+   - Residuals vs Fitted plot:
+4. Interaction model (age by sex) fitted and Type III ANOVA test for the age-by-sex interaction term reported:
+5. Clear conclusion on evidence for/against interaction and whether the additive assumption is reasonable:
+
+## Criterion 2: Part B – Logistic Regression & DAG (30%)
+
+Score: <points>/10
+
+1. Correct adjustment set for the unconfounded effect of cholesterol on heart disease (given the provided DAG):
+2. Unadjusted logistic regression model fitted and reported — OR for cholesterol, 95% CI, and interpretation:
+3. Adjusted logistic regression model fitted and reported using only the identified confounders — aOR, 95% CI, and interpretation:
+4. Side-by-side comparison of OR vs aOR with a correct confounding assessment (does the point estimate change meaningfully after adjustment?):
+
+## Criterion 3: Part C – Prediction Model (30%)
+
+Score: <points>/10
+
+1. Full model fitted using the specified candidate predictors (age, sex, chest pain type, cholesterol, fasting blood sugar, and resting blood pressure) to predict maximum heart rate:
+2. Manual backward elimination performed using Type III ANOVA p-values and the threshold 0.10:
+3. Clear removal-steps table included (predictor removed + p-value at that step):
+4. Final model includes only predictors with p < 0.10 (per Type III ANOVA) and is clearly stated:
+5. Final model reported with coefficients, 95% CIs, and p-values (or equivalent output) and a short justification summary:
+
+## Criterion 4: Data handling and reproducibility (10%)
+
+Score: <points>/10
+
+1. Analysis file submitted and readable (R script or SPSS output/syntax) and matches the reported results:
+2. Code/output is structured so results can be verified:
+   - Data import shown:
+   - Recoding steps clear:
+   - Model fits visible:
+   - Plots/tables shown:
+3. For R users — individualized 200-patient dataset is created correctly (same subset as Assignment 1; correct seed/sampling documented):
+
+## Grade Calculation
+
+| Criterion | Weight | Score | Weighted Score |
+|-----------|--------|-------|----------------|
+| Part A: ANCOVA | 30% | ___ | ___ |
+| Part B: Logistic Regression & DAG | 30% | ___ | ___ |
+| Part C: Prediction Model | 30% | ___ | ___ |
+| Data handling and reproducibility | 10% | ___ | ___ |
+| **Final Grade** | **100%** | | **___** |
+
+## Comments
+
