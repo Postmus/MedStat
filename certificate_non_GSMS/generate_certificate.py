@@ -54,6 +54,9 @@ SIGNATURE_NAME_X_PT = 105.122705
 SIGNATURE_NAME_TOP_Y_PT = 636.455492
 FOOTER_X_PT = 103.919999
 FOOTER_TOP_Y_PT = 720.095507
+SIGNATURE_IMAGE_X_PT = 100.0
+SIGNATURE_IMAGE_Y_PT = 570.0
+SIGNATURE_IMAGE_WIDTH_PT = 140.0
 
 BOLD_FONT = "/usr/share/fonts/truetype/noto/NotoSans-Bold.ttf"
 REGULAR_FONT = "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf"
@@ -161,6 +164,44 @@ def load_data() -> dict:
     return data
 
 
+def paste_signature(page: Image.Image, data: dict) -> None:
+    signature_file = data.get("signature_file")
+    if not signature_file:
+        return
+
+    signature_path = OUTPUT_DIR / signature_file
+    if not signature_path.exists():
+        raise FileNotFoundError(f"Signature file not found: {signature_path}")
+
+    signature = Image.open(signature_path).convert("RGBA")
+    signature = remove_white_background(signature)
+    target_width_pt = float(data.get("signature_width_pt", SIGNATURE_IMAGE_WIDTH_PT))
+    x_pt = float(data.get("signature_x_pt", SIGNATURE_IMAGE_X_PT))
+    y_pt = float(data.get("signature_y_pt", SIGNATURE_IMAGE_Y_PT))
+
+    target_width_px = pt_to_px(target_width_pt)
+    scale = target_width_px / signature.width
+    target_height_px = int(round(signature.height * scale))
+    signature = signature.resize((target_width_px, target_height_px))
+
+    page.paste(signature, (pt_to_px(x_pt), pt_to_px(y_pt)), signature)
+
+
+def remove_white_background(image: Image.Image, *, threshold: int = 245) -> Image.Image:
+    cleaned = image.copy()
+    pixels = cleaned.load()
+
+    for y in range(cleaned.height):
+        for x in range(cleaned.width):
+            r, g, b, a = pixels[x, y]
+            if a == 0:
+                continue
+            if r >= threshold and g >= threshold and b >= threshold:
+                pixels[x, y] = (255, 255, 255, 0)
+
+    return cleaned
+
+
 def pt_to_px(value: float) -> int:
     return int(round(value * PX_PER_PT))
 
@@ -206,6 +247,7 @@ def build_pdf_assets() -> tuple[Image.Image, Path, Path]:
         (255, 255, 255, 128),
     )
     page.alpha_composite(overlay, (pt_to_px(OVERLAY_X_PT), pt_to_px(OVERLAY_Y_PT)))
+    paste_signature(page, data)
 
     draw = ImageDraw.Draw(page)
 

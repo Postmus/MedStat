@@ -5,6 +5,8 @@ Change only these values in the JSON file:
 - `student_name`
 - `course_period`
 - `issue_city_and_date`
+- `signature_file` (optional)
+- `signature_x_pt`, `signature_y_pt`, `signature_width_pt` (optional PDF signature placement)
 
 Then run:
 

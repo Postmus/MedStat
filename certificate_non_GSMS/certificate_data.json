@@ -1,5 +1,9 @@
 {
   "student_name": "John Doe",
   "course_period": "June 2 - June 18, 2025",
-  "issue_city_and_date": "Groningen, June 30th, 2025"
+  "issue_city_and_date": "Groningen, June 30th, 2025",
+  "signature_file": "signature.png",
+  "signature_x_pt": 100.0,
+  "signature_y_pt": 582.0,
+  "signature_width_pt": 140.0
 }
