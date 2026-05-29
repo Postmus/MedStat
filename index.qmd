@@ -2,4 +2,6 @@
 title: "R/SPSS labs for the Medical Statistics course"
 ---
 
-This website hosts the R and SPSS labs for the Medical Statistics course. You can navigate between the different labs using the menu above.
+Welcome to the Medical Statistics course website.
+
+Here you will find the materials you need for the course. We will add the labs step by step as the course progresses. The answers will be published here as well after each lab session.
