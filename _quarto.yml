@@ -3,6 +3,8 @@ project:
   output-dir: "docs"
   render:
     - index.qmd
+    - R_lab1.qmd
+    - SPSS_lab1.qmd
   resources:
     - "/datasets"
 
@@ -15,6 +17,12 @@ website:
     left:
       - text: "Home"
         href: index.qmd
+      - text: "Day 1"
+        menu:
+          - text: "R lab"
+            href: R_lab1.qmd
+          - text: "SPSS lab"
+            href: SPSS_lab1.qmd
       - text: "Datasets"
         menu:
           - text: "lowbwt.sav"
