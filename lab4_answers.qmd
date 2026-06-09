@@ -38,7 +38,7 @@ Using the data provided in the table, calculate an approximate 95% confidence in
 
 * Step 5: Determine the 95% confidence interval
   - $Z_{critical} = 1.96$
-  - $\text{Lower bound} = \text{Difference} - Z_{critical} \times \text{SE} = 0.233 - 1.96 \times 0.0.120 \approx -0.001$
+  - $\text{Lower bound} = \text{Difference} - Z_{critical} \times \text{SE} = 0.233 - 1.96 \times 0.120 \approx -0.001$
   - $\text{Upper bound} = \text{Difference} + Z_{critical} \times \text{SE} = 0.233 + 1.96 \times 0.120 \approx 0.468$
 
 * Step 6: Conclusion
@@ -78,7 +78,7 @@ In addition to the p-value, output of the `prop.test()` function also provides a
 :::
 
 ::: {.callout-tip icon=false title="Answer question 4"}
-The 95% confidence interval for the difference in proportions was $(-0.001, 0.468)$. This is an approximate interval without continuity correction. The confidence interval provided in the output above is slightly wider due to the continuity correction. Without continuity correction (`adjust = FALSE` in R), the confidence interval provided by the `prop.test()` function is the same as the one that was calculated manually. SPSS gave the same result as R.
+The 95% confidence interval for the difference in proportions was $(-0.001, 0.468)$. This is an approximate interval without continuity correction. The confidence interval provided in the output above is slightly wider due to the continuity correction. Without continuity correction (`correct = FALSE` in R), the confidence interval provided by the `prop.test()` function is the same as the one that was calculated manually. SPSS gave the same result as R.
 :::
 
 ### Checking of assumptions
