@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Medical Statistics – Lab 1 – Medical Statistics</title>
+<title>Medical Statistics – Lab 4 – Medical Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e31584831b205ffbb2d98406f31c2a5b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-7d8f446abc168d75111c8ab93f0c9211.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -259,26 +259,37 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1---descriptive-statistics" id="toc-part-1---descriptive-statistics" class="nav-link active" data-scroll-target="#part-1---descriptive-statistics">Part 1 - Descriptive statistics</a>
+  <li><a href="#part-1-inference-for-categorical-data" id="toc-part-1-inference-for-categorical-data" class="nav-link active" data-scroll-target="#part-1-inference-for-categorical-data">Part 1: Inference for categorical data</a>
   <ul class="collapse">
-  <li><a href="#descriptive-analysis-of-continuous-variables" id="toc-descriptive-analysis-of-continuous-variables" class="nav-link" data-scroll-target="#descriptive-analysis-of-continuous-variables">Descriptive analysis of continuous variables</a></li>
-  <li><a href="#descriptive-analysis-of-categorical-variables" id="toc-descriptive-analysis-of-categorical-variables" class="nav-link" data-scroll-target="#descriptive-analysis-of-categorical-variables">Descriptive analysis of categorical variables</a></li>
-  </ul></li>
-  <li><a href="#part-2---probability-calculations-for-random-variables" id="toc-part-2---probability-calculations-for-random-variables" class="nav-link" data-scroll-target="#part-2---probability-calculations-for-random-variables">Part 2 - Probability calculations for random variables</a>
+  <li><a href="#smoking-and-post-surgical-complications" id="toc-smoking-and-post-surgical-complications" class="nav-link" data-scroll-target="#smoking-and-post-surgical-complications">Smoking and post-surgical complications</a>
   <ul class="collapse">
-  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution">Binomial Distribution</a></li>
-  <li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link" data-scroll-target="#normal-distribution">Normal Distribution</a></li>
+  <li><a href="#confidence-intervals-and-hypothesis-testing-for-the-difference-in-proportions-using-the-normal-approximation" id="toc-confidence-intervals-and-hypothesis-testing-for-the-difference-in-proportions-using-the-normal-approximation" class="nav-link" data-scroll-target="#confidence-intervals-and-hypothesis-testing-for-the-difference-in-proportions-using-the-normal-approximation">Confidence intervals and hypothesis testing for the difference in proportions using the normal approximation</a></li>
+  <li><a href="#checking-of-assumptions" id="toc-checking-of-assumptions" class="nav-link" data-scroll-target="#checking-of-assumptions">Checking of assumptions</a></li>
+  <li><a href="#fishers-exact-test" id="toc-fishers-exact-test" class="nav-link" data-scroll-target="#fishers-exact-test">Fisher’s exact test</a></li>
   </ul></li>
-  <li><a href="#part-3---some-conceptual-questions" id="toc-part-3---some-conceptual-questions" class="nav-link" data-scroll-target="#part-3---some-conceptual-questions">Part 3 - Some conceptual questions</a></li>
+  <li><a href="#vaccine-side-effects-across-age-groups" id="toc-vaccine-side-effects-across-age-groups" class="nav-link" data-scroll-target="#vaccine-side-effects-across-age-groups">Vaccine side effects across age groups</a>
+  <ul class="collapse">
+  <li><a href="#chi-square-test-of-homogeneity" id="toc-chi-square-test-of-homogeneity" class="nav-link" data-scroll-target="#chi-square-test-of-homogeneity">Chi-square test of homogeneity</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#part-2-analysis-of-paired-continous-data" id="toc-part-2-analysis-of-paired-continous-data" class="nav-link" data-scroll-target="#part-2-analysis-of-paired-continous-data">Part 2: Analysis of paired continous data</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#paired-t-test" id="toc-paired-t-test" class="nav-link" data-scroll-target="#paired-t-test">Paired t-test</a></li>
+  <li><a href="#sign-test-and-wilcoxon-signed-rank-test" id="toc-sign-test-and-wilcoxon-signed-rank-test" class="nav-link" data-scroll-target="#sign-test-and-wilcoxon-signed-rank-test">Sign test and Wilcoxon signed-rank test</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#part-3-analysis-of-paired-dichotomous-data" id="toc-part-3-analysis-of-paired-dichotomous-data" class="nav-link" data-scroll-target="#part-3-analysis-of-paired-dichotomous-data">Part 3: Analysis of paired dichotomous data</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="SPSS_lab1.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="SPSS_lab4.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Medical Statistics – Lab 1</h1>
+<h1 class="title">Medical Statistics – Lab 4</h1>
 <p class="subtitle lead">SPSS version</p>
 </div>
 
@@ -296,78 +307,45 @@ window.Quarto = {
 </header>
 
 
-<p>Welcome to lab 1 in the Medical statistics course. In this lab, we will explore descriptive statistics and probability calculations for random variables. We will use an example dataset to practice summarizing continuous and categorical variables, and introduce some basic concepts of probability distributions.</p>
-<section id="part-1---descriptive-statistics" class="level1">
-<h1>Part 1 - Descriptive statistics</h1>
-<p>For this part of the lab, we will use the <code>lowbwt.sav</code> dataset. This dataset contains information collected at Baystate Medical Center Springfield, MA, during 1986 and is from Appendix 1 of Hosmer and Lemeshow (1989). The data include information about factors related to low birth weight, an important concern due to its association with high infant mortality rates and birth defects.</p>
-<p>The dataset includes the following variables:</p>
+<p>Welcome to lab 4 in the medical statistics course. In this lab, we will focus on the analysis of categorical data and the comparison of proportions between groups. We will also perform several statistical tests for the analysis of paired data.</p>
+<section id="part-1-inference-for-categorical-data" class="level1">
+<h1>Part 1: Inference for categorical data</h1>
+<section id="smoking-and-post-surgical-complications" class="level2">
+<h2 class="anchored" data-anchor-id="smoking-and-post-surgical-complications">Smoking and post-surgical complications</h2>
+<p>A study was conducted to investigate whether smoking is associated with an increased risk of post-surgical complications. The relationship between smoking status (smoker or non-smoker) and the occurrence of complications following surgery was examined. The outcome of interest was whether or not a complication occurred (yes or no), with smoking status serving as the explanatory variable to compare complication rates between the two groups.</p>
+<p>The data from the study are summarized in the following 2x2 contingency table:</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Variable</th>
-<th>Abbreviation</th>
+<th></th>
+<th>Complication</th>
+<th>No Complication</th>
+<th>Total</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Identification Code</td>
-<td>ID</td>
+<td>Smokers</td>
+<td>8</td>
+<td>12</td>
+<td>20</td>
 </tr>
 <tr class="even">
-<td>Low Birth Weight (0 = Birth Weight ≥ 2500g, 1 = Birth Weight &lt; 2500g)</td>
-<td>low</td>
+<td>Non-smokers</td>
+<td>10</td>
+<td>50</td>
+<td>60</td>
 </tr>
 <tr class="odd">
-<td>Age of the Mother in Years</td>
-<td>age</td>
-</tr>
-<tr class="even">
-<td>Weight in Pounds at the Last Menstrual Period</td>
-<td>lwt</td>
-</tr>
-<tr class="odd">
-<td>Ethnicity (1 = Caucasian, 2 = Afro-American, 3 = Asian)</td>
-<td>ethnicity</td>
-</tr>
-<tr class="even">
-<td>Smoking Status During Pregnancy (1 = Yes, 0 = No)</td>
-<td>smoke</td>
-</tr>
-<tr class="odd">
-<td>History of Premature Labor (0 = None, 1 = One, etc.)</td>
-<td>ptl</td>
-</tr>
-<tr class="even">
-<td>History of Hypertension (1 = Yes, 0 = No)</td>
-<td>ht</td>
-</tr>
-<tr class="odd">
-<td>Presence of Uterine Irritability (1 = Yes, 0 = No)</td>
-<td>urirr</td>
-</tr>
-<tr class="even">
-<td>Number of Physician Visits During the First Trimester (0 = None, 1 = One, 2 = Two, etc.)</td>
-<td>pvft</td>
-</tr>
-<tr class="odd">
-<td>Birth Weight in Grams</td>
-<td>bwt</td>
+<td>Total</td>
+<td>18</td>
+<td>62</td>
+<td>80</td>
 </tr>
 </tbody>
 </table>
-<p>The variables <code>bwt</code> (birth weight in grams) and <code>low</code> (low birth weight) are the outcome variables, while all other variables are considered independent variables. The outcome variables will be analyzed in more detail in subsequent labs. In this lab, we will focus on describing the study population in terms of the independent variables to obtain a set of summary statistics that could be used to populate a baseline characteristics table.</p>
-<section id="descriptive-analysis-of-continuous-variables" class="level2">
-<h2 class="anchored" data-anchor-id="descriptive-analysis-of-continuous-variables">Descriptive analysis of continuous variables</h2>
-<p>Let’s start by calculating the summary statistics for the continuous variable <code>age</code>.</p>
-<ol type="1">
-<li><p><strong>Mean</strong> and <strong>Standard Deviation</strong>: Use the “Analyze &gt; Descriptive Statistics &gt; Descriptives…” menu in SPSS to calculate the mean age of the mothers. Select <code>age</code> as the variable, and ensure that the mean and standard deviation are checked in the “Options” dialog.</p></li>
-<li><p><strong>Median and Interquartile Range (IQR)</strong>: To calculate the median and IQR for <code>age</code>, use the “Analyze &gt; Descriptive Statistics &gt; Frequencies…” menu. Select <code>age</code> as the variable and click on “Statistics…” to choose the median and quartiles.</p></li>
-</ol>
-<p>To decide which summary measures (mean and standard deviation, or median and IQR) are appropriate to report, we need to understand the shape of the distribution of the <code>age</code> variable. Create a histogram by using “Graphs &gt; Legacy Dialogs &gt; Histogram…” and selecting <code>age</code> as the variable.</p>
+<section id="confidence-intervals-and-hypothesis-testing-for-the-difference-in-proportions-using-the-normal-approximation" class="level3">
+<h3 class="anchored" data-anchor-id="confidence-intervals-and-hypothesis-testing-for-the-difference-in-proportions-using-the-normal-approximation">Confidence intervals and hypothesis testing for the difference in proportions using the normal approximation</h3>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 1">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -378,7 +356,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on the shape of the histogram, determine which summary statistics are more appropriate to report.</p>
+<p>Using the data provided in the table, calculate an approximate 95% confidence interval for the difference in proportions of post-surgical complications between smokers and non-smokers.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 2">
@@ -391,17 +369,22 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Calculate the mean, standard deviation, median, and IQR for the variable <code>lwt</code>. Additionally, create a histogram to determine the shape of its distribution and decide which summary measures are most appropriate to report.</p>
+<p>Based on the 95% confidence interval, can we conclude that there is a statistically significant difference in the proportion of post-surgical complications between smokers and non-smokers?</p>
 </div>
 </div>
-</section>
-<section id="descriptive-analysis-of-categorical-variables" class="level2">
-<h2 class="anchored" data-anchor-id="descriptive-analysis-of-categorical-variables">Descriptive analysis of categorical variables</h2>
-<p>Let’s move on to analyzing the categorical variables. We will start by calculating the frequency and percentage of mothers who smoked during pregnancy (<code>smoke</code>):</p>
-<ol type="1">
-<li><p><strong>Frequency Table</strong>: Use the “Analyze &gt; Descriptive Statistics &gt; Frequencies…” menu to calculate the frequency of each category for <code>smoke</code>.</p></li>
-<li><p><strong>Percentage Calculation</strong>: SPSS will automatically calculate the percentages for each category in the frequency table output.</p></li>
-</ol>
+<p>We can also use the normal approximation to test the hypothesis that the proportion of complications is the same for smokers and non-smokers. This test is known as the two-sample Z test for equality of proportions.</p>
+<p>As explained in the syllabus, the two-sample Z test uses the pooled population proportion <span class="math inline">\(\hat{p}\)</span>, which is calculated as the total number of events divided by the total sample size. This pooled proportion is used under the null hypothesis, which assumes that the two groups share the same underlying proportion. The standard error of the difference in proportions is then calculated as <span class="math inline">\(\sqrt{\hat{p}(1-\hat{p})(1/n_1 + 1/n_2)}\)</span>, where <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> are the sample sizes in the two groups.</p>
+<p>In contrast, the 95% confidence interval for the difference in proportions does not rely on the pooled proportion. Instead, it calculates the standard error separately for each group using the observed proportions, resulting in an unpooled standard error: <span class="math inline">\(\sqrt{\frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}}\)</span>, where <span class="math inline">\(p_1\)</span> and <span class="math inline">\(p_2\)</span> are the sample proportions for each group. This approach provides an interval that better reflects the variability in the observed data, independent of the null hypothesis assumption.</p>
+<p>To conduct the two-sample Z test, we need to create a new dataset containing the above observations. To achieve this, go to <code>File</code> -&gt; <code>New</code> -&gt; <code>Data</code> to create a new data file. Navigate to the <code>Variable View</code> tab and create three variables: <code>Group</code>, <code>Complication</code>, and <code>Frequency</code>. The <code>Group</code> variable should have two levels: <code>Smokers</code> (coded as 1) and <code>Non-smokers</code> (coded as 2), while the <code>Complication</code> variable should have two levels: <code>Complication</code> (coded as 1) and <code>No complication</code> (coded as 2). The <code>Frequency</code> variable will contain the counts of observations for each combination of group and complication status.</p>
+<p>Navigate to the <code>Data View</code> tab and enter the data from the contingency table into the new dataset. For example, in the first row in the screenshot below, the <code>Group</code> variable is set to <code>Smokers</code> (value=1), the <code>Complication</code> variable is set to <code>Complication</code> (value=1), and the <code>Frequency</code> variable is set to 8 (number of individuals in that cell of the contingency table). Repeat this process for the remaining rows to enter all the data.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab4_smoking.PNG" class="img-fluid figure-img"></p>
+<figcaption>Screenshot of the SPSS dataset</figcaption>
+</figure>
+</div>
+<p>Once the data is entered, we need to weight the data by the <code>Frequency</code> variable to account for the multiple observations in each cell. To do this, go to <code>Data</code> -&gt; <code>Weight Cases</code>. Select the <code>Frequency</code> variable and click <code>OK</code>.</p>
+<p>Finally, we can proceed with the two-sample Z test. Go to <code>Analyze</code> -&gt; <code>Compare Means</code> -&gt; <code>Independent-Samples proportions</code>. Select the <code>Group</code> variable as the <code>Grouping Variable</code> and the <code>Complication</code> variable as the <code>Test Variable</code>. Under <code>Confidence Intervals...</code>, select <code>Wald</code> and <code>Wald (Continuity Corrected)</code> to calculate the approximate 95% confidence intervals for the difference in proportions with and without continuity correction. Under Test Type, select <code>Wald H0 (Continuity Corrected)</code> to conduct the two-sample Z test with continuity correction. Click <code>OK</code> to run the test.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 3">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -412,10 +395,9 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Calculate the frequencies and percentages for the variable <code>ht</code> (history of hypertension).</p>
+<p>Based on the results of the test, can we conclude that there is a statistically significant difference in the proportion of post-surgical complications between smokers and non-smokers?</p>
 </div>
 </div>
-<p>In addition to calculating frequencies and percentages, it can also be helpful to visualize categorical data. One common way to do this is by creating a bar chart. To create a bar chart for the <code>smoke</code> variable, use “Graphs &gt; Legacy Dialogs &gt; Bar…” and select “Simple” and “Summaries for Groups of Cases.” Then select <code>smoke</code> as the Category Axis.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 4">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -426,25 +408,26 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Create a bar chart for the variable <code>ht</code> to visualize the frequency of mothers with a history of hypertension.</p>
+<p>In addition to the p-value, The SPSS output also provides two approximate 95% confidence intervals for the difference in proportions. How do these confidence intervals compare to the one you calculated manually?</p>
 </div>
 </div>
 </section>
-</section>
-<section id="part-2---probability-calculations-for-random-variables" class="level1">
-<h1>Part 2 - Probability calculations for random variables</h1>
-<p>In this section, we will focus on two commonly used probability distributions: the binomial distribution and the normal distribution. We will explore how to work with these distributions in SPSS using practical examples.</p>
-<section id="binomial-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="binomial-distribution">Binomial Distribution</h2>
-<p>A binomial distribution represents the number of successes in a fixed number of independent trials, each with the same probability of success. For example, if we have 10 patients and we want to know the probability that exactly 3 of them respond to a given treatment, where the response rate is known to be 40%, we can use SPSS to calculate this probability.</p>
-<p>To perform this calculation in SPSS, go to “Transform &gt; Compute Variable…” and create a new variable called <code>p_response_3</code>. Use the function <code>PDF.BINOM(x, n, p)</code> to calculate the cumulative probability:</p>
-<ul>
-<li><strong><code>x</code></strong>: The number of successes we are interested in (in this example, <code>3</code> patients responding).</li>
-<li><strong><code>n</code></strong>: The number of trials (in this example, <code>10</code> patients).</li>
-<li><strong><code>p</code></strong>: The probability of success in each trial (in this example, <code>0.4</code> or 40% response rate).</li>
-</ul>
-<p>Cumulative probabilities, such as the probability that 3 or fewer patients out of 10 respond to the treatment, can similarly be calculated by creating a new variable with the <code>CDF.BINOM(x, n, p)</code> function.</p>
-<p><strong>Note</strong>: Unlike other statistical software, SPSS requires that calculations performed using the “Transform &gt; Compute Variable…” tool always have a target variable specified. This means you cannot perform calculations without creating an output variable in your dataset, which can make one-time calculations cumbersome. This is a limitation of SPSS, especially when you just want to explore different scenarios without cluttering your dataset with temporary variables.</p>
+<section id="checking-of-assumptions" class="level3">
+<h3 class="anchored" data-anchor-id="checking-of-assumptions">Checking of assumptions</h3>
+<p>For the use of the normal approximation to be valid, the expected number of events and non-events in each group should be at least 5.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Check this assumption by calculating the expected counts for each cell in the contingency table.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 5">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -455,9 +438,14 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The probability of being blood group B is 0.08. What is the probability that if 500 ml of blood is taken from each of 100 unrelated blood donors fewer than 1,500 ml of group B blood will be obtained?</p>
+<p>Is it reasonable to use the normal approximation in this case?</p>
 </div>
 </div>
+</section>
+<section id="fishers-exact-test" class="level3">
+<h3 class="anchored" data-anchor-id="fishers-exact-test">Fisher’s exact test</h3>
+<p>When the expected cell counts are small, the normal approximation may not be appropriate. In such cases, Fisher’s exact test is recommended for testing the association between two categorical variables.</p>
+<p>In SPSS, we can perform Fisher’s exact test by going to <code>Analyze</code> -&gt; <code>Descriptive Statistics</code> -&gt; <code>Crosstabs</code>. Select the <code>Group</code> variable as the <code>Row(s)</code> and the <code>Complication</code> variable as the <code>Column(s)</code>. Click on <code>Statistics</code> and check the box <code>Chi_square</code>. Click on <code>Exact Tests</code> and check the box <code>Exact</code>. Click <code>OK</code> to run the test.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 6">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -468,24 +456,73 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In a clinical trial in which a total of 100 patients are allocated to two treatments A and B by simple randomization (tossing a coin for each new patient). What is the probability that the difference between the numbers of patients in the two treatment groups exceeds 20? (Hint: the number of individuals in one treatment group (for example A) follows a Binomial distribution).</p>
+<p>Based on the results of Fisher’s exact test, can we conclude that there is a statistically significant difference in the proportion of post-surgical complications between smokers and non-smokers?</p>
 </div>
 </div>
 </section>
-<section id="normal-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="normal-distribution">Normal Distribution</h2>
-<p>Suppose that we want to calculate the probability that a randomly selected individual has a weight less than or equal to 80 kg, assuming that the distribution of weight in the population follows a normal distribution with mean 72 kg and standard deviation 10 kg.</p>
-<p>To calculate this probability, we first need to <strong>standardize</strong> the value using the formula:</p>
-<p><span class="math display">\[
-Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
-\]</span></p>
-<p>where:</p>
-<ul>
-<li><strong><code>x</code></strong> is the value we want to standardize (in this case, 80 kg).</li>
-<li><strong><code>μ</code></strong> is the mean of the distribution (in this case, 72 kg).</li>
-<li><strong><code>σ</code></strong> is the standard deviation of the distribution (in this case, 10 kg).</li>
-</ul>
-<p>Using SPSS, we can then use the “Transform &gt; Compute Variable…” menu and the <code>CDF.NORMAL(z, mean, sd)</code> function to find the corresponding cumulative probability from the standard normal distribution by setting <code>z = 0.8</code>, <code>mean = 0</code> and <code>sd = 1</code>.</p>
+</section>
+<section id="vaccine-side-effects-across-age-groups" class="level2">
+<h2 class="anchored" data-anchor-id="vaccine-side-effects-across-age-groups">Vaccine side effects across age groups</h2>
+<p>A study was conducted to investigate whether the occurrence of vaccine side effects differs across age groups. Researchers categorized side effects into three types: none, mild, and severe. The study participants were divided into three age groups: 18–39, 40–59, and 60+, and data was collected on the type of side effect experienced by individuals in each group.</p>
+<p>The research objective was to determine whether the distribution of side effects is consistent across these age groups.</p>
+<p>The data is summarized in the following contingency table:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Age Group</th>
+<th>None</th>
+<th>Mild</th>
+<th>Severe</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>18–39</td>
+<td>50</td>
+<td>30</td>
+<td>10</td>
+<td>90</td>
+</tr>
+<tr class="even">
+<td>40–59</td>
+<td>40</td>
+<td>40</td>
+<td>20</td>
+<td>100</td>
+</tr>
+<tr class="odd">
+<td>60+</td>
+<td>30</td>
+<td>50</td>
+<td>40</td>
+<td>120</td>
+</tr>
+<tr class="even">
+<td>Total</td>
+<td>120</td>
+<td>120</td>
+<td>70</td>
+<td>310</td>
+</tr>
+</tbody>
+</table>
+<section id="chi-square-test-of-homogeneity" class="level3">
+<h3 class="anchored" data-anchor-id="chi-square-test-of-homogeneity">Chi-square test of homogeneity</h3>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Create a new dataset in SPSS to enter the data from the contingency table.</p>
+</div>
+</div>
+<p>Using the new dataset, we can perform a chi-square test of homogeneity to determine whether the distribution of side effects is consistent across the three age groups. Go to <code>Analyze</code> -&gt; <code>Descriptive Statistics</code> -&gt; <code>Crosstabs</code>. Select the <code>Age Group</code> variable as the <code>Row(s)</code> and the <code>Side Effect</code> variable as the <code>Column(s)</code>. Click on <code>Statistics</code> and check the box <code>Chi_square</code>. Click <code>OK</code> to run the test.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 7">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -496,13 +533,12 @@ Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Over a 25 year period the mean height of adult males increased from 175.8 cm to 179.1 cm, but the standard deviation stayed at 5.84 cm. The minimum height requirement for men to join the police force is 172 cm. What proportion of men would be too short to become policemen at the beginning and end of the 25 year period, assuming that the height of adult males has a Normal distribution?</p>
+<p>Based on the results of the chi-square test, can we conclude that the distribution of vaccine side effects is consistent across the three age groups?</p>
 </div>
 </div>
-</section>
-</section>
-<section id="part-3---some-conceptual-questions" class="level1">
-<h1>Part 3 - Some conceptual questions</h1>
+<section id="checking-of-assumptions-1" class="level4">
+<h4 class="anchored" data-anchor-id="checking-of-assumptions-1">Checking of assumptions</h4>
+<p>To use the chi-square test, the expected cell counts should be at least 5 for most cells.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 8">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -513,13 +549,25 @@ Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Imagine we have some observations on blood pressure and calculate the mean, standard deviation, median and IQR. How do these measures change if all observations are</p>
-<ol type="a">
-<li>increased by 10</li>
-<li>decreased by their mean</li>
-<li>multiplied by 10</li>
-<li>divided by their standard deviation</li>
-</ol>
+<p>Are the expected cell counts greater than 5 for the different cells in the contingency table?</p>
+</div>
+</div>
+</section>
+<section id="post-hoc-pairwise-comparisons" class="level4">
+<h4 class="anchored" data-anchor-id="post-hoc-pairwise-comparisons">Post-hoc pairwise comparisons</h4>
+<p>Finally, we are interested in determining which age groups have significantly different distributions of side effects. We start by comparing the first two age groups (18–39 and 40–59). Assuming the name of the age group variable is <code>Age_Group</code> and the three age groups are coded as 1, 2, and 3, we can filter out the third age group (60+) by going to <code>Data</code> -&gt; <code>Select Cases</code>. Select <code>If condition is satisfied</code> and enter the condition <code>Age_Group &lt; 3</code>. Click <code>OK</code> to filter the data.</p>
+<p>Now that the data is filtered, we can perform a chi-square test for the subset of the data corresponding to the first two age groups by repeating the steps described above. Manually adjust the p-value for multiple comparisons using the Bonferroni correction.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Perform the pairwise comparison between the other two pairs of age groups (40–59 and 60+, 18–39 and 60+) using the same approach.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 9">
@@ -532,14 +580,38 @@ Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Two fair dice are rolled, the results are X1 and X2.</p>
-<ol type="a">
-<li>What is the probability Prob(X1=X2)?</li>
-<li>What is the expected value E(X1), and the standard deviation SD(X1)?</li>
-<li>Give the expected value and the variance of X1+X2 and of X1-X2.</li>
+<p>Based on the results of the pairwise comparisons, which age groups have significantly different distributions of side effects?</p>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section id="part-2-analysis-of-paired-continous-data" class="level1">
+<h1>Part 2: Analysis of paired continous data</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this part of the lab, we will analyze paired data on pocket depth before and after an intervention. Pocket depth refers to the depth of the gum pockets around teeth, measured using a periodontal probe. It is an important indicator of periodontal health. Healthy gums typically have pocket depths less than 3 mm, while deeper pockets may indicate conditions such as gingivitis or periodontitis.</p>
+<p>The dataset <code>pockets_paired.sav</code>, available from the Datasets menu, contains the following columns:</p>
+<ul>
+<li><code>subjectID</code>: Unique identifier for each participant</li>
+<li><code>pocket_depth_before</code>: Average pocket depth (in mm) measured before the intervention</li>
+<li><code>pocket_depth_after</code>: Average pocket depth (in mm) measured after the intervention</li>
+</ul>
+<p>The objective is to determine whether the intervention significantly reduces pocket depth. We will apply three statistical methods to analyze the paired data:</p>
+<ol type="1">
+<li>Paired t-test</li>
+<li>Sign test</li>
+<li>Wilcoxon signed-rank test</li>
 </ol>
-</div>
-</div>
+<section id="paired-t-test" class="level3">
+<h3 class="anchored" data-anchor-id="paired-t-test">Paired t-test</h3>
+<p>We start by performing a paired t-test to compare the average pocket depth before and after the intervention. To conduct this analysis in SPSS, follow these steps:</p>
+<ol type="1">
+<li><strong>Perform the Test</strong>: Go to <code>Analyze</code> &gt; <code>Compare Means</code> &gt; <code>Paired-Samples T Test</code>.</li>
+<li><strong>Select Variables</strong>: Move <code>pocket_depth_before</code> and <code>pocket_depth_after</code> to the <code>Paired Variables</code> box.</li>
+<li><strong>Run the Test</strong>: Click <code>OK</code> to run the analysis.</li>
+</ol>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 10">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -550,13 +622,18 @@ Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>There are two hospitals in town. On average 45 deliveries take place each day in the larger hospital, and 15 in the smaller. The probability of a baby being a boy is about 0.52, and the probability of twins is about 0.012. On any day, which hospital is more likely</p>
-<ol type="a">
-<li>to have a set of twins delivered</li>
-<li>to have more than 60 % of babies being boys?</li>
+<p>Based on the results of the paired t-test, can we conclude that the intervention significantly reduces pocket depth?</p>
+</div>
+</div>
+<section id="checking-of-assumptions-2" class="level4">
+<h4 class="anchored" data-anchor-id="checking-of-assumptions-2">Checking of assumptions</h4>
+<p>To determine whether it is appropriate to apply the paired t-test to these data, we need to verify that the differences in pocket depth before and after the intervention are normally distributed. We can visually inspect the distribution of differences using a histogram.</p>
+<p>First, we need to create a new variable that calculates the difference between the two measurements. In SPSS, a new variable can be created by navigating to <code>Transform</code> &gt; <code>Compute Variable</code>. Enter a name for the new variable (e.g., <code>diff</code>) in the <code>Target Variable</code> field and enter the expression <code>pocket_depth_after - pocket_depth_before</code> in the <code>Numeric Expression</code> field. Then, click <code>OK</code> to create the new variable.</p>
+<p>Next, we can create a histogram of the differences in pocket depth to visually assess the normality of the distribution by following these steps:</p>
+<ol type="1">
+<li>Go to <code>Graphs</code> &gt; <code>Legacy Dialogs</code> &gt; <code>Histogram</code>.</li>
+<li>Select the <code>diff</code> variable as the <code>Variable</code> and click <code>OK</code>.</li>
 </ol>
-</div>
-</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 11">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -567,10 +644,110 @@ Z = \frac{x - \mu}{\sigma} = \frac{80-72}{10} = 0.8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The probability of a baby being a boy is 0.52. For six women delivering consecutively in the same labour ward on one day, which of the following exact sequences of boys and girls is most likely and which least likely?</p>
-<p>GBGBGB</p>
-<p>BBBGGG</p>
-<p>GBBBBB</p>
+<p>Based on the histogram, do the differences in pocket depth appear to be approximately normally distributed?</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sign-test-and-wilcoxon-signed-rank-test" class="level3">
+<h3 class="anchored" data-anchor-id="sign-test-and-wilcoxon-signed-rank-test">Sign test and Wilcoxon signed-rank test</h3>
+<p>The sign test is a non-parametric test used to compare two related samples. It is based on the signs of the differences between the pairs of observations. We will apply the sign test to the pocket depth data to determine whether the intervention has a significant effect.</p>
+<p>The Wilcoxon signed-rank test is another non-parametric test used to compare two related samples. It is based on the ranks of the absolute differences between the pairs of observations. In this case, the sign test is more appropriate because the Wilcoxon signed-rank test requires the assumption of symmetry in the distribution of differences, whereas the previously constructed histogram suggests that the distribution of these differences is left-skewed.</p>
+<p>To perform the sign test and the Wilcoxon signed-rank test in SPSS, follow these steps:</p>
+<ol type="1">
+<li><strong>Perform the Test</strong>: <code>Nonparametric Tests</code> &gt; <code>Legacy Dialogs</code> &gt; <code>2 Related Samples</code>.</li>
+<li><strong>Select Variables</strong>: Move <code>pocket_depth_before</code> and <code>pocket_depth_after</code> to the <code>Test Pairs</code> box.</li>
+<li><strong>Run the Test</strong>: Check the <code>Sign</code> box as well as the <code>Wilcoxon</code> box and click <code>OK</code> to run the analysis.</li>
+</ol>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 12">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Question 12
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Based on the results of the sign test, can we conclude that the intervention significantly reduces pocket depth?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 13">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Question 13
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Based on the results of the Wilcoxon signed-rank test, can we conclude that the intervention significantly reduces pocket depth?</p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="part-3-analysis-of-paired-dichotomous-data" class="level1">
+<h1>Part 3: Analysis of paired dichotomous data</h1>
+<p>In this part of the lab, we will analyze paired dichotomous data from a study investigating the skin response to two substances: <strong>dinitrochlorobenzene (DNCB)</strong>, a contact allergen, and <strong>croton oil</strong>, a skin irritant. The objective is to determine whether the proportion of patients with a negative response to DNCB is the same as the proportion with a negative response to croton oil.</p>
+<p>The data, summarized in the following table, represents the results of simultaneous skin reaction tests on 173 patients with skin cancer:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>DNCB +ve</th>
+<th>DNCB -ve</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Croton oil +ve</strong></td>
+<td>81</td>
+<td>23</td>
+<td>104</td>
+</tr>
+<tr class="even">
+<td><strong>Croton oil -ve</strong></td>
+<td>48</td>
+<td>21</td>
+<td>69</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td>129</td>
+<td>44</td>
+<td>173</td>
+</tr>
+</tbody>
+</table>
+<p>Because the data are paired, we will use the McNemar test to compare the proportions of positive and negative responses to DNCB and croton oil.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Create a new dataset in SPSS to enter the data from the contingency table.</p>
+</div>
+</div>
+<p>Using the data entered in SPSS, we can perform the McNemar test to compare the proportions of positive and negative responses to DNCB and croton oil. To conduct this analysis in SPSS, go to <code>Analyze</code> &gt; <code>Descriptive Statistics</code> &gt; <code>Crosstabs</code>. Move the variables <code>DNCB</code> and <code>Croton_oil</code> to the <code>Row(s)</code> and <code>Column(s)</code> boxes. In the <code>Statistics</code> dialog box, check the <code>McNemar</code> box, uncheck the <code>Chi-square</code> box, and click <code>Continue</code>. Then, click <code>OK</code> to run the analysis.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 14">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Question 14
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Based on the results of the McNemar test, can we conclude that there is a significant difference in the proportions of patients with a negative response to DNCB and croton oil? If so, can you determine which substance is associated with a higher proportion of negative responses?</p>
 </div>
 </div>
 

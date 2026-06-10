@@ -11,6 +11,9 @@ project:
     - lab2_answers.qmd
     - R_lab3.qmd
     - SPSS_lab3.qmd
+    - lab3_answers.qmd
+    - R_lab4.qmd
+    - SPSS_lab4.qmd
   resources:
     - "/datasets"
 
@@ -41,12 +44,20 @@ website:
             href: R_lab3.qmd
           - text: "SPSS lab"
             href: SPSS_lab3.qmd
+      - text: "Day 4"
+        menu:
+          - text: "R lab"
+            href: R_lab4.qmd
+          - text: "SPSS lab"
+            href: SPSS_lab4.qmd
       - text: "Answers"
         menu:
           - text: "Lab 1"
             href: lab1_answers.qmd
           - text: "Lab 2"
             href: lab2_answers.qmd
+          - text: "Lab 3"
+            href: lab3_answers.qmd
       - text: "Datasets"
         menu:
           - text: "lowbwt.sav"

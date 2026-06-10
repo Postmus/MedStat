@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Medical Statistics – Answers lab 1 – Medical Statistics</title>
+<title>Medical Statistics – Answers lab 3 – Medical Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -259,18 +259,37 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1---descriptive-statistics" id="toc-part-1---descriptive-statistics" class="nav-link active" data-scroll-target="#part-1---descriptive-statistics">Part 1 - Descriptive statistics</a></li>
-  <li><a href="#part-2---probability-calculations-for-random-variables" id="toc-part-2---probability-calculations-for-random-variables" class="nav-link" data-scroll-target="#part-2---probability-calculations-for-random-variables">Part 2 - Probability calculations for random variables</a></li>
-  <li><a href="#part-3---some-conceptual-questions" id="toc-part-3---some-conceptual-questions" class="nav-link" data-scroll-target="#part-3---some-conceptual-questions">Part 3 - Some conceptual questions</a></li>
+  <li><a href="#part-1-independent-samples-t-test-and-mann-whitney-u-test" id="toc-part-1-independent-samples-t-test-and-mann-whitney-u-test" class="nav-link active" data-scroll-target="#part-1-independent-samples-t-test-and-mann-whitney-u-test">Part 1: Independent Samples t-test and Mann-Whitney U Test</a>
+  <ul class="collapse">
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory data analysis</a></li>
+  <li><a href="#independent-samples-t-test" id="toc-independent-samples-t-test" class="nav-link" data-scroll-target="#independent-samples-t-test">Independent samples t-test</a></li>
+  <li><a href="#checking-of-assumptions" id="toc-checking-of-assumptions" class="nav-link" data-scroll-target="#checking-of-assumptions">Checking of assumptions</a></li>
+  <li><a href="#confidence-interval-for-the-mean-difference" id="toc-confidence-interval-for-the-mean-difference" class="nav-link" data-scroll-target="#confidence-interval-for-the-mean-difference">95% Confidence Interval for the mean difference</a></li>
+  <li><a href="#mann-whitney-u-test" id="toc-mann-whitney-u-test" class="nav-link" data-scroll-target="#mann-whitney-u-test">Mann-Whitney U Test</a></li>
+  </ul></li>
+  <li><a href="#part-2-one-way-anova-and-kruskal-wallis-test" id="toc-part-2-one-way-anova-and-kruskal-wallis-test" class="nav-link" data-scroll-target="#part-2-one-way-anova-and-kruskal-wallis-test">Part 2: One-Way ANOVA and Kruskal-Wallis Test</a>
+  <ul class="collapse">
+  <li><a href="#explaratory-data-analysis" id="toc-explaratory-data-analysis" class="nav-link" data-scroll-target="#explaratory-data-analysis">Explaratory data analysis</a></li>
+  <li><a href="#one-way-anova" id="toc-one-way-anova" class="nav-link" data-scroll-target="#one-way-anova">One-way ANOVA</a></li>
+  <li><a href="#post-hoc-tests" id="toc-post-hoc-tests" class="nav-link" data-scroll-target="#post-hoc-tests">Post-hoc tests</a></li>
+  <li><a href="#kruskal-wallis-test" id="toc-kruskal-wallis-test" class="nav-link" data-scroll-target="#kruskal-wallis-test">Kruskal-Wallis Test</a></li>
+  </ul></li>
+  <li><a href="#part-3-unguided-exercises" id="toc-part-3-unguided-exercises" class="nav-link" data-scroll-target="#part-3-unguided-exercises">Part 3: Unguided exercises</a>
+  <ul class="collapse">
+  <li><a href="#effect-of-hypertension-on-birth-weight" id="toc-effect-of-hypertension-on-birth-weight" class="nav-link" data-scroll-target="#effect-of-hypertension-on-birth-weight">Effect of hypertension on birth weight</a></li>
+  <li><a href="#example-solution" id="toc-example-solution" class="nav-link" data-scroll-target="#example-solution">Example solution</a></li>
+  <li><a href="#comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients" id="toc-comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients" class="nav-link" data-scroll-target="#comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients">Comparing red cell folate levels across ventilation strategies in cardiac bypass patients</a></li>
+  <li><a href="#example-solution-1" id="toc-example-solution-1" class="nav-link" data-scroll-target="#example-solution-1">Example solution</a></li>
+  </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab1_answers.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab3_answers.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Medical Statistics – Answers lab 1</h1>
+<h1 class="title">Medical Statistics – Answers lab 3</h1>
 </div>
 
 
@@ -287,13 +306,15 @@ window.Quarto = {
 </header>
 
 
-<section id="part-1---descriptive-statistics" class="level1">
-<h1>Part 1 - Descriptive statistics</h1>
+<section id="part-1-independent-samples-t-test-and-mann-whitney-u-test" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-independent-samples-t-test-and-mann-whitney-u-test">Part 1: Independent Samples t-test and Mann-Whitney U Test</h2>
+<section id="exploratory-data-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory data analysis</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lab1_answers_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lab3_answers_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -308,7 +329,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on the shape of the histogram, determine which summary statistics are more appropriate to report.</p>
+<p>Based on the boxplot, do you expect the smoking status to have an effect on birth weight?</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 1">
@@ -321,7 +342,25 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>From the histogram, it follows that the distribution of age is right-skewed. In such a situation, we would generally prefer reporting median [IQR] or median [Q1, Q3] over mean (SD).</p>
+<p>Based on the boxplot, it appears that mothers who smoked have lower birth weights on average compared to those who did not smoke. This suggests that smoking status may indeed have an effect on birth weight.</p>
+</div>
+</div>
+</section>
+<section id="independent-samples-t-test" class="level3">
+<h3 class="anchored" data-anchor-id="independent-samples-t-test">Independent samples t-test</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  bwt by smoke
+t = 2.6336, df = 187, p-value = 0.009156
+alternative hypothesis: true difference in means between group no and group yes is not equal to 0
+95 percent confidence interval:
+  70.69274 492.73382
+sample estimates:
+ mean in group no mean in group yes 
+         3054.957          2773.243 </code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 2">
@@ -334,7 +373,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Calculate the mean, standard deviation, median, and IQR for the variable <code>lwt</code>. Additionally, create a histogram to determine the shape of its distribution and decide which summary measures are most appropriate to report.</p>
+<p>Based on the results of the independent samples t-test, is there a statistically significant difference in birth weight between mothers who smoked and those who did not?</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 2">
@@ -347,17 +386,19 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>We start by making a histogram of the variable <code>lwt</code>:</p>
+<p>The p-value of the independent samples t-test (p=0.009) is less than 0.05, which indicates that there is a statistically significant difference in the mean birth weight between mothers who smoked and those who did not.</p>
+</div>
+</div>
+</section>
+<section id="checking-of-assumptions" class="level3">
+<h3 class="anchored" data-anchor-id="checking-of-assumptions">Checking of assumptions</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lab1_answers_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lab3_answers_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
-</div>
-</div>
-<p>From the histogram, it follows that the distribution of lwt is right-skewed. We therefore prefer reporting median [Q1, Q3]. The median [Q1, Q3] is equal to 121 [110, 140].</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 3">
@@ -370,7 +411,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Calculate the frequencies and percentages for the variable history of hypertension (<code>ht</code>)</p>
+<p>Do the histograms indicate that the birth weight data are approximately normally distributed for both groups?</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 3">
@@ -383,27 +424,15 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>ht</th>
-<th>frequency</th>
-<th>percentage</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>0</td>
-<td>177</td>
-<td>93.7%</td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td>12</td>
-<td>6.3%</td>
-</tr>
-</tbody>
-</table>
+<p>Based on the histograms, the distributions in both groups appear reasonably normal for the purposes of conducting an independent samples t-test.</p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+       Df F value Pr(&gt;F)
+group   1  1.3901 0.2399
+      187               </code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 4">
@@ -416,7 +445,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Create a bar chart for the variable <code>ht</code> to visualize the frequency of mothers with a history of hypertension.</p>
+<p>Based on Levene’s test, does the assumption of equal variances hold?</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 4">
@@ -429,20 +458,90 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lab1_answers_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
+<p>The p-value of Levene’s test (p = 0.2399) is greater than 0.05, indicating insufficient evidence to reject the null hypothesis of equal variances. Therefore, we can assume that the assumption of equal variances holds.</p>
 </div>
 </div>
 </section>
-<section id="part-2---probability-calculations-for-random-variables" class="level1">
-<h1>Part 2 - Probability calculations for random variables</h1>
+<section id="confidence-interval-for-the-mean-difference" class="level3">
+<h3 class="anchored" data-anchor-id="confidence-interval-for-the-mean-difference">95% Confidence Interval for the mean difference</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  smoke  mean    sd     n
+  &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+1 no    3055.  752.   115
+2 yes   2773.  660.    74</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Based on these summary statistics, calculate the pooled standard deviation and the standard error of the mean difference. Then compute the 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<section id="calculations-for-birth-weight-difference" class="level3">
+<h3 class="anchored" data-anchor-id="calculations-for-birth-weight-difference">Calculations for Birth Weight Difference</h3>
+<ol type="1">
+<li><p><strong>Pooled Standard Deviation</strong><br>
+The pooled standard deviation is calculated using the formula:<br>
+<span class="math display">\[
+s_p = \sqrt{\frac{(n_{no} - 1) \cdot s_{no}^2 + (n_{yes} - 1) \cdot s_{yes}^2}{n_{no} + n_{yes} - 2}}
+\]</span> Substituting the values:<br>
+<span class="math display">\[
+s_p = \sqrt{\frac{(115 - 1) \cdot 752^2 + (74 - 1) \cdot 660^2}{115 + 74 - 2}} = 717.49
+\]</span></p></li>
+<li><p><strong>Standard Error of the Mean Difference</strong><br>
+The standard error (SE) of the mean difference is calculated as:<br>
+<span class="math display">\[
+SE = s_p \cdot \sqrt{\frac{1}{n_{no}} + \frac{1}{n_{yes}}}
+\]</span> Substituting the values:<br>
+<span class="math display">\[
+SE = 717.49 \cdot \sqrt{\frac{1}{115} + \frac{1}{74}} = 106.93
+\]</span></p></li>
+<li><p><strong>Mean Difference</strong><br>
+The difference in means between the groups is:<br>
+<span class="math display">\[
+\text{Mean Difference} = \bar{X}_{no} - \bar{X}_{yes} = 3055 - 2773 = 282
+\]</span></p></li>
+<li><p><strong>95% Confidence Interval</strong><br>
+To construct the exact 95% CI, we need the 97.5th percentile from the t-distribution with <span class="math inline">\(115 + 74 - 2 = 187\)</span> degrees of freedom. Since the table in Appendix B does not go beyond 150 df, we use 1.96 (the value from the standard normal distribution) as an approximation. The confidence interval is then calculated as:<br>
+<span class="math display">\[
+\text{CI} = \text{Mean Difference} \pm 1.96 \cdot SE
+\]</span> Substituting the values:<br>
+<span class="math display">\[
+\text{CI} = 282 \pm 1.96 \cdot 106.93 = (72.43, 491.57)
+\]</span></p></li>
+</ol>
+</section>
+<section id="results" class="level3">
+<h3 class="anchored" data-anchor-id="results">Results</h3>
+<ul>
+<li><strong>Pooled Standard Deviation:</strong> 717.49<br>
+</li>
+<li><strong>Standard Error of the Mean Difference:</strong> 106.93<br>
+</li>
+<li><strong>95% Confidence Interval for the Mean Difference:</strong> (72.43, 491.57)</li>
+</ul>
+</section>
+</div>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 5">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -453,7 +552,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The probability of being blood group B is 0.08. What is the probability that if 500 ml of blood is taken from each of 100 unrelated blood donors fewer than 1,500 ml of group B blood will be obtained?</p>
+<p>Does your manually calculated 95% confidence interval for the mean difference in birth weight between the two groups agree with the one provided in the output of the <code>t.test()</code> function?</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 5">
@@ -466,7 +565,20 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If we let the random variable X denote the number of blood donors of blood group B, it follows from the text in the exercise that X ~ Bin(0.08, 100). Fewer than 1,500 ml of group B blood will be obtained if X is equal to or smaller than 2. We can therefore answer this question by calculating <span class="math inline">\(P(X \leq 2)\)</span> using the cumulative distribution function of the binomial distribution, which gives a probability of 0.01 or 1%.</p>
+<p>The manually calculated 95% confidence interval for the mean difference in birth weight between mothers who smoked and those who did not is (72.43, 491.57), is approximately equal to the one provided in the output of the <code>t.test()</code> function, wich is (70.69, 492.73). The latter is marginally wider due to the use of the 97.5 the percentile of the t-distribution with 187 degrees of freedom (1.97) rather than the standard normal distribution (1.96). Additionally, small differences arise from rounding in the manual calculation.</p>
+</div>
+</div>
+</section>
+<section id="mann-whitney-u-test" class="level3">
+<h3 class="anchored" data-anchor-id="mann-whitney-u-test">Mann-Whitney U Test</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  bwt by smoke
+W = 5243.5, p-value = 0.007109
+alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 6">
@@ -479,7 +591,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In a clinical trial in which a total of 100 patients are allocated to two treatments A and B by simple randomization (tossing a coin for each new patient). What is the probability that the difference between the numbers of patients in the two treatment groups exceeds 20? (Hint: the number of individuals in one treatment group (for example A) follows a Binomial distribution).</p>
+<p>What are the null and alternative hypotheses for the Mann-Whitney U test, and what does the p-value indicate about the difference in birth weight between mothers who smoked and those who did not?</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 6">
@@ -492,7 +604,22 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If we let the random variable X denote the number of individuals in treatment group A, we get a difference between the number of patients in the two treatment groups of over 20 if <span class="math inline">\(X &lt; 40\)</span> or if <span class="math inline">\(X &gt; 60\)</span>. Using the cumulative distribution function of the binomial distribution, these probabilities are equal to <span class="math inline">\(P(X &lt; 40) = 0.0176\)</span> and <span class="math inline">\(P(X &gt; 60) = 1 - P(X \leq 60) = 0.0176\)</span>. The probability that the difference between the number of patients in the two treatment groups exceeds 20 is therefore equal to 2*0.0176 = 0.035 or 3.5%</p>
+<p>The null hypothesis for the Mann-Whitney U test is that there is no difference in the median birth weight between mothers who smoked and those who did not. The alternative hypothesis is that there is a difference in median birth weight between the two groups. The p-value of the test is 0.0071, which is less than 0.05. Therefore, we reject the null hypothesis and conclude that there is a statistically significant difference in median birth weight between mothers who smoked and those who did not.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="part-2-one-way-anova-and-kruskal-wallis-test" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-one-way-anova-and-kruskal-wallis-test">Part 2: One-Way ANOVA and Kruskal-Wallis Test</h2>
+<section id="explaratory-data-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="explaratory-data-analysis">Explaratory data analysis</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab3_answers_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 7">
@@ -505,7 +632,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Over a 25 year period the mean height of adult males increased from 175.8 cm to 179.1 cm, but the standard deviation stayed at 5.84 cm. The minimum height requirement for men to join the police force is 172 cm. What proportion of men would be too short to become policemen at the beginning and end of the 25 year period, assuming that the height of adult males has a Normal distribution?</p>
+<p>What does the boxplot suggest about the distribution of birth weights across different ethnic groups?</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 7">
@@ -518,12 +645,21 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>At the start, the minimum height was <span class="math inline">\((172 - 175.8) / 5.84 = -0.65\)</span> standard deviations from the mean. From the cumulative distribution function of the standard normal distribution, the proportion of men smaller than this would be about <span class="math inline">\(26\%\)</span>. At the end of the <span class="math inline">\(25\)</span>-year period, the minimum height was <span class="math inline">\((172 - 179.1) / 5.84 = -1.22\)</span> standard deviations from the mean. From the cumulative distribution function of the standard normal distribution, the proportion of men below the minimum is now about <span class="math inline">\(11\%\)</span>. Thus, the proportion of ineligible men has more than halved.</p>
+<p>The boxplot suggests that there may be differences in birth weight across the three ehtnic groups. More specifically, The mean birth weight appears to be higher for the Causasian group compared to the Afro-American and Asian groups.</p>
 </div>
 </div>
 </section>
-<section id="part-3---some-conceptual-questions" class="level1">
-<h1>Part 3 - Some conceptual questions</h1>
+<section id="one-way-anova" class="level3">
+<h3 class="anchored" data-anchor-id="one-way-anova">One-way ANOVA</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>             Df   Sum Sq Mean Sq F value  Pr(&gt;F)   
+ethnicity     2  5070608 2535304   4.972 0.00788 **
+Residuals   186 94846445  509927                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 8">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -534,13 +670,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Imagine we have some observations on blood pressure and calculate the mean, standard deviation, median and IQR. How do these measures change if all observations are</p>
-<ol type="a">
-<li>increased by 10</li>
-<li>decreased by their mean</li>
-<li>multiplied by 10</li>
-<li>divided by their standard deviation</li>
-</ol>
+<p>What conclusions can be drawn from the results of the one-way ANOVA?</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 8">
@@ -553,12 +683,24 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ol type="a">
-<li>Standard deviation and IQR remain the same, mean and median increase by 10.</li>
-<li>Standard deviation and IQR remain the same, mean and median decrease by the mean (the mean becomes zero).</li>
-<li>All are multiplied by 10.</li>
-<li>All are divided by standard deviation; the standard deviation becomes one.</li>
-</ol>
+<p>The p-value from the one-way ANOVA (p=0.0079) is less than 0.05, indicating that there is at least one ethic group with a significantly different birth weight.</p>
+</div>
+</div>
+</section>
+<section id="post-hoc-tests" class="level3">
+<h3 class="anchored" data-anchor-id="post-hoc-tests">Post-hoc tests</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pairwise comparisons using t tests with pooled SD 
+
+data:  lowbwt$bwt and lowbwt$ethnicity 
+
+              Caucasian Afro-American
+Afro-American 0.048     -            
+Asian         0.027     1.000        
+
+P value adjustment method: bonferroni </code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 9">
@@ -571,12 +713,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Two fair dice are rolled, the results are X1 and X2.</p>
-<ol type="a">
-<li>What is the probability Prob(X1=X2)?</li>
-<li>What is the expected value E(X1), and the standard deviation SD(X1)?</li>
-<li>Give the expected value and the variance of X1+X2 and of X1-X2.</li>
-</ol>
+<p>What conclusions can be drawn from the post-hoc comparisons?</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 9">
@@ -589,19 +726,19 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Question (a)</strong></p>
-<p>Assume the dice have different colors, red (R) and blue (B). <span class="math inline">\(P(R = 1) = \frac{1}{6}\)</span>, <span class="math inline">\(P(R = 2) = \frac{1}{6}\)</span>, etc. The outcomes of Red and Blue are independent of each other. So for example: <span class="math inline">\(P(R = 1 \text{ and } B = 4) = P(R = 1) \times P(B = 4) = \frac{1}{6} \times \frac{1}{6} = \frac{1}{36}\)</span>.</p>
-<p>This is true for all possible combinations of outcomes. There are only <span class="math inline">\(6\)</span> possible outcomes with equal results: <span class="math inline">\(R = 1\)</span> and <span class="math inline">\(B = 1\)</span>, <span class="math inline">\(R = 2\)</span> and <span class="math inline">\(B = 2\)</span>, and so on. In total: <span class="math inline">\(\text{Prob} = 6 \cdot (\frac{1}{6} \cdot \frac{1}{6}) = 6 \times \frac{1}{36} = \frac{1}{6}\)</span>.</p>
-<p><strong>Question (b)</strong></p>
-<p>Using the formula on page 3.3 of the syllabus:</p>
-<p><span class="math inline">\(E(X_1) = \frac{1}{6} \cdot (1 + 2 + 3 + 4 + 5 + 6) = 3.5\)</span></p>
-<p><span class="math inline">\(\text{Var}(X_1) = \frac{1}{6} \cdot [(1 - 3.5)^2 + (2 - 3.5)^2 + \ldots] = 2.92\)</span></p>
-<p><span class="math inline">\(\text{SD} = \sqrt{2.92} = 1.71\)</span></p>
-<p><strong>Question (c)</strong> Using the calculation rules on page 3.5 of the syllabus:</p>
-<p><span class="math inline">\(E(X_1 + X_2) = E(X_1) + E(X_2) = 3.5 + 3.5 = 7\)</span></p>
-<p><span class="math inline">\(\text{Var}(X_1 + X_2) = 2.92 + 2.92 = 5.84\)</span></p>
-<p><span class="math inline">\(E(X_1 - X_2) = 0\)</span></p>
-<p><span class="math inline">\(\text{Var}(X_1 - X_2) = 2.92 + 2.92 = 5.84\)</span></p>
+<p>It follows from the post-hoc comparisons with the Bonferroni-adjusted p-values that the mean birth weight of Caucasian infants is significantly different from that of Afro-American infants (p=0.048) and Asian infants (p=0.027). There is no significant difference in mean birth weight between Afro-American and Asian infants (p=1).</p>
+</div>
+</div>
+</section>
+<section id="kruskal-wallis-test" class="level3">
+<h3 class="anchored" data-anchor-id="kruskal-wallis-test">Kruskal-Wallis Test</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Kruskal-Wallis rank sum test
+
+data:  bwt by ethnicity
+Kruskal-Wallis chi-squared = 8.5909, df = 2, p-value = 0.01363</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 10">
@@ -614,11 +751,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>There are two hospitals in town. On average 45 deliveries take place each day in the larger hospital, and 15 in the smaller. The probability of a baby being a boy is about 0.52, and the probability of twins is about 0.012. On any day, which hospital is more likely</p>
-<ol type="a">
-<li>to have a set of twins delivered</li>
-<li>to have more than 60 % of babies being boys?</li>
-</ol>
+<p>Are the results of the Kruskal-Wallis test consistent with the one-way ANOVA results?</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 10">
@@ -631,15 +764,46 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ol type="a">
-<li><p>The larger hospital, simply because there are more births. (This question is about an absolute number: a set of twins).</p></li>
-<li><p>The day-to-day variation in the proportion of boys will be greater in the smaller hospital, so it is more likely to have more than 60% of babies being boys on any day. (This question is about a relative number: 60% of the babies).</p></li>
-</ol>
-<p>To make the differences more clear: consider a very small hospital (only one delivery per day) and a very large hospital (1000 deliveries a day).</p>
-<ol type="a">
-<li><p>The probability that the delivery in the small hospital will concern twins equals 0.012. The same is true for each delivery in the larger hospital, but since we have 1000 deliveries, we expect 12 of them to concern twins.</p></li>
-<li><p>In the small hospital, the probability that the child is a boy is 0.52. If a boy is born, then 100% of the babies that day are boys. This will happen in 52% of the days. For the larger hospital, we expect to see 520 boys and 480 girls on an arbitrary day. Some days there will be more than 520 boys, and other days there will be fewer. However, the probability that more than 60% of the children (more than 600 out of 1000) will be boys is very small—for sure less than 0.52.</p></li>
-</ol>
+<p>The p-value from the Kruskal-Wallis test (p=0.014) is consistent with the one-way ANOVA results, indicating that there is at least one ethnic group with a significantly different median birth weight.</p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Kruskal-Wallis rank sum test
+
+data: x and group
+Kruskal-Wallis chi-squared = 8.5909, df = 2, p-value = 0.01
+
+                           Comparison of x by group                            
+                                 (Bonferroni)                                  
+Col Mean-|
+Row Mean |   Afro-Ame      Asian
+---------+----------------------
+   Asian |  -0.667476
+         |     1.0000
+         |
+Caucasia |  -2.380803  -2.337641
+         |     0.0518     0.0582
+
+alpha = 0.05
+Reject Ho if p &lt;= alpha</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$chi2
+[1] 8.590907
+
+$Z
+[1] -0.6674762 -2.3808031 -2.3376414
+
+$altP
+[1] 0.50446798 0.01727494 0.01940586
+
+$altP.adjusted
+[1] 1.00000000 0.05182482 0.05821758
+
+$comparisons
+[1] "Afro-American - Asian"     "Afro-American - Caucasian"
+[3] "Asian - Caucasian"        </code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 11">
@@ -652,10 +816,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The probability of a baby being a boy is 0.52. For six women delivering consecutively in the same labour ward on one day, which of the following exact sequences of boys and girls is most likely and which least likely?</p>
-<p>GBGBGB</p>
-<p>BBBGGG</p>
-<p>GBBBBB</p>
+<p>What conclusions can be drawn from Dunn’s test? Are these consistent with the post-hoc comparisons from the one-way ANOVA?</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled" title="Answer question 11">
@@ -668,11 +829,216 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>As the probability of a boy is slightly greater than the probability of a girl, the sequence with the most boys is most likely, which is the last sequence. The other two sequences are equally likely.</p>
+<p>Unlike the post-hoc comparisons from the one-way ANOVA, Dunn’s test with Bonferroni correction does not show statistically significant differences between any pair of groups at the 0.05 level. Although the adjusted p-values for Caucasian vs.&nbsp;Afro-American (p=0.052) and Caucasian vs.&nbsp;Asian (p=0.058) are close to 0.05, they do not reach statistical significance. This illustrates that non-parametric post-hoc tests can be more conservative than their parametric counterparts.</p>
 </div>
 </div>
+</section>
+</section>
+<section id="part-3-unguided-exercises" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-unguided-exercises">Part 3: Unguided exercises</h2>
+<section id="effect-of-hypertension-on-birth-weight" class="level3">
+<h3 class="anchored" data-anchor-id="effect-of-hypertension-on-birth-weight">Effect of hypertension on birth weight</h3>
+<p>Examine the effect of history of hypertension on birth weight by performing the following steps:</p>
+<ul>
+<li>Create a boxplot to visualize the distribution of birth weights by history of hypertension</li>
+<li>Perform an independent samples t-test to compare the mean birth weights between mothers with and without a history of hypertension</li>
+<li>Check the assumptions of the t-test, including normality and homogeneity of variances</li>
+<li>If the assumptions of the t-test are violated, perform a Mann-Whitney U test as a non-parametric alternative</li>
+</ul>
+</section>
+<section id="example-solution" class="level3">
+<h3 class="anchored" data-anchor-id="example-solution">Example solution</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab3_answers_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  bwt by ht
+t = 2.0192, df = 187, p-value = 0.04489
+alternative hypothesis: true difference in means between group no and group yes is not equal to 0
+95 percent confidence interval:
+  10.02413 861.09734
+sample estimates:
+ mean in group no mean in group yes 
+         2972.311          2536.750 </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab3_answers_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+       Df F value Pr(&gt;F)
+group   1  1.2851 0.2584
+      187               </code></pre>
+</div>
+</div>
+<p><strong>Evaluation of the results</strong>: Although the p-value from the independent samples t-test suggests that there is no statistically significant difference in birth weight between mothers with and without a history of hypertension, the group sizes are highly imbalanced (177 vs.&nbsp;12). This imbalance reduces the reliability of the t-test results and may limit its power to detect true differences. Additionally, the small sample size in the hypertension group makes it harder to assess assumptions such as normality. To check the robustness of the findings, we also conduct the Mann-Whitney U test as a non-parametric alternative.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  bwt by ht
+W = 1350, p-value = 0.1169
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+</div>
+<p><strong>Overall conclusion</strong>: Both the independent samples t-test and the Mann-Whitney U test suggest that there is no statistically significant difference in birth weight between mothers with and without a history of hypertension. This consistency across methods supports the robustness of the findings, despite the imbalance in group sizes.</p>
+</section>
+<section id="comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients" class="level3">
+<h3 class="anchored" data-anchor-id="comparing-red-cell-folate-levels-across-ventilation-strategies-in-cardiac-bypass-patients">Comparing red cell folate levels across ventilation strategies in cardiac bypass patients</h3>
+<p>Twenty-two patients undergoing cardiac bypass surgery were randomized to one of three ventilation groups:</p>
+<ul>
+<li><strong>Group I</strong>: Received a 50% nitrous oxide and 50% oxygen mixture continuously for 24 hours</li>
+<li><strong>Group II</strong>: Received a 50% nitrous oxide and 50% oxygen mixture only during the operation</li>
+<li><strong>Group III</strong>: Received no nitrous oxide and a 35-50% oxygen mixture continuously for 24 hours</li>
+</ul>
+<p>The data file <code>ex5_6.sav</code> (available on Brightspace) contains the red cell folate levels for the three groups after 24 hours of ventilation. The aim of this study is to compare the three groups and test whether they have the same red cell folate levels.</p>
+<section id="tasks" class="level4">
+<h4 class="anchored" data-anchor-id="tasks">Tasks</h4>
+<ol type="1">
+<li><strong>Exploratory data analysis</strong> Create a boxplot to visualize the distribution of red cell folate levels by ventilation group. Based on this plot:
+<ul>
+<li>What are your first conclusions regarding the means and variances of the different groups?</li>
+</ul></li>
+<li><strong>Perform a one-way ANOVA</strong>:
+<ul>
+<li>Interpret the results</li>
+<li>Are the assumptions satisfied?</li>
+</ul></li>
+<li><strong>Try a log transformation on the data</strong>:
+<ul>
+<li>Perform another one-way ANOVA</li>
+<li>Are the assumptions satisfied after the transformation?</li>
+</ul></li>
+<li><strong>Determine which means differ</strong>:
+<ul>
+<li>Which means do you think differ?</li>
+<li>Explain your reasoning.</li>
+</ul></li>
+<li><strong>Try a non-parametric approach</strong>:
+<ul>
+<li>What are your conclusions from this method?</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="example-solution-1" class="level3">
+<h3 class="anchored" data-anchor-id="example-solution-1">Example solution</h3>
+<section id="exploratory-data-analysis-1" class="level4">
+<h4 class="anchored" data-anchor-id="exploratory-data-analysis-1">Exploratory data analysis</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab3_answers_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The groups seem to be different with respect to their means, but also with respect to their variation (range has different length)</p>
+</section>
+<section id="perform-a-one-way-anova-and-interpret-the-results.-are-the-conditions-satisfied" class="level4">
+<h4 class="anchored" data-anchor-id="perform-a-one-way-anova-and-interpret-the-results.-are-the-conditions-satisfied">Perform a one way ANOVA, and interpret the results. Are the conditions satisfied?</h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)  
+group        2  15516    7758   3.711 0.0436 *
+Residuals   19  39716    2090                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+      Df F value  Pr(&gt;F)  
+group  2  3.6413 0.04585 *
+      19                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>The ANOVA reveals significant results P= 0.044; this means that the null hypothesis of equal means in the three groups is rejected. However, according to the test of homogeneity of variances, the assumption of equal variances is violated (P-value = 0.044).</p>
+</section>
+<section id="try-a-log-transformation-on-the-data-and-perform-again-a-one-way-anova.-are-now-the-assumptions-satisfied" class="level4">
+<h4 class="anchored" data-anchor-id="try-a-log-transformation-on-the-data-and-perform-again-a-one-way-anova.-are-now-the-assumptions-satisfied">Try a log transformation on the data, and perform again a one-way ANOVA. Are now the assumptions satisfied?</h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)  
+group        2 0.1784 0.08922   3.539 0.0494 *
+Residuals   19 0.4790 0.02521                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+      Df F value Pr(&gt;F)
+group  2   1.889 0.1785
+      19               </code></pre>
+</div>
+</div>
+<p>The test of equal variances for the log-transformed data reveals that the assumption of equal variances can be made. Test results for the ANOVA: P-value = 0.049. This is on the boundary of significance. There is indication that at least one pair of groups have different means.</p>
+</section>
+<section id="which-means-do-differ-according-to-you-why" class="level4">
+<h4 class="anchored" data-anchor-id="which-means-do-differ-according-to-you-why">Which means do differ according to you? Why?</h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pairwise comparisons using t tests with pooled SD 
+
+data:  df$rcfl and df$group 
+
+        Group 1 Group 2
+Group 2 0.042   -      
+Group 3 0.464   1.000  
+
+P value adjustment method: bonferroni </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pairwise comparisons using t tests with pooled SD 
+
+data:  df$log_rcfl and df$group 
+
+        Group 1 Group 2
+Group 2 0.047   -      
+Group 3 0.597   1.000  
+
+P value adjustment method: bonferroni </code></pre>
+</div>
+</div>
+<p>From the paired comparisons with Bonferroni-corrections it appears that group1 and group 2 differ significantly with respect to their means (but on the boundary, P-value = 0.047).</p>
+<ol start="5" type="a">
+<li>Try a non-parametric approach on these data. What are now your conclusions?</li>
+</ol>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Kruskal-Wallis rank sum test
+
+data:  rcfl by group
+Kruskal-Wallis chi-squared = 4.1852, df = 2, p-value = 0.1234</code></pre>
+</div>
+</div>
+<p>The Kruskal-Wallis test gives P-value = 0.123, indicating that there are no significant differences between the three groups.</p>
+</section>
+<section id="caveat" class="level4">
+<h4 class="anchored" data-anchor-id="caveat">Caveat</h4>
+<p>In this example, the sample size is very limited, making it difficult — if not impossible — to verify whether the assumptions underlying the one-way ANOVA are met. The Kruskal-Wallis test is a good alternative in such cases.</p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
