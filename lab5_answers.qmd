@@ -1,0 +1,223 @@
+---
+title: "Medical Statistics - Answers lab 5"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-location: right
+  pdf:
+    toc: false
+execute:
+  warning: false
+  message: false
+  error: false
+  eval: true
+---
+
+## Introduction
+
+This answer page gives one complete set of answers for lab 5. The same numerical results should be obtained when the analyses are carried out in R or SPSS.
+
+The analyses use the Cleveland heart disease dataset and address the following research questions:
+
+* Does maximum heart rate achieved differ across chest pain types?
+* Is the presence of heart disease associated with sex?
+* Is the presence of heart disease associated with fasting blood sugar?
+
+## Exercise 1: Download and open the dataset
+
+The dataset contains 303 patients and 14 variables.
+
+```{r}
+library(haven)
+library(knitr)
+library(tableone)
+library(car)
+library(dunn.test)
+
+heart_data <- as.data.frame(read_sav("datasets/heart_disease_cleveland.sav"))
+
+# Convert labelled categorical variables to factors.
+labelled_vars <- vapply(heart_data, haven::is.labelled, logical(1))
+heart_data[labelled_vars] <- lapply(heart_data[labelled_vars], haven::as_factor)
+
+dim(heart_data)
+names(heart_data)
+```
+
+The variables `sex`, `cp`, `fbs`, `restecg`, `exang`, `slope`, `thal`, and `target` are categorical. The variable `ca` is also best treated as categorical for the baseline table, because it records the number of major vessels from 0 to 3.
+
+```{r}
+heart_data$ca <- factor(heart_data$ca)
+```
+
+## Exercise 2: Create a baseline characteristics table
+
+```{r}
+continuous_vars <- c("age", "trestbps", "chol", "thalach", "oldpeak")
+categorical_vars <- c("sex", "cp", "fbs", "restecg", "exang", "slope", "ca", "thal")
+all_vars <- c(continuous_vars, categorical_vars)
+
+table1 <- CreateTableOne(
+  vars = all_vars,
+  data = heart_data,
+  factorVars = categorical_vars
+)
+
+kable(
+  print(
+    table1,
+    nonnormal = "oldpeak",
+    printToggle = FALSE
+  )
+)
+```
+
+A suitable baseline table gives one summary format per variable. In the table above, most continuous variables are summarized using mean and standard deviation, `oldpeak` is summarized using median and interquartile range because it is clearly skewed, and categorical variables are summarized using counts and percentages.
+
+## Exercise 3: Analyze maximum heart rate across chest pain types
+
+Research question: *Does maximum heart rate achieved differ across chest pain types?*
+
+The outcome is `thalach`, and the grouping variable is `cp`.
+
+### Descriptive results
+
+```{r}
+boxplot(
+  thalach ~ cp,
+  data = heart_data,
+  xlab = "Chest pain type",
+  ylab = "Maximum heart rate achieved",
+  las = 2
+)
+```
+
+```{r}
+for (group in levels(heart_data$cp)) {
+  group_data <- heart_data$thalach[heart_data$cp == group]
+  n <- length(group_data)
+  mean_thalach <- mean(group_data)
+  se_thalach <- sd(group_data) / sqrt(n)
+  ci_thalach <- mean_thalach + c(-1, 1) * qt(0.975, df = n - 1) * se_thalach
+
+  cat(
+    group,
+    ": n =", n,
+    ", mean =", round(mean_thalach, 1),
+    ", 95% CI = [", round(ci_thalach[1], 1), ", ", round(ci_thalach[2], 1), "]\n",
+    sep = ""
+  )
+}
+```
+
+The mean maximum heart rate was lowest in the asymptomatic chest pain group.
+
+### One-way ANOVA
+
+```{r}
+anova_model <- aov(thalach ~ cp, data = heart_data)
+summary(anova_model)
+```
+
+The one-way ANOVA is statistically significant, $F(3, 299) = 17.41$, $p < 0.001$. This indicates that maximum heart rate achieved differs across chest pain types.
+
+### Assumption checks
+
+```{r}
+
+par(mfrow = c(2, 2))
+hist(heart_data$thalach[heart_data$cp == "Typical angina"],
+     main = "Typical angina", xlab = "Maximum heart rate")
+hist(heart_data$thalach[heart_data$cp == "Atypical angina"],
+     main = "Atypical angina", xlab = "Maximum heart rate")
+hist(heart_data$thalach[heart_data$cp == "Non-anginal pain"],
+     main = "Non-anginal pain", xlab = "Maximum heart rate")
+hist(heart_data$thalach[heart_data$cp == "Asymptomatic"],
+     main = "Asymptomatic", xlab = "Maximum heart rate")
+
+par(mfrow = c(1, 1))
+qqnorm(residuals(anova_model))
+qqline(residuals(anova_model))
+
+tapply(heart_data$thalach, heart_data$cp, sd)
+leveneTest(thalach ~ cp, data = heart_data)
+```
+
+The histograms and Q-Q plot can be used to assess whether the distributions are roughly compatible with ANOVA. There is no need to base this decision on a formal test of normality; with these sample sizes such tests are often not helpful for deciding which analysis to use. The group standard deviations are of a similar order of magnitude, and Levene's test does not show evidence against the equal variances assumption.
+
+### Post-hoc comparisons
+
+```{r}
+pairwise.t.test(
+  heart_data$thalach,
+  heart_data$cp,
+  p.adjust.method = "bonferroni",
+  pool.sd = TRUE
+)
+```
+
+Using Bonferroni-adjusted pairwise t-tests, the asymptomatic chest pain group has a significantly lower maximum heart rate than the typical angina group, the atypical angina group, and the non-anginal pain group. The other pairwise comparisons are not statistically significant after Bonferroni adjustment.
+
+### Kruskal-Wallis sensitivity analysis
+
+```{r}
+kruskal.test(thalach ~ cp, data = heart_data)
+
+dunn.test(
+  heart_data$thalach,
+  heart_data$cp,
+  method = "bonferroni",
+  altp = TRUE
+)
+```
+
+The Kruskal-Wallis test gives the same substantive conclusion, $\chi^2(3) = 47.32$, $p < 0.001$. The Bonferroni-adjusted Dunn's test again shows that the asymptomatic group differs from the other three chest pain groups.
+
+## Exercise 4: Analyze heart disease by sex
+
+Research question: *Is the presence of heart disease associated with sex?*
+
+::: {.callout-note}
+For the 2x2 tables in this lab, `chisq.test(..., correct = FALSE)` is used to report the ordinary Pearson chi-square test. This corresponds to the **Pearson Chi-Square** row in SPSS. If `correct = FALSE` is omitted, R applies Yates' continuity correction by default for 2x2 tables; SPSS reports this separately as **Continuity Correction**.
+:::
+
+```{r}
+sex_table <- table(heart_data$sex, heart_data$target)
+sex_table
+round(prop.table(sex_table, margin = 1) * 100, 1)
+```
+
+The row percentages show that the prevalence of heart disease was higher in males than in females.
+
+The expected cell counts are all larger than 5, so the chi-square test is appropriate.
+
+```{r}
+sex_chisq <- chisq.test(sex_table, correct = FALSE)
+sex_chisq$expected
+sex_chisq
+```
+
+There is strong evidence of an association between sex and heart disease, $\chi^2(1) = 23.22$, $p < 0.001$. The prevalence of heart disease was higher in males (55.3%) than in females (25.8%).
+
+## Exercise 5: Analyze heart disease by fasting blood sugar
+
+Research question: *Is the presence of heart disease associated with fasting blood sugar?*
+
+```{r}
+fbs_table <- table(heart_data$fbs, heart_data$target)
+fbs_table
+round(prop.table(fbs_table, margin = 1) * 100, 1)
+```
+
+The row percentages show similar heart disease prevalence in the two fasting blood sugar groups.
+
+The expected cell counts are all larger than 5, so the chi-square test is appropriate.
+
+```{r}
+fbs_chisq <- chisq.test(fbs_table, correct = FALSE)
+fbs_chisq$expected
+fbs_chisq
+```
+
+There is no evidence of an association between fasting blood sugar and heart disease, $\chi^2(1) = 0.19$, $p = 0.660$. The prevalence of heart disease was similar for patients with fasting blood sugar at or below 120 mg/dl (45.3%) and patients with fasting blood sugar above 120 mg/dl (48.9%).

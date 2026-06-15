@@ -1,0 +1,112 @@
+---
+title: "Medical Statistics"
+subtitle: "Lab 5: Cleveland heart disease dataset"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-location: right
+  pdf:
+    toc: false
+execute:
+  warning: false
+  message: false
+  error: false
+  eval: false
+---
+
+## Introduction
+
+Welcome to lab 5 in the Medical Statistics course. This lab is a set of unguided exercises using a new dataset. There are no separate R and SPSS versions for this lab: complete the exercises in either R or SPSS using the course methods from the previous labs.
+
+In this lab, you will combine the methods from the previous lectures and labs to address the following research questions:
+
+* Does maximum heart rate achieved differ across chest pain types?
+* Is the presence of heart disease associated with sex or fasting blood sugar?
+
+## Dataset description
+
+The Cleveland heart disease dataset originates from the Cleveland Clinic Foundation and focuses on heart disease diagnosis. It includes data from 303 patients on the following variables:
+
+* `age`: Age in years
+* `sex`: Sex (1 = female; 2 = male)
+* `cp`: Chest pain type (1 = typical angina; 2 = atypical angina; 3 = non-anginal pain; 4 = asymptomatic)
+* `trestbps`: Resting blood pressure (mm Hg at hospital admission)
+* `chol`: Serum cholesterol in mg/dl
+* `fbs`: Fasting blood sugar > 120 mg/dl
+* `restecg`: Resting electrocardiographic results (1 = normal; 2 = ST-T wave abnormality; 3 = left ventricular hypertrophy)
+* `thalach`: Maximum heart rate achieved
+* `exang`: Exercise-induced angina (1 = no; 2 = yes)
+* `oldpeak`: ST depression induced by exercise relative to rest
+* `slope`: Slope of the peak exercise ST segment (1 = upsloping; 2 = flat; 3 = downsloping)
+* `ca`: Number of major vessels (0-3) colored by fluoroscopy
+* `thal`: Thallium heart scan results (1 = normal; 2 = fixed defect; 3 = reversible defect)
+* `target`: Diagnosis of heart disease (1 = heart disease; 2 = no heart disease)
+
+## Exercises
+
+### Exercise 1: Download and open the dataset
+
+Download the Cleveland heart disease dataset from the Datasets menu or from the link at the end of this page. Open or import it in R or SPSS.
+
+Before starting the analysis, inspect the dataset and check that:
+
+* the dataset contains 303 patients;
+* all variables listed in the dataset description are present;
+* categorical variables are treated as categorical variables;
+* continuous variables are treated as numerical variables.
+
+### Exercise 2: Create a baseline characteristics table
+
+Create a baseline characteristics table for the dataset.
+
+* Include all variables except the outcome variable `target`.
+* Use appropriate summaries for continuous variables, such as mean and standard deviation or median and interquartile range.
+* Use frequency counts and percentages for categorical variables.
+* Present the table clearly, with meaningful labels and units where appropriate.
+
+### Exercise 3: Analyze maximum heart rate across chest pain types
+
+Research question: *Does maximum heart rate achieved differ across chest pain types?*
+
+Use `thalach` as the outcome variable and `cp` as the grouping variable.
+
+* Visualize the distribution of maximum heart rate achieved for each chest pain type.
+* Calculate the estimated mean maximum heart rate and a 95% confidence interval for each chest pain type.
+* Perform a one-way ANOVA to compare maximum heart rate across chest pain types.
+* Check the assumptions for the one-way ANOVA.
+* If the assumptions are not sufficiently met, perform a Kruskal-Wallis test as a non-parametric alternative.
+* If the overall test is statistically significant, perform suitable post-hoc comparisons with Bonferroni-adjusted p-values.
+* Write a short interpretation of the results.
+
+### Exercise 4: Analyze heart disease by sex
+
+Research question: *Is the presence of heart disease associated with sex?*
+
+Use `target` as the outcome variable and `sex` as the explanatory variable.
+
+* Create a contingency table for heart disease status by sex.
+* Report the row percentages.
+* Check the expected cell counts.
+* Select and perform the appropriate test:
+  - chi-square test if the expected cell counts are sufficiently large;
+  - Fisher's exact test if the expected cell counts are too small.
+* Write a short interpretation of the results.
+
+### Exercise 5: Analyze heart disease by fasting blood sugar
+
+Research question: *Is the presence of heart disease associated with fasting blood sugar?*
+
+Use `target` as the outcome variable and `fbs` as the explanatory variable.
+
+* Create a contingency table for heart disease status by fasting blood sugar.
+* Report the row percentages.
+* Check the expected cell counts.
+* Select and perform the appropriate test:
+  - chi-square test if the expected cell counts are sufficiently large;
+  - Fisher's exact test if the expected cell counts are too small.
+* Write a short interpretation of the results.
+
+## Downloads
+
+[Cleveland heart disease dataset (SPSS format)](datasets/heart_disease_cleveland.sav)

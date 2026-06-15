@@ -15,6 +15,7 @@ project:
     - R_lab4.qmd
     - SPSS_lab4.qmd
     - lab4_answers.qmd
+    - lab5.qmd
   resources:
     - "/datasets"
 
@@ -51,6 +52,8 @@ website:
             href: R_lab4.qmd
           - text: "SPSS lab"
             href: SPSS_lab4.qmd
+      - text: "Day 5"
+        href: lab5.qmd
       - text: "Answers"
         menu:
           - text: "Lab 1"
