@@ -22,6 +22,7 @@ project:
     - lab6_answers.qmd
     - R_lab7.qmd
     - SPSS_lab7.qmd
+    - lab7_answers.qmd
   resources:
     - "/datasets"
 
@@ -86,6 +87,8 @@ website:
             href: lab5_answers.qmd
           - text: "Lab 6"
             href: lab6_answers.qmd
+          - text: "Lab 7"
+            href: lab7_answers.qmd
       - text: "Datasets"
         menu:
           - text: "lowbwt.sav"
