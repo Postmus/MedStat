@@ -95,10 +95,94 @@ Inspect your final selected logistic regression model. Which predictors are reta
 
 ## Part 3: Causal diagrams
 
+In the lecture, we introduced the main DAG concepts: causal paths, confounding, mediation, and colliders. In this lab, we will turn those concepts into a practical procedure for deciding which variables to adjust for when estimating a causal effect.
+
+### Key terms
+
+A **DAG** is a directed acyclic graph: a diagram with variables as nodes and arrows representing assumed causal effects. "Acyclic" means that the arrows do not form a loop back to the same variable.
+
+A **path** is any route through the diagram that connects two variables. Importantly, a path does **not** have to follow the direction of the arrows. For example, if the diagram contains:
+
+```text
+E <- C -> O
+```
+
+then `E - C - O` is a path between `E` and `O`, even though one arrow points into `E` and one arrow points into `O`.
+
+A **causal path** from exposure to outcome is a path where all arrows point forward from the exposure to the outcome. For example:
+
+```text
+E -> M -> O
+```
+
+is a causal path from `E` to `O`.
+
+A **mediator** lies on a causal path from exposure to outcome. If we adjust for a mediator, we block part of the causal effect. Therefore, if we want the **total effect** of the exposure, we usually should not adjust for mediators.
+
+A **confounder** is a common cause of the exposure and the outcome. A confounder creates a non-causal path between exposure and outcome. Adjusting for confounders can help remove confounding.
+
+A **collider** is a variable that is caused by two other variables on a path, for example:
+
+```text
+E -> C <- O
+```
+
+A path through a collider is normally blocked. However, adjusting for a collider, or for a descendant of a collider, can open the path and introduce bias.
+
+### Recipe for detecting and correcting for confounding
+
+Suppose we are interested in the effect of an exposure **E** on an outcome **O**.
+
+#### Step 1. Identify the effect of interest
+
+First decide which causal effect you want to estimate. In this lab, we are usually interested in the **total effect** of the exposure on the outcome.
+
+This matters because the same variable can play different roles depending on the effect of interest. A variable may be a confounder for one effect, but a mediator or irrelevant variable for another effect.
+
+#### Step 2. Inspect the paths between exposure and outcome
+
+Look for all paths connecting **E** and **O**. Remember: paths do not have to follow the direction of the arrows.
+
+Separate these into:
+
+- causal paths from **E** to **O**, where all arrows point forward from exposure to outcome;
+- non-causal paths, which may create confounding.
+
+#### Step 3. Decide which paths should remain open
+
+If we want the **total effect** of **E** on **O**, the causal paths from **E** to **O** should remain open. We should therefore avoid adjusting for mediators on these paths.
+
+#### Step 4. Decide which paths should be blocked
+
+Non-causal paths between **E** and **O** may create confounding. These paths should be blocked by adjusting for appropriate variables.
+
+As a practical rule:
+
+- adjust for common causes of the exposure and outcome;
+- do not adjust for mediators if the goal is the total effect;
+- do not adjust for colliders, because this can open a path that was previously blocked.
+
+#### Step 5. Check the adjustment set
+
+The aim is not to adjust for as many variables as possible. The aim is to choose a sufficient adjustment set: variables that block confounding paths without blocking the causal effect of interest or opening new biasing paths.
+
+After reasoning through the DAG by hand, you can use DAGitty to check your answer.
+
+### Checking DAGs with DAGitty
+
+[DAGitty](http://www.dagitty.net/dags.html) is a webtool for drawing and checking causal diagrams. In this lab, we will use it as a second step after reasoning through the diagram ourselves. DAGitty can help identify possible adjustment sets for a chosen exposure and outcome, but its answer depends entirely on the DAG you enter. If the arrows in the DAG do not reflect the causal assumptions you want to make, the suggested adjustment set will not be meaningful.
+
+For these exercises, use DAGitty to:
+
+- draw or inspect the DAG;
+- set the exposure and outcome;
+- compare DAGitty's suggested adjustment set with your own reasoning.
+
 For each of the exercises below:
 
--	Try solving the diagrams by hand by using the recipe from the lecture (see lecture slides on Brightspace)
--	Check your answer using the [DAGitty webtool](http://www.dagitty.net/dags.html)
+- First solve the diagram by hand using the recipe above.
+- Pay special attention to the meaning of a path: a path connects variables, but does not have to follow the direction of the arrows.
+- Then check your answer using the [DAGitty webtool](http://www.dagitty.net/dags.html).
 
 ### Exercise 1
 
@@ -114,7 +198,7 @@ In the graph depicted below, what happens when you additionally adjust for **v5*
 
 ### Exercise 3
 
-This diagram is slightly different: **v1** now is the exposure. For which variables do you need toadjust to assess the unconfounded effect of **v1** on **O**?
+This diagram is slightly different: **v1** now is the exposure. For which variables do you need to adjust to assess the unconfounded effect of **v1** on **O**?
 
 ![DAG exercise 3](images/lab7_DAG3.PNG)
 
