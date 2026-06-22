@@ -25,6 +25,9 @@ project:
     - lab7_answers.qmd
     - R_lab8.qmd
     - SPSS_lab8.qmd
+    - lab8_answers.qmd
+    - R_lab9.qmd
+    - SPSS_lab9.qmd
   resources:
     - "/datasets"
 
@@ -81,6 +84,12 @@ website:
             href: R_lab8.qmd
           - text: "SPSS lab"
             href: SPSS_lab8.qmd
+      - text: "Day 9"
+        menu:
+          - text: "R lab"
+            href: R_lab9.qmd
+          - text: "SPSS lab"
+            href: SPSS_lab9.qmd
       - text: "Answers"
         menu:
           - text: "Lab 1"
@@ -97,6 +106,8 @@ website:
             href: lab6_answers.qmd
           - text: "Lab 7"
             href: lab7_answers.qmd
+          - text: "Lab 8"
+            href: lab8_answers.qmd
       - text: "Datasets"
         menu:
           - text: "lowbwt.sav"

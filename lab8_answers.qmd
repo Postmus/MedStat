@@ -16,14 +16,15 @@ execute:
   echo: false
 ---
 
-## Part 1: Building prediction models using backward elimination
+## Part 1: Estimated marginal means in a two-way ANOVA
 
-### Step 1: Fit the initial linear regression model
+### Load the data
 
 ```{r}  
 library(haven)   # for reading SPSS files
 library(dplyr)   # for data manipulation
 library(ggplot2) # for data visualization
+library(emmeans) # for estimated marginal means
 library(car)    # for calculating type-III ANOVA tables
 library(MASS)   # for automated selection
 
@@ -34,6 +35,84 @@ whas500 <- read_sav("datasets/whas500.sav")
 whas500 <- whas500 %>%
   mutate(across(where(is.labelled), as_factor))
 ```
+
+### Exploratory plot
+
+```{r}
+#| echo: true
+
+whas500 |>
+  group_by(gender, chf) |>
+  summarise(
+    mean_los = mean(los, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  ggplot(aes(x = chf, y = mean_los, group = gender, color = gender)) +
+  geom_point(size = 3) +
+  geom_line() +
+  labs(
+    x = "Congestive heart complications",
+    y = "Mean length of stay (days)",
+    color = "Gender"
+  )
+```
+
+**Question:** Based on the interaction plot, do the lines look approximately parallel, or is there visual evidence that the association between CHF and length of stay differs by gender?
+
+**Answer:**  
+The lines look approximately parallel. Patients with CHF have a longer mean length of stay for both males and females, and the size of this difference appears similar across gender. There is no strong visual evidence of an interaction.
+
+### Two-way ANOVA model
+
+```{r}
+#| echo: true
+
+fit_emm <- lm(los ~ gender * chf, data = whas500)
+anova(fit_emm)
+```
+
+**Question:** Inspect the ANOVA table. Is there evidence of an interaction between `gender` and `chf`?
+
+**Answer:**  
+No. The interaction between `gender` and `chf` is not statistically significant, $F(1, 496) = 0.03$, $p = 0.872$. We therefore do not focus on formal simple-effect contrasts. Instead, we interpret the main effects and their estimated marginal means.
+
+### Estimated marginal means and contrasts
+
+```{r}
+#| echo: true
+
+emmeans(fit_emm, ~ gender)
+emmeans(fit_emm, ~ chf)
+emmeans(fit_emm, ~ gender * chf)
+
+# Contrast tests for the main effects
+pairs(emmeans(fit_emm, ~ gender))
+pairs(emmeans(fit_emm, ~ chf))
+
+# Contrast tests for simple effects
+# Only focus on these if the interaction is meaningful/statistically significant.
+pairs(emmeans(fit_emm, ~ chf | gender))
+pairs(emmeans(fit_emm, ~ gender | chf))
+```
+
+**Question:** What is the estimated mean length of stay for males and females, averaged over CHF status?
+
+**Answer:**  
+Averaged over CHF status, the estimated marginal mean length of stay is approximately **6.13 days** for males and **6.89 days** for females. The main-effect contrast is not statistically significant at the 0.05 level ($p = 0.095$).
+
+**Question:** What is the estimated mean length of stay for patients with and without CHF, averaged over gender?
+
+**Answer:**  
+Averaged over gender, the estimated marginal mean length of stay is approximately **5.70 days** for patients without CHF and **7.32 days** for patients with CHF. The main-effect contrast is statistically significant ($p < 0.001$), indicating that patients with CHF have a longer estimated mean length of stay.
+
+**Question:** Should we focus on main-effect contrasts or simple-effect contrasts?
+
+**Answer:**  
+Because the interaction is not statistically significant, we focus on the **main-effect contrasts**. The simple-effect contrasts are shown to demonstrate how they can be requested, but they are not the primary basis for interpretation in this example.
+
+## Part 2: Building prediction models using backward elimination
+
+### Step 1: Fit the initial linear regression model
 
 Create an initial model for hospital length of stay (`los`) using the following predictors: `age`, `gender`, `hr`, `sysbp`, `diasbp`, `bmi`, `cvd`, `sho`. Run/summarize the model to inspect coefficients and p-values.
 
@@ -92,7 +171,7 @@ plot(final_model, which = 1)
   
 The overall fit of the model appears reasonable, as the residuals are generally centered around zero with no major patterns suggesting severe violations of linearity. However, there are some outliers with very long lengths of stay (LOS) that are not adequately captured by the model. These outliers lead to a right skew in the residual distribution, as seen in the histogram, influencing model fit. While the current model seems to work reasonably well for most observations, further steps (e.g., transformations or robust regression techniques) could be considered to better account for these extreme cases.  
 
-## Part 2: Automated procedures for building prediction models (logistic regression)
+## Part 3: Automated procedures for building prediction models (logistic regression)
 
 In this part, we explore automated procedures for predictor selection in **logistic regression** prediction models, focusing on predicting in-hospital death (`dstat`).
 
@@ -129,12 +208,13 @@ In SPSS, using the **Backward: LR** method (standard settings), the procedure al
 
 ![SPSS results of the backward selection for logistic regression](images/lab7_SPSS_BW_logistic.png)
 
-## Part 3: Causal diagrams
+## Part 4: Causal diagrams
 
-For each of the exercises below: 
+For each of the exercises below:
 
--	Try solving the diagrams by hand by using the recipe from the lecture (see lecture slides on Brightspace)
--	Check your answer using the [DAGitty webtool](http://www.dagitty.net/dags.html)
+- First solve the diagram by hand using the recipe from the lab.
+- Pay special attention to the meaning of a path: a path connects variables, but does not have to follow the direction of the arrows.
+- Then check your answer using the [DAGitty webtool](http://www.dagitty.net/dags.html).
 
 ### Exercise 1
 
@@ -143,7 +223,7 @@ In the graph depicted below, for which variables do you need to adjust to assess
 ![DAG exercise 1](images/lab7_DAG1.PNG)
 
 **Answer:**  
-Following the recipe: after removing all arrows leaving E, there are several unblocked paths leading from E to O. Just like in the lecture, adjusting for v2 opens a backdoor path (E – v1 – v3 – O) This newly opened backdoor path needs to be closed by also conditioning on v1 or v3, or both. 
+Using the recipe, there are several non-causal paths between E and O that need to be considered. Adjusting for v2 blocks one path, but it also opens a path through a collider structure (E - v1 - v3 - O). This newly opened path needs to be closed by also conditioning on v1 or v3, or both. 
 Hence, there are 3 options: (v1, v2, v3) ; (v1, v2) ; and finally, (v2, v3).
 
 ### Exercise 2
@@ -159,7 +239,7 @@ In DAGitty, when you set v5 to ‘adjusted’, the algorithm will say the follow
 
 ### Exercise 3
 
-This diagram is slightly different: **v1** now is the exposure. For which variables do you need toadjust to assess the unconfounded effect of **v1** on **O**?
+This diagram is slightly different: **v1** now is the exposure. For which variables do you need to adjust to assess the unconfounded effect of **v1** on **O**?
 
 ![DAG exercise 3](images/lab7_DAG3.PNG)
 
@@ -173,11 +253,11 @@ Now, **v2** is the exposure. For which variables do you need to adjust to assess
 ![DAG exercise 4](images/lab7_DAG4.PNG)
 
 **Answer:**
-Following the recipe, there are three unblocked paths left after removing the arrows leaving v2: 
+Using the recipe, there are three non-causal paths that need to be blocked when v2 is the exposure:
 
-a) v2 – v3 – O and 
-b) v2 – v1 – E – O 
-c) v2  - v1 – E -v5 - O
+a) v2 - v3 - O and 
+b) v2 - v1 - E - O 
+c) v2 - v1 - E - v5 - O
 
 Backdoor path a) can be closed by conditioning on v3. 
 
