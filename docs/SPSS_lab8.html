@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Medical Statistics – Lab 7 – Medical Statistics</title>
+<title>Medical Statistics – Lab 8 – Medical Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -359,29 +324,44 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction" id="toc-part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction" class="nav-link active" data-scroll-target="#part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction">Part 1: Risk of in-hospital death in patients with acute myocardial infarction</a>
+  <li><a href="#part-1-estimated-marginal-means-in-a-two-way-anova" id="toc-part-1-estimated-marginal-means-in-a-two-way-anova" class="nav-link active" data-scroll-target="#part-1-estimated-marginal-means-in-a-two-way-anova">Part 1: Estimated marginal means in a two-way ANOVA</a>
   <ul class="collapse">
-  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory data analysis</a></li>
-  <li><a href="#simple-logistic-regression" id="toc-simple-logistic-regression" class="nav-link" data-scroll-target="#simple-logistic-regression">Simple logistic regression</a></li>
-  <li><a href="#multiple-logistic-regression" id="toc-multiple-logistic-regression" class="nav-link" data-scroll-target="#multiple-logistic-regression">Multiple logistic regression</a></li>
-  <li><a href="#likelihood-ratio-tests" id="toc-likelihood-ratio-tests" class="nav-link" data-scroll-target="#likelihood-ratio-tests">Likelihood ratio tests</a></li>
-  <li><a href="#evaluating-model-fit" id="toc-evaluating-model-fit" class="nav-link" data-scroll-target="#evaluating-model-fit">Evaluating model fit</a></li>
+  <li><a href="#exploratory-plot" id="toc-exploratory-plot" class="nav-link" data-scroll-target="#exploratory-plot">Exploratory plot</a></li>
+  <li><a href="#two-way-anova-model" id="toc-two-way-anova-model" class="nav-link" data-scroll-target="#two-way-anova-model">Two-way ANOVA model</a></li>
   </ul></li>
-  <li><a href="#part-2-unguided-exercises" id="toc-part-2-unguided-exercises" class="nav-link" data-scroll-target="#part-2-unguided-exercises">Part 2: unguided exercises</a>
+  <li><a href="#part-2-building-prediction-models-using-backward-elimination" id="toc-part-2-building-prediction-models-using-backward-elimination" class="nav-link" data-scroll-target="#part-2-building-prediction-models-using-backward-elimination">Part 2: Building prediction models using backward elimination</a>
   <ul class="collapse">
+  <li><a href="#step-1-fit-the-initial-linear-regression-model" id="toc-step-1-fit-the-initial-linear-regression-model" class="nav-link" data-scroll-target="#step-1-fit-the-initial-linear-regression-model">Step 1: Fit the initial linear regression model</a></li>
+  <li><a href="#step-2-eliminate-the-least-significant-predictor" id="toc-step-2-eliminate-the-least-significant-predictor" class="nav-link" data-scroll-target="#step-2-eliminate-the-least-significant-predictor">Step 2: Eliminate the least significant predictor</a></li>
+  <li><a href="#step-3-repeat-the-steps" id="toc-step-3-repeat-the-steps" class="nav-link" data-scroll-target="#step-3-repeat-the-steps">Step 3: Repeat the steps</a></li>
+  <li><a href="#step-4-final-model" id="toc-step-4-final-model" class="nav-link" data-scroll-target="#step-4-final-model">Step 4: Final model</a></li>
+  </ul></li>
+  <li><a href="#part-3-automated-procedures-for-building-prediction-models-logistic-regression" id="toc-part-3-automated-procedures-for-building-prediction-models-logistic-regression" class="nav-link" data-scroll-target="#part-3-automated-procedures-for-building-prediction-models-logistic-regression">Part 3: Automated procedures for building prediction models (logistic regression)</a>
+  <ul class="collapse">
+  <li><a href="#spss-backward-selection-lr-tests" id="toc-spss-backward-selection-lr-tests" class="nav-link" data-scroll-target="#spss-backward-selection-lr-tests">SPSS: Backward selection (LR tests)</a></li>
+  </ul></li>
+  <li><a href="#part-4-causal-diagrams" id="toc-part-4-causal-diagrams" class="nav-link" data-scroll-target="#part-4-causal-diagrams">Part 4: Causal diagrams</a>
+  <ul class="collapse">
+  <li><a href="#key-terms" id="toc-key-terms" class="nav-link" data-scroll-target="#key-terms">Key terms</a></li>
+  <li><a href="#recipe-for-detecting-and-correcting-for-confounding" id="toc-recipe-for-detecting-and-correcting-for-confounding" class="nav-link" data-scroll-target="#recipe-for-detecting-and-correcting-for-confounding">Recipe for detecting and correcting for confounding</a></li>
+  <li><a href="#checking-dags-with-dagitty" id="toc-checking-dags-with-dagitty" class="nav-link" data-scroll-target="#checking-dags-with-dagitty">Checking DAGs with DAGitty</a></li>
   <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
   <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
+  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise 3</a></li>
+  <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise 4</a></li>
+  <li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a></li>
+  <li><a href="#exercise-6" id="toc-exercise-6" class="nav-link" data-scroll-target="#exercise-6">Exercise 6</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="R_lab7.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="SPSS_lab8.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Medical Statistics – Lab 7</h1>
-<p class="subtitle lead">R version</p>
+<h1 class="title">Medical Statistics – Lab 8</h1>
+<p class="subtitle lead">SPSS version</p>
 </div>
 
 
@@ -398,222 +378,332 @@ window.Quarto = {
 </header>
 
 
-<section id="part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-risk-of-in-hospital-death-in-patients-with-acute-myocardial-infarction">Part 1: Risk of in-hospital death in patients with acute myocardial infarction</h2>
-<p>In part 1 of the lab, we are going to analyze the risk of in-hospital death in patients hospitalized because of acute myocardial infarction. The dataset comes from the Worcester Heart Attack Study (WHAS) and includes data from 500 patients admitted in Worcester, Massachusetts in 1997, 1999, and 2001 (file <code>whas500.sav</code> from the Datasets menu). The outcome of interest is in-hospital death, measured by the variable “discharge status from hospital” (<code>dstat</code>) with values <code>alive</code> and <code>death</code>.</p>
-<p>We will use the following R packages: <code>haven</code>, <code>dplyr</code>, and <code>DescTools</code>. The first two packages were also used in the previous labs and therefore already installed on your computer. For <code>DescTools</code> (used to perform Hosmer-Lemeshow Goodness of Fit Tests) you may have to download and install it first by running <code>install.packages("DescTools")</code>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)   <span class="co"># for reading SPSS files</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)   <span class="co"># for data manipulation</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools)  <span class="co"># for performing Hosmer-Lemeshow Goodness of Fit Tests</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>whas500 <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"whas500.sav"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert labeled variables to factors</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>whas500 <span class="ot">&lt;-</span> whas500 <span class="sc">%&gt;%</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.labelled), as_factor))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<section id="exploratory-data-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory data analysis</h3>
-<p>To explore whether gender has an effect on the risk of in-hospital death, we start by creating a contingency table and use the table to calculate the proportion in-hospital death in the two gender subgroups:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>contingencyTable <span class="ot">&lt;-</span> <span class="fu">table</span>(whas500<span class="sc">$</span>gender, whas500<span class="sc">$</span>dstat) <span class="co"># create 2 x 2 table</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>contingencyTable</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(contingencyTable, <span class="at">margin =</span> <span class="dv">1</span>) <span class="co"># Calulate the row proportions (margin = 1)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 1">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Based on the group proportions, do you expect gender to have an effect on the risk of in-hospital death?</p>
-</div>
-</div>
-</section>
-<section id="simple-logistic-regression" class="level3">
-<h3 class="anchored" data-anchor-id="simple-logistic-regression">Simple logistic regression</h3>
-<p>To determine whether gender is significantly associated with in-hospital death, we can conduct several statistical tests. As a recap of lab 4, we start by performing a chi-square test of homogeneity.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 2">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 2
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Perform the chi-square test of homogeneity (see instructions in lab 4 if needed). What conclusion can be drawn from the test?</p>
-</div>
-</div>
-<p>Another option is to perform logistic regression. In R, this can be achieved using the <code>glm()</code> function:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 0/1 numeric version of the dependent variable, where a value of 1 means "success" (i.e., occurrence of the event of interest)</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>whas500<span class="sc">$</span>dstat_numeric <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(whas500<span class="sc">$</span>dstat<span class="sc">==</span><span class="st">"dead"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit logistic regression model </span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>model.sex <span class="ot">&lt;-</span> <span class="fu">glm</span>(dstat_numeric <span class="sc">~</span> gender, <span class="at">family =</span> binomial, <span class="at">data =</span> whas500)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><strong>Explanation:</strong> glm stands for “generalized linear model,” an extension of linear regression that accommodates different types of outcome distributions and includes a link function to model the relationship between predictors and the outcome. The argument <code>family = binomial</code> specifies that the outcome distribution is Bernoulli/binomial. By default, the link function for this model is “logit,” which corresponds to logistic regression.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 3">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 3
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>What is the odds ratio for in-hospital death for females compared to males? How should this odds ratio be interpreted in the context of the study?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 4">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 4
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Based on the estimated regression coefficients (ignoring p-values), what are the predicted proportions of in-hospital deaths for male and female patients? Compare the predicted proportions to the observed proportions from the previously constructed contingency table. Do they match?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 5">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 5
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>What conclusion can be drawn from the logistic regression analysis regarding the association between gender and in-hospital death? Is this in line with the conclusion drawn from the chi-square test?</p>
-</div>
-</div>
-</section>
-<section id="multiple-logistic-regression" class="level3">
-<h3 class="anchored" data-anchor-id="multiple-logistic-regression">Multiple logistic regression</h3>
-<p>To assess the extent to which the effect of gender is confounded by age, we will fit a multiple regression model with in-hospital death as the dependent variable and gender and age as the independent variables:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit logistic regression model </span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>model.sex.age <span class="ot">&lt;-</span> <span class="fu">glm</span>(dstat_numeric <span class="sc">~</span> gender <span class="sc">+</span> age, <span class="at">family =</span> binomial, <span class="at">data =</span> whas500)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.sex.age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 6">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 6
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>How does adjusting for age affect the estimated odds ratio for in-hospital death for females compared to males?</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 7">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 7
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Calculate the odds ratio for in-hospital death corresponding to a 10-year increase in age and interpret its meaning.</p>
-</div>
-</div>
-</section>
-<section id="likelihood-ratio-tests" class="level3">
-<h3 class="anchored" data-anchor-id="likelihood-ratio-tests">Likelihood ratio tests</h3>
-<p>As explained in the syllabus, the p-values in the table of estimated regression coefficients are derived from Wald tests, which test the null hypothesis that the corresponding regression coefficient is equal to 0</p>
-<p>Instead of the Wald tests, we can also obtain p-values using likelihood ratio tests, which compare the goodness of fit of the full model (including the predictor of interest) to a reduced model (excluding the predictor) to test the null hypothesis that the predictor has no effect on the outcome. This approach is particularly useful for testing predictors with non-linear or complex effects, as it evaluates their contribution to the model as a whole. Examples include categorical variables with three or more categories (requiring the creation of multiple dummy variables) and relationships modeled using multiple terms, such as including both a linear and a quadratic term to capture a quadratic relationship.</p>
-<p>For example, we can use a likelihood ratio test (LRT) to compare a full model including both sex and age as predictors to a reduced model including only age. To achieve this, we first need to fit the reduced model that only includes age and then perform the LRT using the <code>anova()</code> function:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit reduced model</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>model.age <span class="ot">&lt;-</span> <span class="fu">glm</span>(dstat_numeric <span class="sc">~</span> age, <span class="at">family =</span> binomial, <span class="at">data =</span> whas500)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform likelihood ratio test</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model.age, model.sex.age, <span class="at">test=</span><span class="st">"LRT"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 8">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 8
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>How does the p-value from the likelihood ratio test compare to the one from the Wald test?</p>
-</div>
-</div>
-</section>
-<section id="evaluating-model-fit" class="level3">
-<h3 class="anchored" data-anchor-id="evaluating-model-fit">Evaluating model fit</h3>
-<p>One way to examine the fit of the logistic regression model is the Hosmer-Lemeshow Goodness of Fit test. In R, this test can be performed using the <code>HosmerLemeshowTest()</code> function from the <code>DescTools</code> package:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">HosmerLemeshowTest</span>(<span class="at">fit=</span><span class="fu">fitted</span>(model.sex.age), <span class="at">obs=</span>model.sex.age<span class="sc">$</span>y, <span class="at">ngr =</span> <span class="dv">10</span>, <span class="at">verbose =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><strong>Explanation:</strong></p>
+<p>Welcome to lab 8. In this lab, we will practice estimated marginal means in a two-way ANOVA, build prediction models using backward elimination and automated procedures, and reason with causal diagrams (DAGs).</p>
+<p>We will use the Worcester Heart Attack Study dataset (<code>whas500.sav</code>, available from the Datasets menu). The dataset includes data from 500 patients admitted with acute myocardial infarction in Worcester, Massachusetts in 1997, 1999, and 2001.</p>
+<p>Key variables in the dataset include:</p>
 <ul>
-<li><code>fitted(model.sex.age)</code> returns the caclulated in-hospital death probabilities based on the fitted logistic regression model for each patient in the dataset. These are the</li>
-<li><code>model.sex.age$y</code> retrieves the outcome variable from the fitted logistic regression model.</li>
-<li><code>ngr = 10</code> specifies the number of groups to be used in the test, which is set to 10 by default.</li>
-<li><code>verbose = TRUE</code> not only prints the test-statistic, degrees of freedom, and p-value but also the groups used to perform the test.</li>
+<li><code>los</code>: Length of hospital stay (days, continuous outcome)</li>
+<li><code>age</code>: Age at hospital admission (years)</li>
+<li><code>gender</code>: Gender (0 = Male, 1 = Female)</li>
+<li><code>hr</code>: Initial heart rate (beats per minute)</li>
+<li><code>sysbp</code> and <code>diasbp</code>: Initial systolic and diastolic blood pressure (mmHg)</li>
+<li><code>bmi</code>: Body mass index (kg/m^2)</li>
+<li><code>cvd</code>: Presence of cardiovascular disease (0 = No, 1 = Yes)</li>
+<li><code>chf</code>: Congestive heart complications (0 = No, 1 = Yes)</li>
+<li><code>sho</code>: Presence of cardiogenic shock (0 = No, 1 = Yes)</li>
 </ul>
-<p>The Hosmer-Lemeshow goodness-of-fit test has two variations: the C statistic and the H statistic, which differ in how they group predicted probabilities for comparison. The C statistic groups predicted probabilities into deciles (10 equal-sized groups based on the range of probabilities), while the H statistic uses fixed cutoffs (e.g., evenly spaced intervals between 0 and 1). The C statistic is the most commonly used version as it adapts to the data distribution, ensuring well-populated groups, making it suitable for general model fit evaluation. In this lab, we therefore focus on this latter statistics (with matches the explanation in the syllabus).</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question 9">
+<p>Download the dataset from the Datasets menu (<code>whas500.sav</code>) and open it in SPSS.</p>
+<section id="part-1-estimated-marginal-means-in-a-two-way-anova" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-estimated-marginal-means-in-a-two-way-anova">Part 1: Estimated marginal means in a two-way ANOVA</h2>
+<p>In the lecture, we discussed estimated marginal means in the context of one-way and two-way ANOVA. In this first exercise, we will use a two-way ANOVA to study hospital length of stay (<code>los</code>) in the WHAS500 dataset.</p>
+<p>We will use:</p>
+<ul>
+<li>outcome: <code>los</code>, length of hospital stay in days;</li>
+<li>factor 1: <code>gender</code>;</li>
+<li>factor 2: <code>chf</code>, congestive heart complications.</li>
+</ul>
+<section id="exploratory-plot" class="level3">
+<h3 class="anchored" data-anchor-id="exploratory-plot">Exploratory plot</h3>
+<p>Before fitting the model, make an interaction plot of the mean length of stay by <code>chf</code>, with separate lines for <code>gender</code>.</p>
+<p>In SPSS:</p>
+<ol type="1">
+<li>Go to <strong>Graphs -&gt; Chart Builder</strong>.</li>
+<li>Choose a line chart with separate lines.</li>
+<li>Put <code>chf</code> on the x-axis and <code>los</code> on the y-axis.</li>
+<li>Set the statistic for <code>los</code> to <strong>Mean</strong>.</li>
+<li>Use <code>gender</code> to define the separate lines.</li>
+</ol>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Question 9
+<span class="screen-reader-only">Important</span>Question
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on the results of the Hosmer-Lemeshow goodness-of-fit test, does our model provide a satisfactory fit to the data?</p>
+<p>Based on the interaction plot, do the lines look approximately parallel, or is there visual evidence that the association between CHF and length of stay differs by gender?</p>
+</div>
+</div>
+</section>
+<section id="two-way-anova-model" class="level3">
+<h3 class="anchored" data-anchor-id="two-way-anova-model">Two-way ANOVA model</h3>
+<p>Fit a two-way ANOVA model with <code>los</code> as the outcome and <code>gender</code>, <code>chf</code>, and their interaction as predictors.</p>
+<p>In SPSS:</p>
+<ol type="1">
+<li>Go to <strong>Analyze -&gt; General Linear Model -&gt; Univariate</strong>.</li>
+<li>Put <code>los</code> in <strong>Dependent Variable</strong>.</li>
+<li>Put <code>gender</code> and <code>chf</code> in <strong>Fixed Factor(s)</strong>.</li>
+<li>Under <strong>Model</strong>, use the full factorial model, so the interaction between <code>gender</code> and <code>chf</code> is included.</li>
+<li>Under <strong>EM Means</strong>, request estimated marginal means for <code>gender</code>, <code>chf</code>, and <code>gender * chf</code>. For <code>gender</code> and <code>chf</code>, also request pairwise comparisons so you obtain contrast tests for the main effects.</li>
+<li>Under <strong>Options</strong>, request <strong>Descriptive statistics</strong> and <strong>Parameter estimates</strong>.</li>
+</ol>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Inspect the Tests of Between-Subjects Effects table. Is there evidence of an interaction between <code>gender</code> and <code>chf</code>?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If the interaction term is statistically significant, it usually makes sense to examine simple effects, for example the effect of CHF separately within males and females. If the interaction is not statistically significant, we usually do not focus on formal simple-effects tests. Instead, we interpret the main effects and their estimated marginal means, while using the interaction plot and the cell means descriptively.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the estimated marginal means to answer the following:</p>
+<ul>
+<li>What is the estimated mean length of stay for males and females, averaged over CHF status?</li>
+<li>What is the estimated mean length of stay for patients with and without CHF, averaged over gender?</li>
+<li>Use the contrast tests to assess whether the estimated marginal means differ statistically. First decide whether you should focus on the main-effect contrasts or the simple-effect contrasts, based on the interaction test.</li>
+</ul>
 </div>
 </div>
 </section>
 </section>
-<section id="part-2-unguided-exercises" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-unguided-exercises">Part 2: unguided exercises</h2>
+<section id="part-2-building-prediction-models-using-backward-elimination" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-building-prediction-models-using-backward-elimination">Part 2: Building prediction models using backward elimination</h2>
+<section id="step-1-fit-the-initial-linear-regression-model" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-fit-the-initial-linear-regression-model">Step 1: Fit the initial linear regression model</h3>
+<p>Create an initial model for hospital length of stay (<code>los</code>) using the following predictors: <code>age</code>, <code>gender</code>, <code>hr</code>, <code>sysbp</code>, <code>diasbp</code>, <code>bmi</code>, <code>cvd</code>, <code>sho</code>. Run/summarize the model to inspect coefficients and p-values.</p>
+<p>Use the <strong>General Linear Model</strong> procedure: <code>Analyze → General Linear Model → Univariate.</code></p>
+</section>
+<section id="step-2-eliminate-the-least-significant-predictor" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-eliminate-the-least-significant-predictor">Step 2: Eliminate the least significant predictor</h3>
+<p>To identify the least significant predictor, we use the Type III ANOVA table:</p>
+<ul>
+<li>Significance threshold: <span class="math inline">\(p &gt; 0.10\)</span></li>
+<li>Remove the predictor with the largest p-value above this threshold.</li>
+</ul>
+<p>The Type III ANOVA table is generated in the General Linear Model output.</p>
+</section>
+<section id="step-3-repeat-the-steps" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-repeat-the-steps">Step 3: Repeat the steps</h3>
+<p>Iteratively remove the least significant predictor until all predictors have <span class="math inline">\(p &lt; 0.10\)</span>. At each step:</p>
+<ul>
+<li>Rerun the regression model</li>
+<li>Generate the Type III ANOVA table</li>
+<li>Remove the least significant predictor</li>
+</ul>
+</section>
+<section id="step-4-final-model" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-final-model">Step 4: Final model</h3>
+<p>Present the final linear regression model:</p>
+<ul>
+<li>Report the final model, including regression coefficients and 95% CIs.</li>
+<li>Create residual plots to assess the model assumptions (normality, homoscedasticity, linearity).</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="95% CIs for regression coefficients">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>95% CIs for regression coefficients
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In <strong>Analyze → General Linear Model → Univariate</strong>, click <strong>Options</strong> and request <strong>Parameter estimates</strong> (95% CIs are included automatically).</p>
+</div>
+</div>
+</section>
+</section>
+<section id="part-3-automated-procedures-for-building-prediction-models-logistic-regression" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-automated-procedures-for-building-prediction-models-logistic-regression">Part 3: Automated procedures for building prediction models (logistic regression)</h2>
+<p>In this part, we explore automated procedures for predictor selection in <strong>logistic regression</strong> prediction models. We use the same WHAS dataset but now focus on predicting in-hospital death (<code>dstat</code>: alive/dead) from candidate predictors.</p>
+<section id="spss-backward-selection-lr-tests" class="level3">
+<h3 class="anchored" data-anchor-id="spss-backward-selection-lr-tests">SPSS: Backward selection (LR tests)</h3>
+<ul>
+<li>Go to <strong>Analyze → Regression → Binary Logistic</strong>.</li>
+<li>Put <code>dstat</code> in <strong>Dependent</strong>.</li>
+<li>Add your continuous candidate predictors (e.g., <code>age</code>, <code>hr</code>, <code>sysbp</code>, <code>diasbp</code>, <code>bmi</code>) to <strong>Covariates</strong>.</li>
+<li>Also add any categorical candidate predictors (e.g., <code>gender</code>, <code>cvd</code>, <code>sho</code>) to <strong>Covariates</strong>, then click <strong>Categorical…</strong> and move them into <strong>Categorical Covariates</strong> so SPSS treats them as factors.</li>
+<li>Under <strong>Method</strong>, select <strong>Backward: LR</strong> (backward selection based on likelihood ratio tests).</li>
+<li>Click <strong>Options…</strong> and tick <strong>CI for exp(B)</strong> to obtain 95% CIs for the odds ratios.</li>
+</ul>
+<p><strong>Note (categorical predictors):</strong> Make sure you correctly specify categorical predictors via <strong>Categorical…</strong> (otherwise SPSS may treat their numeric codes as continuous). If you include categorical predictors with more than two categories and specify them via <strong>Categorical…</strong>, SPSS will handle the dummy coding internally and the <strong>Backward: LR</strong> procedure evaluates the predictor as a factor (i.e., removal is based on the overall significance of the factor, not separately for each dummy coefficient).</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Related note (linear regression)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Related note (linear regression)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For stepwise selection with a continuous outcome, SPSS implements this under <strong>Analyze → Regression → Linear</strong> (Method: Forward/Backward/Stepwise), but this procedure does not have a dedicated “factors” box—categorical predictors must be dummy-coded manually. In that situation, it is possible for some dummy variables to enter/leave the model while others do not. The <strong>General Linear Model → Univariate</strong> procedure does not offer the same automated stepwise selection.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Question">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Inspect your final selected logistic regression model. Which predictors are retained in the prediction model?</p>
+</div>
+</div>
+</section>
+</section>
+<section id="part-4-causal-diagrams" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-causal-diagrams">Part 4: Causal diagrams</h2>
+<p>In the lecture, we introduced the main DAG concepts: causal paths, confounding, mediation, and colliders. In this lab, we will turn those concepts into a practical procedure for deciding which variables to adjust for when estimating a causal effect.</p>
+<section id="key-terms" class="level3">
+<h3 class="anchored" data-anchor-id="key-terms">Key terms</h3>
+<p>A <strong>DAG</strong> is a directed acyclic graph: a diagram with variables as nodes and arrows representing assumed causal effects. “Acyclic” means that the arrows do not form a loop back to the same variable.</p>
+<p>A <strong>path</strong> is any route through the diagram that connects two variables. Importantly, a path does <strong>not</strong> have to follow the direction of the arrows. For example, if the diagram contains:</p>
+<pre class="text"><code>E &lt;- C -&gt; O</code></pre>
+<p>then <code>E - C - O</code> is a path between <code>E</code> and <code>O</code>, even though one arrow points into <code>E</code> and one arrow points into <code>O</code>.</p>
+<p>A <strong>causal path</strong> from exposure to outcome is a path where all arrows point forward from the exposure to the outcome. For example:</p>
+<pre class="text"><code>E -&gt; M -&gt; O</code></pre>
+<p>is a causal path from <code>E</code> to <code>O</code>.</p>
+<p>A <strong>mediator</strong> lies on a causal path from exposure to outcome. If we adjust for a mediator, we block part of the causal effect. Therefore, if we want the <strong>total effect</strong> of the exposure, we usually should not adjust for mediators.</p>
+<p>A <strong>confounder</strong> is a common cause of the exposure and the outcome. A confounder creates a non-causal path between exposure and outcome. Adjusting for confounders can help remove confounding.</p>
+<p>A <strong>collider</strong> is a variable that is caused by two other variables on a path, for example:</p>
+<pre class="text"><code>E -&gt; C &lt;- O</code></pre>
+<p>A path through a collider is normally blocked. However, adjusting for a collider, or for a descendant of a collider, can open the path and introduce bias.</p>
+</section>
+<section id="recipe-for-detecting-and-correcting-for-confounding" class="level3">
+<h3 class="anchored" data-anchor-id="recipe-for-detecting-and-correcting-for-confounding">Recipe for detecting and correcting for confounding</h3>
+<p>Suppose we are interested in the effect of an exposure <strong>E</strong> on an outcome <strong>O</strong>.</p>
+<section id="step-1.-identify-the-effect-of-interest" class="level4">
+<h4 class="anchored" data-anchor-id="step-1.-identify-the-effect-of-interest">Step 1. Identify the effect of interest</h4>
+<p>First decide which causal effect you want to estimate. In this lab, we are usually interested in the <strong>total effect</strong> of the exposure on the outcome.</p>
+<p>This matters because the same variable can play different roles depending on the effect of interest. A variable may be a confounder for one effect, but a mediator or irrelevant variable for another effect.</p>
+</section>
+<section id="step-2.-inspect-the-paths-between-exposure-and-outcome" class="level4">
+<h4 class="anchored" data-anchor-id="step-2.-inspect-the-paths-between-exposure-and-outcome">Step 2. Inspect the paths between exposure and outcome</h4>
+<p>Look for all paths connecting <strong>E</strong> and <strong>O</strong>. Remember: paths do not have to follow the direction of the arrows.</p>
+<p>Separate these into:</p>
+<ul>
+<li>causal paths from <strong>E</strong> to <strong>O</strong>, where all arrows point forward from exposure to outcome;</li>
+<li>non-causal paths, which may create confounding.</li>
+</ul>
+</section>
+<section id="step-3.-decide-which-paths-should-remain-open" class="level4">
+<h4 class="anchored" data-anchor-id="step-3.-decide-which-paths-should-remain-open">Step 3. Decide which paths should remain open</h4>
+<p>If we want the <strong>total effect</strong> of <strong>E</strong> on <strong>O</strong>, the causal paths from <strong>E</strong> to <strong>O</strong> should remain open. We should therefore avoid adjusting for mediators on these paths.</p>
+</section>
+<section id="step-4.-decide-which-paths-should-be-blocked" class="level4">
+<h4 class="anchored" data-anchor-id="step-4.-decide-which-paths-should-be-blocked">Step 4. Decide which paths should be blocked</h4>
+<p>Non-causal paths between <strong>E</strong> and <strong>O</strong> may create confounding. These paths should be blocked by adjusting for appropriate variables.</p>
+<p>As a practical rule:</p>
+<ul>
+<li>adjust for common causes of the exposure and outcome;</li>
+<li>do not adjust for mediators if the goal is the total effect;</li>
+<li>do not adjust for colliders, because this can open a path that was previously blocked.</li>
+</ul>
+</section>
+<section id="step-5.-check-the-adjustment-set" class="level4">
+<h4 class="anchored" data-anchor-id="step-5.-check-the-adjustment-set">Step 5. Check the adjustment set</h4>
+<p>The aim is not to adjust for as many variables as possible. The aim is to choose a sufficient adjustment set: variables that block confounding paths without blocking the causal effect of interest or opening new biasing paths.</p>
+<p>After reasoning through the DAG by hand, you can use DAGitty to check your answer.</p>
+</section>
+</section>
+<section id="checking-dags-with-dagitty" class="level3">
+<h3 class="anchored" data-anchor-id="checking-dags-with-dagitty">Checking DAGs with DAGitty</h3>
+<p><a href="http://www.dagitty.net/dags.html">DAGitty</a> is a webtool for drawing and checking causal diagrams. In this lab, we will use it as a second step after reasoning through the diagram ourselves. DAGitty can help identify possible adjustment sets for a chosen exposure and outcome, but its answer depends entirely on the DAG you enter. If the arrows in the DAG do not reflect the causal assumptions you want to make, the suggested adjustment set will not be meaningful.</p>
+<p>For these exercises, use DAGitty to:</p>
+<ul>
+<li>draw or inspect the DAG;</li>
+<li>set the exposure and outcome;</li>
+<li>compare DAGitty’s suggested adjustment set with your own reasoning.</li>
+</ul>
+<p>For each of the exercises below:</p>
+<ul>
+<li>First solve the diagram by hand using the recipe above.</li>
+<li>Pay special attention to the meaning of a path: a path connects variables, but does not have to follow the direction of the arrows.</li>
+<li>Then check your answer using the <a href="http://www.dagitty.net/dags.html">DAGitty webtool</a>.</li>
+</ul>
+</section>
 <section id="exercise-1" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1">Exercise 1</h3>
-<p>Multiple logistic regression was used to construct a prognostic index to predict coronary artery disease from data on 348 patients with valvular heart disease who had undergone routine coronary arteriography before valve replacement (Ramsdale et al.&nbsp;1982). The estimated equation was:</p>
-<p><span class="math display">\[logit(p) = ln(p/(1-p)) = b_{0} + 1.167 \times x{1} + 0.0106 \times x_{2} + \textrm{other terms}\]</span></p>
-<p>where <span class="math inline">\(x_{1}\)</span> stands for the family history of ischaemic disease (0=no, 1=yes) and <span class="math inline">\(x_{2}\)</span> is the estimated total number of cigarettes ever smoked in terms of thousand cigarettes, calculated as the average number smoked annually times the number of years smoking.</p>
-<ol type="a">
-<li>What is the estimated odds ratio for having coronary artery disease for subjects with a positive family history relative to subjects with a negative family history?</li>
-<li>What total number of cigarettes ever smoked carries the same risk as a positive family history? Convert the result into years of smoking 20 cigarettes per day.</li>
-<li>What is the odds ratio for coronary artery disease for someone with a positive family history who had smoked 20 cigarettes a day for 30 years compared to a non smoker with no family history?</li>
-</ol>
+<p>In the graph depicted below, for which variables do you need to adjust to assess the unconfounded effect of E on O (there may be several possibilities)?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG1.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 1</figcaption>
+</figure>
+</div>
 </section>
 <section id="exercise-2" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-2">Exercise 2</h3>
-<p>Data from 37 patients receiving a non-depleted allogenic bone marrow transplant were examined to see which variables were associated with the occurrence of acute graft-versus-host disease (GvHD: 0=no, 1=yes) (Bagot et al., 1988). Possible predictors are TYPE (type of leukemia: 1=AML, acute myeloid leukaemia; 2=ALL, acute lymphocytic leukaemia; 3=CML, chronic myeloid leukemia), PREG (donor pregnancy: 0= no, 1=yes), and LOGIND (the logarithm of an index of mixed epidermal cell-lymphocyte reactions). The data are in the file <code>GvHD.sav</code> available from the Downloads menu.</p>
-<ol type="a">
-<li>Perform a likelihood ratio test to determine whether there is a significant association between the type of leukemia and the occurrence of GvHD after adjusting for donor pregnancy and the logarithm of an index of mixed epidermal cell-lymphocyte reactions.</li>
-<li>In the adjusted model, What is the estimated odds ratio for the occurrence of GvHD for patients with ALL compared to those with ALM?</li>
-<li>Use the Hosmer-Lemeshow goodness-of-fit test to evaluate the fit of the model. Based on the results, does the model provide a satisfactory fit to the data?</li>
-</ol>
+<p>In the graph depicted below, what happens when you additionally adjust for <strong>v5</strong>?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG2.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 2</figcaption>
+</figure>
+</div>
+</section>
+<section id="exercise-3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-3">Exercise 3</h3>
+<p>This diagram is slightly different: <strong>v1</strong> now is the exposure. For which variables do you need to adjust to assess the unconfounded effect of <strong>v1</strong> on <strong>O</strong>?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG3.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 3</figcaption>
+</figure>
+</div>
+</section>
+<section id="exercise-4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4">Exercise 4</h3>
+<p>Now, <strong>v2</strong> is the exposure. For which variables do you need to adjust to assess the total unconfounded effect of <strong>v2</strong> on <strong>O</strong>?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG4.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 4</figcaption>
+</figure>
+</div>
+</section>
+<section id="exercise-5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5">Exercise 5</h3>
+<p>Back to the first DAG. However, <strong>v2</strong> is now unmeasured. Can we still obtain an unconfounded estimate of the effect of <strong>E</strong> on <strong>O</strong>?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG5.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 5</figcaption>
+</figure>
+</div>
+</section>
+<section id="exercise-6" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-6">Exercise 6</h3>
+<p>See the DAG below: you adjusted for <strong>v5</strong>. What would be the consequence of this action?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lab7_DAG6.PNG" class="img-fluid figure-img"></p>
+<figcaption>DAG exercise 6</figcaption>
+</figure>
+</div>
 
 
 </section>

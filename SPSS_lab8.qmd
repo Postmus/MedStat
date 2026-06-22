@@ -16,27 +16,82 @@ execute:
   eval: false
 ---
 
-Welcome to lab 8. In this lab, we will build prediction models using backward elimination and automated procedures, and we will practice reasoning with causal diagrams (DAGs).
+Welcome to lab 8. In this lab, we will practice estimated marginal means in a two-way ANOVA, build prediction models using backward elimination and automated procedures, and reason with causal diagrams (DAGs).
 
-## Part 1: Building prediction models using backward elimination
-
-In this part of the lab, we will build a prediction model for hospital length of stay (`los`) in patients with acute myocardial infarction. The dataset comes from the Worcester Heart Attack Study (WHAS) and includes data from 500 patients admitted in Worcester, Massachusetts in 1997, 1999, and 2001.
+We will use the Worcester Heart Attack Study dataset (`whas500.sav`, available from the Datasets menu). The dataset includes data from 500 patients admitted with acute myocardial infarction in Worcester, Massachusetts in 1997, 1999, and 2001.
 
 Key variables in the dataset include:
 
-  - `los`: Length of hospital stay (days, continuous outcome)
-  - `age`: Age at hospital admission (years)
-  - `gender`: Gender (0 = Male, 1 = Female)
-  - `hr`: Initial heart rate (beats per minute)
-  - `sysbp` and `diasbp`: Initial systolic and diastolic blood pressure (mmHg)
-  - `bmi`: Body mass index (kg/m^2)
-  - `cvd`: Presence of cardiovascular disease (0 = No, 1 = Yes)
-  - `sho`: Presence of cardiogenic shock (0 = No, 1 = Yes)
-
-
-### Step 1: Fit the initial linear regression model
+- `los`: Length of hospital stay (days, continuous outcome)
+- `age`: Age at hospital admission (years)
+- `gender`: Gender (0 = Male, 1 = Female)
+- `hr`: Initial heart rate (beats per minute)
+- `sysbp` and `diasbp`: Initial systolic and diastolic blood pressure (mmHg)
+- `bmi`: Body mass index (kg/m^2)
+- `cvd`: Presence of cardiovascular disease (0 = No, 1 = Yes)
+- `chf`: Congestive heart complications (0 = No, 1 = Yes)
+- `sho`: Presence of cardiogenic shock (0 = No, 1 = Yes)
 
 Download the dataset from the Datasets menu (`whas500.sav`) and open it in SPSS.
+
+## Part 1: Estimated marginal means in a two-way ANOVA
+
+In the lecture, we discussed estimated marginal means in the context of one-way and two-way ANOVA. In this first exercise, we will use a two-way ANOVA to study hospital length of stay (`los`) in the WHAS500 dataset.
+
+We will use:
+
+- outcome: `los`, length of hospital stay in days;
+- factor 1: `gender`;
+- factor 2: `chf`, congestive heart complications.
+
+### Exploratory plot
+
+Before fitting the model, make an interaction plot of the mean length of stay by `chf`, with separate lines for `gender`.
+
+In SPSS:
+
+1. Go to **Graphs -> Chart Builder**.
+2. Choose a line chart with separate lines.
+3. Put `chf` on the x-axis and `los` on the y-axis.
+4. Set the statistic for `los` to **Mean**.
+5. Use `gender` to define the separate lines.
+
+::: {.callout-important icon=false title="Question"}
+Based on the interaction plot, do the lines look approximately parallel, or is there visual evidence that the association between CHF and length of stay differs by gender?
+:::
+
+### Two-way ANOVA model
+
+Fit a two-way ANOVA model with `los` as the outcome and `gender`, `chf`, and their interaction as predictors.
+
+In SPSS:
+
+1. Go to **Analyze -> General Linear Model -> Univariate**.
+2. Put `los` in **Dependent Variable**.
+3. Put `gender` and `chf` in **Fixed Factor(s)**.
+4. Under **Model**, use the full factorial model, so the interaction between `gender` and `chf` is included.
+5. Under **EM Means**, request estimated marginal means for `gender`, `chf`, and `gender * chf`. For `gender` and `chf`, also request pairwise comparisons so you obtain contrast tests for the main effects.
+6. Under **Options**, request **Descriptive statistics** and **Parameter estimates**.
+
+::: {.callout-important icon=false title="Question"}
+Inspect the Tests of Between-Subjects Effects table. Is there evidence of an interaction between `gender` and `chf`?
+:::
+
+::: {.callout-note}
+If the interaction term is statistically significant, it usually makes sense to examine simple effects, for example the effect of CHF separately within males and females. If the interaction is not statistically significant, we usually do not focus on formal simple-effects tests. Instead, we interpret the main effects and their estimated marginal means, while using the interaction plot and the cell means descriptively.
+:::
+
+::: {.callout-important icon=false title="Question"}
+Use the estimated marginal means to answer the following:
+
+- What is the estimated mean length of stay for males and females, averaged over CHF status?
+- What is the estimated mean length of stay for patients with and without CHF, averaged over gender?
+- Use the contrast tests to assess whether the estimated marginal means differ statistically. First decide whether you should focus on the main-effect contrasts or the simple-effect contrasts, based on the interaction test.
+:::
+
+## Part 2: Building prediction models using backward elimination
+
+### Step 1: Fit the initial linear regression model
 
 Create an initial model for hospital length of stay (`los`) using the following predictors: `age`, `gender`, `hr`, `sysbp`, `diasbp`, `bmi`, `cvd`, `sho`. Run/summarize the model to inspect coefficients and p-values.
 
@@ -70,7 +125,7 @@ Present the final linear regression model:
 In **Analyze → General Linear Model → Univariate**, click **Options** and request **Parameter estimates** (95% CIs are included automatically).
 :::
 
-## Part 2: Automated procedures for building prediction models (logistic regression)
+## Part 3: Automated procedures for building prediction models (logistic regression)
 
 In this part, we explore automated procedures for predictor selection in **logistic regression** prediction models. We use the same WHAS dataset but now focus on predicting in-hospital death (`dstat`: alive/dead) from candidate predictors.
 
@@ -93,7 +148,7 @@ For stepwise selection with a continuous outcome, SPSS implements this under **A
 Inspect your final selected logistic regression model. Which predictors are retained in the prediction model?
 :::
 
-## Part 3: Causal diagrams
+## Part 4: Causal diagrams
 
 In the lecture, we introduced the main DAG concepts: causal paths, confounding, mediation, and colliders. In this lab, we will turn those concepts into a practical procedure for deciding which variables to adjust for when estimating a causal effect.
 
