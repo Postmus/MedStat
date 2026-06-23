@@ -1,6 +1,6 @@
 ---
 title: "Medical Statistics"
-subtitle: "Lab 10: Cleveland heart disease dataset"
+subtitle: "Lab 10: Integrated exercises with the Cleveland heart disease dataset"
 format:
   html: default
   pdf: default
@@ -13,73 +13,175 @@ execute:
 
 ## Introduction
 
-In this final lab of the Medical Statistics course, you will continue working with the Cleveland heart disease dataset. You will apply **linear regression** to build a **prediction model** for resting blood pressure and use **logistic regression** to test an **inference-focused** research question on heart disease status. Through both parts, you will:
+In this final lab, you will work more independently with the Cleveland heart disease dataset. The analyses are specified, but you will decide how to carry them out, check the relevant output, and interpret the results clearly.
 
-- Practice **backward elimination** in linear regression to arrive at a simpler predictive model.
-- Demonstrate the ability to interpret **odds ratios** in a logistic regression setting, distinguishing unadjusted from adjusted associations.
+The exercises combine methods from the previous lab sessions:
+
+- ANCOVA and regression diagnostics;
+- logistic regression and odds ratios;
+- causal diagrams and confounder adjustment;
+- prediction model building.
 
 ## Dataset description
 
-The Cleveland heart disease dataset originates from the Cleveland Clinic Foundation and focuses on heart disease diagnosis. Key variables include:
+The Cleveland heart disease dataset includes demographic, clinical, and diagnostic variables from patients evaluated for heart disease.
 
-- `age` (years)
-- `sex` (1=female; 2=male)
-- `cp` (chest pain type; 4 categories)
-- `trestbps` (resting blood pressure in mm Hg)
-- `chol` (serum cholesterol in mg/dl)
-- `fbs` (fasting blood sugar >120 mg/dl; binary)
-- `target` (heart disease status; 1 = heart disease, 2 = no heart disease)
+Key variables used in this lab:
 
-## Research questions
+- `age`: age in years
+- `sex`: sex (`Female`, `Male`)
+- `cp`: chest pain type (`Typical angina`, `Atypical angina`, `Non-anginal pain`, `Asymptomatic`)
+- `trestbps`: resting blood pressure in mm Hg
+- `chol`: serum cholesterol in mg/dl
+- `fbs`: fasting blood sugar > 120 mg/dl (`False`, `True`)
+- `thalach`: maximum heart rate achieved
+- `target`: diagnosis of heart disease (`Heart Disease`, `No Heart Disease`)
 
-1. *Which demographic and clinical variables best predict resting blood pressure (`trestbps`)?*  
-   - You will use **backward elimination** to identify a final model and generate a **patient-level prediction**.
+Use the full dataset `heart_disease_cleveland.sav`.
 
-2. *Is sex (male vs. female) significantly associated with heart disease (`target`) status, after accounting for age, chest pain type, fasting blood sugar, and cholesterol?*  
-   - You will fit **simple** and **multivariable** logistic models to see whether the association between sex and heart disease remains after adjusting for additional factors.
+## Part A: ANCOVA
 
-## Part A: Linear regression
+In this part, you will investigate whether resting blood pressure differs between males and females after accounting for age.
 
-### A1. Initial model setup
+### A1. Research question
 
-- **Outcome variable**: `trestbps` (resting blood pressure)
-- **Candidate variables**:
-  - `cp` (chest pain type)
-  - `age`
-  - `chol`
-  - `sex` (1 = female; 2 = male)
-  - `fbs` (fasting blood sugar >120 mg/dl)
+Is there a difference in resting blood pressure (`trestbps`) between males and females after adjusting for age?
 
-Fit a multiple linear regression model including all five variables as potential contributors to resting blood pressure. Summarize the model (coefficients, p-values, R-squared, etc.).
+### A2. Exploratory analysis
 
-### A2. Backward elimination
+Before fitting a model:
 
-1. **Remove** the least significant variable (highest p-value).
-2. **Refit** the model.
-3. **Repeat** until all remaining terms are below the 10% significance threshold for variable inclusion (i.e., p < 0.10 for all remaining predictors).
+1. Describe resting blood pressure by sex.
+2. Make a scatterplot of resting blood pressure against age, using color or symbols to distinguish males and females.
+3. Briefly comment on whether the relationship between age and resting blood pressure appears approximately linear.
 
-### A3. Final model summary
+### A3. Additive ANCOVA model
 
-- Present the final set of variables. Interpret them in a predictive context (e.g., “An increase of 10 mg/dl in cholesterol corresponds to a 1.2 mm Hg change in resting blood pressure, holding other factors constant.”).
-- Evaluate model goodness-of-fit by performing a residual analysis.
+Fit an additive ANCOVA model with `trestbps` as the outcome and `age` and `sex` as predictors.
 
-### A4. Patient-level prediction
+Answer the following:
 
-- **Hypothetical patient**:
-  - Age = 62
-  - CP = 1 (typical angina)
-  - Chol = 240 mg/dl
-  - Sex = 1 (female)
-  - FBS = 0 (≤120 mg/dl)
-- **Plug** these values into your final regression equation to calculate the predicted resting blood pressure. If you removed any variables during your model selection, simply exclude them from the calculation.
-- **Interpret** the predicted value. For example, “The model estimates this patient’s resting blood pressure to be around 135 mm Hg.”
+- the adjusted difference in resting blood pressure between males and females;
+- the 95% confidence interval;
+- the p-value for `sex`;
+- a short interpretation in words.
 
-## Part B: Logistic regression
+### A4. Model assumptions and interaction
 
-### B1. Simple model (unadjusted)
+Assess whether the additive ANCOVA model is reasonable.
 
-Begin by ensuring that heart disease status is coded appropriately, for example 0 for no heart disease and 1 for heart disease if your software or analysis requires it. Then, run a simple logistic regression using sex as the sole explanatory variable, focusing on the odds ratio comparing males to females. Finally, interpret that odds ratio alongside its confidence interval, explaining how much higher or lower the odds of heart disease are for one sex relative to the other.
+1. Use a Q-Q plot to assess normality of the residuals.
+2. Use a residuals-versus-fitted plot to assess homoscedasticity and linearity.
+3. Fit an interaction model that allows the association between age and resting blood pressure to differ by sex.
+4. Test the age-by-sex interaction term.
+5. State whether the additive model seems appropriate.
 
-### B2. Expanded model (adjusted)
+## Part B: Logistic regression and causal adjustment
 
-Next, fit a logistic regression that includes sex, age, chest pain type, fasting blood sugar, and cholesterol. Pay particular attention to how the odds ratio for sex shifts (in terms of magnitude and significance) once these additional factors are taken into account. In your write-up, note any change in its magnitude relative to the simpler model and discuss plausible clinical reasons for any observed differences.
+In this part, you will investigate whether cholesterol is associated with the presence of heart disease.
+
+### B1. Preparing the outcome and exposure
+
+For logistic regression, use heart disease as the event of interest. Code or define the outcome so that:
+
+- 1/event = `Heart Disease`;
+- 0/no event = `No Heart Disease`.
+
+::: {.callout-tip title="R reminder"}
+If you are using R, create a binary outcome before fitting the logistic regression model:
+
+```{r}
+#| eval: false
+
+heart_data <- heart_data |>
+  mutate(target01 = ifelse(target == "Heart Disease", 1, 0))
+```
+:::
+
+### B2. Unadjusted model
+
+Fit a logistic regression model with heart disease status as the outcome and cholesterol as the only predictor.
+
+Answer the following:
+
+- the odds ratio for a 1 mg/dl increase in cholesterol;
+- the corresponding odds ratio for a 10 mg/dl increase in cholesterol;
+- the 95% confidence interval;
+- the p-value;
+- a short interpretation.
+
+### B3. Causal diagram
+
+Consider the following hypothetical causal diagram for the relationship between cholesterol and heart disease.
+
+The assumed arrows are:
+
+- age -> cholesterol
+- age -> heart disease
+- sex -> cholesterol
+- sex -> heart disease
+- cholesterol -> heart disease
+- heart disease -> chest pain type
+
+Use this DAG to decide which variables should be included in the adjusted model.
+
+Which variables should be included in the adjusted logistic regression model? Explain your choice using the DAG.
+
+### B4. Adjusted model
+
+Fit the adjusted logistic regression model using the confounders identified from the DAG.
+
+Answer the following:
+
+- the adjusted odds ratio for a 1 mg/dl increase in cholesterol;
+- the corresponding adjusted odds ratio for a 10 mg/dl increase in cholesterol;
+- the 95% confidence interval;
+- the p-value;
+- whether the estimate changed compared with the unadjusted model;
+- what this suggests about confounding.
+
+## Part C: Building a prediction model
+
+In this part, you will build a prediction model for maximum heart rate achieved (`thalach`).
+
+Candidate predictors:
+
+- `age`
+- `sex`
+- `cp`
+- `chol`
+- `fbs`
+- `trestbps`
+
+### C1. Candidate model
+
+Start with a linear regression model with `thalach` as the outcome and the candidate predictors listed above.
+
+For categorical predictors with more than two categories, evaluate the predictor as a whole rather than focusing on only one dummy coefficient.
+
+### C2. Model selection
+
+Choose a variable selection strategy and apply it to build a final prediction model.
+
+Answer the following:
+
+- Which selection strategy did you use?
+- Why is this strategy reasonable for a prediction model?
+- Which predictors were retained in the final model?
+
+### C3. Prediction for a patient
+
+Use the final model to predict maximum heart rate for the following patient:
+
+- age: 62 years
+- sex: female
+- chest pain type: typical angina
+- cholesterol: 240 mg/dl
+- fasting blood sugar > 120 mg/dl: false
+- resting blood pressure: 135 mm Hg
+
+Only use predictors that are included in your final model.
+
+## Downloads
+
+[Cleveland heart disease dataset (SPSS format)](datasets/heart_disease_cleveland.sav)
