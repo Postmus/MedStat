@@ -1,0 +1,359 @@
+---
+title: "Medical Statistics - Answers lab 10"
+subtitle: "Integrated exercises with the Cleveland heart disease dataset"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-location: right
+    code-overflow: wrap
+  pdf:
+    toc: false
+execute:
+  warning: false
+  message: false
+  error: false
+  eval: true
+  echo: false
+---
+
+```{r}
+library(haven)
+library(dplyr)
+library(ggplot2)
+library(car)
+
+heart_data <- read_sav("datasets/heart_disease_cleveland.sav")
+
+heart_data <- heart_data |>
+  mutate(across(where(is.labelled), as_factor))
+```
+
+## Part A: ANCOVA
+
+### A1. Research question
+
+The research question is whether resting blood pressure (`trestbps`) differs between males and females after adjusting for age.
+
+In model notation, this is assessed with:
+
+$$
+\text{trestbps} = \beta_0 + \beta_1 \times \text{age} + \beta_2 \times \text{sex} + \varepsilon
+$$
+
+The coefficient for `sex` estimates the adjusted mean difference in resting blood pressure between males and females at the same age.
+
+### A2. Exploratory analysis
+
+```{r}
+heart_data |>
+  group_by(sex) |>
+  summarise(
+    n = n(),
+    mean_trestbps = mean(trestbps, na.rm = TRUE),
+    sd_trestbps = sd(trestbps, na.rm = TRUE),
+    median_trestbps = median(trestbps, na.rm = TRUE),
+    q1 = quantile(trestbps, 0.25, na.rm = TRUE),
+    q3 = quantile(trestbps, 0.75, na.rm = TRUE),
+    .groups = "drop"
+  )
+```
+
+The mean resting blood pressure is about 133 mm Hg for females and 131 mm Hg for males. The distributions are quite similar, with both groups having a median close to 130-132 mm Hg and an interquartile range of approximately 120 to 140 mm Hg.
+
+```{r}
+ggplot(heart_data, aes(x = age, y = trestbps, color = sex)) +
+  geom_point(alpha = 0.70) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    x = "Age (years)",
+    y = "Resting blood pressure (mm Hg)",
+    color = "Sex"
+  )
+```
+
+The scatterplot suggests a weak positive association between age and resting blood pressure. There is no strong visual evidence of a clearly non-linear relationship, so a linear adjustment for age is reasonable for this exercise.
+
+### A3. Additive ANCOVA model
+
+```{r}
+model_a <- lm(trestbps ~ age + sex, data = heart_data)
+summary(model_a)
+confint(model_a)
+```
+
+::: {.callout-tip icon=false title="Answer"}
+After adjusting for age, males have an estimated resting blood pressure that is **1.39 mm Hg lower** than females.
+
+The 95% confidence interval for the male-female adjusted difference is **-5.51 to 2.72 mm Hg**, and the p-value is **0.506**.
+
+There is no evidence of a statistically significant difference in resting blood pressure between males and females after adjusting for age.
+:::
+
+### A4. Model assumptions and interaction
+
+```{r}
+plot(model_a, which = 2)
+```
+
+```{r}
+plot(model_a, which = 1)
+```
+
+The Q-Q plot should be checked for large departures from normality. In this dataset, the residuals are mostly compatible with approximate normality, although some tail deviations may be present.
+
+The residuals-versus-fitted plot should be checked for curvature and unequal spread. There is no strong pattern suggesting that the additive linear model is inappropriate, although the model is not expected to explain all variation in resting blood pressure.
+
+```{r}
+op <- options(contrasts = c("contr.sum", "contr.poly"))
+model_a_int <- lm(trestbps ~ age * sex, data = heart_data)
+Anova(model_a_int, type = "III")
+options(op)
+```
+
+::: {.callout-tip icon=false title="Answer"}
+The age-by-sex interaction has p = **0.471**. This does not provide evidence that the association between age and resting blood pressure differs between males and females.
+
+Together with the diagnostic plots, this suggests that the additive ANCOVA model is a reasonable model for these data.
+:::
+
+## Part B: Logistic regression and causal adjustment
+
+### B1. Preparing the outcome and exposure
+
+```{r}
+heart_data <- heart_data |>
+  mutate(
+    target01 = ifelse(target == "Heart Disease", 1, 0),
+    chol10 = chol / 10
+  )
+
+table(heart_data$target, heart_data$target01)
+```
+
+The outcome is coded so that `1` is the event of interest: heart disease. The value `0` corresponds to no heart disease.
+
+### B2. Unadjusted model
+
+```{r}
+model_b1 <- glm(target01 ~ chol, family = binomial, data = heart_data)
+summary(model_b1)
+
+exp(cbind(
+  OR = coef(model_b1),
+  confint.default(model_b1)
+))
+```
+
+```{r}
+model_b1_10 <- glm(target01 ~ chol10, family = binomial, data = heart_data)
+
+exp(cbind(
+  OR = coef(model_b1_10),
+  confint.default(model_b1_10)
+))
+```
+
+::: {.callout-tip icon=false title="Answer"}
+In the unadjusted model, the odds ratio for a **1 mg/dl** increase in cholesterol is **1.003** with 95% CI **0.999 to 1.008** and p = **0.142**.
+
+For a **10 mg/dl** increase in cholesterol, the odds ratio is **1.034** with 95% CI **0.989 to 1.081**.
+
+The estimate is slightly above 1, but the confidence interval includes 1 and the p-value is not statistically significant. There is no clear evidence from the unadjusted model that cholesterol is associated with heart disease status.
+:::
+
+### B3. Causal diagram
+
+The DAG contains the following arrows:
+
+- age -> cholesterol
+- age -> heart disease
+- sex -> cholesterol
+- sex -> heart disease
+- cholesterol -> heart disease
+- heart disease -> chest pain type
+
+```{mermaid}
+flowchart LR
+  age[Age] --> chol[Cholesterol]
+  age --> hd[Heart disease]
+  sex[Sex] --> chol
+  sex --> hd
+  chol --> hd
+  hd --> cp[Chest pain type]
+```
+
+::: {.callout-tip icon=false title="Answer"}
+To estimate the causal effect of cholesterol on heart disease, the adjusted model should include **age** and **sex**.
+
+Age and sex are confounders because they are causes of both cholesterol and heart disease. Chest pain type should not be adjusted for, because it is a consequence of heart disease in the DAG. Adjusting for a downstream consequence of the outcome is not part of the confounder adjustment set.
+:::
+
+### B4. Adjusted model
+
+```{r}
+model_b2 <- glm(target01 ~ chol + age + sex, family = binomial, data = heart_data)
+summary(model_b2)
+
+exp(cbind(
+  OR = coef(model_b2),
+  confint.default(model_b2)
+))
+```
+
+```{r}
+model_b2_10 <- glm(target01 ~ chol10 + age + sex, family = binomial, data = heart_data)
+
+exp(cbind(
+  OR = coef(model_b2_10),
+  confint.default(model_b2_10)
+))
+```
+
+::: {.callout-tip icon=false title="Answer"}
+After adjustment for age and sex, the odds ratio for a **1 mg/dl** increase in cholesterol is **1.005** with 95% CI **1.000 to 1.010** and p = **0.057**.
+
+For a **10 mg/dl** increase in cholesterol, the adjusted odds ratio is **1.049** with 95% CI **0.999 to 1.103**.
+
+The adjusted estimate is slightly larger than the unadjusted estimate. This suggests that age and sex act as confounders in the cholesterol-heart disease relationship, although the adjusted cholesterol association is still only borderline and is not statistically significant at the 0.05 level.
+:::
+
+## Part C: Building a prediction model
+
+### C1. Candidate model
+
+```{r}
+op <- options(contrasts = c("contr.sum", "contr.poly"))
+
+candidate_model_c <- lm(
+  thalach ~ age + sex + cp + chol + fbs + trestbps,
+  data = heart_data
+)
+
+summary(candidate_model_c)
+Anova(candidate_model_c, type = "III")
+
+options(op)
+```
+
+For categorical predictors with more than two categories, such as `cp`, the Type III ANOVA table tests the predictor as a whole rather than only testing one dummy coefficient.
+
+### C2. Model selection
+
+For this prediction exercise, backward elimination was used. The full candidate model was fitted first, and then the predictor with the largest p-value was removed as long as its p-value was greater than 0.10. This is reasonable for a prediction model because the goal is to obtain a more parsimonious model that keeps predictors with useful predictive information.
+
+```{r}
+full_terms <- c("age", "sex", "cp", "chol", "fbs", "trestbps")
+current_terms <- full_terms
+
+op <- options(contrasts = c("contr.sum", "contr.poly"))
+
+fit <- lm(
+  as.formula(paste("thalach ~", paste(current_terms, collapse = " + "))),
+  data = heart_data
+)
+
+removal_steps <- tibble(
+  step = integer(),
+  removed = character(),
+  p_value = double()
+)
+
+for (iteration in seq_len(length(full_terms))) {
+  tab <- Anova(fit, type = "III")
+  tab <- tab[rownames(tab) != "(Intercept)", , drop = FALSE]
+  pvals <- tab[, "Pr(>F)"]
+
+  max_p <- max(pvals, na.rm = TRUE)
+  if (is.na(max_p) || max_p < 0.10) break
+
+  term_to_remove <- rownames(tab)[which.max(pvals)]
+
+  removal_steps <- bind_rows(
+    removal_steps,
+    tibble(
+      step = nrow(removal_steps) + 1,
+      removed = term_to_remove,
+      p_value = max_p
+    )
+  )
+
+  current_terms <- setdiff(current_terms, term_to_remove)
+  if (length(current_terms) == 0) break
+
+  fit <- lm(
+    as.formula(paste("thalach ~", paste(current_terms, collapse = " + "))),
+    data = heart_data
+  )
+}
+
+options(op)
+
+removal_steps
+current_terms
+```
+
+::: {.callout-tip icon=false title="Answer"}
+Backward elimination removed the following predictors:
+
+1. `fbs`, p = 0.778
+2. `sex`, p = 0.429
+3. `trestbps`, p = 0.235
+
+The final prediction model retained **age**, **chest pain type (`cp`)**, and **cholesterol (`chol`)**.
+:::
+
+```{r}
+final_model_c <- lm(thalach ~ age + cp + chol, data = heart_data)
+summary(final_model_c)
+confint(final_model_c)
+```
+
+The final fitted model is:
+
+$$
+\widehat{\text{thalach}} =
+197.45
+- 0.923 \times \text{age}
++ \text{chest pain type coefficient}
++ 0.042 \times \text{cholesterol}.
+$$
+
+With `Typical angina` as the reference category for chest pain type, the estimated chest-pain coefficients are approximately:
+
+- `Atypical angina`: 1.98
+- `Non-anginal pain`: -2.84
+- `Asymptomatic`: -15.98
+
+### C3. Prediction for a patient
+
+The patient has:
+
+- age: 62 years
+- sex: female
+- chest pain type: typical angina
+- cholesterol: 240 mg/dl
+- fasting blood sugar > 120 mg/dl: false
+- resting blood pressure: 135 mm Hg
+
+Only age, chest pain type, and cholesterol are used, because these are the predictors retained in the final model.
+
+```{r}
+new_patient <- data.frame(
+  age = 62,
+  cp = factor("Typical angina", levels = levels(heart_data$cp)),
+  chol = 240
+)
+
+predict(final_model_c, newdata = new_patient)
+```
+
+::: {.callout-tip icon=false title="Answer"}
+The predicted maximum heart rate for this patient is **150.4 beats per minute**.
+
+This is calculated from the final model as:
+
+$$
+197.45 - 0.923 \times 62 + 0.042 \times 240 = 150.4.
+$$
+:::

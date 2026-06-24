@@ -30,6 +30,7 @@ project:
     - SPSS_lab9.qmd
     - lab9_answers.qmd
     - lab10.qmd
+    - lab10_answers.qmd
   resources:
     - "/datasets"
 
@@ -114,6 +115,8 @@ website:
             href: lab8_answers.qmd
           - text: "Lab 9"
             href: lab9_answers.qmd
+          - text: "Lab 10"
+            href: lab10_answers.qmd
       - text: "Datasets"
         menu:
           - text: "lowbwt.sav"
