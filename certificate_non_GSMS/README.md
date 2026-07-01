@@ -1,9 +1,13 @@
-Use [certificate_data.json](/home/simalgo/projects/MedStat/certificate_non_GSMS/certificate_data.json) and [generate_certificate.py](/home/simalgo/projects/MedStat/certificate_non_GSMS/generate_certificate.py) to rebuild the certificate with the original watermark background.
+Use `certificate_data.json` and `generate_certificate.py` to rebuild the certificate with the original watermark background.
+
+`certificate_data.json` contains the John Doe example. For a real student, fill in `certificate_data_student.json` and render from that file.
 
 Change only these values in the JSON file:
 
 - `student_name`
 - `course_period`
+- `ects`
+- `grade` (optional; leave blank to omit it)
 - `issue_city_and_date`
 - `signature_file` (optional)
 - `signature_x_pt`, `signature_y_pt`, `signature_width_pt` (optional PDF signature placement)
@@ -11,7 +15,13 @@ Change only these values in the JSON file:
 Then run:
 
 ```bash
-python3 /home/simalgo/projects/MedStat/certificate_non_GSMS/generate_certificate.py
+python certificate_non_GSMS/generate_certificate.py
+```
+
+Or render the fill-in student file while keeping the John Doe example unchanged:
+
+```bash
+python certificate_non_GSMS/generate_certificate.py certificate_non_GSMS/certificate_data_student.json
 ```
 
 This writes:

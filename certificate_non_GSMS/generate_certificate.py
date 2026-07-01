@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 import re
+import sys
 
 from docx import Document
 from docx.enum.section import WD_SECTION
@@ -43,9 +44,11 @@ COURSE_TOP_Y_PT = 238.511002
 PERIOD_CENTER_X_PT = (218.759995 + 408.264376) / 2
 PERIOD_TOP_Y_PT = 271.851425
 ECTS_CENTER_X_PT = (248.160004 + 379.020325) / 2
-ECTS_TOP_Y_PT = 294.190994
+ECTS_TOP_Y_PT = 305.190994
 NAME_CENTER_X_PT = (216.120003 + 375.553773) / 2
 NAME_TOP_Y_PT = 382.390999
+GRADE_CENTER_X_PT = NAME_CENTER_X_PT
+GRADE_TOP_Y_PT = 332.390999
 ISSUE_X_PT = 103.919999
 ISSUE_TOP_Y_PT = 552.815478
 SIGNATURE_LINE_X_PT = 105.122705
@@ -58,8 +61,28 @@ SIGNATURE_IMAGE_X_PT = 100.0
 SIGNATURE_IMAGE_Y_PT = 570.0
 SIGNATURE_IMAGE_WIDTH_PT = 140.0
 
-BOLD_FONT = "/usr/share/fonts/truetype/noto/NotoSans-Bold.ttf"
-REGULAR_FONT = "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf"
+
+def first_existing_font(candidates: tuple[str, ...], fallback: str) -> str:
+    for candidate in candidates:
+        if Path(candidate).exists():
+            return candidate
+    return fallback
+
+
+BOLD_FONT = first_existing_font(
+    (
+        "/usr/share/fonts/truetype/noto/NotoSans-Bold.ttf",
+        "C:/Windows/Fonts/arialbd.ttf",
+    ),
+    "arialbd.ttf",
+)
+REGULAR_FONT = first_existing_font(
+    (
+        "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf",
+        "C:/Windows/Fonts/arial.ttf",
+    ),
+    "arial.ttf",
+)
 
 
 def set_page_background(section, color_hex: str) -> None:
@@ -97,11 +120,16 @@ def safe_stem(value: str) -> str:
     return stem or "student"
 
 
-def build_document() -> Document:
-    data = load_data()
+def format_ects(data: dict) -> str:
+    ects = str(data.get("ects", "2.5")).strip() or "2.5"
+    return f"Credits: {ects} ECTS"
+
+
+def build_document(data: dict) -> Document:
     student_name = data["student_name"]
     course_period = data["course_period"]
     issue_city_and_date = data["issue_city_and_date"]
+    grade = data.get("grade")
 
     document = Document()
     section = document.sections[0]
@@ -118,7 +146,16 @@ def build_document() -> Document:
     add_paragraph(document, "Certificate of attendance", size=23, bold=True, spacing_after=14)
     add_paragraph(document, "Course on Medical Statistics", size=16, bold=True, spacing_after=2)
     add_paragraph(document, course_period, size=12, bold=True, spacing_after=6)
-    add_paragraph(document, "(2,5 ECTS)", size=16, bold=True, spacing_after=58)
+    add_paragraph(document, format_ects(data), size=13, bold=True, spacing_after=4 if grade else 58)
+
+    if grade:
+        add_paragraph(
+            document,
+            f"Grade: {grade}",
+            size=13,
+            bold=True,
+            spacing_after=34,
+        )
 
     name_paragraph = add_paragraph(document, student_name, size=18, bold=True, spacing_after=74)
     for run in name_paragraph.runs:
@@ -150,8 +187,20 @@ def build_document() -> Document:
     return document
 
 
-def load_data() -> dict:
-    data_path = OUTPUT_DIR / DATA_FILENAME
+def resolve_data_path() -> Path:
+    if len(sys.argv) > 2:
+        raise ValueError("Usage: python certificate_non_GSMS/generate_certificate.py [data-file.json]")
+
+    if len(sys.argv) == 2:
+        data_path = Path(sys.argv[1])
+        if not data_path.is_absolute():
+            data_path = Path.cwd() / data_path
+        return data_path
+
+    return OUTPUT_DIR / DATA_FILENAME
+
+
+def load_data(data_path: Path) -> dict:
     with data_path.open("r", encoding="utf-8") as handle:
         data = json.load(handle)
 
@@ -227,8 +276,7 @@ def draw_left_text(draw, text: str, *, x_pt: float, top_y_pt: float, font, fill=
         y += (bbox[3] - bbox[1]) + line_gap_px
 
 
-def build_pdf_assets() -> tuple[Image.Image, Path, Path]:
-    data = load_data()
+def build_pdf_assets(data: dict) -> tuple[Image.Image, Path, Path]:
     background_path = OUTPUT_DIR / BACKGROUND_FILENAME
 
     page = Image.new("RGBA", (PAGE_WIDTH_PX, PAGE_HEIGHT_PX), "white")
@@ -260,7 +308,17 @@ def build_pdf_assets() -> tuple[Image.Image, Path, Path]:
     draw_centered_text(draw, "Certificate of attendance", center_x_pt=TITLE_CENTER_X_PT, top_y_pt=TITLE_TOP_Y_PT, font=title_font)
     draw_centered_text(draw, "Course on Medical Statistics", center_x_pt=COURSE_CENTER_X_PT, top_y_pt=COURSE_TOP_Y_PT, font=subtitle_font)
     draw_centered_text(draw, data["course_period"], center_x_pt=PERIOD_CENTER_X_PT, top_y_pt=PERIOD_TOP_Y_PT, font=small_bold_font)
-    draw_centered_text(draw, "(2,5 ECTS)", center_x_pt=ECTS_CENTER_X_PT, top_y_pt=ECTS_TOP_Y_PT, font=subtitle_font)
+    draw_centered_text(draw, format_ects(data), center_x_pt=ECTS_CENTER_X_PT, top_y_pt=ECTS_TOP_Y_PT, font=small_bold_font)
+
+    if data.get("grade"):
+        draw_centered_text(
+            draw,
+            f"Grade: {data['grade']}",
+            center_x_pt=GRADE_CENTER_X_PT,
+            top_y_pt=GRADE_TOP_Y_PT,
+            font=small_bold_font,
+        )
+
     draw_centered_text(draw, data["student_name"], center_x_pt=NAME_CENTER_X_PT, top_y_pt=NAME_TOP_Y_PT, font=name_font)
 
     draw_left_text(draw, data["issue_city_and_date"], x_pt=ISSUE_X_PT, top_y_pt=ISSUE_TOP_Y_PT, font=regular_font)
@@ -281,8 +339,9 @@ def build_pdf_assets() -> tuple[Image.Image, Path, Path]:
 
 
 def main() -> None:
-    data = load_data()
-    document = build_document()
+    data_path = resolve_data_path()
+    data = load_data(data_path)
+    document = build_document(data)
 
     output_path = OUTPUT_DIR / DOCX_OUTPUT_FILENAME
     student_copy_path = OUTPUT_DIR / f"Certificate_MedStat_{safe_stem(data['student_name'])}.docx"
@@ -291,7 +350,7 @@ def main() -> None:
     document.save(output_path)
     document.save(student_copy_path)
 
-    page, pdf_path, png_path = build_pdf_assets()
+    page, pdf_path, png_path = build_pdf_assets(data)
     page_rgb = page.convert("RGB")
     page_rgb.save(pdf_path, resolution=300.0)
     page_rgb.save(student_pdf_copy_path, resolution=300.0)
